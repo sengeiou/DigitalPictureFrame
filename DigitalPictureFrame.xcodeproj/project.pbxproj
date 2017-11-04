@@ -53,10 +53,10 @@
 		E24F69661FAB9ADA0099343B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69651FAB9ADA0099343B /* Settings.swift */; };
 		E24F69681FAB9B960099343B /* WiFiInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69671FAB9B960099343B /* WiFiInfo.swift */; };
 		E24F696C1FABA8E80099343B /* DigitalPictureFrameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F696B1FABA8E80099343B /* DigitalPictureFrameData.swift */; };
-		E24F697B1FABB9400099343B /* DigitalPictureFrameItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F697A1FABB9400099343B /* DigitalPictureFrameItemType.swift */; };
+		E24F697B1FABB9400099343B /* DigitalPictureFrameCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F697A1FABB9400099343B /* DigitalPictureFrameCellType.swift */; };
 		E24F697E1FABBAFA0099343B /* DigitalPictureFrameItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F697D1FABBAFA0099343B /* DigitalPictureFrameItem.swift */; };
 		E24F69801FABBBE10099343B /* CellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F697F1FABBBE10099343B /* CellItem.swift */; };
-		E24F69821FABC4610099343B /* DigitalPictureFrameItemSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69811FABC4610099343B /* DigitalPictureFrameItemSectionType.swift */; };
+		E24F69821FABC4610099343B /* DigitalPictureFrameCellSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69811FABC4610099343B /* DigitalPictureFrameCellSectionType.swift */; };
 		E24F69841FABC6CD0099343B /* UserItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69831FABC6CD0099343B /* UserItem.swift */; };
 		E24F69861FABC8090099343B /* SettingsGeneralItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69851FABC8090099343B /* SettingsGeneralItem.swift */; };
 		E24F69891FABCE5D0099343B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69881FABCE5D0099343B /* BaseViewController.swift */; };
@@ -124,10 +124,10 @@
 		E24F69651FAB9ADA0099343B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E24F69671FAB9B960099343B /* WiFiInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiInfo.swift; sourceTree = "<group>"; };
 		E24F696B1FABA8E80099343B /* DigitalPictureFrameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameData.swift; sourceTree = "<group>"; };
-		E24F697A1FABB9400099343B /* DigitalPictureFrameItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameItemType.swift; sourceTree = "<group>"; };
+		E24F697A1FABB9400099343B /* DigitalPictureFrameCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameCellType.swift; sourceTree = "<group>"; };
 		E24F697D1FABBAFA0099343B /* DigitalPictureFrameItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameItem.swift; sourceTree = "<group>"; };
 		E24F697F1FABBBE10099343B /* CellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellItem.swift; sourceTree = "<group>"; };
-		E24F69811FABC4610099343B /* DigitalPictureFrameItemSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameItemSectionType.swift; sourceTree = "<group>"; };
+		E24F69811FABC4610099343B /* DigitalPictureFrameCellSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameCellSectionType.swift; sourceTree = "<group>"; };
 		E24F69831FABC6CD0099343B /* UserItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItem.swift; sourceTree = "<group>"; };
 		E24F69851FABC8090099343B /* SettingsGeneralItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGeneralItem.swift; sourceTree = "<group>"; };
 		E24F69881FABCE5D0099343B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -208,11 +208,11 @@
 		E20608D51FAB62B400F06260 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E23DB6E71FAE227A00976957 /* DigitalPictureFrameViewController.swift */,
 				E24F69881FABCE5D0099343B /* BaseViewController.swift */,
 				E20FF6C11FAB818A00F89850 /* UserViewController.swift */,
 				E20FF6B51FAB747300F89850 /* SettingsViewController.swift */,
 				E20FF6B71FAB748A00F89850 /* WiFiViewController.swift */,
-				E23DB6E71FAE227A00976957 /* DigitalPictureFrameViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -245,9 +245,10 @@
 				E24F69871FABCDD30099343B /* Items */,
 				E2204F7D1FACCEC600F7E8DC /* Response */,
 				E20FF6B91FAB770E00F89850 /* TopTabBarItemType.swift */,
+				E24F697F1FABBBE10099343B /* CellItem.swift */,
 				E24F697D1FABBAFA0099343B /* DigitalPictureFrameItem.swift */,
-				E24F697A1FABB9400099343B /* DigitalPictureFrameItemType.swift */,
-				E24F69811FABC4610099343B /* DigitalPictureFrameItemSectionType.swift */,
+				E24F697A1FABB9400099343B /* DigitalPictureFrameCellType.swift */,
+				E24F69811FABC4610099343B /* DigitalPictureFrameCellSectionType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -364,7 +365,6 @@
 		E24F69871FABCDD30099343B /* Items */ = {
 			isa = PBXGroup;
 			children = (
-				E24F697F1FABBBE10099343B /* CellItem.swift */,
 				E2204F8E1FACD6AB00F7E8DC /* WiFiItem.swift */,
 				E24F69831FABC6CD0099343B /* UserItem.swift */,
 				E24F69851FABC8090099343B /* SettingsGeneralItem.swift */,
@@ -559,7 +559,7 @@
 				E24F69841FABC6CD0099343B /* UserItem.swift in Sources */,
 				E24F698C1FABCFD40099343B /* ImageDescriptionSwitchTableViewCell.swift in Sources */,
 				E20FF6A61FAB738B00F89850 /* ViewSetupable.swift in Sources */,
-				E24F697B1FABB9400099343B /* DigitalPictureFrameItemType.swift in Sources */,
+				E24F697B1FABB9400099343B /* DigitalPictureFrameCellType.swift in Sources */,
 				E2204F931FACDA7A00F7E8DC /* DigitalPictureFrameCellSetupable.swift in Sources */,
 				E2204F951FACDD6700F7E8DC /* DigitalPictureFrameDataSourceDelegate.swift in Sources */,
 				E20608C41FAB629B00F06260 /* AppDelegate.swift in Sources */,
@@ -587,7 +587,7 @@
 				E20FF6AC1FAB739200F89850 /* UIStoryboard+Storyboard.swift in Sources */,
 				E20FF6C21FAB818A00F89850 /* UserViewController.swift in Sources */,
 				E20FF6A71FAB738B00F89850 /* StoryboardIdentifiable.swift in Sources */,
-				E24F69821FABC4610099343B /* DigitalPictureFrameItemSectionType.swift in Sources */,
+				E24F69821FABC4610099343B /* DigitalPictureFrameCellSectionType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

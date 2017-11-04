@@ -12,7 +12,7 @@ protocol DigitalPictureFrameCellDequeueble: class { }
 
 extension DigitalPictureFrameCellDequeueble where Self: UITableView {
   
-  func dequeueDigitalPictureFrameCell<T: UITableViewCell>(cell: T.Type) -> T where T: DigitalPictureFrameCellSetupable {
+  func dequeueDigitalPictureFrameCell<T: UITableViewCell>(cell: T.Type) -> T {
     let cell = self.dequeueReusableCell(withIdentifier: T.reuseIdentifier) as! T
     return cell
   }

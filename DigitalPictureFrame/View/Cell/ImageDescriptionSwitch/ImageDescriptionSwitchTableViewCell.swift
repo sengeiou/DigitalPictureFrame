@@ -9,43 +9,53 @@
 import UIKit
 import Foundation
 
-class ImageDescriptionSwitchTableViewCell: UITableViewCell { //, DigitalPictureFrameCellSetupable {
+class ImageDescriptionSwitchTableViewCell: UITableViewCell {
   @IBOutlet weak var descImageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var onOffSwitch: UISwitch!
   
-//  var rowInSection: Int?
-//  var item: DigitalPictureFrameItem? {
-//    didSet {
-//      switch item {
-//      case is UserItem:
-//        guard let userItem = item as? UserItem, let row = rowInSection else { return }
-//        let user = userItem.cells[row].entity
-//
-//        descriptionLabel.text = user.name
-//        onOffSwitch.isOn = user.enabled
-//
-//        if let imageData = Data(base64Encoded: user.image) {
-//          let userImage = UIImage(data: imageData)
-//          descImageView.image = userImage
-//        }
-//
-//      case is SettingsGeneralItem:
-//        guard let settingsItem = item as? SettingsGeneralItem, let row = rowInSection else { return }
-////        descriptionLabel.text = settingsItem
-////        onOffSwitch.isOn = user.enabled
-//
-//      default:
-//        break
-//      }
-//
-//    }
-//  }
+  var rowInSection: Int?
+  var item: AnyDigitalPictureFrameItem<User>? {
+    didSet {
+      switch item {
+      case is UserItem:
+        guard let userItem = item as? UserItem, let row = rowInSection else { return }
+        let user = userItem.cells[row].entity
+
+        descriptionLabel.text = user.name
+        onOffSwitch.isOn = user.enabled
+
+        if let imageData = Data(base64Encoded: user.image) {
+          let userImage = UIImage(data: imageData)
+          descImageView.image = userImage
+        }
+
+      case is SettingsGeneralItem:
+        guard let settingsItem = item as? SettingsGeneralItem, let row = rowInSection else { return }
+  //        descriptionLabel.text = settingsItem
+  //        onOffSwitch.isOn = user.enabled
+
+      default:
+        break
+      }
+
+    }
+  }
   
   override func awakeFromNib() {
     super.awakeFromNib()
 
     descImageView.roundThumbnail()
+  }
+  
+}
+
+
+extension ImageDescriptionSwitchTableViewCell {
+  
+  func setup<T>(_ type: T.Type, by item: AnyDigitalPictureFrameItem<T>, at indexPath: IndexPath? = nil) {
+    self.rowInSection = indexPath?.row
+//    self.item = item
   }
   
 }

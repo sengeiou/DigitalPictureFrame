@@ -12,8 +12,8 @@ final class SettingsWeatherZipCodeItem: ZipCodeSettingsSection, DigitalPictureFr
   typealias ItemModel = String
   
   var weatherZip: String
-  var type = DigitalPictureFrameItemType.imageDescriptionSwitch
-  var section = DigitalPictureFrameItemSectionType.zipCode
+  var type = DigitalPictureFrameCellType.imageDescriptionSwitch
+  var section = DigitalPictureFrameCellSectionType.zipCode
   var cells: [CellItem<ItemModel>]
   
   init(weatherZip: String) {

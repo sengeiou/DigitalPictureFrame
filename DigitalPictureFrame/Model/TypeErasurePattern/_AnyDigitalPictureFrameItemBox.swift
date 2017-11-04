@@ -17,7 +17,7 @@ class _AnyDigitalPictureFrameItemBox<Concrete: DigitalPictureFrameItem>: _AnyDig
 
   
   // Trampoline property accessors along to base
-  override var type: DigitalPictureFrameItemType  {
+  override var type: DigitalPictureFrameCellType  {
     get {
       return concrete.type
     }
@@ -26,7 +26,7 @@ class _AnyDigitalPictureFrameItemBox<Concrete: DigitalPictureFrameItem>: _AnyDig
     }
   }
   
-  override var section: DigitalPictureFrameItemSectionType {
+  override var section: DigitalPictureFrameCellSectionType {
     get {
       return concrete.section
     }
@@ -35,7 +35,7 @@ class _AnyDigitalPictureFrameItemBox<Concrete: DigitalPictureFrameItem>: _AnyDig
     }
   }
   
-  override var cells: [CellItem<ItemModel>] {
+  override var cells: [CellItem<Concrete.ItemModel>] {
     get {
       return concrete.cells
     }

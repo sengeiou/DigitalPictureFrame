@@ -8,12 +8,12 @@
 
 import Foundation
 
-final class UserItem: NSObject, DigitalPictureFrameItem {
+final class UserItem: DigitalPictureFrameItem {
   typealias ItemModel = User
   private var users: [User]
   
-  var type = DigitalPictureFrameItemType.imageDescriptionSwitch
-  var section = DigitalPictureFrameItemSectionType.users
+  var type = DigitalPictureFrameCellType.imageDescriptionSwitch
+  var section = DigitalPictureFrameCellSectionType.users
   var cells: [CellItem<ItemModel>]
   
   

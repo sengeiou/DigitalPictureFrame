@@ -11,7 +11,7 @@ import Foundation
 protocol DigitalPictureFrameItem {
   associatedtype ItemModel
   
-  var type: DigitalPictureFrameItemType { get set }
-  var section: DigitalPictureFrameItemSectionType { get set }
+  var type: DigitalPictureFrameCellType { get set }
+  var section: DigitalPictureFrameCellSectionType { get set }
   var cells: [CellItem<ItemModel>] { get set }
 }

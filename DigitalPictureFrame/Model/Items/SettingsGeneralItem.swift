@@ -14,8 +14,8 @@ final class SettingsGeneralItem: GeneralSettingsSection, DigitalPictureFrameItem
   var rgbLight: Bool
   var randomQuotes: Bool
   var sleep: Bool
-  var type = DigitalPictureFrameItemType.imageDescriptionSwitch
-  var section = DigitalPictureFrameItemSectionType.general
+  var type = DigitalPictureFrameCellType.imageDescriptionSwitch
+  var section = DigitalPictureFrameCellSectionType.general
   var cells: [CellItem<ItemModel>]
   
   

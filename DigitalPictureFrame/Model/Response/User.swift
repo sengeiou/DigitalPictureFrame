@@ -8,18 +8,8 @@
 
 import Foundation
 
-struct User: Codable, CustomStringConvertible {
+struct User: Codable {
   var name: String
   var image: String
   var enabled: Bool
-}
-
-
-// MARK: - CustomStringConvertible protocol
-extension User {
-  
-  var description: String {
-    return image + ", " + name
-  }
-  
 }

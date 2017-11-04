@@ -13,8 +13,8 @@ final class SettingsUserInfoItem: NSObject, UserInfoSettingsSection, DigitalPict
   
   var sideInfo: SideInfo
   
-  var type = DigitalPictureFrameItemType.imageDescriptionSwitch
-  var section = DigitalPictureFrameItemSectionType.userInfo
+  var type = DigitalPictureFrameCellType.imageDescriptionSwitch
+  var section = DigitalPictureFrameCellSectionType.userInfo
   var cells: [CellItem<ItemModel>]
   
   init(sideInfo: SideInfo) {

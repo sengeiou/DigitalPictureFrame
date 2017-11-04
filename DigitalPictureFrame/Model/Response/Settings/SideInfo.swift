@@ -8,16 +8,7 @@
 
 import Foundation
 
-struct SideInfo: Codable, CustomStringConvertible {
+struct SideInfo: Codable {
   var leftUserName: String
   var rightUserName: String
-}
-
-
-// MARK: - CustomStringConvertible protocol
-extension SideInfo {
-  
-  var description: String {
-    return leftUserName + ", " + rightUserName
-  }
 }

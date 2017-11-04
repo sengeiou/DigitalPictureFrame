@@ -10,12 +10,12 @@ import Foundation
 
 class _AnyDigitalPictureFrameItemBase<ItemModel>: DigitalPictureFrameItem {
 
-  var type: DigitalPictureFrameItemType {
+  var type: DigitalPictureFrameCellType {
     get { fatalError("Must override") }
     set { fatalError("Must override") }
   }
   
-  var section: DigitalPictureFrameItemSectionType {
+  var section: DigitalPictureFrameCellSectionType {
     get { fatalError("Must override") }
     set { fatalError("Must override") }
   }

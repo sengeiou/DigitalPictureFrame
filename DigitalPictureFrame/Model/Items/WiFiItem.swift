@@ -12,8 +12,8 @@ final class WiFiItem: DigitalPictureFrameItem {
   typealias ItemModel = WiFiInfo
   private var wiFi: WiFiInfo
   
-  var type = DigitalPictureFrameItemType.imageDescriptionRightText
-  var section = DigitalPictureFrameItemSectionType.wifi
+  var type = DigitalPictureFrameCellType.imageDescriptionRightText
+  var section = DigitalPictureFrameCellSectionType.wifi
   var cells: [CellItem<ItemModel>]
   
   

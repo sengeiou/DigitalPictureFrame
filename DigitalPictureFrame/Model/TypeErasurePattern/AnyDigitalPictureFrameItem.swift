@@ -13,10 +13,10 @@ final class AnyDigitalPictureFrameItem<ItemModel>: DigitalPictureFrameItem {
   
   // Initializer takes our concrete implementer of DigitalPictureFrameItem i.e. UserItem
   init<Concrete: DigitalPictureFrameItem>(_ concrete: Concrete) where Concrete.ItemModel == ItemModel {
-    box = _AnyDigitalPictureFrameItemBox(concrete)
+    self.box = _AnyDigitalPictureFrameItemBox(concrete)
   }
   
-  var type: DigitalPictureFrameItemType {
+  var type: DigitalPictureFrameCellType {
     get {
       return box.type
     }
@@ -25,7 +25,7 @@ final class AnyDigitalPictureFrameItem<ItemModel>: DigitalPictureFrameItem {
     }
   }
   
-  var section: DigitalPictureFrameItemSectionType {
+  var section: DigitalPictureFrameCellSectionType {
     get {
       return box.section
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 class UserViewController: BaseViewController {
-  var users: [User]?
+  private var users: [User]?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -58,10 +58,11 @@ private extension UserViewController {
     guard let users = users else { return }
     
     let userItem = UserItem(users: users)
-//    dataSourceDelegate = DigitalPictureFrameDataSource(items: [userItem])
-//    tableView.dataSource = dataSourceDelegate
-//    tableView.delegate = dataSourceDelegate
-//    tableView.reloadData()
+    let anyUserItem: [AnyDigitalPictureFrameItem<User>] = [AnyDigitalPictureFrameItem(userItem)]
+    let dataSourceDelegate = DigitalPictureFrameDataSource(items: anyUserItem)
+    tableView.dataSource = dataSourceDelegate
+    tableView.delegate = dataSourceDelegate
+    tableView.reloadData()
   }
   
 }

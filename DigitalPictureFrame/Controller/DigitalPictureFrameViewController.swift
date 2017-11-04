@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DigitalPictureFrameViewController: UITabBarController, ViewSetupable {
+class DigitalPictureFrameViewController: UITabBarController, UITabBarControllerDelegate, ViewSetupable {
   @IBOutlet weak var topTabBar: UITabBar!
   
   override func viewDidLoad() {
@@ -41,5 +41,26 @@ extension DigitalPictureFrameViewController {
     }
     
     moveTabBarToTopOfScreen()
+  }
+}
+
+
+// MARK: - UITabBarControllerDelegate protocol
+extension DigitalPictureFrameViewController {
+  
+  func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+    guard let selectedTag = tabBarController.tabBar.selectedItem?.tag,
+          let selectedType = TopTabBarItemType(rawValue: selectedTag) else { return }
+    
+    switch selectedType {
+    case .users:
+      print(selectedType.description)
+      
+    case .settings:
+      print(selectedType.description)
+      
+    case .wifi:
+      print(selectedType.description)
+    }
   }
 }

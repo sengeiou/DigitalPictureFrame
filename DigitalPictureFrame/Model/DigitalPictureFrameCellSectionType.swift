@@ -1,5 +1,5 @@
 //
-//  DigitalPictureFrameItemSectionType.swift
+//  DigitalPictureFrameCellSectionType.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek on 11/2/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum DigitalPictureFrameItemSectionType: String {
+enum DigitalPictureFrameCellSectionType: String {
   case users = "Users"
   case general = "General"
   case time = "Time"

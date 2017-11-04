@@ -30,38 +30,6 @@
             </objects>
             <point key="canvasLocation" x="-249" y="192"/>
         </scene>
-        <!--Item 2-->
-        <scene sceneID="Zmc-k6-Zvz">
-            <objects>
-                <viewController id="N9n-qu-dsW" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="tB9-ib-yCI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="eej-9w-1Y9"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="xCP-VF-15N"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7x1-q2-eqr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="650" y="707"/>
-        </scene>
-        <!--Item 1-->
-        <scene sceneID="zki-Zx-lsw">
-            <objects>
-                <viewController id="Uqo-il-CbE" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Qfu-GP-4of">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="gO3-2E-Ssy"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="c4N-YN-M0P"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4d1-VR-xip" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="650" y="42"/>
-        </scene>
         <!--Users-->
         <scene sceneID="1rh-sM-M9r">
             <objects>

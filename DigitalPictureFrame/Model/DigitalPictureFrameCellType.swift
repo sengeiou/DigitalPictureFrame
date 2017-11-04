@@ -1,5 +1,5 @@
 //
-//  DigitalPictureFrameItemType.swift
+//  DigitalPictureFrameCellType.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek on 11/2/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum DigitalPictureFrameItemType: String {
+enum DigitalPictureFrameCellType: String {
   case imageDescriptionSwitch
   case imageDescriptionRightText
 }

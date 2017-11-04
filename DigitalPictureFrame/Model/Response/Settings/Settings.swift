@@ -8,21 +8,11 @@
 
 import Foundation
 
-struct Settings: GeneralSettingsSection, TimeSettingsSection, ZipCodeSettingsSection, UserInfoSettingsSection, CustomStringConvertible, Codable {
+struct Settings: GeneralSettingsSection, TimeSettingsSection, ZipCodeSettingsSection, UserInfoSettingsSection, Codable {
   var rgbLight: Bool
   var randomQuotes: Bool
   var sleep: Bool
   var timeFrame: TimeFrame
   var weatherZip: String
   var sideInfo: SideInfo
-}
-
-
-// MARK: - CustomStringConvertible protocol
-extension Settings {
-  
-  var description: String {
-    return weatherZip
-  }
-  
 }

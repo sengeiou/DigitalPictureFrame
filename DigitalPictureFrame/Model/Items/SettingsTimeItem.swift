@@ -13,8 +13,8 @@ final class SettingsTimeItem: TimeSettingsSection, DigitalPictureFrameItem {
   
   var timeFrame: TimeFrame
   
-  var type = DigitalPictureFrameItemType.imageDescriptionSwitch
-  var section = DigitalPictureFrameItemSectionType.time
+  var type = DigitalPictureFrameCellType.imageDescriptionSwitch
+  var section = DigitalPictureFrameCellSectionType.time
   var cells: [CellItem<ItemModel>]
   
   
