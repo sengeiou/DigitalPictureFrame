@@ -12,4 +12,5 @@ protocol GeneralSettingsSection {
   var rgbLight: Bool { get set }
   var randomQuotes: Bool { get set }
   var sleep: Bool { get set }
+  var reset: Bool { get set }
 }

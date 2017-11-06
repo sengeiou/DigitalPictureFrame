@@ -9,16 +9,17 @@
 import Foundation
 
 final class SettingsUserInfoItem: NSObject, UserInfoSettingsSection, DigitalPictureFrameItem {
-  typealias ItemModel = SideInfo
-  
   var sideInfo: SideInfo
   
-  var type = DigitalPictureFrameCellType.imageDescriptionSwitch
-  var section = DigitalPictureFrameCellSectionType.userInfo
-  var cells: [CellItem<ItemModel>]
+  let type = DigitalPictureFrameCellType.userInfoSettings
+  let section = DigitalPictureFrameCellSectionType.userInfo
+  var cells: [CellItem] {
+    let leftInfoCell = CellItem(thumbnailImageName: "thumbnail-infoSide", description: "User Info Left Side", value: sideInfo.leftUserName)
+    let rightInfoCell = CellItem(thumbnailImageName: "thumbnail-infoSide", description: "User Info Right Side", value: sideInfo.rightUserName)
+    return [leftInfoCell, rightInfoCell]
+  }
   
   init(sideInfo: SideInfo) {
     self.sideInfo = sideInfo
-    self.cells = [CellItem(entity: sideInfo)]
   }
 }

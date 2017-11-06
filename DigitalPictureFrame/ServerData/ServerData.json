@@ -1,5 +1,5 @@
 {
-  "phoneNumber": "4784568064",
+  "MAC": "00-14-22-01-23-45",
   "users": [
             {
             "name": "Rocky Balboa",
@@ -40,6 +40,7 @@
       "onTime": "2017-10-02T05:30:00Z",
       "offTime": "2017-10-02T22:30:00Z"
     },
+    "reset": false,
     "weatherZip": "57104",
     "sideInfo": {
       "leftUserName": "John Rambo",

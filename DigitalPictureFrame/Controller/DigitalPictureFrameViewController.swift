@@ -27,8 +27,9 @@ class DigitalPictureFrameViewController: UITabBarController, UITabBarControllerD
 extension DigitalPictureFrameViewController {
   
   func setup() {
-    
+    delegate = self
   }
+  
   
   func setupLayout() {
     func moveTabBarToTopOfScreen() {
@@ -49,18 +50,30 @@ extension DigitalPictureFrameViewController {
 extension DigitalPictureFrameViewController {
   
   func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-    guard let selectedTag = tabBarController.tabBar.selectedItem?.tag,
-          let selectedType = TopTabBarItemType(rawValue: selectedTag) else { return }
-    
+    guard let selectedTab = tabBarController.tabBar.selectedItem?.tag,
+          let selectedType = TopTabBarItemType(rawValue: selectedTab) else { return }
+
     switch selectedType {
-    case .users:
-      print(selectedType.description)
+    case .users where viewController is UserViewController:
+      let vc = viewController as! UserViewController
+      vc.users = DatabaseSingleton.shared.data?.users
+      print(selectedType.description) // add notification center to reload data in VC!!
+
+    case .settings where viewController is SettingsViewController:
+      let vc = viewController as! SettingsViewController
+      vc.settings = DatabaseSingleton.shared.data?.settings
+      vc.tableView.reloadData()
+      print(selectedType.description) // add notification center to reload data in VC!!
+
+    case .wifi where viewController is WiFiViewController:
+      let vc = viewController as! WiFiViewController
+      vc.wifiInfo = DatabaseSingleton.shared.data?.wifiInfo
+      vc.tableView.reloadData()
+      print(selectedType.description) // add notification center to reload data in VC!!
       
-    case .settings:
-      print(selectedType.description)
-      
-    case .wifi:
-      print(selectedType.description)
+    default:
+      break
     }
+    
   }
 }

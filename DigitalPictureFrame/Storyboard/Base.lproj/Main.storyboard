@@ -52,7 +52,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nHg-HZ-dfN"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Users" image="icon-users" id="BKg-ub-CCh"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Users" image="icon-users" id="BKg-ub-CCh"/>
                     <connections>
                         <outlet property="tableView" destination="YyV-8G-TqV" id="Iro-bP-IJE"/>
                     </connections>
@@ -83,7 +83,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="I1I-bC-zTN"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="icon-settings" id="I3w-me-bzu"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Settings" image="icon-settings" id="I3w-me-bzu"/>
                     <connections>
                         <outlet property="tableView" destination="VdZ-Kw-hNw" id="RD3-Pp-A1Z"/>
                     </connections>
@@ -114,7 +114,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="juU-Ub-3Kk"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Wi-Fi" image="icon-wifi" id="25e-E6-kFN"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="Wi-Fi" image="icon-wifi" id="25e-E6-kFN"/>
                     <connections>
                         <outlet property="tableView" destination="ub4-IG-aON" id="wh7-i8-bup"/>
                     </connections>

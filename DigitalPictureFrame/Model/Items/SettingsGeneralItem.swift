@@ -9,23 +9,25 @@
 import Foundation
 
 final class SettingsGeneralItem: GeneralSettingsSection, DigitalPictureFrameItem {
-  typealias ItemModel = [String: Bool]
-  
   var rgbLight: Bool
   var randomQuotes: Bool
   var sleep: Bool
-  var type = DigitalPictureFrameCellType.imageDescriptionSwitch
-  var section = DigitalPictureFrameCellSectionType.general
-  var cells: [CellItem<ItemModel>]
+  var reset: Bool
+  let type = DigitalPictureFrameCellType.generalSettings
+  let section = DigitalPictureFrameCellSectionType.general
+  var cells: [CellItem] {
+    let rgbLightCell = CellItem(thumbnailImageName: "thumbnail-rgbLight", description: "RGB Light", value: rgbLight)
+    let randomQuotesCell = CellItem(thumbnailImageName: "thumbnail-randomQuotes", description: "Random Quotes", value: randomQuotes)
+    let sleepCell = CellItem(thumbnailImageName: "thumbnail-sleep", description: "Sleep", value: sleep)
+    let resetCell = CellItem(thumbnailImageName: "thumbnail-sleep", description: "Reset", value: reset)
+    return [rgbLightCell, randomQuotesCell, sleepCell, resetCell]
+  }
   
   
-  init(rgbLight: Bool, randomQuotes: Bool, sleep: Bool) {
+  init(rgbLight: Bool, randomQuotes: Bool, sleep: Bool, reset: Bool) {
     self.rgbLight = rgbLight
     self.randomQuotes = randomQuotes
     self.sleep = sleep
-    
-    let dict = ["rgbLight": rgbLight, "randomQuotes": randomQuotes, "sleep": sleep]
-    let generalCells = CellItem(entity: dict)
-    cells = [generalCells]
+    self.reset = reset
   }
 }

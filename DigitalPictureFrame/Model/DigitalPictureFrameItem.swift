@@ -9,9 +9,7 @@
 import Foundation
 
 protocol DigitalPictureFrameItem {
-  associatedtype ItemModel
-  
-  var type: DigitalPictureFrameCellType { get set }
-  var section: DigitalPictureFrameCellSectionType { get set }
-  var cells: [CellItem<ItemModel>] { get set }
+  var type: DigitalPictureFrameCellType { get }
+  var section: DigitalPictureFrameCellSectionType { get }
+  var cells: [CellItem] { get }
 }

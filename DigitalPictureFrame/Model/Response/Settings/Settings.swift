@@ -12,6 +12,7 @@ struct Settings: GeneralSettingsSection, TimeSettingsSection, ZipCodeSettingsSec
   var rgbLight: Bool
   var randomQuotes: Bool
   var sleep: Bool
+  var reset: Bool
   var timeFrame: TimeFrame
   var weatherZip: String
   var sideInfo: SideInfo

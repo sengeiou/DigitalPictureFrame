@@ -9,7 +9,7 @@
 import UIKit
 
 class UserViewController: BaseViewController {
-  private var users: [User]?
+  var users: [User]?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,12 +28,23 @@ extension UserViewController {
   
   override func setup() {
     super.setup()
+    registerCells()
     loadData()
   }
   
   func setupStyle() {
     tableView.separatorStyle = .none
   }
+}
+
+
+// MARK: - Register cells
+extension UserViewController {
+  
+  func registerCells() {
+    tableView.register(cell: UserTableViewCell.self)
+  }
+  
 }
 
 
@@ -44,6 +55,7 @@ private extension UserViewController {
     NetworkManager.shared.fetchData(completionHandler: {[unowned self] result in
       switch result {
       case .success(let decodeData):
+        DatabaseSingleton.shared.assign(data: decodeData)
         self.users = decodeData.users
         self.assignDelegateAndReload()
         
@@ -58,8 +70,7 @@ private extension UserViewController {
     guard let users = users else { return }
     
     let userItem = UserItem(users: users)
-    let anyUserItem: [AnyDigitalPictureFrameItem<User>] = [AnyDigitalPictureFrameItem(userItem)]
-    let dataSourceDelegate = DigitalPictureFrameDataSource(items: anyUserItem)
+    dataSourceDelegate = DigitalPictureFrameDataSource(items: [userItem])
     tableView.dataSource = dataSourceDelegate
     tableView.delegate = dataSourceDelegate
     tableView.reloadData()

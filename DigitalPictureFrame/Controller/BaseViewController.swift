@@ -19,6 +19,9 @@ class BaseViewController: UIViewController, ViewSetupable {
     setup()
   }
   
+//  func registerCells() {
+//    // override in subclass
+//  }
 }
 
 
@@ -26,18 +29,7 @@ class BaseViewController: UIViewController, ViewSetupable {
 extension BaseViewController {
   
   func setup() {
-    registerCells()
-  }
-  
-}
-
-
-// MARK: - Register cells
-private extension BaseViewController {
-  
-  func registerCells() {
-    tableView.register(cell: ImageDescriptionSwitchTableViewCell.self)
-    tableView.register(cell: ImageDescriptionRightTextTableViewCell.self)
+//    registerCells()
   }
   
 }

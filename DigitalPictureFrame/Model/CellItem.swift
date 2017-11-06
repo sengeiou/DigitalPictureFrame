@@ -7,7 +7,16 @@
 //
 
 import Foundation
+import UIKit
 
-struct CellItem<T> {
-  var entity: T
+struct CellItem {
+  var thumbnailImageName: String
+  var description: String
+  var value: Any
+  
+  init(thumbnailImageName: String, description: String, value: Any) {
+    self.thumbnailImageName = thumbnailImageName
+    self.description = description
+    self.value = value
+  }
 }

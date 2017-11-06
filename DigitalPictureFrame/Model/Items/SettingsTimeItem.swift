@@ -9,19 +9,18 @@
 import Foundation
 
 final class SettingsTimeItem: TimeSettingsSection, DigitalPictureFrameItem {
-  typealias ItemModel = TimeFrame
-  
   var timeFrame: TimeFrame
   
-  var type = DigitalPictureFrameCellType.imageDescriptionSwitch
-  var section = DigitalPictureFrameCellSectionType.time
-  var cells: [CellItem<ItemModel>]
+  let type = DigitalPictureFrameCellType.timeFrameSettings
+  let section = DigitalPictureFrameCellSectionType.time
+  var cells: [CellItem] {
+    let offTimeCell = CellItem(thumbnailImageName: "thumbnail-Time", description: "Off Time", value: timeFrame.offTime)
+    let onTimeCell = CellItem(thumbnailImageName: "thumbnail-Time", description: "On Time", value: timeFrame.onTime)
+    return [onTimeCell, offTimeCell]
+  }
   
   
   init(timeFrame: TimeFrame) {
     self.timeFrame = timeFrame
-    
-    let timeCell = CellItem(entity: timeFrame)
-    self.cells = [timeCell]
   }
 }

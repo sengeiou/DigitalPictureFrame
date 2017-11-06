@@ -8,7 +8,15 @@
 
 import Foundation
 
-struct WiFiInfo: Codable {
+struct WiFiInfo: Codable, CustomStringConvertible {
   var name: String
   var password: String
+}
+
+// MARK: CustomStringConvertible protocol
+extension WiFiInfo {
+  
+  var description: String {
+    return name
+  }
 }

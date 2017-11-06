@@ -60,15 +60,21 @@
 		E24F69841FABC6CD0099343B /* UserItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69831FABC6CD0099343B /* UserItem.swift */; };
 		E24F69861FABC8090099343B /* SettingsGeneralItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69851FABC8090099343B /* SettingsGeneralItem.swift */; };
 		E24F69891FABCE5D0099343B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69881FABCE5D0099343B /* BaseViewController.swift */; };
-		E24F698C1FABCFD40099343B /* ImageDescriptionSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F698A1FABCFD40099343B /* ImageDescriptionSwitchTableViewCell.swift */; };
-		E24F698D1FABCFD40099343B /* ImageDescriptionSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E24F698B1FABCFD40099343B /* ImageDescriptionSwitchTableViewCell.xib */; };
-		E24F69901FABD1B70099343B /* ImageDescriptionRightTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F698E1FABD1B70099343B /* ImageDescriptionRightTextTableViewCell.swift */; };
-		E24F69911FABD1B70099343B /* ImageDescriptionRightTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E24F698F1FABD1B70099343B /* ImageDescriptionRightTextTableViewCell.xib */; };
 		E24F69951FABF15A0099343B /* TimeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69941FABF15A0099343B /* TimeFrame.swift */; };
 		E24F69971FABF1AD0099343B /* SideInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69961FABF1AD0099343B /* SideInfo.swift */; };
-		E25CBE4B1FAD19DC0088ACF7 /* _AnyDigitalPictureFrameItemBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CBE4A1FAD19DC0088ACF7 /* _AnyDigitalPictureFrameItemBox.swift */; };
-		E25CBE4D1FAD1D480088ACF7 /* AnyDigitalPictureFrameItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CBE4C1FAD1D480088ACF7 /* AnyDigitalPictureFrameItem.swift */; };
-		E25CBE501FAD1EAC0088ACF7 /* _AnyDigitalPictureFrameItemBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25CBE4E1FAD1E840088ACF7 /* _AnyDigitalPictureFrameItemBase.swift */; };
+		E27D95631FAE84D30099430B /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95611FAE84D30099430B /* UserTableViewCell.swift */; };
+		E27D95641FAE84D30099430B /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27D95621FAE84D30099430B /* UserTableViewCell.xib */; };
+		E27D95671FAE84EB0099430B /* GeneralSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95651FAE84EB0099430B /* GeneralSettingsTableViewCell.swift */; };
+		E27D95681FAE84EB0099430B /* GeneralSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27D95661FAE84EB0099430B /* GeneralSettingsTableViewCell.xib */; };
+		E27D956B1FAE84FB0099430B /* UserInfoSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95691FAE84FB0099430B /* UserInfoSettingsTableViewCell.swift */; };
+		E27D956C1FAE84FB0099430B /* UserInfoSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27D956A1FAE84FB0099430B /* UserInfoSettingsTableViewCell.xib */; };
+		E27D956F1FAE850D0099430B /* TimeFrameSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D956D1FAE850D0099430B /* TimeFrameSettingsTableViewCell.swift */; };
+		E27D95701FAE850D0099430B /* TimeFrameSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27D956E1FAE850D0099430B /* TimeFrameSettingsTableViewCell.xib */; };
+		E27D95731FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95711FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.swift */; };
+		E27D95741FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27D95721FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.xib */; };
+		E27D95771FAE85360099430B /* WiFiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95751FAE85360099430B /* WiFiTableViewCell.swift */; };
+		E27D95781FAE85360099430B /* WiFiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27D95761FAE85360099430B /* WiFiTableViewCell.xib */; };
+		E27D957A1FAE9CF70099430B /* DatabaseSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95791FAE9CF70099430B /* DatabaseSingleton.swift */; };
 		FE0F2B2E20BD5F7BFDD5D4CB /* libPods-DigitalPictureFrame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 805F17D7B2BE41617FCC0AD2 /* libPods-DigitalPictureFrame.a */; };
 /* End PBXBuildFile section */
 
@@ -131,15 +137,21 @@
 		E24F69831FABC6CD0099343B /* UserItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItem.swift; sourceTree = "<group>"; };
 		E24F69851FABC8090099343B /* SettingsGeneralItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGeneralItem.swift; sourceTree = "<group>"; };
 		E24F69881FABCE5D0099343B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		E24F698A1FABCFD40099343B /* ImageDescriptionSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDescriptionSwitchTableViewCell.swift; sourceTree = "<group>"; };
-		E24F698B1FABCFD40099343B /* ImageDescriptionSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageDescriptionSwitchTableViewCell.xib; sourceTree = "<group>"; };
-		E24F698E1FABD1B70099343B /* ImageDescriptionRightTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDescriptionRightTextTableViewCell.swift; sourceTree = "<group>"; };
-		E24F698F1FABD1B70099343B /* ImageDescriptionRightTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageDescriptionRightTextTableViewCell.xib; sourceTree = "<group>"; };
 		E24F69941FABF15A0099343B /* TimeFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFrame.swift; sourceTree = "<group>"; };
 		E24F69961FABF1AD0099343B /* SideInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideInfo.swift; sourceTree = "<group>"; };
-		E25CBE4A1FAD19DC0088ACF7 /* _AnyDigitalPictureFrameItemBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _AnyDigitalPictureFrameItemBox.swift; sourceTree = "<group>"; };
-		E25CBE4C1FAD1D480088ACF7 /* AnyDigitalPictureFrameItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDigitalPictureFrameItem.swift; sourceTree = "<group>"; };
-		E25CBE4E1FAD1E840088ACF7 /* _AnyDigitalPictureFrameItemBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _AnyDigitalPictureFrameItemBase.swift; sourceTree = "<group>"; };
+		E27D95611FAE84D30099430B /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		E27D95621FAE84D30099430B /* UserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
+		E27D95651FAE84EB0099430B /* GeneralSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsTableViewCell.swift; sourceTree = "<group>"; };
+		E27D95661FAE84EB0099430B /* GeneralSettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneralSettingsTableViewCell.xib; sourceTree = "<group>"; };
+		E27D95691FAE84FB0099430B /* UserInfoSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSettingsTableViewCell.swift; sourceTree = "<group>"; };
+		E27D956A1FAE84FB0099430B /* UserInfoSettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserInfoSettingsTableViewCell.xib; sourceTree = "<group>"; };
+		E27D956D1FAE850D0099430B /* TimeFrameSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFrameSettingsTableViewCell.swift; sourceTree = "<group>"; };
+		E27D956E1FAE850D0099430B /* TimeFrameSettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeFrameSettingsTableViewCell.xib; sourceTree = "<group>"; };
+		E27D95711FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherZipcodeSettingsTableViewCell.swift; sourceTree = "<group>"; };
+		E27D95721FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherZipcodeSettingsTableViewCell.xib; sourceTree = "<group>"; };
+		E27D95751FAE85360099430B /* WiFiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiTableViewCell.swift; sourceTree = "<group>"; };
+		E27D95761FAE85360099430B /* WiFiTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WiFiTableViewCell.xib; sourceTree = "<group>"; };
+		E27D95791FAE9CF70099430B /* DatabaseSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSingleton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,7 +251,6 @@
 		E20608D91FAB632100F06260 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E25CBE451FAD17350088ACF7 /* TypeErasurePattern */,
 				E24F696D1FABB3390099343B /* DataSource */,
 				E24F69691FAB9C0D0099343B /* Protocol */,
 				E24F69871FABCDD30099343B /* Items */,
@@ -318,6 +329,7 @@
 				E24F69561FAB93380099343B /* NetworkError.swift */,
 				E24F69571FAB93380099343B /* NetworkResultType.swift */,
 				E24F69581FAB93380099343B /* DataLoader.swift */,
+				E27D95791FAE9CF70099430B /* DatabaseSingleton.swift */,
 			);
 			path = DataLoader;
 			sourceTree = "<group>";
@@ -356,8 +368,9 @@
 		E24F697C1FABBAB40099343B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				E24F69921FABD2C50099343B /* ImageDescriptionSwitch */,
-				E24F69931FABD2D00099343B /* ImageDescriptionRightText */,
+				E27D955A1FAE83B40099430B /* UserCell */,
+				E27D955F1FAE844D0099430B /* SettingsCells */,
+				E27D95601FAE84500099430B /* WiFiCell */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -375,32 +388,69 @@
 			path = Items;
 			sourceTree = "<group>";
 		};
-		E24F69921FABD2C50099343B /* ImageDescriptionSwitch */ = {
+		E27D955A1FAE83B40099430B /* UserCell */ = {
 			isa = PBXGroup;
 			children = (
-				E24F698A1FABCFD40099343B /* ImageDescriptionSwitchTableViewCell.swift */,
-				E24F698B1FABCFD40099343B /* ImageDescriptionSwitchTableViewCell.xib */,
+				E27D95611FAE84D30099430B /* UserTableViewCell.swift */,
+				E27D95621FAE84D30099430B /* UserTableViewCell.xib */,
 			);
-			path = ImageDescriptionSwitch;
+			path = UserCell;
 			sourceTree = "<group>";
 		};
-		E24F69931FABD2D00099343B /* ImageDescriptionRightText */ = {
+		E27D955B1FAE83C50099430B /* General */ = {
 			isa = PBXGroup;
 			children = (
-				E24F698E1FABD1B70099343B /* ImageDescriptionRightTextTableViewCell.swift */,
-				E24F698F1FABD1B70099343B /* ImageDescriptionRightTextTableViewCell.xib */,
+				E27D95651FAE84EB0099430B /* GeneralSettingsTableViewCell.swift */,
+				E27D95661FAE84EB0099430B /* GeneralSettingsTableViewCell.xib */,
 			);
-			path = ImageDescriptionRightText;
+			path = General;
 			sourceTree = "<group>";
 		};
-		E25CBE451FAD17350088ACF7 /* TypeErasurePattern */ = {
+		E27D955C1FAE83DE0099430B /* TimeFrame */ = {
 			isa = PBXGroup;
 			children = (
-				E25CBE4E1FAD1E840088ACF7 /* _AnyDigitalPictureFrameItemBase.swift */,
-				E25CBE4A1FAD19DC0088ACF7 /* _AnyDigitalPictureFrameItemBox.swift */,
-				E25CBE4C1FAD1D480088ACF7 /* AnyDigitalPictureFrameItem.swift */,
+				E27D956D1FAE850D0099430B /* TimeFrameSettingsTableViewCell.swift */,
+				E27D956E1FAE850D0099430B /* TimeFrameSettingsTableViewCell.xib */,
 			);
-			path = TypeErasurePattern;
+			path = TimeFrame;
+			sourceTree = "<group>";
+		};
+		E27D955D1FAE83E00099430B /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				E27D95691FAE84FB0099430B /* UserInfoSettingsTableViewCell.swift */,
+				E27D956A1FAE84FB0099430B /* UserInfoSettingsTableViewCell.xib */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		E27D955E1FAE83E30099430B /* WeatherZipcode */ = {
+			isa = PBXGroup;
+			children = (
+				E27D95711FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.swift */,
+				E27D95721FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.xib */,
+			);
+			path = WeatherZipcode;
+			sourceTree = "<group>";
+		};
+		E27D955F1FAE844D0099430B /* SettingsCells */ = {
+			isa = PBXGroup;
+			children = (
+				E27D955B1FAE83C50099430B /* General */,
+				E27D955D1FAE83E00099430B /* UserInfo */,
+				E27D955C1FAE83DE0099430B /* TimeFrame */,
+				E27D955E1FAE83E30099430B /* WeatherZipcode */,
+			);
+			path = SettingsCells;
+			sourceTree = "<group>";
+		};
+		E27D95601FAE84500099430B /* WiFiCell */ = {
+			isa = PBXGroup;
+			children = (
+				E27D95751FAE85360099430B /* WiFiTableViewCell.swift */,
+				E27D95761FAE85360099430B /* WiFiTableViewCell.xib */,
+			);
+			path = WiFiCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -465,13 +515,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E24F698D1FABCFD40099343B /* ImageDescriptionSwitchTableViewCell.xib in Resources */,
+				E27D95641FAE84D30099430B /* UserTableViewCell.xib in Resources */,
+				E27D95741FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.xib in Resources */,
 				E24F69601FAB93400099343B /* ServerData.json in Resources */,
+				E27D95701FAE850D0099430B /* TimeFrameSettingsTableViewCell.xib in Resources */,
 				E20608CE1FAB629B00F06260 /* LaunchScreen.storyboard in Resources */,
 				E24F69621FAB99090099343B /* GoogleService-Info.plist in Resources */,
-				E24F69911FABD1B70099343B /* ImageDescriptionRightTextTableViewCell.xib in Resources */,
+				E27D95681FAE84EB0099430B /* GeneralSettingsTableViewCell.xib in Resources */,
 				E20608CB1FAB629B00F06260 /* Assets.xcassets in Resources */,
+				E27D95781FAE85360099430B /* WiFiTableViewCell.xib in Resources */,
 				E20608C91FAB629B00F06260 /* Main.storyboard in Resources */,
+				E27D956C1FAE84FB0099430B /* UserInfoSettingsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,8 +596,8 @@
 				E24F695C1FAB93380099343B /* NetworkResultType.swift in Sources */,
 				E24F695D1FAB93380099343B /* DataLoader.swift in Sources */,
 				E20FF6AD1FAB739200F89850 /* UITableView+Registrable.swift in Sources */,
-				E25CBE4B1FAD19DC0088ACF7 /* _AnyDigitalPictureFrameItemBox.swift in Sources */,
 				E2204F971FACDDC300F7E8DC /* DigitalPictureFrameDataSource.swift in Sources */,
+				E27D957A1FAE9CF70099430B /* DatabaseSingleton.swift in Sources */,
 				E2204F8B1FACD28F00F7E8DC /* SettingsUserInfoItem.swift in Sources */,
 				E24F69681FAB9B960099343B /* WiFiInfo.swift in Sources */,
 				E24F69891FABCE5D0099343B /* BaseViewController.swift in Sources */,
@@ -552,32 +606,34 @@
 				E24F69971FABF1AD0099343B /* SideInfo.swift in Sources */,
 				E20FF6A51FAB738B00F89850 /* ReusableView.swift in Sources */,
 				E24F69661FAB9ADA0099343B /* Settings.swift in Sources */,
-				E24F69901FABD1B70099343B /* ImageDescriptionRightTextTableViewCell.swift in Sources */,
 				E2204F7A1FACB85700F7E8DC /* AlertViewPresenter.swift in Sources */,
 				E20FF6B41FAB73F800F89850 /* UIView+ReusableView.swift in Sources */,
 				E23DB6E81FAE227A00976957 /* DigitalPictureFrameViewController.swift in Sources */,
+				E27D956F1FAE850D0099430B /* TimeFrameSettingsTableViewCell.swift in Sources */,
 				E24F69841FABC6CD0099343B /* UserItem.swift in Sources */,
-				E24F698C1FABCFD40099343B /* ImageDescriptionSwitchTableViewCell.swift in Sources */,
 				E20FF6A61FAB738B00F89850 /* ViewSetupable.swift in Sources */,
 				E24F697B1FABB9400099343B /* DigitalPictureFrameCellType.swift in Sources */,
+				E27D956B1FAE84FB0099430B /* UserInfoSettingsTableViewCell.swift in Sources */,
 				E2204F931FACDA7A00F7E8DC /* DigitalPictureFrameCellSetupable.swift in Sources */,
 				E2204F951FACDD6700F7E8DC /* DigitalPictureFrameDataSourceDelegate.swift in Sources */,
 				E20608C41FAB629B00F06260 /* AppDelegate.swift in Sources */,
 				E24F69641FAB9A660099343B /* User.swift in Sources */,
 				E24F69591FAB93380099343B /* FileLoaderError.swift in Sources */,
+				E27D95731FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.swift in Sources */,
 				E2204F851FACD1A200F7E8DC /* ZipCodeSettingsSection.swift in Sources */,
 				E24F697E1FABBAFA0099343B /* DigitalPictureFrameItem.swift in Sources */,
 				E2204F811FACD0A100F7E8DC /* TimeSettingsSection.swift in Sources */,
+				E27D95771FAE85360099430B /* WiFiTableViewCell.swift in Sources */,
 				E20FF6A81FAB738B00F89850 /* Registrable.swift in Sources */,
 				E20FF6B21FAB73D200F89850 /* UIView+NibLoadableView.swift in Sources */,
 				E20FF6B01FAB73B600F89850 /* NibLoadableView.swift in Sources */,
 				E24F695B1FAB93380099343B /* NetworkError.swift in Sources */,
-				E25CBE501FAD1EAC0088ACF7 /* _AnyDigitalPictureFrameItemBase.swift in Sources */,
-				E25CBE4D1FAD1D480088ACF7 /* AnyDigitalPictureFrameItem.swift in Sources */,
 				E2204F8F1FACD6AC00F7E8DC /* WiFiItem.swift in Sources */,
 				E2204F9B1FACDFB700F7E8DC /* UITableView+DigitalPictureFrameCellDequeueble.swift in Sources */,
 				E2204F991FACDECB00F7E8DC /* DigitalPictureFrameCellDequeueble.swift in Sources */,
+				E27D95631FAE84D30099430B /* UserTableViewCell.swift in Sources */,
 				E24F696C1FABA8E80099343B /* DigitalPictureFrameData.swift in Sources */,
+				E27D95671FAE84EB0099430B /* GeneralSettingsTableViewCell.swift in Sources */,
 				E20FF6BA1FAB770E00F89850 /* TopTabBarItemType.swift in Sources */,
 				E20FF6B81FAB748A00F89850 /* WiFiViewController.swift in Sources */,
 				E20FF6AE1FAB739200F89850 /* UIViewController+StoryboardIdentifiable.swift in Sources */,

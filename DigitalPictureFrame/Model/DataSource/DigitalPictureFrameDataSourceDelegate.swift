@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 protocol DigitalPictureFrameDataSourceDelegate: class, UITableViewDataSource, UITableViewDelegate {
-  var items: [AnyDigitalPictureFrameItem<Any>] { get set }
+  var items: [DigitalPictureFrameItem] { get set }
   
   func itemCount(in section: Int) -> Int
-  func item(at indexPath: IndexPath) -> AnyDigitalPictureFrameItem<Any>
-  func item(at section: Int) -> AnyDigitalPictureFrameItem<Any>
+  func item(at indexPath: IndexPath) -> DigitalPictureFrameItem
+  func item(at section: Int) -> DigitalPictureFrameItem
 }
 
 

@@ -9,6 +9,10 @@
 import Foundation
 
 enum DigitalPictureFrameCellType: String {
-  case imageDescriptionSwitch
-  case imageDescriptionRightText
+  case user
+  case generalSettings
+  case timeFrameSettings
+  case userInfoSettings
+  case weatherZipcodeSettings
+  case wifi
 }

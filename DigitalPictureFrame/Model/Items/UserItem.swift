@@ -9,16 +9,16 @@
 import Foundation
 
 final class UserItem: DigitalPictureFrameItem {
-  typealias ItemModel = User
-  private var users: [User]
+  private(set) var users: [User]
   
-  var type = DigitalPictureFrameCellType.imageDescriptionSwitch
-  var section = DigitalPictureFrameCellSectionType.users
-  var cells: [CellItem<ItemModel>]
+  let type = DigitalPictureFrameCellType.user
+  let section = DigitalPictureFrameCellSectionType.users
+  var cells: [CellItem] {
+    return users.map { CellItem(thumbnailImageName: $0.image, description: $0.description, value: $0.enabled) }
+  }
   
   
   init(users: [User]) {
     self.users = users
-    self.cells = users.map { CellItem<User>(entity: $0) }
   }
 }

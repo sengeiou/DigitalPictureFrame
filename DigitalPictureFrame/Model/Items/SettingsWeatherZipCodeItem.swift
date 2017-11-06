@@ -9,15 +9,15 @@
 import Foundation
 
 final class SettingsWeatherZipCodeItem: ZipCodeSettingsSection, DigitalPictureFrameItem {
-  typealias ItemModel = String
-  
   var weatherZip: String
-  var type = DigitalPictureFrameCellType.imageDescriptionSwitch
-  var section = DigitalPictureFrameCellSectionType.zipCode
-  var cells: [CellItem<ItemModel>]
+  let type = DigitalPictureFrameCellType.weatherZipcodeSettings
+  let section = DigitalPictureFrameCellSectionType.zipCode
+  var cells: [CellItem] {
+    let leftInfoCell = CellItem(thumbnailImageName: "thumbnail-weatherZip", description: "Weather Zip Code", value: weatherZip)
+    return [leftInfoCell]
+  }
   
   init(weatherZip: String) {
     self.weatherZip = weatherZip
-    self.cells = [CellItem(entity: weatherZip)]
   }
 }

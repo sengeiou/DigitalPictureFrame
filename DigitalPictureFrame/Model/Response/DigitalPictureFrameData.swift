@@ -9,7 +9,7 @@
 import Foundation
 
 struct DigitalPictureFrameData: Codable {
-  var phoneNumber: String
+  var MAC: String
   var users: [User]
   var settings: Settings
   var wifiInfo: WiFiInfo

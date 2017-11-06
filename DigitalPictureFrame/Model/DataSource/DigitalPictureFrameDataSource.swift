@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-final class DigitalPictureFrameDataSource<T>: NSObject, UITableViewDataSource, UITableViewDelegate {
-  var items: [AnyDigitalPictureFrameItem<T>]
+final class DigitalPictureFrameDataSource: NSObject, DigitalPictureFrameDataSourceDelegate {
+  var items: [DigitalPictureFrameItem]
   
-  init(items: [AnyDigitalPictureFrameItem<T>]) {
+  init(items: [DigitalPictureFrameItem]) {
     self.items = items
   }
   
@@ -21,14 +21,18 @@ final class DigitalPictureFrameDataSource<T>: NSObject, UITableViewDataSource, U
     return items[section].cells.count
   }
   
-  func item(at indexPath: IndexPath) -> AnyDigitalPictureFrameItem<T> {
+  func item(at indexPath: IndexPath) -> DigitalPictureFrameItem {
     return items[indexPath.section]
   }
   
-  func item(at section: Int) -> AnyDigitalPictureFrameItem<T> {
+  func item(at section: Int) -> DigitalPictureFrameItem {
     return items[section]
   }
-  
+}
+
+
+// MARK: - UITableViewDataSource protocol
+extension DigitalPictureFrameDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
     return items.count
@@ -50,22 +54,44 @@ final class DigitalPictureFrameDataSource<T>: NSObject, UITableViewDataSource, U
     let frameItem = item(at: indexPath)
     
     switch frameItem.type {
-    case .imageDescriptionSwitch:
-      let cell = tableView.dequeueDigitalPictureFrameCell(cell: ImageDescriptionSwitchTableViewCell.self)
-      //      cell.setup(by: frameItem, at: indexPath)
+    case .user:
+      let cell = tableView.dequeueDigitalPictureFrameCell(cell: UserTableViewCell.self)
+      cell.setup(by: frameItem, at: indexPath)
       return cell
       
-    case .imageDescriptionRightText:
-      break
-      //      let cell = tableView.dequeueDigitalPictureFrameCell(cell: ImageDescriptionRightTextTableViewCell.self)
-      //      cell.setup(by: frameItem, at: indexPath)
-      //      return cell
+    case .generalSettings:
+      let cell = tableView.dequeueDigitalPictureFrameCell(cell: GeneralSettingsTableViewCell.self)
+      cell.setup(by: frameItem, at: indexPath)
+      return cell
+      
+    case .timeFrameSettings:
+      let cell = tableView.dequeueDigitalPictureFrameCell(cell: TimeFrameSettingsTableViewCell.self)
+      cell.setup(by: frameItem, at: indexPath)
+      return cell
+      
+    case .userInfoSettings:
+      let cell = tableView.dequeueDigitalPictureFrameCell(cell: UserInfoSettingsTableViewCell.self)
+      cell.setup(by: frameItem, at: indexPath)
+      return cell
+      
+    case .weatherZipcodeSettings:
+      let cell = tableView.dequeueDigitalPictureFrameCell(cell: WeatherZipcodeSettingsTableViewCell.self)
+      cell.setup(by: frameItem, at: indexPath)
+      return cell
+      
+    case .wifi:
+      let cell = tableView.dequeueDigitalPictureFrameCell(cell: WiFiTableViewCell.self)
+      cell.setup(by: frameItem, at: indexPath)
+      return cell
     }
-    
-    return UITableViewCell()
   }
   
+}
 
+
+// MARK: - UITableViewDelegate protocol
+extension DigitalPictureFrameDataSource {
+  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let frameItem = item(at: indexPath)
     print("Row: \(indexPath.row) and type: \(frameItem.type.rawValue)")
@@ -74,18 +100,5 @@ final class DigitalPictureFrameDataSource<T>: NSObject, UITableViewDataSource, U
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 65
   }
-}
-
-
-// MARK: - UITableViewDataSource protocol
-extension DigitalPictureFrameDataSource {
-  
-  }
-
-
-// MARK: - UITableViewDelegate protocol
-extension DigitalPictureFrameDataSource {
-  
-  
   
 }

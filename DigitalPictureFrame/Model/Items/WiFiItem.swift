@@ -7,18 +7,20 @@
 //
 
 import Foundation
+import UIKit
 
 final class WiFiItem: DigitalPictureFrameItem {
-  typealias ItemModel = WiFiInfo
-  private var wiFi: WiFiInfo
+  private(set) var wiFi: WiFiInfo
   
-  var type = DigitalPictureFrameCellType.imageDescriptionRightText
-  var section = DigitalPictureFrameCellSectionType.wifi
-  var cells: [CellItem<ItemModel>]
+  let type = DigitalPictureFrameCellType.wifi
+  let section = DigitalPictureFrameCellSectionType.wifi
+  var cells: [CellItem] {
+    let wifiCell = CellItem(thumbnailImageName: "thumbnail-wifi", description: wiFi.description, value: wiFi.password)
+    return [wifiCell]
+  }
   
   
   init(wiFi: WiFiInfo) {
     self.wiFi = wiFi
-    self.cells = [CellItem(entity: wiFi)]
   }
 }
