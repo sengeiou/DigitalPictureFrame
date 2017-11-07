@@ -60,6 +60,7 @@ extension DigitalPictureFrameDataSource {
     switch delegateVC {
     case is UserViewController where frameItem.type == .user:
       let cell = tableView.dequeueDigitalPictureFrameCell(cell: UserTableViewCell.self)
+      cell.delegate = delegateVC as! UserViewController
       cell.setup(by: frameItem, at: indexPath)
       return cell
       

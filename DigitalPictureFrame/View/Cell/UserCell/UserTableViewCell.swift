@@ -13,6 +13,7 @@ class UserTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable, View
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var onOffSwitch: UISwitch!
   
+  weak var delegate: UserCellDelegate?
   
   var rowInSection: Int?
   var item: DigitalPictureFrameItem? {
@@ -29,6 +30,7 @@ class UserTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable, View
     }
   }
   
+
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -43,6 +45,30 @@ extension UserTableViewCell {
     selectionStyle = .none
     thumbnailImageView.contentMode = .scaleAspectFit
     thumbnailImageView.roundThumbnail()
+  }
+  
+}
+
+
+// MARK: DigitalPictureFrameCellSetupable protocol
+extension UserTableViewCell {
+  
+  func setup(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+    self.rowInSection = indexPath.row
+    self.item = item
+    self.onOffSwitch.tag = indexPath.section
+  }
+  
+}
+
+
+// MARK: Actions
+extension UserTableViewCell {
+  
+  @IBAction func switchPressed(_ sender: UISwitch) {
+    guard let rowInSection = rowInSection else { return }
+    let index = IndexPath(row: rowInSection, section: sender.tag)
+    delegate?.userCell(self, didPressSwitch: sender, at: index)
   }
   
 }

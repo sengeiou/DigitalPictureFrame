@@ -79,6 +79,7 @@
 		E2E0784B1FB0D58200E9EAF7 /* Date+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */; };
 		E2E769D31FB2744200F5C37E /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E769D11FB2744100F5C37E /* Observer.swift */; };
 		E2E769D41FB2744200F5C37E /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E769D21FB2744200F5C37E /* Observable.swift */; };
+		E2E769D61FB27DA000F5C37E /* UserCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E769D51FB27DA000F5C37E /* UserCellDelegate.swift */; };
 		E2F059691FB23E9C0054C424 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F059681FB23E9C0054C424 /* ProgressIndicator.swift */; };
 		E2F0596C1FB2469B0054C424 /* UIColor+CustomRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */; };
 		E2FB8E281FB0EEA400724889 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E271FB0EEA400724889 /* TimePicker.swift */; };
@@ -170,6 +171,7 @@
 		E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utility.swift"; sourceTree = "<group>"; };
 		E2E769D11FB2744100F5C37E /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		E2E769D21FB2744200F5C37E /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		E2E769D51FB27DA000F5C37E /* UserCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellDelegate.swift; sourceTree = "<group>"; };
 		E2F059681FB23E9C0054C424 /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
 		E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomRGB.swift"; sourceTree = "<group>"; };
 		E2FB8E271FB0EEA400724889 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				E27D95611FAE84D30099430B /* UserTableViewCell.swift */,
+				E2E769D51FB27DA000F5C37E /* UserCellDelegate.swift */,
 				E27D95621FAE84D30099430B /* UserTableViewCell.xib */,
 			);
 			path = UserCell;
@@ -709,6 +712,7 @@
 				E24F69841FABC6CD0099343B /* UserItem.swift in Sources */,
 				E20FF6A61FAB738B00F89850 /* ViewSetupable.swift in Sources */,
 				E24F697B1FABB9400099343B /* DigitalPictureFrameCellType.swift in Sources */,
+				E2E769D61FB27DA000F5C37E /* UserCellDelegate.swift in Sources */,
 				E27D956B1FAE84FB0099430B /* UserInfoSettingsTableViewCell.swift in Sources */,
 				E2204F931FACDA7A00F7E8DC /* DigitalPictureFrameCellSetupable.swift in Sources */,
 				E2204F951FACDD6700F7E8DC /* DigitalPictureFrameDataSourceDelegate.swift in Sources */,

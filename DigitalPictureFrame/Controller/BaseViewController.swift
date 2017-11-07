@@ -40,6 +40,19 @@ extension BaseViewController {
 }
 
 
+
+// MARK: -
+extension SettingsViewController {
+  
+  func reloadRows(at indexPaths: IndexPath...) {
+    tableView.beginUpdates()
+    tableView.reloadRows(at: indexPaths, with: .fade)
+    tableView.endUpdates()
+  }
+  
+}
+
+
 // MARK: - Create assign delegate
 extension BaseViewController {
   

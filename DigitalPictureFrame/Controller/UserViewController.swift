@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserViewController: BaseViewController {
+class UserViewController: BaseViewController, UserCellDelegate {
   lazy private var progressIndicator: ProgressIndicator = {
     let progress = ProgressIndicator(text: "Loading")
     self.view.addSubview(progress)
@@ -23,7 +23,6 @@ class UserViewController: BaseViewController {
   
   deinit {
     unregisterNotifications()
-    print("Deinit SettingsViewController")
   }
 }
 
@@ -44,18 +43,6 @@ extension UserViewController {
   
   func registerCells() {
     tableView.register(cell: UserTableViewCell.self)
-  }
-  
-}
-
-
-// MARK: - Create and assign delegate
-private extension UserViewController {
-
-  func createAndAssignUserDelegate() {
-    let users = DatabaseManager.shared().users
-    let userItem = UserItem(users: users)
-    createAndAssignDelegate(for: userItem)
   }
   
 }
@@ -82,9 +69,28 @@ extension UserViewController {
   }
   
   
-  
   @objc func reloadDataInUserViewController() {
     createAndAssignUserDelegate()
   }
 }
 
+
+// MARK: - Create and assign delegate
+private extension UserViewController {
+  
+  func createAndAssignUserDelegate() {
+    let users = DatabaseManager.shared().users
+    let userItem = UserItem(users: users)
+    createAndAssignDelegate(for: userItem)
+  }
+  
+}
+
+// MARK: - UserCellDelegate protocol
+extension UserViewController {
+  
+  func userCell(_ cell: UserTableViewCell, didPressSwitch button: UISwitch, at indexPath: IndexPath) {
+    print("didPressSwitch: \(button.isOn) at: \(indexPath)")
+  }
+  
+}

@@ -35,7 +35,6 @@ class SettingsViewController: BaseViewController, TimePickerDelegate, TimeFrameS
   }
   
   deinit {
-//    unregisterNotifications()
     print("Deinit SettingsViewController")
   }
 }
@@ -72,8 +71,6 @@ extension SettingsViewController {
   
   override func setup() {
     super.setup()
-  
-//    registerNotifications()
     registerCells()
   }
   
@@ -87,7 +84,6 @@ extension SettingsViewController {
     items = [general, timeFrame, userInfo, weatherZipcode]
     
     dataSourceDelegate = DigitalPictureFrameDataSource(self, items: items!)
-    
     tableView.dataSource = dataSourceDelegate
     tableView.delegate = dataSourceDelegate
   }
@@ -108,62 +104,22 @@ extension SettingsViewController {
 }
 
 
-//// MARK: - Add Notification Observer
-//extension SettingsViewController {
-//
-//  func registerNotifications() {
-//    addNofificationObserverToShowTimePicker()
-//  }
-//
-//  func unregisterNotifications() {
-//    removeNofificationObserverShowingTimePicker()
-//  }
-//
-//
-//  func addNofificationObserverToShowTimePicker() {
-//    NotificationCenter.default.addObserver(self, selector: #selector(SettingsViewController.showTimePickerView), name: NotificationName.showTimePicker.name, object: nil)
-//  }
-//
-//  func removeNofificationObserverShowingTimePicker() {
-//    NotificationCenter.default.removeObserver(self, name: NotificationName.showTimePicker.name, object: nil)
-//  }
-//}
-
-
 // MARK: - TimePickerDelegate protocol
 extension SettingsViewController {
-  
-  func timePicker(_ timePicker: TimePicker, didSelectTime sender: UIDatePicker) {
-    let formatter = DateFormatter()
-    formatter.timeStyle = .short
-    let shortTime = formatter.string(from: sender.date)
-    print("shortTime: \(shortTime)")
-  }
   
   func timePicker(_ timePicker: TimePicker, didPressDone sender: UIDatePicker) {
     guard let modifiedItemIndexPath = modifiedItemIndexPath else { return }
     guard let modifiedTimeFrameItem = dataSourceDelegate?.item(at: modifiedItemIndexPath) as? SettingsTimeItem else { return }
-    
-    let selectedTime = Date.date(sender.date) ?? ""
-    print("selectedTime: \(selectedTime)")
+    guard let selectedTime = Date.date(sender.date) else { return }
     
     let time = modifiedTimeFrameItem.cells[modifiedItemIndexPath.row]
-    print("before: \(time.value)")
     time.value = selectedTime
-    print("after: \(time.value)")
-    print(modifiedTimeFrameItem.cells[modifiedItemIndexPath.row].value)
+    reloadRows(at: modifiedItemIndexPath)
     timePicker.dismiss()
-    
-    
-    tableView.beginUpdates()
-    tableView.reloadRows(at: [modifiedItemIndexPath], with: .fade)
-    tableView.endUpdates()
-    print("Done")
   }
   
   func timePicker(_ timePicker: TimePicker, didPressCancel sender: UIDatePicker) {
     timePicker.dismiss()
-    print("Cancel")
   }
   
 }
