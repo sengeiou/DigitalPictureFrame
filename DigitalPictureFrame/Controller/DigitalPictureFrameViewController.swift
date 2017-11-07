@@ -9,6 +9,13 @@
 import UIKit
 
 class DigitalPictureFrameViewController: UITabBarController, UITabBarControllerDelegate, ViewSetupable {
+  private var shared: DatabaseManager?
+  lazy private var progressIndicator: ProgressIndicator = {
+    let progress = ProgressIndicator(text: "Loading")
+    self.view.addSubview(progress)
+    return progress
+  }()
+  
   @IBOutlet weak var topTabBar: UITabBar!
   
   override func viewDidLoad() {
@@ -20,14 +27,15 @@ class DigitalPictureFrameViewController: UITabBarController, UITabBarControllerD
     super.viewDidLayoutSubviews()
     setupLayout()
   }
-}
 
+}
 
 // MARK: - ViewSetupable protocol
 extension DigitalPictureFrameViewController {
   
   func setup() {
     delegate = self
+    loadData()
   }
   
   
@@ -46,6 +54,32 @@ extension DigitalPictureFrameViewController {
 }
 
 
+// MARK: - Load data
+private extension DigitalPictureFrameViewController {
+  
+  func loadData() {
+    progressIndicator.show()
+    NetworkManager.shared.fetchData(completionHandler: {[unowned self] result in
+      switch result {
+      case .success(let decodeData):
+        let _ = DatabaseManager.shared(data: decodeData)
+        self.sendNotificationToReloadUserData()
+        self.progressIndicator.hide()
+        
+      case .failure(let error):
+        self.progressIndicator.hide()
+        AlertViewPresenter.shared.presentErrorAlert(viewController: self, error: error)
+        
+      }
+    })
+  }
+  
+  func sendNotificationToReloadUserData() {
+    NotificationCenter.default.post(name: NotificationName.reloadDataInUserViewController.name, object: nil)
+  }
+}
+
+
 // MARK: - UITabBarControllerDelegate protocol
 extension DigitalPictureFrameViewController {
   
@@ -55,19 +89,17 @@ extension DigitalPictureFrameViewController {
 
     switch selectedType {
     case .users where viewController is UserViewController:
-      let vc = viewController as! UserViewController
-      vc.users = DatabaseSingleton.shared.data?.users
-      print(selectedType.description) // add notification center to reload data in VC!!
+      print(selectedType.description)
 
     case .settings where viewController is SettingsViewController:
       let vc = viewController as! SettingsViewController
-      vc.settings = DatabaseSingleton.shared.data?.settings
+      vc.settings = DatabaseManager.shared().settings
       vc.tableView.reloadData()
       print(selectedType.description) // add notification center to reload data in VC!!
 
     case .wifi where viewController is WiFiViewController:
       let vc = viewController as! WiFiViewController
-      vc.wifiInfo = DatabaseSingleton.shared.data?.wifiInfo
+      vc.wifiInfo = DatabaseManager.shared().wifiInfo
       vc.tableView.reloadData()
       print(selectedType.description) // add notification center to reload data in VC!!
       

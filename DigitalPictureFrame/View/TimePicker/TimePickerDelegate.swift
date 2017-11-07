@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-protocol TimePickerDelegate: class {
-  func timePicker(_ timePicker: TimePicker, didSelectTime sender: UIDatePicker)
+@objc protocol TimePickerDelegate: class {
+  @objc optional func timePicker(_ timePicker: TimePicker, didSelectTime sender: UIDatePicker)
   func timePicker(_ timePicker: TimePicker, didPressDone sender: UIDatePicker)
   func timePicker(_ timePicker: TimePicker, didPressCancel sender: UIDatePicker)
 }

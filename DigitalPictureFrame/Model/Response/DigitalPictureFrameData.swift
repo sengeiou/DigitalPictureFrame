@@ -13,4 +13,19 @@ struct DigitalPictureFrameData: Codable {
   var users: [User]
   var settings: Settings
   var wifiInfo: WiFiInfo
+  
+  
+  init() {
+    self.MAC = ""
+    self.users = []
+    self.settings = Settings()
+    self.wifiInfo = WiFiInfo()
+  }
+  
+  init(MAC: String, users: [User], settings: Settings, wifiInfo: WiFiInfo) {
+    self.MAC = MAC
+    self.users = users
+    self.settings = settings
+    self.wifiInfo = wifiInfo
+  }
 }

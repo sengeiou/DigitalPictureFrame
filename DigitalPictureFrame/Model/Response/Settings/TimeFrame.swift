@@ -8,7 +8,17 @@
 
 import Foundation
 
-struct TimeFrame: Codable {
+final class TimeFrame: Codable {
   var onTime: String
   var offTime: String
+  
+  init() {
+    onTime = ""
+    offTime = ""
+  }
+  
+  init(onTime: String, offTime: String) {
+    self.onTime = onTime
+    self.offTime = offTime
+  }
 }

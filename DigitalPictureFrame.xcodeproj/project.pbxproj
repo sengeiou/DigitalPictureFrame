@@ -74,8 +74,12 @@
 		E27D95741FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27D95721FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.xib */; };
 		E27D95771FAE85360099430B /* WiFiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95751FAE85360099430B /* WiFiTableViewCell.swift */; };
 		E27D95781FAE85360099430B /* WiFiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27D95761FAE85360099430B /* WiFiTableViewCell.xib */; };
-		E27D957A1FAE9CF70099430B /* DatabaseSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95791FAE9CF70099430B /* DatabaseSingleton.swift */; };
+		E27D957A1FAE9CF70099430B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95791FAE9CF70099430B /* DatabaseManager.swift */; };
 		E2E0784B1FB0D58200E9EAF7 /* Date+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */; };
+		E2E769D31FB2744200F5C37E /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E769D11FB2744100F5C37E /* Observer.swift */; };
+		E2E769D41FB2744200F5C37E /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E769D21FB2744200F5C37E /* Observable.swift */; };
+		E2F059691FB23E9C0054C424 /* ProgressIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F059681FB23E9C0054C424 /* ProgressIndicator.swift */; };
+		E2F0596C1FB2469B0054C424 /* UIColor+CustomRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */; };
 		E2FB8E281FB0EEA400724889 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E271FB0EEA400724889 /* TimePicker.swift */; };
 		E2FB8E2B1FB0EF5500724889 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E2A1FB0EF5500724889 /* NotificationName.swift */; };
 		E2FB8E2D1FB0F05900724889 /* NotificationUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E2C1FB0F05900724889 /* NotificationUserInfoKey.swift */; };
@@ -162,8 +166,12 @@
 		E27D95721FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherZipcodeSettingsTableViewCell.xib; sourceTree = "<group>"; };
 		E27D95751FAE85360099430B /* WiFiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiTableViewCell.swift; sourceTree = "<group>"; };
 		E27D95761FAE85360099430B /* WiFiTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WiFiTableViewCell.xib; sourceTree = "<group>"; };
-		E27D95791FAE9CF70099430B /* DatabaseSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSingleton.swift; sourceTree = "<group>"; };
+		E27D95791FAE9CF70099430B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utility.swift"; sourceTree = "<group>"; };
+		E2E769D11FB2744100F5C37E /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		E2E769D21FB2744200F5C37E /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		E2F059681FB23E9C0054C424 /* ProgressIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressIndicator.swift; sourceTree = "<group>"; };
+		E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomRGB.swift"; sourceTree = "<group>"; };
 		E2FB8E271FB0EEA400724889 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
 		E2FB8E2A1FB0EF5500724889 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		E2FB8E2C1FB0F05900724889 /* NotificationUserInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUserInfoKey.swift; sourceTree = "<group>"; };
@@ -273,6 +281,7 @@
 		E20608D91FAB632100F06260 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E2E769CC1FB272B000F5C37E /* Observable */,
 				E24F696D1FABB3390099343B /* DataSource */,
 				E24F69691FAB9C0D0099343B /* Protocol */,
 				E24F69871FABCDD30099343B /* Items */,
@@ -292,8 +301,10 @@
 			children = (
 				E24F697C1FABBAB40099343B /* Cell */,
 				E2204F8D1FACD65300F7E8DC /* AlertView */,
+				E24853701FB253E60051BA81 /* UserPicker */,
 				E2FB8E291FB0EEC000724889 /* TimePicker */,
 				E2FB8E371FB10A8700724889 /* TableSectionButton.swift */,
+				E2F0596A1FB240350054C424 /* ProgressView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,6 +312,7 @@
 		E20608DB1FAB633300F06260 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */,
 				E2FB8E391FB113BC00724889 /* UIView+AddConstraintsWithFormat.swift */,
 				E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */,
 				E20FF6B31FAB73F800F89850 /* UIView+ReusableView.swift */,
@@ -348,6 +360,13 @@
 			path = AlertView;
 			sourceTree = "<group>";
 		};
+		E24853701FB253E60051BA81 /* UserPicker */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UserPicker;
+			sourceTree = "<group>";
+		};
 		E24F69531FAB93380099343B /* DataLoader */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,7 +375,7 @@
 				E24F69561FAB93380099343B /* NetworkError.swift */,
 				E24F69571FAB93380099343B /* NetworkResultType.swift */,
 				E24F69581FAB93380099343B /* DataLoader.swift */,
-				E27D95791FAE9CF70099430B /* DatabaseSingleton.swift */,
+				E27D95791FAE9CF70099430B /* DatabaseManager.swift */,
 			);
 			path = DataLoader;
 			sourceTree = "<group>";
@@ -480,6 +499,23 @@
 				E27D95761FAE85360099430B /* WiFiTableViewCell.xib */,
 			);
 			path = WiFiCell;
+			sourceTree = "<group>";
+		};
+		E2E769CC1FB272B000F5C37E /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				E2E769D21FB2744200F5C37E /* Observable.swift */,
+				E2E769D11FB2744100F5C37E /* Observer.swift */,
+			);
+			path = Observable;
+			sourceTree = "<group>";
+		};
+		E2F0596A1FB240350054C424 /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				E2F059681FB23E9C0054C424 /* ProgressIndicator.swift */,
+			);
+			path = ProgressView;
 			sourceTree = "<group>";
 		};
 		E2FB8E291FB0EEC000724889 /* TimePicker */ = {
@@ -645,9 +681,10 @@
 				E24F695A1FAB93380099343B /* NetworkManager.swift in Sources */,
 				E24F695C1FAB93380099343B /* NetworkResultType.swift in Sources */,
 				E24F695D1FAB93380099343B /* DataLoader.swift in Sources */,
+				E2F0596C1FB2469B0054C424 /* UIColor+CustomRGB.swift in Sources */,
 				E20FF6AD1FAB739200F89850 /* UITableView+Registrable.swift in Sources */,
 				E2204F971FACDDC300F7E8DC /* DigitalPictureFrameDataSource.swift in Sources */,
-				E27D957A1FAE9CF70099430B /* DatabaseSingleton.swift in Sources */,
+				E27D957A1FAE9CF70099430B /* DatabaseManager.swift in Sources */,
 				E2204F8B1FACD28F00F7E8DC /* SettingsUserInfoItem.swift in Sources */,
 				E24F69681FAB9B960099343B /* WiFiInfo.swift in Sources */,
 				E24F69891FABCE5D0099343B /* BaseViewController.swift in Sources */,
@@ -690,12 +727,15 @@
 				E27D95631FAE84D30099430B /* UserTableViewCell.swift in Sources */,
 				E24F696C1FABA8E80099343B /* DigitalPictureFrameData.swift in Sources */,
 				E2FB8E381FB10A8700724889 /* TableSectionButton.swift in Sources */,
+				E2F059691FB23E9C0054C424 /* ProgressIndicator.swift in Sources */,
 				E27D95671FAE84EB0099430B /* GeneralSettingsTableViewCell.swift in Sources */,
 				E20FF6BA1FAB770E00F89850 /* TopTabBarItemType.swift in Sources */,
 				E20FF6B81FAB748A00F89850 /* WiFiViewController.swift in Sources */,
 				E20FF6AE1FAB739200F89850 /* UIViewController+StoryboardIdentifiable.swift in Sources */,
 				E2204F891FACD25E00F7E8DC /* UserInfoSettingsSection.swift in Sources */,
 				E2204F871FACD1E100F7E8DC /* SettingsWeatherZipCodeItem.swift in Sources */,
+				E2E769D41FB2744200F5C37E /* Observable.swift in Sources */,
+				E2E769D31FB2744200F5C37E /* Observer.swift in Sources */,
 				E2E0784B1FB0D58200E9EAF7 /* Date+Utility.swift in Sources */,
 				E2FB8E2D1FB0F05900724889 /* NotificationUserInfoKey.swift in Sources */,
 				E24F69951FABF15A0099343B /* TimeFrame.swift in Sources */,

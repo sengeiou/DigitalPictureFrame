@@ -9,16 +9,21 @@
 import UIKit
 
 class UserViewController: BaseViewController {
-  var users: [User]? {
-    didSet {
-      createAndAssignUserDelegate()
-    }
-  }
+  lazy private var progressIndicator: ProgressIndicator = {
+    let progress = ProgressIndicator(text: "Loading")
+    self.view.addSubview(progress)
+    return progress
+  }()
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+  }
+  
+  deinit {
+    unregisterNotifications()
+    print("Deinit SettingsViewController")
   }
 }
 
@@ -28,8 +33,8 @@ extension UserViewController {
   
   override func setup() {
     super.setup()
+    registerNotifications()
     registerCells()
-    loadData()
   }
 }
 
@@ -44,27 +49,42 @@ extension UserViewController {
 }
 
 
-// MARK: - Load data
+// MARK: - Create and assign delegate
 private extension UserViewController {
-  
-  func loadData() {
-    NetworkManager.shared.fetchData(completionHandler: {[unowned self] result in
-      switch result {
-      case .success(let decodeData):
-        DatabaseSingleton.shared.assign(data: decodeData)
-        self.users = decodeData.users
-        
-      case .failure(let error):
-        AlertViewPresenter.shared.presentErrorAlert(viewController: self, error: error)
-      }
-    })
-  }
-  
-  
+
   func createAndAssignUserDelegate() {
-    guard let users = users else { return }
+    let users = DatabaseManager.shared().users
     let userItem = UserItem(users: users)
     createAndAssignDelegate(for: userItem)
   }
   
 }
+
+
+// MARK: - Add Notification Observer
+extension UserViewController {
+  
+  func registerNotifications() {
+    addNofificationObserverToReloadUserVC()
+  }
+  
+  func unregisterNotifications() {
+    removeNofificationObserverReloadingUserVC()
+  }
+  
+  
+  func addNofificationObserverToReloadUserVC() {
+    NotificationCenter.default.addObserver(self, selector: #selector(UserViewController.reloadDataInUserViewController), name: NotificationName.reloadDataInUserViewController.name, object: nil)
+  }
+  
+  func removeNofificationObserverReloadingUserVC() {
+    NotificationCenter.default.removeObserver(self, name: NotificationName.reloadDataInUserViewController.name, object: nil)
+  }
+  
+  
+  
+  @objc func reloadDataInUserViewController() {
+    createAndAssignUserDelegate()
+  }
+}
+

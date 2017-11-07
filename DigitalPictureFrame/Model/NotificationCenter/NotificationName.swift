@@ -15,6 +15,8 @@ enum NotificationName: String {
   case showZipcodeAlertView = "ShowZipcodeAlertView"
   case hideZipcodeAlertView = "HideZipcodeAlertView"
   
+  case reloadDataInUserViewController = "ReloadDataInUserViewController"
+  
   var name: Notification.Name {
     return Notification.Name(self.rawValue)
   }

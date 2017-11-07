@@ -13,7 +13,7 @@
         <!--DigitalPictureFrame-->
         <scene sceneID="ZO0-AU-QaX">
             <objects>
-                <tabBarController title="DigitalPictureFrame" id="gfc-3v-eVs" customClass="DigitalPictureFrameViewController" customModule="DigitalPictureFrame" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController title="DigitalPictureFrame" hidesBottomBarWhenPushed="YES" id="gfc-3v-eVs" customClass="DigitalPictureFrameViewController" customModule="DigitalPictureFrame" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" tag="1" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0om-fH-KZG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

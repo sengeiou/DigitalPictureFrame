@@ -25,7 +25,7 @@ extension Date {
   }
   
   fileprivate static var tzdFormat: String {
-    let format = "yyyy-MM-dd HH:mm:ssZ"
+    let format = "yyyy-MM-dd'T'HH:mm:ssZ"
     return format
   }
   
@@ -73,15 +73,6 @@ extension Date {
     formatter.dateStyle = .none
     formatter.timeStyle = .medium
     return formatter.string(from: date)
-  }
-  
-  
-  func changedToLocaleDateFormat() -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = Date.enLocaleDateFormat
-    
-    let formattedDateAsString = dateFormatter.string(from: self)
-    return formattedDateAsString
   }
   
   

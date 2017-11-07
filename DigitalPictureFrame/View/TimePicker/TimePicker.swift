@@ -14,8 +14,28 @@ class TimePicker: UIView, ViewSetupable {
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var doneButton: UIButton!
   
+  
+  private weak var presenterViewController: UIViewController!
+  lazy private var fadeView: UIView = {
+    let view = UIView(frame: self.presenterViewController.view.frame)
+    return view
+  }()
+  
   weak var delegate: TimePickerDelegate?
   
+  private var viewHeight: CGFloat {
+    return presenterViewController.view.frame.height
+  }
+  
+  private var viewWidth: CGFloat {
+    return presenterViewController.view.frame.width
+  }
+  
+  
+  convenience init(presenterViewController: UIViewController, frame: CGRect) {
+    self.init(frame: frame)
+    self.presenterViewController = presenterViewController
+  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -27,6 +47,11 @@ class TimePicker: UIView, ViewSetupable {
     super.init(coder: aDecoder)
     setup()
     setupStyle()
+  }
+  
+  
+  deinit {
+    print("deinit TimePicker")
   }
 }
 
@@ -41,8 +66,8 @@ extension TimePicker {
   
   func setupStyle() {
     datePicker.datePickerMode = .time
-    datePicker.backgroundColor = UIColor.white
-    contentView.backgroundColor = .red
+    datePicker.backgroundColor = .white
+    contentView.backgroundColor = .groupGray
   }
   
 }
@@ -58,4 +83,33 @@ private extension TimePicker {
     contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
   
+}
+
+
+
+// MARK: - Present and dismiss view
+extension TimePicker {
+  
+  func present() {
+    let pickerYPos = viewHeight - frame.height
+    UIApplication.shared.keyWindow!.addSubview(fadeView)
+    fadeView.backgroundColor = UIColor.black.withAlphaComponent(0)
+    
+    UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+      self.frame = CGRect(x: 0, y: pickerYPos, width: self.viewWidth, height: self.frame.height)
+      self.fadeView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+    })
+    
+    fadeView.addSubview(self)
+  }
+  
+  func dismiss() {
+    fadeView.backgroundColor = UIColor.black.withAlphaComponent(0)
+    UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+      self.frame = CGRect(x: 0, y: self.viewHeight, width: self.viewWidth, height: self.frame.height)
+    }, completion: { finished in
+      self.removeFromSuperview()
+      self.fadeView.removeFromSuperview()
+    })
+  }
 }

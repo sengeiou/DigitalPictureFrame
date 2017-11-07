@@ -37,8 +37,8 @@
     "randomQuotes": true,
     "sleep": false,
     "timeFrame": {
-      "onTime": "2017-10-02T05:30:00Z",
-      "offTime": "2017-10-02T22:30:00Z"
+      "onTime": "2017-11-07T15:52:57-0600",
+      "offTime": "2017-11-07T22:52:57-0600"
     },
     "reset": false,
     "weatherZip": "57104",

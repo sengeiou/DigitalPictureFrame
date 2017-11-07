@@ -10,15 +10,17 @@ import UIKit
 
 class SettingsViewController: BaseViewController, TimePickerDelegate, TimeFrameSettingsCellDelegate {
   lazy private var timePicker: TimePicker = {
-    let pickerViewHeight = CGFloat(200.0)
+    let pickerViewHeight = CGFloat(220.0)
+    let xPos = CGFloat(0)
     let yPos = view.frame.height
-    let frame = CGRect(x: 0, y: yPos, width: viewWidth, height: pickerViewHeight)
-    let picker = TimePicker(frame: frame)
+    let frame = CGRect(x: xPos, y: yPos, width: viewWidth, height: pickerViewHeight)
+    let picker = TimePicker(presenterViewController: self, frame: frame)
     picker.delegate = self
     return picker
   }()
   
-  private var items: [DigitalPictureFrameItem]? // modify!!
+  private var modifiedItemIndexPath: IndexPath?
+  private var items: [DigitalPictureFrameItem]?
   
   var settings: Settings? {
     didSet {
@@ -26,13 +28,14 @@ class SettingsViewController: BaseViewController, TimePickerDelegate, TimeFrameS
     }
   }
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
   }
   
   deinit {
-    unregisterNotifications()
+//    unregisterNotifications()
     print("Deinit SettingsViewController")
   }
 }
@@ -52,13 +55,7 @@ extension SettingsViewController {
     return viewHeight - timePicker.frame.height
   }
   
-  
-  @objc func showTimePickerView() {
-    UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
-      self.timePicker.frame = CGRect(x: 0, y: self.pickerYPos, width: self.viewWidth, height: self.timePicker.frame.height)
-    }, completion:nil)
-    self.view.addSubview(self.timePicker)
-  }
+
   
   
   func hideTimePickerView() {
@@ -76,7 +73,7 @@ extension SettingsViewController {
   override func setup() {
     super.setup()
   
-    registerNotifications()
+//    registerNotifications()
     registerCells()
   }
   
@@ -111,26 +108,26 @@ extension SettingsViewController {
 }
 
 
-// MARK: - Add Notification Observer
-extension SettingsViewController {
-  
-  func registerNotifications() {
-    addNofificationObserverToShowTimePicker()
-  }
-  
-  func unregisterNotifications() {
-    removeNofificationObserverShowingTimePicker()
-  }
-  
-  
-  func addNofificationObserverToShowTimePicker() {
-    NotificationCenter.default.addObserver(self, selector: #selector(SettingsViewController.showTimePickerView), name: NotificationName.showTimePicker.name, object: nil)
-  }
-  
-  func removeNofificationObserverShowingTimePicker() {
-    NotificationCenter.default.removeObserver(self, name: NotificationName.showTimePicker.name, object: nil)
-  }
-}
+//// MARK: - Add Notification Observer
+//extension SettingsViewController {
+//
+//  func registerNotifications() {
+//    addNofificationObserverToShowTimePicker()
+//  }
+//
+//  func unregisterNotifications() {
+//    removeNofificationObserverShowingTimePicker()
+//  }
+//
+//
+//  func addNofificationObserverToShowTimePicker() {
+//    NotificationCenter.default.addObserver(self, selector: #selector(SettingsViewController.showTimePickerView), name: NotificationName.showTimePicker.name, object: nil)
+//  }
+//
+//  func removeNofificationObserverShowingTimePicker() {
+//    NotificationCenter.default.removeObserver(self, name: NotificationName.showTimePicker.name, object: nil)
+//  }
+//}
 
 
 // MARK: - TimePickerDelegate protocol
@@ -139,17 +136,33 @@ extension SettingsViewController {
   func timePicker(_ timePicker: TimePicker, didSelectTime sender: UIDatePicker) {
     let formatter = DateFormatter()
     formatter.timeStyle = .short
-    let time = formatter.string(from: sender.date)
-    print(time)
+    let shortTime = formatter.string(from: sender.date)
+    print("shortTime: \(shortTime)")
   }
   
   func timePicker(_ timePicker: TimePicker, didPressDone sender: UIDatePicker) {
-    hideTimePickerView()
+    guard let modifiedItemIndexPath = modifiedItemIndexPath else { return }
+    guard let modifiedTimeFrameItem = dataSourceDelegate?.item(at: modifiedItemIndexPath) as? SettingsTimeItem else { return }
+    
+    let selectedTime = Date.date(sender.date) ?? ""
+    print("selectedTime: \(selectedTime)")
+    
+    let time = modifiedTimeFrameItem.cells[modifiedItemIndexPath.row]
+    print("before: \(time.value)")
+    time.value = selectedTime
+    print("after: \(time.value)")
+    print(modifiedTimeFrameItem.cells[modifiedItemIndexPath.row].value)
+    timePicker.dismiss()
+    
+    
+    tableView.beginUpdates()
+    tableView.reloadRows(at: [modifiedItemIndexPath], with: .fade)
+    tableView.endUpdates()
     print("Done")
   }
   
   func timePicker(_ timePicker: TimePicker, didPressCancel sender: UIDatePicker) {
-    hideTimePickerView()
+    timePicker.dismiss()
     print("Cancel")
   }
   
@@ -160,7 +173,8 @@ extension SettingsViewController {
 extension SettingsViewController {
   
   func timeFrameSettingsCell(_ cell: TimeFrameSettingsTableViewCell, didPressTimePickerButtonAt indexPath: IndexPath) {
-    showTimePickerView()
+    modifiedItemIndexPath = indexPath
+    timePicker.present()
   }
   
 }

@@ -21,7 +21,7 @@ extension TimePicker {
   }
   
   @objc func timeDidChange(_ sender: UIDatePicker) {
-    delegate?.timePicker(self, didSelectTime: sender)
+    delegate?.timePicker?(self, didSelectTime: sender)
   }
   
 }

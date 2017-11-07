@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct User: Codable, CustomStringConvertible {
+final class User: Codable, CustomStringConvertible {
   var name: String
   var image: String
   var enabled: Bool

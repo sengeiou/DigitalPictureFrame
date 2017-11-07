@@ -8,9 +8,19 @@
 
 import Foundation
 
-struct WiFiInfo: Codable, CustomStringConvertible {
+final class WiFiInfo: Codable, CustomStringConvertible {
   var name: String
   var password: String
+  
+  init() {
+    self.name = ""
+    self.password = ""
+  }
+  
+  init(name: String, password: String) {
+    self.name = name
+    self.password = password
+  }
 }
 
 // MARK: CustomStringConvertible protocol

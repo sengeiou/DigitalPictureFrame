@@ -11,4 +11,14 @@ import Foundation
 struct SideInfo: Codable {
   var leftUserName: String
   var rightUserName: String
+  
+  init() {
+    self.leftUserName = ""
+    self.rightUserName = ""
+  }
+  
+  init(leftUserName: String, rightUserName: String) {
+    self.leftUserName = leftUserName
+    self.rightUserName = rightUserName
+  }
 }
