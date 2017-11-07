@@ -37,8 +37,9 @@ class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable, View
 extension WiFiTableViewCell {
   
   func setup() {
-    thumbnailImageView.roundThumbnail()
     selectionStyle = .none
     passwordTextField.isSecureTextEntry = true
+    thumbnailImageView.contentMode = .scaleAspectFit
+    thumbnailImageView.roundThumbnail()
   }
 }

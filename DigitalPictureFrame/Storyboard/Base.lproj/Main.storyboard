@@ -33,7 +33,7 @@
         <!--Users-->
         <scene sceneID="1rh-sM-M9r">
             <objects>
-                <viewController storyboardIdentifier="UserViewController" id="9wm-LV-t2b" customClass="UserViewController" customModule="DigitalPictureFrame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserViewController" hidesBottomBarWhenPushed="YES" id="9wm-LV-t2b" customClass="UserViewController" customModule="DigitalPictureFrame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="clc-Mn-2na">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,7 +64,7 @@
         <!--Settings-->
         <scene sceneID="BeO-9d-VcC">
             <objects>
-                <viewController storyboardIdentifier="SettingsViewController" id="bSd-nW-lip" customClass="SettingsViewController" customModule="DigitalPictureFrame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" hidesBottomBarWhenPushed="YES" id="bSd-nW-lip" customClass="SettingsViewController" customModule="DigitalPictureFrame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xsm-6V-E69">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -95,7 +95,7 @@
         <!--Wi-Fi-->
         <scene sceneID="FOe-om-H06">
             <objects>
-                <viewController storyboardIdentifier="WiFiViewController" id="VYv-6K-tKP" customClass="WiFiViewController" customModule="DigitalPictureFrame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WiFiViewController" hidesBottomBarWhenPushed="YES" id="VYv-6K-tKP" customClass="WiFiViewController" customModule="DigitalPictureFrame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VSc-Hz-ge7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

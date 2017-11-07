@@ -11,8 +11,11 @@ import UIKit
 
 final class DigitalPictureFrameDataSource: NSObject, DigitalPictureFrameDataSourceDelegate {
   var items: [DigitalPictureFrameItem]
+  var delegateVC: UIViewController
   
-  init(items: [DigitalPictureFrameItem]) {
+  
+  init(_ delegateVC: UIViewController, items: [DigitalPictureFrameItem]) {
+    self.delegateVC = delegateVC
     self.items = items
   }
   
@@ -52,37 +55,48 @@ extension DigitalPictureFrameDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let frameItem = item(at: indexPath)
+    let defaultCell = UITableViewCell()
     
-    switch frameItem.type {
-    case .user:
+    switch delegateVC {
+    case is UserViewController where frameItem.type == .user:
       let cell = tableView.dequeueDigitalPictureFrameCell(cell: UserTableViewCell.self)
       cell.setup(by: frameItem, at: indexPath)
       return cell
       
-    case .generalSettings:
-      let cell = tableView.dequeueDigitalPictureFrameCell(cell: GeneralSettingsTableViewCell.self)
-      cell.setup(by: frameItem, at: indexPath)
-      return cell
+    case is SettingsViewController:
+      switch frameItem.type {
+      case .generalSettings:
+        let cell = tableView.dequeueDigitalPictureFrameCell(cell: GeneralSettingsTableViewCell.self)
+        cell.setup(by: frameItem, at: indexPath)
+        return cell
+        
+      case .timeFrameSettings:
+        let cell = tableView.dequeueDigitalPictureFrameCell(cell: TimeFrameSettingsTableViewCell.self)
+        cell.delegate = delegateVC as! SettingsViewController
+        cell.setup(by: frameItem, at: indexPath)
+        return cell
+        
+      case .userInfoSettings:
+        let cell = tableView.dequeueDigitalPictureFrameCell(cell: UserInfoSettingsTableViewCell.self)
+        cell.setup(by: frameItem, at: indexPath)
+        return cell
+        
+      case .weatherZipcodeSettings:
+        let cell = tableView.dequeueDigitalPictureFrameCell(cell: WeatherZipcodeSettingsTableViewCell.self)
+        cell.setup(by: frameItem, at: indexPath)
+        return cell
+        
+      default:
+        return defaultCell
+      }
       
-    case .timeFrameSettings:
-      let cell = tableView.dequeueDigitalPictureFrameCell(cell: TimeFrameSettingsTableViewCell.self)
-      cell.setup(by: frameItem, at: indexPath)
-      return cell
-      
-    case .userInfoSettings:
-      let cell = tableView.dequeueDigitalPictureFrameCell(cell: UserInfoSettingsTableViewCell.self)
-      cell.setup(by: frameItem, at: indexPath)
-      return cell
-      
-    case .weatherZipcodeSettings:
-      let cell = tableView.dequeueDigitalPictureFrameCell(cell: WeatherZipcodeSettingsTableViewCell.self)
-      cell.setup(by: frameItem, at: indexPath)
-      return cell
-      
-    case .wifi:
+    case is WiFiViewController where frameItem.type == .wifi:
       let cell = tableView.dequeueDigitalPictureFrameCell(cell: WiFiTableViewCell.self)
       cell.setup(by: frameItem, at: indexPath)
       return cell
+      
+    default:
+      return defaultCell
     }
   }
   
@@ -93,9 +107,22 @@ extension DigitalPictureFrameDataSource {
 extension DigitalPictureFrameDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func sendNotificationToShowTimePicker() {
+      NotificationCenter.default.post(name: NotificationName.showTimePicker.name, object: nil)
+    }
+    
     let frameItem = item(at: indexPath)
+    
+    switch frameItem.type {
+    case .timeFrameSettings where delegateVC is SettingsViewController:
+      break
+      
+    default:
+      break
+    }
     print("Row: \(indexPath.row) and type: \(frameItem.type.rawValue)")
   }
+  
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 65

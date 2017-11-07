@@ -11,19 +11,13 @@ import UIKit
 class WiFiViewController: BaseViewController {
   var wifiInfo: WiFiInfo? {
     didSet {
-      createAndAssembleItem()
+      createAndAssignWiFiDelegate()
     }
   }
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    setupStyle()
   }
 }
 
@@ -35,20 +29,7 @@ extension WiFiViewController {
     super.setup()
     registerCells()
   }
-
-  func setupStyle() {
-    tableView.separatorStyle = .none
-  }
-
   
-  func createAndAssembleItem() {
-    guard let wifiInfo = wifiInfo else { return }
-    let infoItem = WiFiItem(wiFi: wifiInfo)
-    dataSourceDelegate = DigitalPictureFrameDataSource(items: [infoItem])
-    
-    tableView.dataSource = dataSourceDelegate
-    tableView.delegate = dataSourceDelegate
-  }
 }
 
 
@@ -57,6 +38,19 @@ extension WiFiViewController {
   
   func registerCells() {
     tableView.register(cell: WiFiTableViewCell.self)
+  }
+  
+}
+
+
+// MARK: - Create assign delegate
+extension WiFiViewController {
+  
+  func createAndAssignWiFiDelegate() {
+    guard let wifiInfo = wifiInfo else { return }
+    let infoItem = WiFiItem(wiFi: wifiInfo)
+    
+    createAndAssignDelegate(for: infoItem)
   }
   
 }

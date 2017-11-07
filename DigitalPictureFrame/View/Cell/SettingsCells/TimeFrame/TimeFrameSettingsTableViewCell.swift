@@ -12,6 +12,9 @@ class TimeFrameSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellSe
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var valueLabel: UILabel!
+  @IBOutlet weak var timePickerButton: TableSectionButton!
+  
+  weak var delegate: TimeFrameSettingsCellDelegate?
   
   var rowInSection: Int?
   var item: DigitalPictureFrameItem? {
@@ -19,9 +22,15 @@ class TimeFrameSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellSe
       guard let timeFrameItem = item as? SettingsTimeItem, let row = rowInSection else { return }
       let timeFrameCell = timeFrameItem.cells[row]
       descriptionLabel.text = timeFrameCell.description
-      valueLabel.text = timeFrameCell.value as? String
+      let timestamp = timeFrameCell.value as? String
+      let time = Date.shortTime(from: timestamp ?? "")
+      valueLabel.text = time
       thumbnailImageView.image = UIImage(named: timeFrameCell.thumbnailImageName)
     }
+  }
+  
+  @IBAction func timePickerButtonPressed(_ sender: TableSectionButton) {
+    delegate?.timeFrameSettingsCell(self, didPressTimePickerButtonAt: sender.indexPath)
   }
   
   
@@ -36,8 +45,20 @@ extension TimeFrameSettingsTableViewCell {
   
   func setup() {
     selectionStyle = .none
-    thumbnailImageView.contentMode = .scaleAspectFit
+    timePickerButton.setTitle("", for: .normal)
+    thumbnailImageView.contentMode = .center
     thumbnailImageView.roundThumbnail()
+  }
+  
+}
+
+// MARK: DigitalPictureFrameCellSetupable protocol
+extension TimeFrameSettingsTableViewCell {
+  
+  func setup(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+    self.rowInSection = indexPath.row
+    self.item = item
+    self.timePickerButton.indexPath = indexPath
   }
   
 }

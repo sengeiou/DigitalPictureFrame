@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimePicker" customModule="DigitalPictureFrame" customModuleProvider="target">
+            <connections>
+                <outlet property="cancelButton" destination="EeY-xc-uxP" id="O6k-YE-ss8"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="MqK-xE-GDP"/>
+                <outlet property="datePicker" destination="e71-oD-0Uq" id="xaI-O1-lRj"/>
+                <outlet property="doneButton" destination="n63-lv-wCo" id="zCk-Jh-mru"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="395" height="193"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="xqh-Hf-Cw8">
+                    <rect key="frame" x="0.0" y="0.0" width="395" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EeY-xc-uxP" userLabel="Cancel Button">
+                            <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
+                            <color key="backgroundColor" red="0.59754549290000003" green="1" blue="0.6529677948" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="75" id="xSa-QH-Xk0"/>
+                            </constraints>
+                            <state key="normal" title="Cancel"/>
+                            <connections>
+                                <action selector="didPressCancel:" destination="-1" eventType="touchUpInside" id="Zbn-LA-EXD"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n63-lv-wCo" userLabel="Done Button">
+                            <rect key="frame" x="320" y="0.0" width="75" height="30"/>
+                            <color key="backgroundColor" red="0.59754549290000003" green="1" blue="0.6529677948" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="75" id="oOO-CQ-byW"/>
+                            </constraints>
+                            <state key="normal" title="Done"/>
+                            <connections>
+                                <action selector="didPressDone:" destination="-1" eventType="touchUpInside" id="zct-qu-WAV"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="uWn-BY-pBE"/>
+                    </constraints>
+                </stackView>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="e71-oD-0Uq">
+                    <rect key="frame" x="0.0" y="30" width="395" height="163"/>
+                    <date key="date" timeIntervalSinceReferenceDate="531690525.88037801">
+                        <!--2017-11-06 19:48:45 +0000-->
+                    </date>
+                </datePicker>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="e71-oD-0Uq" firstAttribute="top" secondItem="xqh-Hf-Cw8" secondAttribute="bottom" id="5b9-8D-GVY"/>
+                <constraint firstItem="e71-oD-0Uq" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="VYe-PL-eyT"/>
+                <constraint firstItem="e71-oD-0Uq" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="hhQ-dd-g7v"/>
+                <constraint firstItem="xqh-Hf-Cw8" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="hsA-v5-tKf"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="e71-oD-0Uq" secondAttribute="bottom" id="jZd-h5-xKN"/>
+                <constraint firstItem="e71-oD-0Uq" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="oEx-7v-NMP"/>
+                <constraint firstItem="xqh-Hf-Cw8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oVi-NW-d5T"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="xqh-Hf-Cw8" secondAttribute="trailing" id="rF8-2y-ygv"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="189.5" y="82"/>
+        </view>
+    </objects>
+</document>

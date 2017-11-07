@@ -9,16 +9,16 @@
 import UIKit
 
 class UserViewController: BaseViewController {
-  var users: [User]?
+  var users: [User]? {
+    didSet {
+      createAndAssignUserDelegate()
+    }
+  }
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    setupStyle()
   }
 }
 
@@ -30,10 +30,6 @@ extension UserViewController {
     super.setup()
     registerCells()
     loadData()
-  }
-  
-  func setupStyle() {
-    tableView.separatorStyle = .none
   }
 }
 
@@ -57,7 +53,6 @@ private extension UserViewController {
       case .success(let decodeData):
         DatabaseSingleton.shared.assign(data: decodeData)
         self.users = decodeData.users
-        self.assignDelegateAndReload()
         
       case .failure(let error):
         AlertViewPresenter.shared.presentErrorAlert(viewController: self, error: error)
@@ -66,14 +61,10 @@ private extension UserViewController {
   }
   
   
-  func assignDelegateAndReload() {
+  func createAndAssignUserDelegate() {
     guard let users = users else { return }
-    
     let userItem = UserItem(users: users)
-    dataSourceDelegate = DigitalPictureFrameDataSource(items: [userItem])
-    tableView.dataSource = dataSourceDelegate
-    tableView.delegate = dataSourceDelegate
-    tableView.reloadData()
+    createAndAssignDelegate(for: userItem)
   }
   
 }

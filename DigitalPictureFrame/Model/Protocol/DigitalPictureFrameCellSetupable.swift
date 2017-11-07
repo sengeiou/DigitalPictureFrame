@@ -17,8 +17,8 @@ protocol DigitalPictureFrameCellSetupable: class {
 // MARK: - Setup item
 extension DigitalPictureFrameCellSetupable where Self: UITableViewCell {
   
-  func setup(by item: DigitalPictureFrameItem, at indexPath: IndexPath? = nil) {
-    self.rowInSection = indexPath?.row
+  func setup(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+    self.rowInSection = indexPath.row
     self.item = item
   }
   

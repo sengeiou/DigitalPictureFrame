@@ -19,9 +19,10 @@ class BaseViewController: UIViewController, ViewSetupable {
     setup()
   }
   
-//  func registerCells() {
-//    // override in subclass
-//  }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    setupStyle()
+  }
 }
 
 
@@ -29,7 +30,31 @@ class BaseViewController: UIViewController, ViewSetupable {
 extension BaseViewController {
   
   func setup() {
-//    registerCells()
+    // TODO: Override in subclass
+  }
+  
+  func setupStyle() {
+    tableView.separatorStyle = .none
   }
   
 }
+
+
+// MARK: - Create assign delegate
+extension BaseViewController {
+  
+  func createAndAssignDelegate(for items: DigitalPictureFrameItem) {
+    let infoItem = [items]
+    
+    if let dataSourceDelegate = dataSourceDelegate {
+      dataSourceDelegate.items = infoItem
+      tableView.reloadData()
+    } else {
+      dataSourceDelegate = DigitalPictureFrameDataSource(self, items: infoItem)
+      tableView.dataSource = dataSourceDelegate
+      tableView.delegate = dataSourceDelegate
+    }
+  }
+  
+}
+

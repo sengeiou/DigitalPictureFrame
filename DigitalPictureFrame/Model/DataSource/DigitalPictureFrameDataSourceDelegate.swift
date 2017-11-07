@@ -11,6 +11,7 @@ import UIKit
 
 protocol DigitalPictureFrameDataSourceDelegate: class, UITableViewDataSource, UITableViewDelegate {
   var items: [DigitalPictureFrameItem] { get set }
+  var delegateVC: UIViewController { get set }
   
   func itemCount(in section: Int) -> Int
   func item(at indexPath: IndexPath) -> DigitalPictureFrameItem
