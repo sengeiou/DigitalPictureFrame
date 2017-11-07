@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '03256D269102CE404283FD1BAEB95F87'
+               BlueprintIdentifier = '99217D9DE221DBC9DD375FA86B08BFC9'
                BlueprintName = 'Pods-DigitalPictureFrame'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libPods-DigitalPictureFrame.a'>
+               BuildableName = 'Pods-DigitalPictureFrame.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

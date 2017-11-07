@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84061F81E64ADFD5BAD3BE36 /* Pods_DigitalPictureFrame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E1B1848DDDEF532592B8EE2 /* Pods_DigitalPictureFrame.framework */; };
 		E20608C41FAB629B00F06260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20608C31FAB629B00F06260 /* AppDelegate.swift */; };
 		E20608C91FAB629B00F06260 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20608C71FAB629B00F06260 /* Main.storyboard */; };
 		E20608CB1FAB629B00F06260 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E20608CA1FAB629B00F06260 /* Assets.xcassets */; };
@@ -90,13 +91,12 @@
 		E2FB8E381FB10A8700724889 /* TableSectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E371FB10A8700724889 /* TableSectionButton.swift */; };
 		E2FB8E3A1FB113BD00724889 /* UIView+AddConstraintsWithFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E391FB113BC00724889 /* UIView+AddConstraintsWithFormat.swift */; };
 		E2FB8E3C1FB127DE00724889 /* WeatherZipcodeSettingsCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E3B1FB127DE00724889 /* WeatherZipcodeSettingsCellDelegate.swift */; };
-		FE0F2B2E20BD5F7BFDD5D4CB /* libPods-DigitalPictureFrame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 805F17D7B2BE41617FCC0AD2 /* libPods-DigitalPictureFrame.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E1B1848DDDEF532592B8EE2 /* Pods_DigitalPictureFrame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DigitalPictureFrame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D682751569EAC350BEC12FA /* Pods-DigitalPictureFrame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DigitalPictureFrame.release.xcconfig"; path = "Pods/Target Support Files/Pods-DigitalPictureFrame/Pods-DigitalPictureFrame.release.xcconfig"; sourceTree = "<group>"; };
 		593F8756C3F7B46835A4F51C /* Pods-DigitalPictureFrame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DigitalPictureFrame.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DigitalPictureFrame/Pods-DigitalPictureFrame.debug.xcconfig"; sourceTree = "<group>"; };
-		805F17D7B2BE41617FCC0AD2 /* libPods-DigitalPictureFrame.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DigitalPictureFrame.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20608C01FAB629B00F06260 /* DigitalPictureFrame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigitalPictureFrame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E20608C31FAB629B00F06260 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E20608C81FAB629B00F06260 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -189,7 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE0F2B2E20BD5F7BFDD5D4CB /* libPods-DigitalPictureFrame.a in Frameworks */,
+				84061F81E64ADFD5BAD3BE36 /* Pods_DigitalPictureFrame.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,7 +199,7 @@
 		7856330FD5E9900A963A03CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				805F17D7B2BE41617FCC0AD2 /* libPods-DigitalPictureFrame.a */,
+				1E1B1848DDDEF532592B8EE2 /* Pods_DigitalPictureFrame.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -642,9 +642,18 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DigitalPictureFrame/Pods-DigitalPictureFrame-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
