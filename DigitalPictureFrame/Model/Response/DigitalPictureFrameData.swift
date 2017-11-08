@@ -9,21 +9,21 @@
 import Foundation
 
 struct DigitalPictureFrameData: Codable {
-  var MAC: String
+  var UDID: String
   var users: [User]
   var settings: Settings
   var wifiInfo: WiFiInfo
   
   
   init() {
-    self.MAC = ""
+    self.UDID = ""
     self.users = []
     self.settings = Settings()
     self.wifiInfo = WiFiInfo()
   }
   
-  init(MAC: String, users: [User], settings: Settings, wifiInfo: WiFiInfo) {
-    self.MAC = MAC
+  init(UDID: String, users: [User], settings: Settings, wifiInfo: WiFiInfo) {
+    self.UDID = UDID
     self.users = users
     self.settings = settings
     self.wifiInfo = wifiInfo

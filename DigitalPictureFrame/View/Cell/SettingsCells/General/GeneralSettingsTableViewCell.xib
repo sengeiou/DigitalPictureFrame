@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72X-E5-JWd" userLabel="Separator View">
-                        <rect key="frame" x="54" y="61.5" width="311" height="1"/>
+                        <rect key="frame" x="0.0" y="61.5" width="365" height="1"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="OV0-G0-QR1"/>
@@ -52,8 +52,8 @@
                     <constraint firstItem="i4j-qu-BI8" firstAttribute="leading" secondItem="SYc-Df-F6D" secondAttribute="trailing" constant="26" id="B12-Yc-nHf"/>
                     <constraint firstAttribute="bottom" secondItem="72X-E5-JWd" secondAttribute="bottom" id="FGy-Q1-KHS"/>
                     <constraint firstItem="SYc-Df-F6D" firstAttribute="centerY" secondItem="N1q-kZ-0bD" secondAttribute="centerY" id="NrM-rP-QkL"/>
+                    <constraint firstItem="72X-E5-JWd" firstAttribute="leading" secondItem="5aH-aO-kqA" secondAttribute="leading" id="ahg-iP-b92"/>
                     <constraint firstItem="SYc-Df-F6D" firstAttribute="leading" secondItem="N1q-kZ-0bD" secondAttribute="trailing" constant="8" id="btt-cI-hWb"/>
-                    <constraint firstItem="72X-E5-JWd" firstAttribute="leading" secondItem="N1q-kZ-0bD" secondAttribute="trailing" id="eDw-VV-IZF"/>
                     <constraint firstItem="N1q-kZ-0bD" firstAttribute="centerY" secondItem="5aH-aO-kqA" secondAttribute="centerY" id="iye-8l-BwL"/>
                     <constraint firstAttribute="trailing" secondItem="72X-E5-JWd" secondAttribute="trailing" id="jXi-Ei-jkH"/>
                     <constraint firstItem="i4j-qu-BI8" firstAttribute="trailing" secondItem="5aH-aO-kqA" secondAttribute="trailingMargin" id="rQ5-Fi-G0N"/>

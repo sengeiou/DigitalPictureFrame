@@ -28,7 +28,7 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BeY-Bb-der" userLabel="Separator View">
-                        <rect key="frame" x="55" y="61.5" width="310" height="1"/>
+                        <rect key="frame" x="0.0" y="61.5" width="365" height="1"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="rZa-KC-4WA"/>
@@ -56,9 +56,9 @@
                 <constraints>
                     <constraint firstItem="sjP-5r-qhp" firstAttribute="leading" secondItem="1v2-z6-jdH" secondAttribute="leading" constant="4" id="3zM-fh-1IL"/>
                     <constraint firstItem="v6i-jk-xaB" firstAttribute="height" secondItem="4zq-2R-RoL" secondAttribute="height" id="45d-Ad-udh"/>
-                    <constraint firstItem="BeY-Bb-der" firstAttribute="leading" secondItem="sjP-5r-qhp" secondAttribute="trailing" constant="1" id="AWF-Uj-4na"/>
                     <constraint firstItem="4zq-2R-RoL" firstAttribute="centerY" secondItem="bYf-zK-SeM" secondAttribute="centerY" id="Edk-dq-9nZ"/>
                     <constraint firstItem="4zq-2R-RoL" firstAttribute="trailing" secondItem="1v2-z6-jdH" secondAttribute="trailingMargin" id="LPC-j7-E6t"/>
+                    <constraint firstItem="BeY-Bb-der" firstAttribute="leading" secondItem="1v2-z6-jdH" secondAttribute="leading" id="OVR-Sl-IRl"/>
                     <constraint firstItem="bYf-zK-SeM" firstAttribute="centerY" secondItem="sjP-5r-qhp" secondAttribute="centerY" id="QjX-Ae-RFv"/>
                     <constraint firstItem="sjP-5r-qhp" firstAttribute="centerY" secondItem="1v2-z6-jdH" secondAttribute="centerY" id="Wdl-1f-2J3"/>
                     <constraint firstAttribute="bottom" secondItem="BeY-Bb-der" secondAttribute="bottom" id="eqD-LH-M5D"/>

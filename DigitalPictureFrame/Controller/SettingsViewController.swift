@@ -8,13 +8,23 @@
 
 import UIKit
 
-class SettingsViewController: BaseViewController, ListPickerViewDelegate, TimeFrameSettingsCellDelegate, WeatherZipcodeSettingsCellDelegate, AlertViewPresenterDelegate, UserInfoSettingsCellDelegate, UITextFieldDelegate {
-  lazy private var timePicker: TimePicker = {
+class SettingsViewController: BaseViewController, SwitchableCellDelegate {
+  lazy private var timePicker: TimePickerView = {
     let pickerViewHeight = CGFloat(220.0)
     let xPos = CGFloat(0)
     let yPos = view.frame.height
     let frame = CGRect(x: xPos, y: yPos, width: view.frame.height, height: pickerViewHeight)
-    let picker = TimePicker(presenterViewController: self, frame: frame)
+    let picker = TimePickerView(presenter: self, frame: frame)
+    picker.delegate = self
+    return picker
+  }()
+  
+  lazy private var userPicker: UserPickerView = {
+    let pickerViewHeight = CGFloat(220.0)
+    let xPos = CGFloat(0)
+    let yPos = view.frame.height
+    let frame = CGRect(x: xPos, y: yPos, width: view.frame.height, height: pickerViewHeight)
+    let picker = UserPickerView(presenter: self, frame: frame)
     picker.delegate = self
     return picker
   }()
@@ -69,12 +79,12 @@ extension SettingsViewController {
 }
 
 
-// MARK: - ListPickerViewDelegate protocol
-extension SettingsViewController {
+// MARK: - TimePickerViewDelegate protocol
+extension SettingsViewController: TimePickerViewDelegate {
   
-  func listPicker(_ listPicker: ListPickerView, didPressDone sender: UIDatePicker) {
+  func timePicker(_ timePickerView: TimePickerView, didPressDone sender: UIDatePicker) {
     guard let modifiedItemIndexPath = modifiedItemIndexPath else { return }
-    guard let modifiedTimeFrameItem = dataSourceDelegate?.item(at: modifiedItemIndexPath) as? SettingsTimeItem else { return }
+    guard let modifiedTimeFrameItem = dataSourceDelegate?.item(at: modifiedItemIndexPath) else { return }
     guard let selectedTime = Date.date(sender.date) else { return }
     
     let time = modifiedTimeFrameItem.cells[modifiedItemIndexPath.row]
@@ -83,15 +93,36 @@ extension SettingsViewController {
     timePicker.dismiss()
   }
   
-  func listPicker(_ listPicker: ListPickerView, didPressCancel sender: UIDatePicker) {
+  func timePicker(_ timePickerView: TimePickerView, didPressCancel sender: UIDatePicker) {
     timePicker.dismiss()
   }
   
 }
 
+// MARK: - UserPickerViewDelegate protocol
+extension SettingsViewController: UserPickerViewDelegate {
+  
+  func userPicker(_ userPickerView: UserPickerView, didPressDone picker: UIPickerView) {
+    guard let modifiedItemIndexPath = modifiedItemIndexPath else { return }
+    guard let modifiedUserInfoItem = dataSourceDelegate?.item(at: modifiedItemIndexPath) else { return }
+    
+    let selectedRow = picker.selectedRow(inComponent: 0)
+    let user = userPickerView.item(at: selectedRow)!
+    let userInfoName = modifiedUserInfoItem.cells[modifiedItemIndexPath.row]
+    userInfoName.value = user.name
+    reloadRows(at: modifiedItemIndexPath)
+    userPicker.dismiss()
+  }
+  
+  func userPicker(_ userPickerView: UserPickerView, didPressCancel picker: UIPickerView) {
+    userPicker.dismiss()
+  }
+
+}
+
 
 // MARK: - TimeFrameSettingsCellDelegate protocol
-extension SettingsViewController {
+extension SettingsViewController: TimeFrameSettingsCellDelegate {
   
   func timeFrameSettingsCell(_ cell: TimeFrameSettingsTableViewCell, didPressTimePickerButtonAt indexPath: IndexPath) {
     modifiedItemIndexPath = indexPath
@@ -100,8 +131,19 @@ extension SettingsViewController {
   
 }
 
+
+// MARK: - UserInfoSettingsCellDelegate protocol
+extension SettingsViewController: UserInfoSettingsCellDelegate {
+  
+  func userInfoSettingsCell(_ cell: UserInfoSettingsTableViewCell, didPressUserPickerButtonAt indexPath: IndexPath) {
+    modifiedItemIndexPath = indexPath
+    userPicker.present()
+  }
+  
+}
+
 // MARK: - WeatherZipcodeSettingsCellDelegate protocol
-extension SettingsViewController {
+extension SettingsViewController: WeatherZipcodeSettingsCellDelegate {
   
   func weatherZipcodeSettingsCell(_ cell: WeatherZipcodeSettingsTableViewCell, didPressZipcodeButtonAt indexPath: IndexPath) {
     modifiedItemIndexPath = indexPath
@@ -118,17 +160,10 @@ extension SettingsViewController {
   }
 }
 
-// MARK: - UserInfoSettingsCellDelegate protocol
-extension SettingsViewController {
-  
-  func userInfoSettingsCell(_ cell: UserInfoSettingsTableViewCell, didPressUserPickerButtonAt indexPath: IndexPath) {
-    // TODO: Implement user picker view
-  }
-  
-}
+
 
 // MARK: - AlertViewPresenterDelegate protocol
-extension SettingsViewController {
+extension SettingsViewController: AlertViewPresenterDelegate {
   
   func alertView(_ alertViewPresenter: AlertViewPresenter, didSubmit result: String) {
     guard let modifiedItemIndexPath = modifiedItemIndexPath else { return }
@@ -143,7 +178,7 @@ extension SettingsViewController {
 
 
 // MARK: - UITextFieldDelegate protocol
-extension SettingsViewController {
+extension SettingsViewController: UITextFieldDelegate {
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     let zipCodeCharactersLimit = 5

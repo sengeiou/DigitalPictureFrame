@@ -1,5 +1,5 @@
 //
-//  DigitalPictureFrameCellSetupable.swift
+//  DigitalPictureFrameCellConfigurable.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek on 11/3/17.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol DigitalPictureFrameCellSetupable: class {
+protocol DigitalPictureFrameCellConfigurable: class {
   var rowInSection: Int? { get set }
   var item: DigitalPictureFrameItem? { get set }
 }
 
 
 // MARK: - Setup item
-extension DigitalPictureFrameCellSetupable where Self: UITableViewCell {
+extension DigitalPictureFrameCellConfigurable where Self: UITableViewCell {
   
-  func setup(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
     self.rowInSection = indexPath.row
     self.item = item
   }

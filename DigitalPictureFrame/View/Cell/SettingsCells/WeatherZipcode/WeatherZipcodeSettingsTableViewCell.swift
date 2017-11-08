@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherZipcodeSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable, ViewSetupable {
+class WeatherZipcodeSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, ViewSetupable {
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var valueLabel: UILabel!
@@ -46,10 +46,10 @@ extension WeatherZipcodeSettingsTableViewCell {
 }
 
 
-// MARK: DigitalPictureFrameCellSetupable protocol
+// MARK: DigitalPictureFrameCellConfigurable protocol
 extension WeatherZipcodeSettingsTableViewCell {
   
-  func setup(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
     self.rowInSection = indexPath.row
     self.item = item
     self.zipcodeButton.indexPath = indexPath
@@ -60,9 +60,8 @@ extension WeatherZipcodeSettingsTableViewCell {
 // MARK: - Actions
 extension WeatherZipcodeSettingsTableViewCell {
   
-  @IBAction func zipcodeButtonPressed(_ sender: UIButton) {
-    let index = zipcodeButton.indexPath
-    delegate?.weatherZipcodeSettingsCell(self, didPressZipcodeButtonAt: index)
+  @IBAction func zipcodeButtonPressed(_ sender: TableSectionButton) {
+    delegate?.weatherZipcodeSettingsCell(self, didPressZipcodeButtonAt: sender.indexPath)
   }
   
 }

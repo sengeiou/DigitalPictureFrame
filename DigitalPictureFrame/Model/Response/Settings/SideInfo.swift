@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SideInfo: Codable {
+final class SideInfo: Codable {
   var leftUserName: String
   var rightUserName: String
   

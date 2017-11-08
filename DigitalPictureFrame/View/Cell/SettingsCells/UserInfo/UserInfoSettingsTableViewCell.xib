@@ -28,7 +28,7 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GFp-9N-YMG" userLabel="Separator View">
-                        <rect key="frame" x="55" y="61.5" width="310" height="1"/>
+                        <rect key="frame" x="0.0" y="61.5" width="365" height="1"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="r9v-77-dCc"/>
@@ -41,28 +41,39 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TextLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axR-Nh-jMd" userLabel="Text Label">
-                        <rect key="frame" x="275" y="21" width="74" height="21"/>
+                        <rect key="frame" x="275" y="16.5" width="74" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUR-Br-lnN" userLabel="UserPickerButton" customClass="TableSectionButton" customModule="DigitalPictureFrame" customModuleProvider="target">
+                        <rect key="frame" x="275" y="16.5" width="74" height="30"/>
+                        <connections>
+                            <action selector="userPickerButtonPressed:" destination="UE4-4d-5lA" eventType="touchUpInside" id="3Je-Z0-p1M"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="sUR-Br-lnN" firstAttribute="centerY" secondItem="0te-oc-S1B" secondAttribute="centerY" id="3no-Tu-pJ6"/>
                     <constraint firstItem="0te-oc-S1B" firstAttribute="leading" secondItem="sjI-xj-gqt" secondAttribute="leading" constant="4" id="GXo-FA-8ql"/>
                     <constraint firstItem="OSO-iw-xcM" firstAttribute="leading" secondItem="0te-oc-S1B" secondAttribute="trailing" constant="6" id="HrH-98-l6F"/>
-                    <constraint firstItem="GFp-9N-YMG" firstAttribute="leading" secondItem="0te-oc-S1B" secondAttribute="trailing" constant="1" id="Rjt-Is-uep"/>
                     <constraint firstAttribute="trailing" secondItem="GFp-9N-YMG" secondAttribute="trailing" id="Sth-SS-lCs"/>
                     <constraint firstItem="axR-Nh-jMd" firstAttribute="trailing" secondItem="sjI-xj-gqt" secondAttribute="trailingMargin" id="U5a-4P-1sm"/>
                     <constraint firstItem="0te-oc-S1B" firstAttribute="centerY" secondItem="sjI-xj-gqt" secondAttribute="centerY" id="c9U-OO-odc"/>
+                    <constraint firstItem="sUR-Br-lnN" firstAttribute="trailing" secondItem="axR-Nh-jMd" secondAttribute="trailing" id="cpt-hB-Tc8"/>
                     <constraint firstAttribute="bottom" secondItem="GFp-9N-YMG" secondAttribute="bottom" id="dfw-1p-Ee7"/>
+                    <constraint firstItem="sUR-Br-lnN" firstAttribute="width" secondItem="axR-Nh-jMd" secondAttribute="width" id="tMP-jJ-Eff"/>
                     <constraint firstItem="OSO-iw-xcM" firstAttribute="centerY" secondItem="0te-oc-S1B" secondAttribute="centerY" id="xIw-iu-fff"/>
+                    <constraint firstItem="GFp-9N-YMG" firstAttribute="leading" secondItem="sjI-xj-gqt" secondAttribute="leading" id="yrg-ai-9xe"/>
                     <constraint firstItem="axR-Nh-jMd" firstAttribute="centerY" secondItem="OSO-iw-xcM" secondAttribute="centerY" id="yuB-J6-tS4"/>
+                    <constraint firstItem="sUR-Br-lnN" firstAttribute="height" secondItem="axR-Nh-jMd" secondAttribute="height" id="zRS-Fe-r3M"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="xvu-0q-Y68"/>
             <connections>
                 <outlet property="descriptionLabel" destination="OSO-iw-xcM" id="1GS-gZ-M6p"/>
                 <outlet property="thumbnailImageView" destination="0te-oc-S1B" id="wRx-nS-2ne"/>
+                <outlet property="userButton" destination="sUR-Br-lnN" id="opA-yB-GeK"/>
                 <outlet property="valueLabel" destination="axR-Nh-jMd" id="fGi-PC-sUe"/>
             </connections>
             <point key="canvasLocation" x="-43.5" y="74.5"/>

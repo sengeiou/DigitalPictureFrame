@@ -9,13 +9,6 @@
 import UIKit
 
 class UserViewController: BaseViewController, SwitchableCellDelegate {
-  lazy private var progressIndicator: ProgressIndicator = {
-    let progress = ProgressIndicator(text: "Loading")
-    self.view.addSubview(progress)
-    return progress
-  }()
-  
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
@@ -61,7 +54,8 @@ extension UserViewController {
   
   
   func addNofificationObserverToReloadUserVC() {
-    NotificationCenter.default.addObserver(self, selector: #selector(UserViewController.reloadDataInUserViewController), name: NotificationName.reloadDataInUserViewController.name, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(UserViewController.reloadDataInUserViewController),
+                                           name: NotificationName.reloadDataInUserViewController.name, object: nil)
   }
   
   func removeNofificationObserverReloadingUserVC() {
@@ -86,11 +80,3 @@ private extension UserViewController {
   
 }
 
-// MARK: - SwitchableCellDelegate protocol
-extension UserViewController {
-  
-  func switchableCell(_ cell: UITableViewCell, didPressSwitch button: UISwitch, at indexPath: IndexPath) {
-    print("didPressSwitch: \(button.isOn) at: \(indexPath)")
-  }
-  
-}

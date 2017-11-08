@@ -14,8 +14,15 @@ final class SettingsUserInfoItem: NSObject, UserInfoSettingsSection, DigitalPict
   let type = DigitalPictureFrameCellType.userInfoSettings
   let section = DigitalPictureFrameCellSectionType.userInfo
   var cells: [CellItem] {
-    let leftInfoCell = CellItem(thumbnailImageName: "thumbnail-infoSide", description: "User Info Left Side", value: sideInfo.leftUserName)
-    let rightInfoCell = CellItem(thumbnailImageName: "thumbnail-infoSide", description: "User Info Right Side", value: sideInfo.rightUserName)
+    let leftInfoCell = CellItem(thumbnailImageName: "thumbnail-infoSide", description: "Left Side", value: sideInfo.leftUserName)
+    leftInfoCell.subscribe(observer: sideInfo) { newValue, _ in
+      self.sideInfo.leftUserName = newValue as! String
+    }
+    
+    let rightInfoCell = CellItem(thumbnailImageName: "thumbnail-infoSide", description: "Right Side", value: sideInfo.rightUserName)
+    rightInfoCell.subscribe(observer: sideInfo) { newValue, _ in
+      self.sideInfo.rightUserName = newValue as! String
+    }
     return [leftInfoCell, rightInfoCell]
   }
   

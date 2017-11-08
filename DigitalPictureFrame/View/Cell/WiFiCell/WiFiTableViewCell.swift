@@ -8,11 +8,13 @@
 
 import UIKit
 
-class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable, ViewSetupable {
+class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, ViewSetupable {
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var passwordTextField: UITextField!
+  @IBOutlet weak var passwordButton: TableSectionButton!
   
+  weak var delegate: WiFiCellDelegate?
   
   var rowInSection: Int?
   var item: DigitalPictureFrameItem? {
@@ -25,6 +27,7 @@ class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable, View
     }
   }
   
+
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -38,8 +41,32 @@ extension WiFiTableViewCell {
   
   func setup() {
     selectionStyle = .none
+    passwordTextField.isUserInteractionEnabled = false
     passwordTextField.isSecureTextEntry = true
+    passwordTextField.textAlignment = .right
     thumbnailImageView.contentMode = .scaleAspectFit
     thumbnailImageView.roundThumbnail()
   }
+}
+
+
+// MARK: DigitalPictureFrameCellConfigurable protocol
+extension WiFiTableViewCell {
+  
+  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+    self.rowInSection = indexPath.row
+    self.item = item
+    self.passwordButton.indexPath = indexPath
+  }
+  
+}
+
+
+// MARK: Actions
+extension WiFiTableViewCell {
+  
+  @IBAction func enterPasswordButtonPressed(_ sender: TableSectionButton) {
+    delegate?.wifiCell(self, didPressPasswordButtonAt: sender.indexPath)
+  }
+  
 }

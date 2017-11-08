@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable, ViewSetupable {
+class UserTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, ViewSetupable {
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var onOffSwitch: UISwitch!
@@ -50,10 +50,10 @@ extension UserTableViewCell {
 }
 
 
-// MARK: DigitalPictureFrameCellSetupable protocol
+// MARK: DigitalPictureFrameCellConfigurable protocol
 extension UserTableViewCell {
   
-  func setup(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
     self.rowInSection = indexPath.row
     self.item = item
     self.onOffSwitch.tag = indexPath.section

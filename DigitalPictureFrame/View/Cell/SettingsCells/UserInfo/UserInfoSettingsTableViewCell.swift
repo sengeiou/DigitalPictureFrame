@@ -8,10 +8,11 @@
 
 import UIKit
 
-class UserInfoSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable, ViewSetupable {
+class UserInfoSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, ViewSetupable {
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var valueLabel: UILabel!
+  @IBOutlet weak var userButton: TableSectionButton!
   
   weak var delegate: UserInfoSettingsCellDelegate?
   var rowInSection: Int?
@@ -25,6 +26,9 @@ class UserInfoSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellSet
     }
   }
   
+  @IBAction func userPickerButtonPressed(_ sender: TableSectionButton) {
+    delegate?.userInfoSettingsCell(self, didPressUserPickerButtonAt: sender.indexPath)
+  }
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -40,6 +44,18 @@ extension UserInfoSettingsTableViewCell {
     selectionStyle = .none
     thumbnailImageView.contentMode = .scaleAspectFit
     thumbnailImageView.roundThumbnail()
+  }
+  
+}
+
+
+// MARK: DigitalPictureFrameCellConfigurable protocol
+extension UserInfoSettingsTableViewCell {
+  
+  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+    self.rowInSection = indexPath.row
+    self.item = item
+    self.userButton.indexPath = indexPath
   }
   
 }

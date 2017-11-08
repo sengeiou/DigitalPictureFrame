@@ -10,7 +10,7 @@ import Foundation
 
 enum NotificationUserInfoKey {
   
-  enum TimePicker: String {
+  enum TimePickerView: String {
     case sourceView = "SourceView"
   }
   

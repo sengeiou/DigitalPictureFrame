@@ -69,32 +69,33 @@ extension DigitalPictureFrameDataSource {
     case is UserViewController where frameItem.type == .user:
       let cell = tableView.dequeueDigitalPictureFrameCell(cell: UserTableViewCell.self)
       cell.delegate = delegateVC as! UserViewController
-      cell.setup(by: frameItem, at: indexPath)
+      cell.configure(by: frameItem, at: indexPath)
       return cell
       
     case is SettingsViewController:
       switch frameItem.type {
       case .generalSettings:
         let cell = tableView.dequeueDigitalPictureFrameCell(cell: GeneralSettingsTableViewCell.self)
-        cell.setup(by: frameItem, at: indexPath)
+        cell.delegate = delegateVC as! SettingsViewController
+        cell.configure(by: frameItem, at: indexPath)
         return cell
         
       case .timeFrameSettings:
         let cell = tableView.dequeueDigitalPictureFrameCell(cell: TimeFrameSettingsTableViewCell.self)
         cell.delegate = delegateVC as! SettingsViewController
-        cell.setup(by: frameItem, at: indexPath)
+        cell.configure(by: frameItem, at: indexPath)
         return cell
         
       case .userInfoSettings:
         let cell = tableView.dequeueDigitalPictureFrameCell(cell: UserInfoSettingsTableViewCell.self)
         cell.delegate = delegateVC as! SettingsViewController
-        cell.setup(by: frameItem, at: indexPath)
+        cell.configure(by: frameItem, at: indexPath)
         return cell
         
       case .weatherZipcodeSettings:
         let cell = tableView.dequeueDigitalPictureFrameCell(cell: WeatherZipcodeSettingsTableViewCell.self)
         cell.delegate = delegateVC as! SettingsViewController
-        cell.setup(by: frameItem, at: indexPath)
+        cell.configure(by: frameItem, at: indexPath)
         return cell
         
       default:
@@ -103,7 +104,8 @@ extension DigitalPictureFrameDataSource {
       
     case is WiFiViewController where frameItem.type == .wifi:
       let cell = tableView.dequeueDigitalPictureFrameCell(cell: WiFiTableViewCell.self)
-      cell.setup(by: frameItem, at: indexPath)
+      cell.delegate = delegateVC as! WiFiViewController
+      cell.configure(by: frameItem, at: indexPath)
       return cell
       
     default:

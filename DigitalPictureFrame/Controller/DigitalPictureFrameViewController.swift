@@ -7,16 +7,15 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
-class DigitalPictureFrameViewController: UITabBarController, UITabBarControllerDelegate, ViewSetupable {
-  private var shared: DatabaseManager?
-  lazy private var progressIndicator: ProgressIndicator = {
-    let progress = ProgressIndicator(text: "Loading")
-    self.view.addSubview(progress)
-    return progress
-  }()
-  
+class DigitalPictureFrameViewController: UITabBarController, ViewSetupable {
   @IBOutlet weak var topTabBar: UITabBar!
+  private var shared: DatabaseManager?
+  
+  private var activityData: ActivityData {
+    return ActivityData(size: CGSize(width: 50, height: 50), type: .ballSpinFadeLoader, color: UIColor.appleBlue)
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -58,16 +57,17 @@ extension DigitalPictureFrameViewController {
 private extension DigitalPictureFrameViewController {
   
   func loadData() {
-    progressIndicator.show()
+    NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+    
     NetworkManager.shared.fetchData(completionHandler: {[unowned self] result in
       switch result {
       case .success(let decodeData):
         let _ = DatabaseManager.shared(data: decodeData)
         self.sendNotificationToReloadUserData()
-        self.progressIndicator.hide()
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
         
       case .failure(let error):
-        self.progressIndicator.hide()
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
         AlertViewPresenter.sharedInstance.presentErrorAlert(in: self, error: error)
         
       }
@@ -81,7 +81,7 @@ private extension DigitalPictureFrameViewController {
 
 
 // MARK: - UITabBarControllerDelegate protocol
-extension DigitalPictureFrameViewController {
+extension DigitalPictureFrameViewController: UITabBarControllerDelegate {
   
   func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
     guard let selectedTab = tabBarController.tabBar.selectedItem?.tag,

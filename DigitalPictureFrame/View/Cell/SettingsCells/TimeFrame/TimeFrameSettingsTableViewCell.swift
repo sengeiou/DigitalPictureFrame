@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeFrameSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable, ViewSetupable {
+class TimeFrameSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, ViewSetupable {
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var valueLabel: UILabel!
@@ -52,10 +52,10 @@ extension TimeFrameSettingsTableViewCell {
   
 }
 
-// MARK: DigitalPictureFrameCellSetupable protocol
+// MARK: DigitalPictureFrameCellConfigurable protocol
 extension TimeFrameSettingsTableViewCell {
   
-  func setup(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
     self.rowInSection = indexPath.row
     self.item = item
     self.timePickerButton.indexPath = indexPath

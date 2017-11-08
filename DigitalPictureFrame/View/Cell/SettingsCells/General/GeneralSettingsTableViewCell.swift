@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GeneralSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable, ViewSetupable {
+class GeneralSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, ViewSetupable {
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var onOffSwitch: UISwitch!
@@ -44,6 +44,19 @@ extension GeneralSettingsTableViewCell {
   }
   
 }
+
+
+// MARK: DigitalPictureFrameCellConfigurable protocol
+extension GeneralSettingsTableViewCell {
+  
+  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+    self.rowInSection = indexPath.row
+    self.item = item
+    self.onOffSwitch.tag = indexPath.section
+  }
+  
+}
+
 
 // MARK: Actions
 extension GeneralSettingsTableViewCell {

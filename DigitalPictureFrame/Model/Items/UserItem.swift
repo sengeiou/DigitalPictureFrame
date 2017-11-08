@@ -14,7 +14,13 @@ final class UserItem: DigitalPictureFrameItem {
   let type = DigitalPictureFrameCellType.user
   let section = DigitalPictureFrameCellSectionType.users
   var cells: [CellItem] {
-    return users.map { CellItem(thumbnailImageName: $0.image, description: $0.description, value: $0.enabled) }
+    return users.map { user in
+      let cell = CellItem(thumbnailImageName: user.image, description: user.description, value: user.enabled)
+      cell.subscribe(observer: user) { newValue, _ in
+        user.enabled = newValue as! Bool
+      }
+      return cell
+    }
   }
   
   

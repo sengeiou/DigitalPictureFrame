@@ -41,8 +41,8 @@ extension BaseViewController {
 
 
 
-// MARK: -
-extension SettingsViewController {
+// MARK: - Reload Rows
+extension BaseViewController {
   
   func reloadRows(at indexPaths: IndexPath...) {
     tableView.beginUpdates()
@@ -70,4 +70,43 @@ extension BaseViewController {
   }
   
 }
+
+
+// Show No reports available message
+fileprivate extension BaseViewController {
+  
+  func showNoReportsAvailableMessage() {
+    removeTableViewEmptyCells()
+    
+    let messageHeight = CGFloat(25)
+    let xPos = CGFloat(0)
+    let yPos = (tableView.frame.size.height - (messageHeight * 2)) / 2
+    let width = tableView.frame.size.width
+    let titleMessage = "No data available"
+    let subtitleMessage = "Pull to refresh"
+    
+    let frame = CGRect(x: xPos, y: yPos, width: width, height: messageHeight * 2)
+    let availabilityMessage = AvailabilityMessageView(frame: frame, titles: titleMessage, subtitleMessage)
+    tableView.addSubview(availabilityMessage)
+  }
+  
+  
+  func removeTableViewEmptyCells() {
+    tableView.tableFooterView = UIView()
+  }
+  
+}
+
+
+
+// MARK: - Hide No Reports Available Message If Visible
+extension BaseViewController {
+  
+  func hideAvailabilityMessageView() {
+    guard let availabilityMessageView = tableView.viewWithTag(EmbeddedViewTag.availabilityMessage.rawValue) else { return }
+    availabilityMessageView.removeFromSuperview()
+  }
+  
+}
+
 
