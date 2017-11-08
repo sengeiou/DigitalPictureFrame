@@ -9,5 +9,5 @@
 import Foundation
 
 protocol WeatherZipcodeSettingsCellDelegate: class {
-  
+  func weatherZipcodeSettingsCell(_ cell: WeatherZipcodeSettingsTableViewCell, didPressZipcodeButtonAt indexPath: IndexPath)
 }

@@ -68,7 +68,7 @@ private extension DigitalPictureFrameViewController {
         
       case .failure(let error):
         self.progressIndicator.hide()
-        AlertViewPresenter.shared.presentErrorAlert(viewController: self, error: error)
+        AlertViewPresenter.sharedInstance.presentErrorAlert(in: self, error: error)
         
       }
     })
@@ -92,15 +92,9 @@ extension DigitalPictureFrameViewController {
       print(selectedType.description)
 
     case .settings where viewController is SettingsViewController:
-      let vc = viewController as! SettingsViewController
-      vc.settings = DatabaseManager.shared().settings
-      vc.tableView.reloadData()
       print(selectedType.description) // add notification center to reload data in VC!!
 
     case .wifi where viewController is WiFiViewController:
-      let vc = viewController as! WiFiViewController
-      vc.wifiInfo = DatabaseManager.shared().wifiInfo
-      vc.tableView.reloadData()
       print(selectedType.description) // add notification center to reload data in VC!!
       
     default:

@@ -15,7 +15,7 @@ final class SettingsTimeItem: TimeSettingsSection, DigitalPictureFrameItem {
   let section = DigitalPictureFrameCellSectionType.time
   var cells: [CellItem] {
     let offTimeCell = CellItem(thumbnailImageName: "thumbnail-Time", description: "Off Time", value: timeFrame.offTime)
-    offTimeCell.subscribe(observer: timeFrame) { newValue, oldValue in
+    offTimeCell.subscribe(observer: timeFrame) { newValue, _ in
       self.timeFrame.offTime = newValue as! String
     }
     

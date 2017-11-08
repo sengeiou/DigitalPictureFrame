@@ -13,6 +13,8 @@ class GeneralSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellSetu
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var onOffSwitch: UISwitch!
   
+  weak var delegate: SwitchableCellDelegate?
+  
   var rowInSection: Int?
   var item: DigitalPictureFrameItem? {
     didSet {
@@ -39,6 +41,17 @@ extension GeneralSettingsTableViewCell {
     selectionStyle = .none
     thumbnailImageView.contentMode = .scaleAspectFit
     thumbnailImageView.roundThumbnail()
+  }
+  
+}
+
+// MARK: Actions
+extension GeneralSettingsTableViewCell {
+
+  @IBAction func switchPressed(_ sender: UISwitch) {
+    guard let rowInSection = rowInSection else { return }
+    let index = IndexPath(row: rowInSection, section: sender.tag)
+    delegate?.switchableCell(self, didPressSwitch: sender, at: index)
   }
   
 }

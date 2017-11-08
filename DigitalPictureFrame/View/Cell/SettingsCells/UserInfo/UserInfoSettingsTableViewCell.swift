@@ -13,6 +13,7 @@ class UserInfoSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellSet
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var valueLabel: UILabel!
   
+  weak var delegate: UserInfoSettingsCellDelegate?
   var rowInSection: Int?
   var item: DigitalPictureFrameItem? {
     didSet {

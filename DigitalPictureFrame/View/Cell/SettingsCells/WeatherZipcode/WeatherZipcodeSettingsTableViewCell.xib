@@ -41,22 +41,32 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TextLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zq-2R-RoL" userLabel="Text Label">
-                        <rect key="frame" x="275" y="21" width="74" height="21"/>
+                        <rect key="frame" x="275" y="16.5" width="74" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6i-jk-xaB" userLabel="Zipcode Button" customClass="TableSectionButton" customModule="DigitalPictureFrame" customModuleProvider="target">
+                        <rect key="frame" x="275" y="16" width="74" height="30"/>
+                        <connections>
+                            <action selector="zipcodeButtonPressed:" destination="rWL-wL-fOg" eventType="touchUpInside" id="QXv-3V-ayk"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="sjP-5r-qhp" firstAttribute="leading" secondItem="1v2-z6-jdH" secondAttribute="leading" constant="4" id="3zM-fh-1IL"/>
+                    <constraint firstItem="v6i-jk-xaB" firstAttribute="height" secondItem="4zq-2R-RoL" secondAttribute="height" id="45d-Ad-udh"/>
                     <constraint firstItem="BeY-Bb-der" firstAttribute="leading" secondItem="sjP-5r-qhp" secondAttribute="trailing" constant="1" id="AWF-Uj-4na"/>
                     <constraint firstItem="4zq-2R-RoL" firstAttribute="centerY" secondItem="bYf-zK-SeM" secondAttribute="centerY" id="Edk-dq-9nZ"/>
                     <constraint firstItem="4zq-2R-RoL" firstAttribute="trailing" secondItem="1v2-z6-jdH" secondAttribute="trailingMargin" id="LPC-j7-E6t"/>
                     <constraint firstItem="bYf-zK-SeM" firstAttribute="centerY" secondItem="sjP-5r-qhp" secondAttribute="centerY" id="QjX-Ae-RFv"/>
                     <constraint firstItem="sjP-5r-qhp" firstAttribute="centerY" secondItem="1v2-z6-jdH" secondAttribute="centerY" id="Wdl-1f-2J3"/>
                     <constraint firstAttribute="bottom" secondItem="BeY-Bb-der" secondAttribute="bottom" id="eqD-LH-M5D"/>
+                    <constraint firstItem="v6i-jk-xaB" firstAttribute="width" secondItem="4zq-2R-RoL" secondAttribute="width" id="gnn-p0-iPW"/>
                     <constraint firstAttribute="trailing" secondItem="BeY-Bb-der" secondAttribute="trailing" id="q0n-f6-9re"/>
+                    <constraint firstItem="v6i-jk-xaB" firstAttribute="trailing" secondItem="4zq-2R-RoL" secondAttribute="trailing" id="rRe-Rp-EwB"/>
                     <constraint firstItem="bYf-zK-SeM" firstAttribute="leading" secondItem="sjP-5r-qhp" secondAttribute="trailing" constant="6" id="yez-fg-Quw"/>
+                    <constraint firstItem="v6i-jk-xaB" firstAttribute="centerY" secondItem="1v2-z6-jdH" secondAttribute="centerY" id="zIP-t8-S4G"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="R7Q-Aq-3ep"/>
@@ -64,6 +74,7 @@
                 <outlet property="descriptionLabel" destination="bYf-zK-SeM" id="EQ0-bb-PeL"/>
                 <outlet property="thumbnailImageView" destination="sjP-5r-qhp" id="cU2-Mp-OgJ"/>
                 <outlet property="valueLabel" destination="4zq-2R-RoL" id="E8o-LV-5hq"/>
+                <outlet property="zipcodeButton" destination="v6i-jk-xaB" id="sJM-w7-OE2"/>
             </connections>
             <point key="canvasLocation" x="-43.5" y="74.5"/>
         </tableViewCell>

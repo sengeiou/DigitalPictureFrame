@@ -8,10 +8,11 @@
 
 import UIKit
 
-class WeatherZipcodeSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable {
+class WeatherZipcodeSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable, ViewSetupable {
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var valueLabel: UILabel!
+  @IBOutlet weak var zipcodeButton: TableSectionButton!
   
   weak var delegate: WeatherZipcodeSettingsCellDelegate?
   
@@ -26,12 +27,42 @@ class WeatherZipcodeSettingsTableViewCell: UITableViewCell, DigitalPictureFrameC
     }
   }
   
-  
   override func awakeFromNib() {
     super.awakeFromNib()
-    selectionStyle = .none
-    thumbnailImageView.roundThumbnail()
+    setup()
   }
 }
 
 
+// MARK: ViewSetupable protocol
+extension WeatherZipcodeSettingsTableViewCell {
+  
+  func setup() {
+    selectionStyle = .none
+    thumbnailImageView.contentMode = .scaleAspectFit
+    thumbnailImageView.roundThumbnail()
+  }
+  
+}
+
+
+// MARK: DigitalPictureFrameCellSetupable protocol
+extension WeatherZipcodeSettingsTableViewCell {
+  
+  func setup(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+    self.rowInSection = indexPath.row
+    self.item = item
+    self.zipcodeButton.indexPath = indexPath
+  }
+  
+}
+
+// MARK: - Actions
+extension WeatherZipcodeSettingsTableViewCell {
+  
+  @IBAction func zipcodeButtonPressed(_ sender: UIButton) {
+    let index = zipcodeButton.indexPath
+    delegate?.weatherZipcodeSettingsCell(self, didPressZipcodeButtonAt: index)
+  }
+  
+}

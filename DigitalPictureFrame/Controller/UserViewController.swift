@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserViewController: BaseViewController, UserCellDelegate {
+class UserViewController: BaseViewController, SwitchableCellDelegate {
   lazy private var progressIndicator: ProgressIndicator = {
     let progress = ProgressIndicator(text: "Loading")
     self.view.addSubview(progress)
@@ -86,10 +86,10 @@ private extension UserViewController {
   
 }
 
-// MARK: - UserCellDelegate protocol
+// MARK: - SwitchableCellDelegate protocol
 extension UserViewController {
   
-  func userCell(_ cell: UserTableViewCell, didPressSwitch button: UISwitch, at indexPath: IndexPath) {
+  func switchableCell(_ cell: UITableViewCell, didPressSwitch button: UISwitch, at indexPath: IndexPath) {
     print("didPressSwitch: \(button.isOn) at: \(indexPath)")
   }
   

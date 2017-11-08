@@ -8,12 +8,12 @@
 
 import UIKit
 
-class SettingsViewController: BaseViewController, TimePickerDelegate, TimeFrameSettingsCellDelegate {
+class SettingsViewController: BaseViewController, ListPickerViewDelegate, TimeFrameSettingsCellDelegate, WeatherZipcodeSettingsCellDelegate, AlertViewPresenterDelegate, UserInfoSettingsCellDelegate, UITextFieldDelegate {
   lazy private var timePicker: TimePicker = {
     let pickerViewHeight = CGFloat(220.0)
     let xPos = CGFloat(0)
     let yPos = view.frame.height
-    let frame = CGRect(x: xPos, y: yPos, width: viewWidth, height: pickerViewHeight)
+    let frame = CGRect(x: xPos, y: yPos, width: view.frame.height, height: pickerViewHeight)
     let picker = TimePicker(presenterViewController: self, frame: frame)
     picker.delegate = self
     return picker
@@ -21,50 +21,14 @@ class SettingsViewController: BaseViewController, TimePickerDelegate, TimeFrameS
   
   private var modifiedItemIndexPath: IndexPath?
   private var items: [DigitalPictureFrameItem]?
-  
-  var settings: Settings? {
-    didSet {
-      createAndAssembleSettingsItem()
-    }
-  }
-  
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
   }
-  
-  deinit {
-    print("Deinit SettingsViewController")
-  }
 }
 
-
-// MARK: - Show/Hide Time Picker View
-extension SettingsViewController {
-  var viewHeight: CGFloat {
-    return view.frame.height
-  }
-  
-  var viewWidth: CGFloat {
-    return view.frame.width
-  }
-  
-  var pickerYPos: CGFloat {
-    return viewHeight - timePicker.frame.height
-  }
-  
-
-  
-  
-  func hideTimePickerView() {
-    UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
-      self.timePicker.frame = CGRect(x: 0, y: self.viewHeight, width: self.viewWidth, height: self.timePicker.frame.height)
-    }, completion: { finished in
-      self.timePicker.removeFromSuperview()
-    })
-  }
-}
 
 // MARK: - ViewSetupable protocol
 extension SettingsViewController {
@@ -72,11 +36,12 @@ extension SettingsViewController {
   override func setup() {
     super.setup()
     registerCells()
+    createAndAssembleSettingsItem()
   }
   
-
+  
   func createAndAssembleSettingsItem() {
-    guard let settings = settings else { return }
+    let settings = DatabaseManager.shared().settings
     let general = SettingsGeneralItem(rgbLight: settings.rgbLight, randomQuotes: settings.randomQuotes, sleep: settings.sleep, reset: settings.reset)
     let timeFrame = SettingsTimeItem(timeFrame: settings.timeFrame)
     let userInfo = SettingsUserInfoItem(sideInfo: settings.sideInfo)
@@ -104,10 +69,10 @@ extension SettingsViewController {
 }
 
 
-// MARK: - TimePickerDelegate protocol
+// MARK: - ListPickerViewDelegate protocol
 extension SettingsViewController {
   
-  func timePicker(_ timePicker: TimePicker, didPressDone sender: UIDatePicker) {
+  func listPicker(_ listPicker: ListPickerView, didPressDone sender: UIDatePicker) {
     guard let modifiedItemIndexPath = modifiedItemIndexPath else { return }
     guard let modifiedTimeFrameItem = dataSourceDelegate?.item(at: modifiedItemIndexPath) as? SettingsTimeItem else { return }
     guard let selectedTime = Date.date(sender.date) else { return }
@@ -118,7 +83,7 @@ extension SettingsViewController {
     timePicker.dismiss()
   }
   
-  func timePicker(_ timePicker: TimePicker, didPressCancel sender: UIDatePicker) {
+  func listPicker(_ listPicker: ListPickerView, didPressCancel sender: UIDatePicker) {
     timePicker.dismiss()
   }
   
@@ -131,6 +96,64 @@ extension SettingsViewController {
   func timeFrameSettingsCell(_ cell: TimeFrameSettingsTableViewCell, didPressTimePickerButtonAt indexPath: IndexPath) {
     modifiedItemIndexPath = indexPath
     timePicker.present()
+  }
+  
+}
+
+// MARK: - WeatherZipcodeSettingsCellDelegate protocol
+extension SettingsViewController {
+  
+  func weatherZipcodeSettingsCell(_ cell: WeatherZipcodeSettingsTableViewCell, didPressZipcodeButtonAt indexPath: IndexPath) {
+    modifiedItemIndexPath = indexPath
+    let title = "Weather Zip Code"
+    let message = "Please type 5 digit zip code below"
+    sharedAlert.delegate = self
+    sharedAlert.presentSubmitAlert(in: self, title: title, message: message, textFieldConfiguration: { textField in
+      textField.placeholder = "Zip Code"
+      textField.keyboardAppearance = .dark
+      textField.keyboardType = .numberPad
+      textField.clearButtonMode = .whileEditing
+      textField.delegate = self
+    })
+  }
+}
+
+// MARK: - UserInfoSettingsCellDelegate protocol
+extension SettingsViewController {
+  
+  func userInfoSettingsCell(_ cell: UserInfoSettingsTableViewCell, didPressUserPickerButtonAt indexPath: IndexPath) {
+    // TODO: Implement user picker view
+  }
+  
+}
+
+// MARK: - AlertViewPresenterDelegate protocol
+extension SettingsViewController {
+  
+  func alertView(_ alertViewPresenter: AlertViewPresenter, didSubmit result: String) {
+    guard let modifiedItemIndexPath = modifiedItemIndexPath else { return }
+    guard let modifiedWeatherZipcodeItem = dataSourceDelegate?.item(at: modifiedItemIndexPath) as? SettingsWeatherZipCodeItem else { return }
+    let newZipcode = result
+    let weatherZipcode = modifiedWeatherZipcodeItem.cells[modifiedItemIndexPath.row]
+    weatherZipcode.value = newZipcode
+    reloadRows(at: modifiedItemIndexPath)
+  }
+  
+}
+
+
+// MARK: - UITextFieldDelegate protocol
+extension SettingsViewController {
+  
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    let zipCodeCharactersLimit = 5
+    
+    let startingLength = textField.text?.count ?? 0
+    let lengthToAdd = string.count
+    let lengthToReplace =  range.length
+    let newLength = startingLength + lengthToAdd - lengthToReplace
+    
+    return newLength <= zipCodeCharactersLimit
   }
   
 }

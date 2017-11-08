@@ -42,6 +42,9 @@
                     </view>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i4j-qu-BI8" userLabel="On/Off Switch">
                         <rect key="frame" x="300" y="16" width="51" height="31"/>
+                        <connections>
+                            <action selector="switchPressed:" destination="9w8-r1-bXH" eventType="valueChanged" id="Vpv-9t-Y2E"/>
+                        </connections>
                     </switch>
                 </subviews>
                 <constraints>

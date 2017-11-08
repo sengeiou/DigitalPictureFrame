@@ -9,11 +9,6 @@
 import UIKit
 
 class WiFiViewController: BaseViewController {
-  var wifiInfo: WiFiInfo? {
-    didSet {
-      createAndAssignWiFiDelegate()
-    }
-  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,6 +23,7 @@ extension WiFiViewController {
   override func setup() {
     super.setup()
     registerCells()
+    createAndAssignWiFiDelegate()
   }
   
 }
@@ -47,9 +43,8 @@ extension WiFiViewController {
 extension WiFiViewController {
   
   func createAndAssignWiFiDelegate() {
-    guard let wifiInfo = wifiInfo else { return }
+    let wifiInfo = DatabaseManager.shared().wifiInfo
     let infoItem = WiFiItem(wiFi: wifiInfo)
-    
     createAndAssignDelegate(for: infoItem)
   }
   

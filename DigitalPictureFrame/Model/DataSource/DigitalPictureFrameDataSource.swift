@@ -49,7 +49,15 @@ extension DigitalPictureFrameDataSource {
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     let frameItem = item(at: section)
-    return frameItem.section.rawValue
+    
+    switch frameItem.section {
+    case .general, .time, .userInfo, .zipCode:
+      return frameItem.section.rawValue
+      
+    default:
+      return nil
+    }
+    
   }
   
   
@@ -79,11 +87,13 @@ extension DigitalPictureFrameDataSource {
         
       case .userInfoSettings:
         let cell = tableView.dequeueDigitalPictureFrameCell(cell: UserInfoSettingsTableViewCell.self)
+        cell.delegate = delegateVC as! SettingsViewController
         cell.setup(by: frameItem, at: indexPath)
         return cell
         
       case .weatherZipcodeSettings:
         let cell = tableView.dequeueDigitalPictureFrameCell(cell: WeatherZipcodeSettingsTableViewCell.self)
+        cell.delegate = delegateVC as! SettingsViewController
         cell.setup(by: frameItem, at: indexPath)
         return cell
         
@@ -106,24 +116,6 @@ extension DigitalPictureFrameDataSource {
 
 // MARK: - UITableViewDelegate protocol
 extension DigitalPictureFrameDataSource {
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    func sendNotificationToShowTimePicker() {
-      NotificationCenter.default.post(name: NotificationName.showTimePicker.name, object: nil)
-    }
-    
-    let frameItem = item(at: indexPath)
-    
-    switch frameItem.type {
-    case .timeFrameSettings where delegateVC is SettingsViewController:
-      break
-      
-    default:
-      break
-    }
-    print("Row: \(indexPath.row) and type: \(frameItem.type.rawValue)")
-  }
-  
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 65

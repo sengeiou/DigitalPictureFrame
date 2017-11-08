@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 final class AlertViewPresenter {
-  static let shared = AlertViewPresenter()
+  static let sharedInstance = AlertViewPresenter()
   weak var delegate: AlertViewPresenterDelegate?
   
   private init() {}
@@ -20,18 +20,11 @@ final class AlertViewPresenter {
 // MARK: - Present submit Alert
 extension AlertViewPresenter {
   
-  func presentSubmitAlert(viewController: UIViewController, title: String, message: String) {
+  func presentSubmitAlert(in viewController: UIViewController, title: String, message: String, textFieldConfiguration: ((UITextField) -> ())? = nil) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    alert.addTextField(configurationHandler: textFieldConfiguration)
     
-    alert.addTextField(configurationHandler: { textField in
-      textField.keyboardAppearance = .dark
-      textField.keyboardType = .default
-      textField.autocorrectionType = .default
-      textField.placeholder = "Enter value"
-      textField.clearButtonMode = .whileEditing
-    })
-    
-    let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { action in
+    let submitAction = UIAlertAction(title: "Ok", style: .default, handler: { action in
       guard let textField = alert.textFields?.first, textField.text?.isEmpty == false else { return }
       self.delegate?.alertView(self, didSubmit: textField.text!)
     })
@@ -49,7 +42,7 @@ extension AlertViewPresenter {
 // MARK: - Present Error Alert
 extension AlertViewPresenter {
   
-  func presentErrorAlert(viewController: UIViewController, error: Error) {
+  func presentErrorAlert(in viewController: UIViewController, error: Error) {
     let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
     let okAction = UIAlertAction(title: "Ok", style: .default)
     
@@ -63,7 +56,7 @@ extension AlertViewPresenter {
 // MARK: - Present Popup Alert
 extension AlertViewPresenter {
   
-  func presentPopupAlert(viewController: UIViewController, title: String?, message: String?, actionTitles: [String], actions: [((UIAlertAction) -> ())?]) {
+  func presentPopupAlert(in viewController: UIViewController, title: String?, message: String?, actionTitles: [String], actions: [((UIAlertAction) -> ())?]) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     
     for (index, title) in actionTitles.enumerated() {

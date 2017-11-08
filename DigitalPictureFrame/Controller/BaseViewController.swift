@@ -11,7 +11,7 @@ import UIKit
 class BaseViewController: UIViewController, ViewSetupable {
   @IBOutlet weak var tableView: UITableView!
   
-  let sharedAlert = AlertViewPresenter.shared
+  let sharedAlert = AlertViewPresenter.sharedInstance
   var dataSourceDelegate: DigitalPictureFrameDataSourceDelegate?
   
   override func viewDidLoad() {

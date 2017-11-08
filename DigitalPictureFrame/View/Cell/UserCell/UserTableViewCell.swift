@@ -13,7 +13,7 @@ class UserTableViewCell: UITableViewCell, DigitalPictureFrameCellSetupable, View
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var onOffSwitch: UISwitch!
   
-  weak var delegate: UserCellDelegate?
+  weak var delegate: SwitchableCellDelegate?
   
   var rowInSection: Int?
   var item: DigitalPictureFrameItem? {
@@ -68,7 +68,7 @@ extension UserTableViewCell {
   @IBAction func switchPressed(_ sender: UISwitch) {
     guard let rowInSection = rowInSection else { return }
     let index = IndexPath(row: rowInSection, section: sender.tag)
-    delegate?.userCell(self, didPressSwitch: sender, at: index)
+    delegate?.switchableCell(self, didPressSwitch: sender, at: index)
   }
   
 }

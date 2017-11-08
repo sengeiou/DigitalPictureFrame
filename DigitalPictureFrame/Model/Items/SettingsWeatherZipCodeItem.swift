@@ -14,6 +14,9 @@ final class SettingsWeatherZipCodeItem: ZipCodeSettingsSection, DigitalPictureFr
   let section = DigitalPictureFrameCellSectionType.zipCode
   var cells: [CellItem] {
     let leftInfoCell = CellItem(thumbnailImageName: "thumbnail-weatherZip", description: "Weather Zip Code", value: weatherZip)
+    leftInfoCell.subscribe(observer: weatherZip as AnyObject) { newValue, _ in
+      self.weatherZip = newValue as! String
+    }
     return [leftInfoCell]
   }
   
