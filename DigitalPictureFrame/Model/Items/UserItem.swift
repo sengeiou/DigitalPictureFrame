@@ -2,7 +2,7 @@
 //  UserItem.swift
 //  DigitalPictureFrame
 //
-//  Created by Pawel Milek on 11/2/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
@@ -18,6 +18,7 @@ final class UserItem: DigitalPictureFrameItem {
       let cell = CellItem(thumbnailImageName: user.image, description: user.description, value: user.enabled)
       cell.subscribe(observer: user) { newValue, _ in
         user.enabled = newValue as! Bool
+        DatabaseManager.shared().updateUserData(for: user)
       }
       return cell
     }

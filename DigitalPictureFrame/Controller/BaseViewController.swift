@@ -2,17 +2,28 @@
 //  BaseViewController.swift
 //  DigitalPictureFrame
 //
-//  Created by Pawel Milek on 11/2/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class BaseViewController: UIViewController, ViewSetupable {
   @IBOutlet weak var tableView: UITableView!
   
+  private var refreshControl: UIRefreshControl = {
+    let refreshCtrl = UIRefreshControl()
+    let attributes = [NSAttributedStringKey.foregroundColor: UIColor.appleBlue]
+    let title = NSAttributedString(string: "Retrieving Data", attributes: attributes)
+    refreshCtrl.attributedTitle = title
+    refreshCtrl.tintColor = UIColor.appleBlue
+    return refreshCtrl
+  }()
+  
   let sharedAlert = AlertViewPresenter.sharedInstance
   var dataSourceDelegate: DigitalPictureFrameDataSourceDelegate?
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,6 +34,10 @@ class BaseViewController: UIViewController, ViewSetupable {
     super.viewWillAppear(animated)
     setupStyle()
   }
+  
+  deinit {
+    unregisterNotifications()
+  }
 }
 
 
@@ -31,18 +46,61 @@ extension BaseViewController {
   
   func setup() {
     // TODO: Override in subclass
+    tableView.refreshControl = refreshControl
+    refreshControl.addTarget(self, action: #selector(BaseViewController.refreshData(_:)), for: .valueChanged)
+    registerNotifications()
   }
   
   func setupStyle() {
     tableView.separatorStyle = .none
   }
   
+  
+  @objc func refreshData(_ sender: Any) {
+    NotificationCenter.default.post(name: NotificationName.refreshData.name, object: nil)
+    refreshControl.endRefreshing()
+  }
+  
 }
-
 
 
 // MARK: - Reload Rows
 extension BaseViewController {
+  func registerNotifications() {
+    addNofificationObserverToReloadUserVC()
+  }
+  
+  func unregisterNotifications() {
+    removeNofificationObserverReloadingUserVC()
+  }
+  
+  
+  func addNofificationObserverToReloadUserVC() {
+    NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.reloadData),
+                                           name: NotificationName.reloadData.name, object: nil)
+  }
+  
+  func removeNofificationObserverReloadingUserVC() {
+    NotificationCenter.default.removeObserver(self, name: NotificationName.reloadData.name, object: nil)
+  }
+  
+  @objc func reloadData() {
+    // TODO: Override in subclass
+  }
+}
+
+// MARK: - Reload Rows
+extension BaseViewController {
+  
+  func updateTableView() {
+    if let dataSourceDelegate = dataSourceDelegate, dataSourceDelegate.items.count > 0 {
+      hideNodataAvailableMessage()
+      tableView.reloadData()
+    } else {
+      showNoDataAvailableMessage()
+    }
+  }
+  
   
   func reloadRows(at indexPaths: IndexPath...) {
     tableView.beginUpdates()
@@ -56,14 +114,11 @@ extension BaseViewController {
 // MARK: - Create assign delegate
 extension BaseViewController {
   
-  func createAndAssignDelegate(for items: DigitalPictureFrameItem) {
-    let infoItem = [items]
-    
+  func createAndAssignDelegate(for items: [DigitalPictureFrameItem]) {
     if let dataSourceDelegate = dataSourceDelegate {
-      dataSourceDelegate.items = infoItem
-      tableView.reloadData()
+      dataSourceDelegate.items = items
     } else {
-      dataSourceDelegate = DigitalPictureFrameDataSource(self, items: infoItem)
+      dataSourceDelegate = DigitalPictureFrameDataSource(self, items: items)
       tableView.dataSource = dataSourceDelegate
       tableView.delegate = dataSourceDelegate
     }
@@ -72,10 +127,19 @@ extension BaseViewController {
 }
 
 
-// Show No reports available message
-fileprivate extension BaseViewController {
+// Show/Hide No data available message
+extension BaseViewController {
   
-  func showNoReportsAvailableMessage() {
+  var isAvailableMessageVisible: Bool {
+    if let _ = tableView.viewWithTag(EmbeddedViewTag.availabilityMessage.rawValue) {
+      return true
+    }
+    
+    return false
+  }
+  
+  func showNoDataAvailableMessage() {
+    guard !isAvailableMessageVisible else { return }
     removeTableViewEmptyCells()
     
     let messageHeight = CGFloat(25)
@@ -91,22 +155,14 @@ fileprivate extension BaseViewController {
   }
   
   
+  func hideNodataAvailableMessage() {
+    guard isAvailableMessageVisible else { return }
+    let availabilityMessageView = tableView.viewWithTag(EmbeddedViewTag.availabilityMessage.rawValue)
+    availabilityMessageView?.removeFromSuperview()
+  }
+  
+  
   func removeTableViewEmptyCells() {
     tableView.tableFooterView = UIView()
   }
-  
 }
-
-
-
-// MARK: - Hide No Reports Available Message If Visible
-extension BaseViewController {
-  
-  func hideAvailabilityMessageView() {
-    guard let availabilityMessageView = tableView.viewWithTag(EmbeddedViewTag.availabilityMessage.rawValue) else { return }
-    availabilityMessageView.removeFromSuperview()
-  }
-  
-}
-
-

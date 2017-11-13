@@ -2,7 +2,7 @@
 //  UserTableViewCell.swift
 //  DigitalPictureFrame
 //
-//  Created by Pawel Milek on 11/4/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
@@ -25,6 +25,8 @@ class UserTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, V
       
       if let imageData = Data(base64Encoded: user.image) {
         let userImage = UIImage(data: imageData)
+        
+        
         thumbnailImageView.image = userImage
       }
     }

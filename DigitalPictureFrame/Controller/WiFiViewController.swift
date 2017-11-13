@@ -2,7 +2,7 @@
 //  WiFiViewController.swift
 //  Digital Picture Frame
 //
-//  Created by Pawel Milek on 11/2/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
@@ -10,6 +10,8 @@ import UIKit
 
 class WiFiViewController: BaseViewController {
   private var modifiedItemIndexPath: IndexPath?
+  private var connectedSSIDName: String?
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,7 +26,11 @@ extension WiFiViewController {
   override func setup() {
     super.setup()
     registerCells()
-    createAndAssignWiFiDelegate()
+    reloadData()
+    
+    // TODO: Implement
+    connectedSSIDName = NetworkConnectionUtility.fetchSSIDInfo()
+    print(connectedSSIDName ?? "Not connected")
   }
   
 }
@@ -36,17 +42,27 @@ extension WiFiViewController {
   func registerCells() {
     tableView.register(cell: WiFiTableViewCell.self)
   }
-  
+
+  @objc override func reloadData() {
+    createAndAssignWiFiDelegate()
+    updateTableView()
+  }
 }
+
+
+
 
 
 // MARK: - Create assign delegate
 extension WiFiViewController {
   
   func createAndAssignWiFiDelegate() {
-    let wifiInfo = DatabaseManager.shared().wifiInfo
+    guard let wifiInfo = DatabaseManager.shared().wifiInfo else {
+      createAndAssignDelegate(for: [])
+      return
+    }
     let infoItem = WiFiItem(wiFi: wifiInfo)
-    createAndAssignDelegate(for: infoItem)
+    createAndAssignDelegate(for: [infoItem])
   }
   
 }

@@ -2,7 +2,7 @@
 //  UserPickerView.swift
 //  DigitalPictureFrame
 //
-//  Created by Pawel Milek on 11/8/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ class UserPickerView: UIView, ViewSetupable, UIPickerViewDataSource, UIPickerVie
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var doneButton: UIButton!
 
-  private var users: [User] {
+  private var users: [User]? {
     return DatabaseManager.shared().users
   }
   var presenterViewController: UIViewController?
@@ -77,7 +77,7 @@ private extension UserPickerView {
 extension UserPickerView {
   
   func item(at index: Int) -> User? {
-    return users[index]
+    return users?[index]
   }
 }
 
@@ -90,7 +90,7 @@ extension UserPickerView {
   }
   
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return users.count
+    return users?.count ?? 0
   }
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

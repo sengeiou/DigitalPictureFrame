@@ -2,7 +2,7 @@
 //  AlertViewPresenter.swift
 //  DigitalPictureFrame
 //
-//  Created by Pawel Milek on 11/3/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
@@ -56,7 +56,7 @@ extension AlertViewPresenter {
 // MARK: - Present Popup Alert
 extension AlertViewPresenter {
   
-  func presentPopupAlert(in viewController: UIViewController, title: String?, message: String?, actionTitles: [String], actions: [((UIAlertAction) -> ())?]) {
+  func presentPopupAlert(in viewController: UIViewController, title: String?, message: String?, actionTitles: [String] = ["OK"], actions: [((UIAlertAction) -> ())?] = [nil]) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     
     for (index, title) in actionTitles.enumerated() {

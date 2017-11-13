@@ -2,8 +2,8 @@
 //  UIView+AddConstraintsWithFormat.swift
 //  iOS-CNH-MobileDealerConnect
 //
-//  Created by Pawel Milek on 3/12/17.
-//  Copyright © 2017 Reply Inc. All rights reserved.
+//  Created by Pawel Milek
+//  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
 import Foundation

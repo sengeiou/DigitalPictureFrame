@@ -2,20 +2,16 @@
 //  NotificationName.swift
 //  DigitalPictureFrame
 //
-//  Created by Pawel Milek on 11/6/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
 import Foundation
 
 enum NotificationName: String {
-  case showTimePicker = "ShowTimePicker"
-  case hideTimePicker = "hideTimePicker"
-
-  case showZipcodeAlertView = "ShowZipcodeAlertView"
-  case hideZipcodeAlertView = "HideZipcodeAlertView"
-  
-  case reloadDataInUserViewController = "ReloadDataInUserViewController"
+  case showNoDataAvailableMessage = "ShowNoDataAvailableMessage"
+  case reloadData = "ReloadData"
+  case refreshData = "RefreshData"
   
   var name: Notification.Name {
     return Notification.Name(self.rawValue)

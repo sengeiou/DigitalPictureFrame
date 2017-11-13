@@ -2,7 +2,7 @@
 //  ViewSetupable.swift
 //  ARPuzzle15
 //
-//  Created by Pawel Milek on 9/18/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 

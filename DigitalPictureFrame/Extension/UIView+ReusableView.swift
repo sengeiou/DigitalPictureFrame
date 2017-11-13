@@ -2,7 +2,7 @@
 //  UIView+ReusableView.swift
 //  ARPuzzle15
 //
-//  Created by Pawel Milek on 10/6/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 

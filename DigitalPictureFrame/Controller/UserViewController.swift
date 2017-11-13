@@ -2,20 +2,17 @@
 //  UserTableViewController.swift
 //  Digital Picture Frame
 //
-//  Created by Pawel Milek on 11/2/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
 import UIKit
 
 class UserViewController: BaseViewController, SwitchableCellDelegate {
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-  }
-  
-  deinit {
-    unregisterNotifications()
   }
 }
 
@@ -25,7 +22,6 @@ extension UserViewController {
   
   override func setup() {
     super.setup()
-    registerNotifications()
     registerCells()
   }
 }
@@ -44,27 +40,9 @@ extension UserViewController {
 // MARK: - Add Notification Observer
 extension UserViewController {
   
-  func registerNotifications() {
-    addNofificationObserverToReloadUserVC()
-  }
-  
-  func unregisterNotifications() {
-    removeNofificationObserverReloadingUserVC()
-  }
-  
-  
-  func addNofificationObserverToReloadUserVC() {
-    NotificationCenter.default.addObserver(self, selector: #selector(UserViewController.reloadDataInUserViewController),
-                                           name: NotificationName.reloadDataInUserViewController.name, object: nil)
-  }
-  
-  func removeNofificationObserverReloadingUserVC() {
-    NotificationCenter.default.removeObserver(self, name: NotificationName.reloadDataInUserViewController.name, object: nil)
-  }
-  
-  
-  @objc func reloadDataInUserViewController() {
+  @objc override func reloadData() {
     createAndAssignUserDelegate()
+    updateTableView()
   }
 }
 
@@ -73,9 +51,13 @@ extension UserViewController {
 private extension UserViewController {
   
   func createAndAssignUserDelegate() {
-    let users = DatabaseManager.shared().users
+    guard let users = DatabaseManager.shared().users else {
+      createAndAssignDelegate(for: [])
+      return
+    }
+    
     let userItem = UserItem(users: users)
-    createAndAssignDelegate(for: userItem)
+    createAndAssignDelegate(for: [userItem])
   }
   
 }

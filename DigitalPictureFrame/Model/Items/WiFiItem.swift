@@ -2,7 +2,7 @@
 //  WiFiItem.swift
 //  DigitalPictureFrame
 //
-//  Created by Pawel Milek on 11/2/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 

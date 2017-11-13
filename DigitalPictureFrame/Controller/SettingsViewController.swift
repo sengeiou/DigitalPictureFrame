@@ -2,7 +2,7 @@
 //  SettingsViewController.swift
 //  Digital Picture Frame
 //
-//  Created by Pawel Milek on 11/2/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
@@ -46,24 +46,10 @@ extension SettingsViewController {
   override func setup() {
     super.setup()
     registerCells()
-    createAndAssembleSettingsItem()
+    reloadData()
   }
   
-  
-  func createAndAssembleSettingsItem() {
-    let settings = DatabaseManager.shared().settings
-    let general = SettingsGeneralItem(rgbLight: settings.rgbLight, randomQuotes: settings.randomQuotes, sleep: settings.sleep, reset: settings.reset)
-    let timeFrame = SettingsTimeItem(timeFrame: settings.timeFrame)
-    let userInfo = SettingsUserInfoItem(sideInfo: settings.sideInfo)
-    let weatherZipcode = SettingsWeatherZipCodeItem(weatherZip: settings.weatherZip)
-    items = [general, timeFrame, userInfo, weatherZipcode]
-    
-    dataSourceDelegate = DigitalPictureFrameDataSource(self, items: items!)
-    tableView.dataSource = dataSourceDelegate
-    tableView.delegate = dataSourceDelegate
-  }
 }
-
 
 
 // MARK: - Register cells
@@ -76,6 +62,25 @@ extension SettingsViewController {
     tableView.register(cell: WeatherZipcodeSettingsTableViewCell.self)
   }
   
+  
+  @objc override func reloadData() {
+    createAndAssembleSettingsItem()
+    updateTableView()
+  }
+  
+  func createAndAssembleSettingsItem() {
+    guard let settings = DatabaseManager.shared().settings else {
+      dataSourceDelegate?.items = []
+      return
+    }
+    
+    let general = SettingsGeneralItem(rgbLight: settings.rgbLight, randomQuotes: settings.randomQuotes, sleep: settings.sleep, reset: settings.reset)
+    let timeFrame = SettingsTimeItem(timeFrame: settings.timeFrame)
+    let userInfo = SettingsUserInfoItem(sideInfo: settings.sideInfo)
+    let weatherZipcode = SettingsWeatherZipCodeItem(weatherZip: settings.weatherZip)
+    items = [general, timeFrame, userInfo, weatherZipcode]
+    createAndAssignDelegate(for: items!)
+  }
 }
 
 

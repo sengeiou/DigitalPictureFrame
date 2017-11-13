@@ -2,23 +2,27 @@
 //  User.swift
 //  DigitalPictureFrame
 //
-//  Created by Pawel Milek on 11/2/17.
+//  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
 import Foundation
 
-final class User: Codable, CustomStringConvertible {
+final class User: Codable, Equatable {
   var name: String
   var image: String
   var enabled: Bool
 }
 
 // MARK: CustomStringConvertible protocol
-extension User {
+extension User: CustomStringConvertible {
   
   var description: String {
     return name
   }
   
+}
+
+func ==(lhs: User, rhs: User) -> Bool {
+  return lhs.name == rhs.name
 }
