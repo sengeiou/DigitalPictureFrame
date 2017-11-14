@@ -18,6 +18,7 @@ class BaseViewController: UIViewController, ViewSetupable {
     let title = NSAttributedString(string: "Retrieving Data", attributes: attributes)
     refreshCtrl.attributedTitle = title
     refreshCtrl.tintColor = UIColor.appleBlue
+    refreshCtrl.addTarget(self, action: #selector(BaseViewController.refreshData(_:)), for: .valueChanged)
     return refreshCtrl
   }()
   
@@ -47,58 +48,72 @@ extension BaseViewController {
   func setup() {
     // TODO: Override in subclass
     tableView.refreshControl = refreshControl
-    refreshControl.addTarget(self, action: #selector(BaseViewController.refreshData(_:)), for: .valueChanged)
     registerNotifications()
   }
   
   func setupStyle() {
     tableView.separatorStyle = .none
   }
-  
-  
-  @objc func refreshData(_ sender: Any) {
-    NotificationCenter.default.post(name: NotificationName.refreshData.name, object: nil)
-    refreshControl.endRefreshing()
-  }
-  
 }
 
 
 // MARK: - Reload Rows
 extension BaseViewController {
   func registerNotifications() {
-    addNofificationObserverToReloadUserVC()
+    addReloadDataNofificationObserver()
+    addEndRefreshingIndicatorNofificationObserver()
   }
   
   func unregisterNotifications() {
-    removeNofificationObserverReloadingUserVC()
+    removeReloadDataNofificationObserver()
+    removeEndRefreshingIndicatorNofificationObserver()
   }
   
   
-  func addNofificationObserverToReloadUserVC() {
+  func addReloadDataNofificationObserver() {
     NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.reloadData),
                                            name: NotificationName.reloadData.name, object: nil)
   }
   
-  func removeNofificationObserverReloadingUserVC() {
+  func removeReloadDataNofificationObserver() {
     NotificationCenter.default.removeObserver(self, name: NotificationName.reloadData.name, object: nil)
+  }
+  
+  func addEndRefreshingIndicatorNofificationObserver() {
+    NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.endRefreshingIndicator),
+                                           name: NotificationName.endRefreshingIndicator.name, object: nil)
+  }
+  
+  func removeEndRefreshingIndicatorNofificationObserver() {
+    NotificationCenter.default.removeObserver(self, name: NotificationName.endRefreshingIndicator.name, object: nil)
   }
   
   @objc func reloadData() {
     // TODO: Override in subclass
   }
+  
+  @objc func refreshData(_ sender: Any) {
+    NotificationCenter.default.post(name: NotificationName.refreshData.name, object: nil)
+  }
+  
+  
+  @objc func endRefreshingIndicator() {
+    refreshControl.endRefreshing()
+  }
 }
+
 
 // MARK: - Reload Rows
 extension BaseViewController {
   
   func updateTableView() {
-    if let dataSourceDelegate = dataSourceDelegate, dataSourceDelegate.items.count > 0 {
+    if let dataSourceDelegate = dataSourceDelegate, dataSourceDelegate.numberOfSections > 0 {
       hideNodataAvailableMessage()
-      tableView.reloadData()
     } else {
       showNoDataAvailableMessage()
     }
+    
+    tableView.reloadData()
   }
   
   
@@ -114,7 +129,12 @@ extension BaseViewController {
 // MARK: - Create assign delegate
 extension BaseViewController {
   
-  func createAndAssignDelegate(for items: [DigitalPictureFrameItem]) {
+  func clearDataSource() {
+    createAndAssignDelegate(for: nil)
+  }
+  
+  
+  func createAndAssignDelegate(for items: [DigitalPictureFrameItem]?) {
     if let dataSourceDelegate = dataSourceDelegate {
       dataSourceDelegate.items = items
     } else {

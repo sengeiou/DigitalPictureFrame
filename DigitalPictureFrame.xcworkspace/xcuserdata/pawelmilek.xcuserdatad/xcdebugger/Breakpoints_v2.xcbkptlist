@@ -246,15 +246,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Controller/DigitalPictureFrameViewController.swift"
-            timestampString = "532302785.424627"
+            timestampString = "532374334.467725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "verifyUserCredentialsAndCreateDatabaseBased(on:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -262,11 +262,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Controller/UserViewController.swift"
-            timestampString = "532302785.4247"
+            timestampString = "532374334.468052"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
@@ -278,31 +278,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Controller/WiFiViewController.swift"
-            timestampString = "532302785.425429"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "reloadData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Controller/DigitalPictureFrameViewController.swift"
-            timestampString = "532302785.425491"
+            timestampString = "532374334.468297"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "sendNotificationToReloadUserData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -310,11 +294,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Controller/UserViewController.swift"
-            timestampString = "532302785.425556"
+            timestampString = "532374334.46836"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
@@ -326,15 +310,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Controller/DigitalPictureFrameViewController.swift"
-            timestampString = "532302785.425792"
+            timestampString = "532374334.468434"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "verifyUserCredentialsAndCreateDatabaseBased(on:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -342,16 +326,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Controller/SettingsViewController.swift"
-            timestampString = "532302785.42584"
+            filePath = "DigitalPictureFrame/Controller/DigitalPictureFrameViewController.swift"
+            timestampString = "532374334.468501"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "createAndAssembleSettingsItem()"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "sendNotificationToEndRefreshingIndicator()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalPictureFrame/Model/DataSource/DigitalPictureFrameDataSource.swift"
+            timestampString = "532374334.468553"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "item(at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -361,13 +361,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Controller/BaseViewController.swift"
-            timestampString = "532302785.427116"
+            filePath = "DigitalPictureFrame/Controller/WiFiViewController.swift"
+            timestampString = "532374334.46877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "updateTableView()"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "alertView(_:didSubmit:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -377,13 +377,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Controller/SettingsViewController.swift"
-            timestampString = "532302831.344142"
+            filePath = "DigitalPictureFrame/Model/Items/WiFiItem.swift"
+            timestampString = "532374334.469685"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "reloadData()"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "cells"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalPictureFrame/Controller/WiFiViewController.swift"
+            timestampString = "532374334.470162"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "alertView(_:didSubmit:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -393,14 +409,30 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Controller/SettingsViewController.swift"
-            timestampString = "532302838.015695"
+            filePath = "DigitalPictureFrame/Controller/WiFiViewController.swift"
+            timestampString = "532374334.470239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "createAndAssembleSettingsItem()"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "alertView(_:didSubmit:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalPictureFrame/Model/Items/WiFiItem.swift"
+            timestampString = "532374334.47029"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "cells"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

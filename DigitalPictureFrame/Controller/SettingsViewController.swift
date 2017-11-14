@@ -70,7 +70,7 @@ extension SettingsViewController {
   
   func createAndAssembleSettingsItem() {
     guard let settings = DatabaseManager.shared().settings else {
-      dataSourceDelegate?.items = []
+      clearDataSource()
       return
     }
     

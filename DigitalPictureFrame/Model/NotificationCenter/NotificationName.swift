@@ -10,8 +10,11 @@ import Foundation
 
 enum NotificationName: String {
   case showNoDataAvailableMessage = "ShowNoDataAvailableMessage"
+  case showAlertViewMessageToEnterNewWirelessNetworkPassword = "ShowAlertViewMessageToEnterNewWirelessNetworkPassword"
+  case showAlertViewMessageNoWirelessNetworkConnected = "ShowAlertViewNoWirelessNetworkConnected"
   case reloadData = "ReloadData"
   case refreshData = "RefreshData"
+  case endRefreshingIndicator = "EndRefreshingIndicator"
   
   var name: Notification.Name {
     return Notification.Name(self.rawValue)

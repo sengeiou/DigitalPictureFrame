@@ -23,10 +23,21 @@ final class WiFiInfo: Codable, CustomStringConvertible {
   }
 }
 
-// MARK: CustomStringConvertible protocol
+// MARK: - CustomStringConvertible protocol
 extension WiFiInfo {
   
   var description: String {
-    return name
+    return "\(name):\(password)"
   }
+}
+
+
+// MARK: - Extract components
+extension WiFiInfo {
+  
+  static func extractComponents(from value: String)  -> (name: String, password: String) {
+    let components = value.components(separatedBy: ":")
+    return (name: components.first!, password: components.last!)
+  }
+  
 }

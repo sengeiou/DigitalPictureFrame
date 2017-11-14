@@ -10,26 +10,26 @@ import Foundation
 import UIKit
 
 final class DigitalPictureFrameDataSource: NSObject, DigitalPictureFrameDataSourceDelegate {
-  var items: [DigitalPictureFrameItem]
+  var items: [DigitalPictureFrameItem]?
   var delegateVC: UIViewController
   
   
-  init(_ delegateVC: UIViewController, items: [DigitalPictureFrameItem]) {
+  init(_ delegateVC: UIViewController, items: [DigitalPictureFrameItem]?) {
     self.delegateVC = delegateVC
     self.items = items
   }
   
   
   func itemCount(in section: Int) -> Int {
-    return items[section].cells.count
+    return items?[section].cells.count ?? 0
   }
   
-  func item(at indexPath: IndexPath) -> DigitalPictureFrameItem {
-    return items[indexPath.section]
+  func item(at indexPath: IndexPath) -> DigitalPictureFrameItem? {
+    return items?[indexPath.section]
   }
   
-  func item(at section: Int) -> DigitalPictureFrameItem {
-    return items[section]
+  func item(at section: Int) -> DigitalPictureFrameItem? {
+    return items?[section]
   }
 }
 
@@ -38,7 +38,7 @@ final class DigitalPictureFrameDataSource: NSObject, DigitalPictureFrameDataSour
 extension DigitalPictureFrameDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return items.count
+    return numberOfSections
   }
   
   
@@ -48,7 +48,7 @@ extension DigitalPictureFrameDataSource {
   
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    let frameItem = item(at: section)
+    guard let frameItem = item(at: section) else { return nil }
     
     switch frameItem.section {
     case .general, .time, .userInfo, .zipCode:
@@ -62,7 +62,7 @@ extension DigitalPictureFrameDataSource {
   
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let frameItem = item(at: indexPath)
+    guard let frameItem = item(at: indexPath) else { return UITableViewCell() }
     let defaultCell = UITableViewCell()
     
     switch delegateVC {

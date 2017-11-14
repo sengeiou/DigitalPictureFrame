@@ -21,14 +21,32 @@ class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, V
     didSet {
       guard let wifiItem = item as? WiFiItem, let row = rowInSection else { return }
       let wifiCell = wifiItem.cells[row]
-      descriptionLabel.text = wifiCell.description
-      passwordTextField.text = wifiCell.value as? String
+      
+      func checkConnectedWirelessNetwork() {
+        guard let connectedNetworkSSID = NetworkConnectionUtility.fetchSSIDInfo() else {
+          sendNotificationToShowMessageViewThatNoWirelessNetworkConnected()
+          return
+        }
+        
+        if connectedNetworkSSID.contains(wifiCell.description) {
+          let wifiComponents = WiFiInfo.extractComponents(from: wifiCell.value as! String)
+          descriptionLabel.text = wifiComponents.name
+          passwordTextField.text = wifiComponents.password
+          
+        } else {
+          descriptionLabel.text = connectedNetworkSSID
+          passwordTextField.text = ""
+          sendNotificationToShowMessageViewEnterNewWirelessNetworkPassword()
+        }
+      }
+      
+      
       thumbnailImageView.image = UIImage(named: wifiCell.thumbnailImageName)
+      checkConnectedWirelessNetwork()
     }
   }
   
 
-  
   override func awakeFromNib() {
     super.awakeFromNib()
     setup()
@@ -54,9 +72,23 @@ extension WiFiTableViewCell {
 extension WiFiTableViewCell {
   
   func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+    self.passwordButton.indexPath = indexPath
     self.rowInSection = indexPath.row
     self.item = item
-    self.passwordButton.indexPath = indexPath
+  }
+  
+}
+
+
+// MARK: - Send notification to enter new network password
+private extension WiFiTableViewCell {
+  
+  func sendNotificationToShowMessageViewEnterNewWirelessNetworkPassword() {
+    NotificationCenter.default.post(name: NotificationName.showAlertViewMessageToEnterNewWirelessNetworkPassword.name, object: nil)
+  }
+  
+  func sendNotificationToShowMessageViewThatNoWirelessNetworkConnected() {
+    NotificationCenter.default.post(name: NotificationName.showAlertViewMessageNoWirelessNetworkConnected.name, object: nil)
   }
   
 }

@@ -10,12 +10,14 @@ import UIKit
 
 class WiFiViewController: BaseViewController {
   private var modifiedItemIndexPath: IndexPath?
-  private var connectedSSIDName: String?
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+  }
+  
+  deinit {
+    unregisterWiFiNotifications()
   }
 }
 
@@ -27,10 +29,7 @@ extension WiFiViewController {
     super.setup()
     registerCells()
     reloadData()
-    
-    // TODO: Implement
-    connectedSSIDName = NetworkConnectionUtility.fetchSSIDInfo()
-    print(connectedSSIDName ?? "Not connected")
+    registerWiFiNotifications()
   }
   
 }
@@ -43,14 +42,8 @@ extension WiFiViewController {
     tableView.register(cell: WiFiTableViewCell.self)
   }
 
-  @objc override func reloadData() {
-    createAndAssignWiFiDelegate()
-    updateTableView()
-  }
+
 }
-
-
-
 
 
 // MARK: - Create assign delegate
@@ -58,13 +51,69 @@ extension WiFiViewController {
   
   func createAndAssignWiFiDelegate() {
     guard let wifiInfo = DatabaseManager.shared().wifiInfo else {
-      createAndAssignDelegate(for: [])
+      clearDataSource()
       return
     }
     let infoItem = WiFiItem(wiFi: wifiInfo)
     createAndAssignDelegate(for: [infoItem])
   }
+}
+
+
+// MARK: - Reload Data
+extension WiFiViewController {
   
+  @objc override func reloadData() {
+    createAndAssignWiFiDelegate()
+    updateTableView()
+  }
+ 
+}
+
+
+// MARK: - Add Notification Observer
+extension WiFiViewController {
+  
+  func registerWiFiNotifications() {
+    addShowMessageToEnterNewWirelessNetworkPasswordNofificationObserver()
+    addShowMessageNoWirelessNetworkConnectedNofificationObserver()
+  }
+  
+  func unregisterWiFiNotifications() {
+    removeShowMessageToEnterNewWirelessNetworkPasswordNofificationObserver()
+    removeShowMessageNoWirelessNetworkConnectedNofificationObserver()
+  }
+  
+  
+  func addShowMessageToEnterNewWirelessNetworkPasswordNofificationObserver() {
+    NotificationCenter.default.addObserver(self, selector: #selector(WiFiViewController.showMessageToEnterNewWirelessNetworkPassword(_:)),
+                                           name: NotificationName.showAlertViewMessageToEnterNewWirelessNetworkPassword.name, object: nil)
+  }
+  
+  func removeShowMessageToEnterNewWirelessNetworkPasswordNofificationObserver() {
+    NotificationCenter.default.removeObserver(self, name: NotificationName.showAlertViewMessageToEnterNewWirelessNetworkPassword.name, object: nil)
+  }
+  
+  func addShowMessageNoWirelessNetworkConnectedNofificationObserver() {
+    NotificationCenter.default.addObserver(self, selector: #selector(WiFiViewController.showMessageNoWirelessNetworkConnected(_:)),
+                                           name: NotificationName.showAlertViewMessageNoWirelessNetworkConnected.name, object: nil)
+  }
+  
+  func removeShowMessageNoWirelessNetworkConnectedNofificationObserver() {
+    NotificationCenter.default.removeObserver(self, name: NotificationName.showAlertViewMessageNoWirelessNetworkConnected.name, object: nil)
+  }
+  
+  @objc func showMessageToEnterNewWirelessNetworkPassword(_ sender: Any) {
+    let title = "Alert"
+    let message = "Wireless network is different than what is currently associated with user.\nEnter password for new Wi-Fi name."
+    sharedAlert.presentPopupAlert(in: self, title: title, message: message)
+  }
+  
+  @objc func showMessageNoWirelessNetworkConnected(_ sender: Any) {
+    let title = "Alert"
+    let message = "No wireless network connected"
+    sharedAlert.presentPopupAlert(in: self, title: title, message: message)
+  }
 }
 
 
@@ -93,10 +142,15 @@ extension WiFiViewController: AlertViewPresenterDelegate {
   
   func alertView(_ alertViewPresenter: AlertViewPresenter, didSubmit result: String) {
     guard let modifiedItemIndexPath = modifiedItemIndexPath else { return }
-    guard let modifiedWiFiItem = dataSourceDelegate?.item(at: modifiedItemIndexPath) else { return }
+    guard let modifiedWiFiItem = dataSourceDelegate?.item(at: modifiedItemIndexPath) as? WiFiItem else { return }
+    
     let newPassword = result
-    let wifiItem = modifiedWiFiItem.cells[modifiedItemIndexPath.row]
-    wifiItem.value = newPassword
+    let fetchedWiFiName = modifiedWiFiItem.wiFi.name
+    let connectedWiFiName = NetworkConnectionUtility.fetchSSIDInfo() ?? "Not available"
+    let wifiComponents = fetchedWiFiName.contains(connectedWiFiName) ? "\(fetchedWiFiName):\(newPassword)" : "\(connectedWiFiName):\(newPassword)"
+    
+    let wifiCell = modifiedWiFiItem.cells[modifiedItemIndexPath.row]
+    wifiCell.value = wifiComponents
     reloadRows(at: modifiedItemIndexPath)
   }
   

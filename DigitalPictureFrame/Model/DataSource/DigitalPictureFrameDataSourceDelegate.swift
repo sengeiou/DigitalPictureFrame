@@ -10,12 +10,21 @@ import Foundation
 import UIKit
 
 protocol DigitalPictureFrameDataSourceDelegate: class, UITableViewDataSource, UITableViewDelegate {
-  var items: [DigitalPictureFrameItem] { get set }
+  var items: [DigitalPictureFrameItem]? { get set }
   var delegateVC: UIViewController { get set }
   
   func itemCount(in section: Int) -> Int
-  func item(at indexPath: IndexPath) -> DigitalPictureFrameItem
-  func item(at section: Int) -> DigitalPictureFrameItem
+  func item(at indexPath: IndexPath) -> DigitalPictureFrameItem?
+  func item(at section: Int) -> DigitalPictureFrameItem?
 }
+
+
+extension DigitalPictureFrameDataSourceDelegate {
+  
+  var numberOfSections: Int {
+    return items?.count ?? 0
+  }
+}
+
 
 

@@ -98,6 +98,7 @@ private extension DigitalPictureFrameViewController {
       case .success(let data):
         self.verifyUserCredentialsAndCreateDatabaseBased(on: data)
         self.sendNotificationToReloadUserData()
+        self.sendNotificationToEndRefreshingIndicator()
         NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
         
       case .failure(let error):
@@ -113,6 +114,9 @@ private extension DigitalPictureFrameViewController {
     NotificationCenter.default.post(name: NotificationName.reloadData.name, object: nil)
   }
 
+  func sendNotificationToEndRefreshingIndicator() {
+    NotificationCenter.default.post(name: NotificationName.endRefreshingIndicator.name, object: nil)
+  }
 }
 
 

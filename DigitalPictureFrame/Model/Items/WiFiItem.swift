@@ -15,9 +15,12 @@ final class WiFiItem: DigitalPictureFrameItem {
   let type = DigitalPictureFrameCellType.wifi
   let section = DigitalPictureFrameCellSectionType.wifi
   var cells: [CellItem] {
-    let wifiCell = CellItem(thumbnailImageName: "thumbnail-wifi-on", description: wiFi.description, value: wiFi.password)
+    let wifiCell = CellItem(thumbnailImageName: "thumbnail-wifi-on", description: wiFi.name, value: wiFi.description)
     wifiCell.subscribe(observer: wiFi) { newValue, _ in
-      self.wiFi.password = newValue as! String
+      let nameAndPassword = WiFiInfo.extractComponents(from: newValue as! String)
+      
+      self.wiFi.name = nameAndPassword.name
+      self.wiFi.password = nameAndPassword.password
     }
     
     return [wifiCell]

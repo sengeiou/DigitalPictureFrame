@@ -52,13 +52,13 @@ private extension UserViewController {
   
   func createAndAssignUserDelegate() {
     guard let users = DatabaseManager.shared().users else {
-      createAndAssignDelegate(for: [])
+      clearDataSource()
       return
     }
     
     let userItem = UserItem(users: users)
     createAndAssignDelegate(for: [userItem])
   }
-  
+
 }
 
