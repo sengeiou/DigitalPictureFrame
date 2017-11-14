@@ -81,6 +81,7 @@
 		E27D957A1FAE9CF70099430B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95791FAE9CF70099430B /* DatabaseManager.swift */; };
 		E2D8AD881FB65A7C000DA60C /* NetworkConnectionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */; };
 		E2D8AD8A1FBA388B000DA60C /* DigitalPictureFrameDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD891FBA388B000DA60C /* DigitalPictureFrameDataError.swift */; };
+		E2D8AD951FBB77F6000DA60C /* Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD941FBB77F6000DA60C /* Crypt.swift */; };
 		E2E0784B1FB0D58200E9EAF7 /* Date+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */; };
 		E2E660161FB374DD00948B3D /* UserPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E660151FB374DD00948B3D /* UserPickerView.swift */; };
 		E2E660181FB3751E00948B3D /* UserPickerView+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E660171FB3751E00948B3D /* UserPickerView+Actions.swift */; };
@@ -183,6 +184,7 @@
 		E27D95791FAE9CF70099430B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionUtility.swift; sourceTree = "<group>"; };
 		E2D8AD891FBA388B000DA60C /* DigitalPictureFrameDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameDataError.swift; sourceTree = "<group>"; };
+		E2D8AD941FBB77F6000DA60C /* Crypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypt.swift; sourceTree = "<group>"; };
 		E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utility.swift"; sourceTree = "<group>"; };
 		E2E660151FB374DD00948B3D /* UserPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickerView.swift; sourceTree = "<group>"; };
 		E2E660171FB3751E00948B3D /* UserPickerView+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserPickerView+Actions.swift"; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				E2FB8E2E1FB0F06600724889 /* NotificationCenter */,
 				E22ED44B1FB3678B0080570A /* EmbeddedViewTag.swift */,
 				E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */,
+				E2D8AD941FBB77F6000DA60C /* Crypt.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -795,6 +798,7 @@
 				E2FB8E2D1FB0F05900724889 /* NotificationUserInfoKey.swift in Sources */,
 				E24F69951FABF15A0099343B /* TimeFrame.swift in Sources */,
 				E20FF6AC1FAB739200F89850 /* UIStoryboard+Storyboard.swift in Sources */,
+				E2D8AD951FBB77F6000DA60C /* Crypt.swift in Sources */,
 				E2217F331FB3ADB5002CCD9C /* WiFiCellDelegate.swift in Sources */,
 				E2FB8E3A1FB113BD00724889 /* UIView+AddConstraintsWithFormat.swift in Sources */,
 				E20FF6C21FAB818A00F89850 /* UserViewController.swift in Sources */,
@@ -946,7 +950,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pawel.milek.DigitalPictureFrame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "DigitalPictureFrame/Model/AES-encryption/DigitalPictureFrame-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -965,7 +969,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pawel.milek.DigitalPictureFrame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "DigitalPictureFrame/Model/AES-encryption/DigitalPictureFrame-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

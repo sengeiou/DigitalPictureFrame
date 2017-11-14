@@ -144,10 +144,14 @@ extension WiFiViewController: AlertViewPresenterDelegate {
     guard let modifiedItemIndexPath = modifiedItemIndexPath else { return }
     guard let modifiedWiFiItem = dataSourceDelegate?.item(at: modifiedItemIndexPath) as? WiFiItem else { return }
     
+    let crypt = Crypt()
     let newPassword = result
+    let encryptedBytes = crypt.encryptContentsToSecureData(for: newPassword)
+    let passwordEncodedBase64 = crypt.convertIntoBase64Encoded(data: encryptedBytes)
+    
     let fetchedWiFiName = modifiedWiFiItem.wiFi.name
     let connectedWiFiName = NetworkConnectionUtility.fetchSSIDInfo() ?? "Not available"
-    let wifiComponents = fetchedWiFiName.contains(connectedWiFiName) ? "\(fetchedWiFiName):\(newPassword)" : "\(connectedWiFiName):\(newPassword)"
+    let wifiComponents = fetchedWiFiName.contains(connectedWiFiName) ? "\(fetchedWiFiName):\(passwordEncodedBase64)" : "\(connectedWiFiName):\(passwordEncodedBase64)"
     
     let wifiCell = modifiedWiFiItem.cells[modifiedItemIndexPath.row]
     wifiCell.value = wifiComponents

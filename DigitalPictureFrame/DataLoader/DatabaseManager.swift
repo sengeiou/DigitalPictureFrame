@@ -70,7 +70,7 @@ extension DatabaseManager {
 
   
   func updateUserData(for user: User) {
-    guard let users = users, let userIndex = users.index(of: user) else { return }
+    guard let users = self.users, let userIndex = users.index(of: user) else { return }
     databaseReference.child("users/\(userIndex)").updateChildValues(["enabled": user.enabled])
   }
   
@@ -91,8 +91,10 @@ extension DatabaseManager {
     databaseReference.child("settings/\(key)")
   }
   
-  func updateWiFiData(key: String, value: Any) {
-    databaseReference.child("wifiInof/\(key)")
+  func updateWiFiData(for wifiInfo: WiFiInfo) {
+    guard let wifiInfo = self.wifiInfo else { return }
+    databaseReference.child("wifiInfo").updateChildValues(["name": wifiInfo.name])
+    databaseReference.child("wifiInfo").updateChildValues(["password": wifiInfo.password])
   }
   
   

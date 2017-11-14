@@ -21,6 +21,7 @@ final class WiFiItem: DigitalPictureFrameItem {
       
       self.wiFi.name = nameAndPassword.name
       self.wiFi.password = nameAndPassword.password
+      DatabaseManager.shared().updateWiFiData(for: self.wiFi)
     }
     
     return [wifiCell]
