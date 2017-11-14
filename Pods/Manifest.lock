@@ -30,11 +30,13 @@ PODS:
   - NVActivityIndicatorView (4.0.0):
     - NVActivityIndicatorView/Presenter (= 4.0.0)
   - NVActivityIndicatorView/Presenter (4.0.0)
+  - RNCryptor (5.0.2)
 
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - NVActivityIndicatorView (~> 4.0)
+  - RNCryptor (~> 5.0)
 
 SPEC CHECKSUMS:
   Firebase: d83d287bdb6b1c78320561482706d1fcfc8ddfc1
@@ -46,7 +48,8 @@ SPEC CHECKSUMS:
   leveldb-library: 44ef425bfde64f5b41daef86b38db2d13edbbee1
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
+  RNCryptor: 59b9f92e9fa8a1af74c32dc6b1af5e30ff5e1b64
 
-PODFILE CHECKSUM: 6f6cce666fc3794ac48f73d924b8e71b8d4d59b4
+PODFILE CHECKSUM: 9b284d69d993aac16a524c723f04107d084fc9fa
 
 COCOAPODS: 1.3.1
