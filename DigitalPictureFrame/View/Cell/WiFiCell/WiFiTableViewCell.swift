@@ -32,6 +32,10 @@ class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, V
           let wifiComponents = WiFiInfo.extractComponents(from: wifiCell.value as! String)
           descriptionLabel.text = wifiComponents.name
           decriptionHandler(wifiComponents.password)
+          
+          let templateImage = thumbnailImageView.image?.withRenderingMode(.alwaysTemplate)
+          thumbnailImageView.image = templateImage
+          thumbnailImageView.tintColor = UIColor.green
         } else {
           descriptionLabel.text = connectedNetworkSSID
           passwordTextField.text = ""
@@ -66,7 +70,7 @@ extension WiFiTableViewCell {
     passwordTextField.isSecureTextEntry = true
     passwordTextField.textAlignment = .right
     thumbnailImageView.contentMode = .scaleAspectFit
-    thumbnailImageView.roundThumbnail()
+    //thumbnailImageView.roundThumbnail()
   }
 }
 

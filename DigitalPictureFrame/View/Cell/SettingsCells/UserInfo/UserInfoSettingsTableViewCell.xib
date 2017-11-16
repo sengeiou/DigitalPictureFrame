@@ -20,7 +20,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="365" height="62.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0te-oc-S1B">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbnail-Time" translatesAutoresizingMaskIntoConstraints="NO" id="0te-oc-S1B">
                         <rect key="frame" x="4" y="6.5" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="3DE-TL-e6m"/>
@@ -79,4 +79,7 @@
             <point key="canvasLocation" x="-43.5" y="74.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="thumbnail-Time" width="256" height="256"/>
+    </resources>
 </document>

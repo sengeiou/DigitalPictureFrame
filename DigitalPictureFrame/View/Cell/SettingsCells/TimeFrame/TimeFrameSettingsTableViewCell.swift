@@ -46,8 +46,8 @@ extension TimeFrameSettingsTableViewCell {
   func setup() {
     selectionStyle = .none
     timePickerButton.setTitle("", for: .normal)
-    thumbnailImageView.contentMode = .center
-    thumbnailImageView.roundThumbnail()
+    thumbnailImageView.contentMode = .scaleAspectFit
+    //thumbnailImageView.roundThumbnail()
   }
   
 }

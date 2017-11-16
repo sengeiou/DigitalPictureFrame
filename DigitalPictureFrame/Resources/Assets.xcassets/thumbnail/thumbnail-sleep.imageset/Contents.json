@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "thumbnail-sleep.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "thumbnail-sleep.jpg",
       "scale" : "2x"
     },
     {

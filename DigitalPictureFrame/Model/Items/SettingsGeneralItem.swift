@@ -36,7 +36,7 @@ final class SettingsGeneralItem: GeneralSettingsSection, DigitalPictureFrameItem
     }
     
     
-    let resetCell = CellItem(thumbnailImageName: "thumbnail-sleep", description: "Reset", value: reset)
+    let resetCell = CellItem(thumbnailImageName: "thumbnail-reset", description: "Reset", value: reset)
     resetCell.subscribe(observer: reset as AnyObject) { newValue, _ in
       self.reset = newValue as! Bool
       DatabaseManager.shared().updateSettings(general: self.reset, key: Settings.Keys.reset.rawValue)

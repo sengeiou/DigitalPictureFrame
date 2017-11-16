@@ -40,7 +40,7 @@ extension WeatherZipcodeSettingsTableViewCell {
   func setup() {
     selectionStyle = .none
     thumbnailImageView.contentMode = .scaleAspectFit
-    thumbnailImageView.roundThumbnail()
+    //thumbnailImageView.roundThumbnail()
   }
   
 }

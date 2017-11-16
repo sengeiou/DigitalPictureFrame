@@ -96,7 +96,6 @@
 		E2E769DA1FB2CCB100F5C37E /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E769D91FB2CCB100F5C37E /* TimePickerView.swift */; };
 		E2F0596C1FB2469B0054C424 /* UIColor+CustomRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */; };
 		E2FB8E2B1FB0EF5500724889 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E2A1FB0EF5500724889 /* NotificationName.swift */; };
-		E2FB8E2D1FB0F05900724889 /* NotificationUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E2C1FB0F05900724889 /* NotificationUserInfoKey.swift */; };
 		E2FB8E301FB0F13D00724889 /* TimePickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E2F1FB0F13D00724889 /* TimePickerViewDelegate.swift */; };
 		E2FB8E321FB0F2F100724889 /* TimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2FB8E311FB0F2F100724889 /* TimePickerView.xib */; };
 		E2FB8E341FB0F61600724889 /* TimePickerView+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E331FB0F61500724889 /* TimePickerView+Actions.swift */; };
@@ -200,7 +199,6 @@
 		E2E769D91FB2CCB100F5C37E /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
 		E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomRGB.swift"; sourceTree = "<group>"; };
 		E2FB8E2A1FB0EF5500724889 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
-		E2FB8E2C1FB0F05900724889 /* NotificationUserInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUserInfoKey.swift; sourceTree = "<group>"; };
 		E2FB8E2F1FB0F13D00724889 /* TimePickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewDelegate.swift; sourceTree = "<group>"; };
 		E2FB8E311FB0F2F100724889 /* TimePickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimePickerView.xib; sourceTree = "<group>"; };
 		E2FB8E331FB0F61500724889 /* TimePickerView+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimePickerView+Actions.swift"; sourceTree = "<group>"; };
@@ -313,12 +311,11 @@
 				E24F69691FAB9C0D0099343B /* Protocol */,
 				E24F69871FABCDD30099343B /* Items */,
 				E2204F7D1FACCEC600F7E8DC /* Response */,
+				E2FB8E2E1FB0F06600724889 /* NotificationCenter */,
 				E20FF6B91FAB770E00F89850 /* TopTabBarItemType.swift */,
-				E24F697F1FABBBE10099343B /* CellItem.swift */,
 				E24F697D1FABBAFA0099343B /* DigitalPictureFrameItem.swift */,
 				E24F697A1FABB9400099343B /* DigitalPictureFrameCellType.swift */,
 				E24F69811FABC4610099343B /* DigitalPictureFrameCellSectionType.swift */,
-				E2FB8E2E1FB0F06600724889 /* NotificationCenter */,
 				E22ED44B1FB3678B0080570A /* EmbeddedViewTag.swift */,
 				E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */,
 				E2D8AD941FBB77F6000DA60C /* Crypt.swift */,
@@ -448,6 +445,7 @@
 		E24F69871FABCDD30099343B /* Items */ = {
 			isa = PBXGroup;
 			children = (
+				E24F697F1FABBBE10099343B /* CellItem.swift */,
 				E2204F8E1FACD6AB00F7E8DC /* WiFiItem.swift */,
 				E24F69831FABC6CD0099343B /* UserItem.swift */,
 				E24F69851FABC8090099343B /* SettingsGeneralItem.swift */,
@@ -542,8 +540,8 @@
 			children = (
 				E2E660151FB374DD00948B3D /* UserPickerView.swift */,
 				E2E660191FB3754000948B3D /* UserPickerView.xib */,
-				E2E6601B1FB3760300948B3D /* UserPickerViewDelegate.swift */,
 				E2E660171FB3751E00948B3D /* UserPickerView+Actions.swift */,
+				E2E6601B1FB3760300948B3D /* UserPickerViewDelegate.swift */,
 			);
 			path = UserPickerView;
 			sourceTree = "<group>";
@@ -572,7 +570,6 @@
 			isa = PBXGroup;
 			children = (
 				E2FB8E2A1FB0EF5500724889 /* NotificationName.swift */,
-				E2FB8E2C1FB0F05900724889 /* NotificationUserInfoKey.swift */,
 			);
 			path = NotificationCenter;
 			sourceTree = "<group>";
@@ -799,7 +796,6 @@
 				E2E769D41FB2744200F5C37E /* Observable.swift in Sources */,
 				E2E769D31FB2744200F5C37E /* Observer.swift in Sources */,
 				E2E0784B1FB0D58200E9EAF7 /* Date+Utility.swift in Sources */,
-				E2FB8E2D1FB0F05900724889 /* NotificationUserInfoKey.swift in Sources */,
 				E24F69951FABF15A0099343B /* TimeFrame.swift in Sources */,
 				E20FF6AC1FAB739200F89850 /* UIStoryboard+Storyboard.swift in Sources */,
 				E2D8AD951FBB77F6000DA60C /* Crypt.swift in Sources */,
