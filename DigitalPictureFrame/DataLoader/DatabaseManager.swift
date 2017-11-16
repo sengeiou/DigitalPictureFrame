@@ -51,7 +51,7 @@ final class DatabaseManager {
 // MARK: - Retrieve and update data
 extension DatabaseManager {
   
-  func retrieveData(completionHandler: @escaping (NetworkResultType<DigitalPictureFrameData, NetworkError>)->()) {
+  func retrieve(completionHandler: @escaping (NetworkResultType<DigitalPictureFrameData, NetworkError>)->()) {
     DispatchQueue.main.async {
       self.databaseReference.observeSingleEvent(of: .value, with: { snapshot in
         if let snapshotDict = snapshot.value as? [String: Any],
@@ -68,39 +68,57 @@ extension DatabaseManager {
     }
   }
 
+}
+
+
+// MARK: - Update data
+extension DatabaseManager {
   
-  func updateUserData(for user: User) {
+  func updateUser(_ user: User) {
     guard let users = self.users, let userIndex = users.index(of: user) else { return }
-    databaseReference.child("users/\(userIndex)").updateChildValues(["enabled": user.enabled])
+    databaseReference.child("\(DigitalPictureFrameData.Keys.users.rawValue)/\(userIndex)").updateChildValues(["\(User.Keys.enabled.rawValue)": user.enabled])
   }
   
   
-  func updateGeneralSettingsData(key: String, value: Any) {
-    databaseReference.child("settings/\(key)")
+  func updateSettings(general: Any, key: String) {
+    databaseReference.child(DigitalPictureFrameData.Keys.settings.rawValue).updateChildValues(["\(key)": general])
   }
   
-  func updateTimeFrameSettingsData(key: String, value: Any) {
-    databaseReference.child("settings/\(key)")
+  func updateSettings(timeFrameOn: TimeFrame) {
+    databaseReference.child("\(DigitalPictureFrameData.Keys.settings.rawValue)/\(Settings.Keys.timeFrame.rawValue)").updateChildValues([TimeFrame.Keys.onTime.rawValue: timeFrameOn.onTime])
   }
   
-  func updateUserInfoSettingsData(key: String, value: Any) {
-    databaseReference.child("settings/\(key)")
+  func updateSettings(timeFrameOff: TimeFrame) {
+    databaseReference.child("\(DigitalPictureFrameData.Keys.settings.rawValue)/\(Settings.Keys.timeFrame.rawValue)").updateChildValues([TimeFrame.Keys.offTime.rawValue: timeFrameOff.offTime])
   }
   
-  func updateWeatherZipcodeSettingsData(key: String, value: Any) {
-    databaseReference.child("settings/\(key)")
+  func updateSettings(leftSideInfo: SideInfo) {
+    guard let _ = self.settings else { return }
+    databaseReference.child("\(DigitalPictureFrameData.Keys.settings.rawValue)/\(Settings.Keys.sideInfo.rawValue)").updateChildValues([SideInfo.Keys.leftUserName.rawValue: leftSideInfo.leftUserName])
   }
   
-  func updateWiFiData(for wifiInfo: WiFiInfo) {
-    guard let wifiInfo = self.wifiInfo else { return }
-    databaseReference.child("wifiInfo").updateChildValues(["name": wifiInfo.name])
-    databaseReference.child("wifiInfo").updateChildValues(["password": wifiInfo.password])
+  func updateSettings(rightSideInfo: SideInfo) {
+    guard let _ = self.settings else { return }
+    databaseReference.child("\(DigitalPictureFrameData.Keys.settings.rawValue)/\(Settings.Keys.sideInfo.rawValue)").updateChildValues([SideInfo.Keys.rightUserName.rawValue: rightSideInfo.rightUserName])
+  }
+  
+  func updateSettings(weatherZipcode: String) {
+    guard let _ = self.settings else { return }
+    databaseReference.child(DigitalPictureFrameData.Keys.settings.rawValue).updateChildValues([Settings.Keys.weatherZip.rawValue: weatherZipcode])
+  }
+  
+  
+  func updateWiFiInfo(_ wifiInfo: WiFiInfo) {
+    guard let _ = self.wifiInfo else { return }
+    databaseReference.child(DigitalPictureFrameData.Keys.wifiInfo.rawValue).updateChildValues([WiFiInfo.Keys.name.rawValue: wifiInfo.name])
+    databaseReference.child(DigitalPictureFrameData.Keys.wifiInfo.rawValue).updateChildValues([WiFiInfo.Keys.password.rawValue: wifiInfo.password])
   }
   
   
   func clearData() {
     data = nil
   }
+  
 }
 
 

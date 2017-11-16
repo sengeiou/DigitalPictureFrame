@@ -79,6 +79,7 @@
 		E27D95771FAE85360099430B /* WiFiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95751FAE85360099430B /* WiFiTableViewCell.swift */; };
 		E27D95781FAE85360099430B /* WiFiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27D95761FAE85360099430B /* WiFiTableViewCell.xib */; };
 		E27D957A1FAE9CF70099430B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95791FAE9CF70099430B /* DatabaseManager.swift */; };
+		E2CED88A1FBC9FEE00FCD90E /* String+IsEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CED8891FBC9FEE00FCD90E /* String+IsEqual.swift */; };
 		E2D8AD881FB65A7C000DA60C /* NetworkConnectionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */; };
 		E2D8AD8A1FBA388B000DA60C /* DigitalPictureFrameDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD891FBA388B000DA60C /* DigitalPictureFrameDataError.swift */; };
 		E2D8AD951FBB77F6000DA60C /* Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD941FBB77F6000DA60C /* Crypt.swift */; };
@@ -182,6 +183,7 @@
 		E27D95751FAE85360099430B /* WiFiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiTableViewCell.swift; sourceTree = "<group>"; };
 		E27D95761FAE85360099430B /* WiFiTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WiFiTableViewCell.xib; sourceTree = "<group>"; };
 		E27D95791FAE9CF70099430B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		E2CED8891FBC9FEE00FCD90E /* String+IsEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IsEqual.swift"; sourceTree = "<group>"; };
 		E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionUtility.swift; sourceTree = "<group>"; };
 		E2D8AD891FBA388B000DA60C /* DigitalPictureFrameDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameDataError.swift; sourceTree = "<group>"; };
 		E2D8AD941FBB77F6000DA60C /* Crypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypt.swift; sourceTree = "<group>"; };
@@ -341,16 +343,17 @@
 		E20608DB1FAB633300F06260 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */,
-				E2FB8E391FB113BC00724889 /* UIView+AddConstraintsWithFormat.swift */,
 				E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */,
-				E20FF6B31FAB73F800F89850 /* UIView+ReusableView.swift */,
-				E20FF6B11FAB73D200F89850 /* UIView+NibLoadableView.swift */,
-				E20FF6A91FAB739200F89850 /* UIStoryboard+Storyboard.swift */,
-				E20FF6AA1FAB739200F89850 /* UITableView+Registrable.swift */,
-				E20FF6AB1FAB739200F89850 /* UIViewController+StoryboardIdentifiable.swift */,
+				E2CED8891FBC9FEE00FCD90E /* String+IsEqual.swift */,
+				E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */,
 				E2204F901FACD99B00F7E8DC /* UIImageView+RoundThumbnail.swift */,
+				E20FF6A91FAB739200F89850 /* UIStoryboard+Storyboard.swift */,
 				E2204F9A1FACDFB700F7E8DC /* UITableView+DigitalPictureFrameCellDequeueble.swift */,
+				E20FF6AA1FAB739200F89850 /* UITableView+Registrable.swift */,
+				E2FB8E391FB113BC00724889 /* UIView+AddConstraintsWithFormat.swift */,
+				E20FF6B11FAB73D200F89850 /* UIView+NibLoadableView.swift */,
+				E20FF6B31FAB73F800F89850 /* UIView+ReusableView.swift */,
+				E20FF6AB1FAB739200F89850 /* UIViewController+StoryboardIdentifiable.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -392,9 +395,9 @@
 		E24F69531FAB93380099343B /* DataLoader */ = {
 			isa = PBXGroup;
 			children = (
-				E24F69571FAB93380099343B /* NetworkResultType.swift */,
-				E24F69581FAB93380099343B /* DataLoader.swift */,
 				E27D95791FAE9CF70099430B /* DatabaseManager.swift */,
+				E24F69581FAB93380099343B /* DataLoader.swift */,
+				E24F69571FAB93380099343B /* NetworkResultType.swift */,
 			);
 			path = DataLoader;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				E24F69861FABC8090099343B /* SettingsGeneralItem.swift in Sources */,
 				E2E6601C1FB3760300948B3D /* UserPickerViewDelegate.swift in Sources */,
 				E2204F7F1FACCF3400F7E8DC /* GeneralSettingsSection.swift in Sources */,
+				E2CED88A1FBC9FEE00FCD90E /* String+IsEqual.swift in Sources */,
 				E24F695C1FAB93380099343B /* NetworkResultType.swift in Sources */,
 				E24F695D1FAB93380099343B /* DataLoader.swift in Sources */,
 				E2E769D81FB2BB7D00F5C37E /* UserInfoSettingsCellDelegate.swift in Sources */,

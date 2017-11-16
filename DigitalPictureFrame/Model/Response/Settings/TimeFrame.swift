@@ -9,6 +9,11 @@
 import Foundation
 
 final class TimeFrame: Codable {
+  enum Keys: String {
+    case onTime
+    case offTime
+  }
+  
   var onTime: String
   var offTime: String
   

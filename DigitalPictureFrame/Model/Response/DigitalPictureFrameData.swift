@@ -9,6 +9,13 @@
 import Foundation
 
 struct DigitalPictureFrameData: Codable {
+  enum Keys: String {
+    case UDID
+    case users
+    case settings
+    case wifiInfo
+  }
+  
   var UDID: String?
   var users: [User]?
   var settings: Settings?

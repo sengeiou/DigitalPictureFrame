@@ -17,11 +17,13 @@ final class SettingsTimeItem: TimeSettingsSection, DigitalPictureFrameItem {
     let offTimeCell = CellItem(thumbnailImageName: "thumbnail-Time", description: "Off Time", value: timeFrame.offTime)
     offTimeCell.subscribe(observer: timeFrame) { newValue, _ in
       self.timeFrame.offTime = newValue as! String
+      DatabaseManager.shared().updateSettings(timeFrameOff: self.timeFrame)
     }
     
     let onTimeCell = CellItem(thumbnailImageName: "thumbnail-Time", description: "On Time", value: timeFrame.onTime)
     onTimeCell.subscribe(observer: timeFrame) { newValue, oldValue in
-        self.timeFrame.onTime = newValue as! String
+      self.timeFrame.onTime = newValue as! String
+      DatabaseManager.shared().updateSettings(timeFrameOn: self.timeFrame)
     }
     
     return [onTimeCell, offTimeCell]

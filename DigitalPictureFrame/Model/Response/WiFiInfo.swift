@@ -9,6 +9,11 @@
 import Foundation
 
 final class WiFiInfo: Codable, CustomStringConvertible {
+  enum Keys: String {
+    case name
+    case password
+  }
+  
   var name: String
   var password: String
   

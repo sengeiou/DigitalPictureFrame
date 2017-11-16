@@ -9,6 +9,16 @@
 import Foundation
 
 final class Settings: GeneralSettingsSection, TimeSettingsSection, ZipCodeSettingsSection, UserInfoSettingsSection, Codable {
+  enum Keys: String {
+    case rgbLight
+    case randomQuotes
+    case sleep
+    case reset
+    case timeFrame
+    case weatherZip
+    case sideInfo
+  }
+  
   var rgbLight: Bool
   var randomQuotes: Bool
   var sleep: Bool

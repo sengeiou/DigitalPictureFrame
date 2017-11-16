@@ -18,7 +18,7 @@ final class UserItem: DigitalPictureFrameItem {
       let cell = CellItem(thumbnailImageName: user.image, description: user.description, value: user.enabled)
       cell.subscribe(observer: user) { newValue, _ in
         user.enabled = newValue as! Bool
-        DatabaseManager.shared().updateUserData(for: user)
+        DatabaseManager.shared().updateUser(user)
       }
       return cell
     }

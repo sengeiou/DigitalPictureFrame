@@ -12,7 +12,7 @@ import NVActivityIndicatorView
 class DigitalPictureFrameViewController: UITabBarController, ViewSetupable {
   @IBOutlet weak var topTabBar: UITabBar!
   private var activityData: ActivityData {
-    return ActivityData(size: CGSize(width: 50, height: 50), type: .ballSpinFadeLoader, color: UIColor.appleBlue)
+    return ActivityData(size: CGSize(width: 50, height: 50), type: .ballRotateChase, color: UIColor.appleBlue)
   }
   
   
@@ -93,7 +93,7 @@ private extension DigitalPictureFrameViewController {
   func loadData() {
     NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
     
-    DatabaseManager.shared().retrieveData(completionHandler: {[unowned self] result in
+    DatabaseManager.shared().retrieve(completionHandler: {[unowned self] result in
       switch result {
       case .success(let data):
         self.verifyUserCredentialsAndCreateDatabaseBased(on: data)

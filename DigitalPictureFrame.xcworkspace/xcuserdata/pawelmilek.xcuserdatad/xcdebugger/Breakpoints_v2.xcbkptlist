@@ -249,22 +249,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Controller/DigitalPictureFrameViewController.swift"
-            timestampString = "532374766.621645"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "verifyUserCredentialsAndCreateDatabaseBased(on:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Controller/UserViewController.swift"
             timestampString = "532374766.622018"
             startingColumnNumber = "9223372036854775807"
@@ -281,22 +265,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Controller/DigitalPictureFrameViewController.swift"
-            timestampString = "532374766.622321"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "sendNotificationToReloadUserData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Controller/UserViewController.swift"
             timestampString = "532374766.622392"
             startingColumnNumber = "9223372036854775807"
@@ -304,38 +272,6 @@
             startingLineNumber = "45"
             endingLineNumber = "45"
             landmarkName = "reloadData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Controller/DigitalPictureFrameViewController.swift"
-            timestampString = "532374766.622471"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "verifyUserCredentialsAndCreateDatabaseBased(on:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Controller/DigitalPictureFrameViewController.swift"
-            timestampString = "532374766.622549"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "sendNotificationToEndRefreshingIndicator()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

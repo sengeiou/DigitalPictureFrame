@@ -16,6 +16,7 @@ final class SettingsWeatherZipCodeItem: ZipCodeSettingsSection, DigitalPictureFr
     let leftInfoCell = CellItem(thumbnailImageName: "thumbnail-weatherZip", description: "Weather Zip Code", value: weatherZip)
     leftInfoCell.subscribe(observer: weatherZip as AnyObject) { newValue, _ in
       self.weatherZip = newValue as! String
+      DatabaseManager.shared().updateSettings(weatherZipcode: self.weatherZip)
     }
     return [leftInfoCell]
   }

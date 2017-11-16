@@ -22,17 +22,16 @@ class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, V
       guard let wifiItem = item as? WiFiItem, let row = rowInSection else { return }
       let wifiCell = wifiItem.cells[row]
       
-      func checkConnectedWirelessNetwork() {
+      func checkConnectedWirelessNetwork(decriptionHandler: ((_ base64EncryptedPassword: String)->())) {
         guard let connectedNetworkSSID = NetworkConnectionUtility.fetchSSIDInfo() else {
           sendNotificationToShowMessageViewThatNoWirelessNetworkConnected()
           return
         }
         
-        if connectedNetworkSSID.contains(wifiCell.description) {
+        if connectedNetworkSSID.isEqual(to: wifiCell.description) {
           let wifiComponents = WiFiInfo.extractComponents(from: wifiCell.value as! String)
           descriptionLabel.text = wifiComponents.name
-          passwordTextField.text = wifiComponents.password
-          
+          decriptionHandler(wifiComponents.password)
         } else {
           descriptionLabel.text = connectedNetworkSSID
           passwordTextField.text = ""
@@ -42,7 +41,11 @@ class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, V
       
       
       thumbnailImageView.image = UIImage(named: wifiCell.thumbnailImageName)
-      checkConnectedWirelessNetwork()
+      checkConnectedWirelessNetwork() {
+        let crypt = Crypt()
+        guard let data = crypt.convertIntoData(string: $0), let pwd = try? crypt.decryptContents(of: data) else { return }
+        passwordTextField.text = pwd
+      }
     }
   }
   

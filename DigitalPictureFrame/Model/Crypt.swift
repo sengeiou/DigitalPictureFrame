@@ -23,7 +23,7 @@ extension Crypt {
     return cipherText
   }
   
-  func dencryptContents(of encryptData: Data) throws -> String? {
+  func decryptContents(of encryptData: Data) throws -> String? {
     var decryptString: String?
     
     do {

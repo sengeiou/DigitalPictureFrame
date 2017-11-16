@@ -9,6 +9,11 @@
 import Foundation
 
 final class SideInfo: Codable {
+  enum Keys: String {
+    case leftUserName
+    case rightUserName
+  }
+  
   var leftUserName: String
   var rightUserName: String
   
