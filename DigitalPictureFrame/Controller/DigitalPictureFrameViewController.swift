@@ -11,8 +11,20 @@ import NVActivityIndicatorView
 
 class DigitalPictureFrameViewController: UITabBarController, ViewSetupable {
   @IBOutlet weak var topTabBar: UITabBar!
+  private var data: DigitalPictureFrameData?
+  private let defaults = UserDefaults.standard
+  private let hasUserVerifiedPhoneNumberKey = "HasUserVerifiedPhoneNumber"
+  private let usersEnteredPhoneNumber = "UsersEnteredPhoneNumber"
   private var activityData: ActivityData {
     return ActivityData(size: CGSize(width: 50, height: 50), type: .ballRotateChase, color: UIColor.appleBlue)
+  }
+  
+  
+  private var isUserPhoneNumberVerified: Bool {
+    guard let data = data, let storedPhoneNumber = data.phoneNumber else { return false }
+    guard let enteredPhoneNumber = defaults.string(forKey: usersEnteredPhoneNumber) else { return false }
+    
+    return enteredPhoneNumber.isEqual(to: storedPhoneNumber) && defaults.bool(forKey: hasUserVerifiedPhoneNumberKey)
   }
   
   
@@ -37,7 +49,6 @@ class DigitalPictureFrameViewController: UITabBarController, ViewSetupable {
 extension DigitalPictureFrameViewController {
   
   func setup() {
-    delegate = self
     registerNotifications()
     loadData()
   }
@@ -96,7 +107,8 @@ private extension DigitalPictureFrameViewController {
     DatabaseManager.shared().retrieve(completionHandler: {[unowned self] result in
       switch result {
       case .success(let data):
-        self.verifyUserCredentialsAndCreateDatabaseBased(on: data)
+        self.data = data
+        self.verifyUserCredentials()
         self.sendNotificationToReloadUserData()
         self.sendNotificationToEndRefreshingIndicator()
         NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
@@ -123,39 +135,70 @@ private extension DigitalPictureFrameViewController {
 // MARK: - Verify user credential
 private extension DigitalPictureFrameViewController {
   
-  func verifyUserCredentialsAndCreateDatabaseBased(on data: DigitalPictureFrameData) { //46F45C7C-F002-4763-85B7-6136E0F4098A
-    guard let currentUserUDID = UIDevice.current.identifierForVendor?.uuidString, let providedUDID = data.UDID, currentUserUDID.isEqual(to: providedUDID) else {
-      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: "Warning", message: DigitalPictureFrameDataError.invalidUserCredentials.description)
-      DatabaseManager.shared().clearData()
+//  func verifyUserCredentialsAndCreateDatabaseBased(on data: DigitalPictureFrameData) { //46F45C7C-F002-4763-85B7-6136E0F4098A
+//    guard let currentUserUDID = UIDevice.current.identifierForVendor?.uuidString, let providedUDID = data.UDID, currentUserUDID.isEqual(to: providedUDID) else {
+//      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: "Warning", message: DigitalPictureFrameDataError.invalidUserCredentials.description)
+//      DatabaseManager.shared().clearData()
+//      return
+//    }
+//
+//    let _ = DatabaseManager.shared(data: data)
+//  }
+  
+  
+  func verifyUserCredentials() {
+    guard !isUserPhoneNumberVerified else {
+      initDatabase()
       return
     }
     
+    DatabaseManager.shared().clearData()
+    sendNotificationToReloadUserData()
+    
+    let title = "User verification"
+    let message = "Please type in current Phone Number"
+    AlertViewPresenter.sharedInstance.delegate = self
+    AlertViewPresenter.sharedInstance.presentSubmitAlert(in: self, title: title, message: message, textFieldConfiguration: { textField in
+      textField.placeholder = "Phone Number"
+      textField.keyboardAppearance = .dark
+      textField.keyboardType = .phonePad
+      textField.clearButtonMode = .whileEditing
+    })
+  }
+
+  
+  func initDatabase() {
     let _ = DatabaseManager.shared(data: data)
   }
-  
 }
 
 
-// MARK: - UITabBarControllerDelegate protocol
-extension DigitalPictureFrameViewController: UITabBarControllerDelegate {
+// MARK: - AlertViewPresenterDelegate protocol
+extension DigitalPictureFrameViewController: AlertViewPresenterDelegate {
   
-  func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-    guard let selectedTab = tabBarController.tabBar.selectedItem?.tag,
-          let selectedType = TopTabBarItemType(rawValue: selectedTab) else { return }
-
-    switch selectedType {
-    case .users where viewController is UserViewController:
-      print(selectedType.description)
-
-    case .settings where viewController is SettingsViewController:
-      print(selectedType.description) // add notification center to reload data in VC!!
-
-    case .wifi where viewController is WiFiViewController:
-      print(selectedType.description) // add notification center to reload data in VC!!
-      
-    default:
-      break
-    }
+  func alertView(_ alertViewPresenter: AlertViewPresenter, didSubmit result: String) {
+    guard !result.isEmpty else { return }
+    guard let retrivedData = data, let phoneNumber = retrivedData.phoneNumber else { return }
     
+    let enteredPhoneNumber = result
+    
+    if phoneNumber.isEqual(to: enteredPhoneNumber) {
+      NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+      defaults.set(true, forKey: hasUserVerifiedPhoneNumberKey)
+      defaults.set(enteredPhoneNumber, forKey: usersEnteredPhoneNumber)
+      initDatabase()
+      sendNotificationToReloadUserData()
+      NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+      
+    } else {
+      
+      let title = "Error"
+      let message = "Phone Number is different than what is currently associated with user."
+      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
+      defaults.set(false, forKey: hasUserVerifiedPhoneNumberKey)
+      defaults.set("", forKey: usersEnteredPhoneNumber)
+    }
   }
+  
 }
+

@@ -125,8 +125,8 @@ extension DatabaseManager {
 // MARK: - Retrive data
 extension DatabaseManager {
   
-  var UDID: String? {
-    return data?.UDID
+  var phoneNumber: String? {
+    return data?.phoneNumber
   }
   
   var users: [User]? {
