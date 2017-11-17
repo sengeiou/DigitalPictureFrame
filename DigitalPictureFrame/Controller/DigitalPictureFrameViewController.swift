@@ -123,8 +123,8 @@ private extension DigitalPictureFrameViewController {
 // MARK: - Verify user credential
 private extension DigitalPictureFrameViewController {
   
-  func verifyUserCredentialsAndCreateDatabaseBased(on data: DigitalPictureFrameData) {
-    guard let currentUserUDID = UIDevice.current.identifierForVendor?.uuidString, let providedUDID = data.UDID, currentUserUDID.contains(providedUDID) else {
+  func verifyUserCredentialsAndCreateDatabaseBased(on data: DigitalPictureFrameData) { //46F45C7C-F002-4763-85B7-6136E0F4098A
+    guard let currentUserUDID = UIDevice.current.identifierForVendor?.uuidString, let providedUDID = data.UDID, currentUserUDID.isEqual(to: providedUDID) else {
       AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: "Warning", message: DigitalPictureFrameDataError.invalidUserCredentials.description)
       DatabaseManager.shared().clearData()
       return

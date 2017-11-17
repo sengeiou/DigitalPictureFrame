@@ -182,6 +182,7 @@
 		E27D95751FAE85360099430B /* WiFiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiTableViewCell.swift; sourceTree = "<group>"; };
 		E27D95761FAE85360099430B /* WiFiTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WiFiTableViewCell.xib; sourceTree = "<group>"; };
 		E27D95791FAE9CF70099430B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		E29369511FBF464D0001D7AB /* DigitalPictureFrame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DigitalPictureFrame.entitlements; sourceTree = "<group>"; };
 		E2CED8891FBC9FEE00FCD90E /* String+IsEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IsEqual.swift"; sourceTree = "<group>"; };
 		E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionUtility.swift; sourceTree = "<group>"; };
 		E2D8AD891FBA388B000DA60C /* DigitalPictureFrameDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameDataError.swift; sourceTree = "<group>"; };
@@ -258,6 +259,7 @@
 		E20608C21FAB629B00F06260 /* DigitalPictureFrame */ = {
 			isa = PBXGroup;
 			children = (
+				E29369511FBF464D0001D7AB /* DigitalPictureFrame.entitlements */,
 				E24F695E1FAB93400099343B /* ServerData */,
 				E24F69531FAB93380099343B /* DataLoader */,
 				E20608C31FAB629B00F06260 /* AppDelegate.swift */,
@@ -611,6 +613,14 @@
 						CreatedOnToolsVersion = 9.1;
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -861,6 +871,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = L9L72R78Y3;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -919,6 +930,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = L9L72R78Y3;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -944,12 +956,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L9L72R78Y3;
+				DEVELOPMENT_TEAM = N3HG6C68EY;
 				INFOPLIST_FILE = DigitalPictureFrame/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = pawel.milek.DigitalPictureFrame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pawel.milek.DigitalPictureFrame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -963,12 +979,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L9L72R78Y3;
+				DEVELOPMENT_TEAM = N3HG6C68EY;
 				INFOPLIST_FILE = DigitalPictureFrame/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = pawel.milek.DigitalPictureFrame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pawel.milek.DigitalPictureFrame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
