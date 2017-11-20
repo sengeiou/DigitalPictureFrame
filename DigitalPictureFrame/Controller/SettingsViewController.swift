@@ -13,7 +13,7 @@ class SettingsViewController: PageContentViewController, SwitchableCellDelegate 
     let pickerViewHeight = CGFloat(220.0)
     let xPos = CGFloat(0)
     let yPos = view.frame.height
-    let frame = CGRect(x: xPos, y: yPos, width: view.frame.height, height: pickerViewHeight)
+    let frame = CGRect(x: xPos, y: yPos, width: view.frame.width, height: pickerViewHeight)
     let picker = TimePickerView(presenter: self, frame: frame)
     picker.delegate = self
     return picker
@@ -23,7 +23,7 @@ class SettingsViewController: PageContentViewController, SwitchableCellDelegate 
     let pickerViewHeight = CGFloat(220.0)
     let xPos = CGFloat(0)
     let yPos = view.frame.height
-    let frame = CGRect(x: xPos, y: yPos, width: view.frame.height, height: pickerViewHeight)
+    let frame = CGRect(x: xPos, y: yPos, width: view.frame.width, height: pickerViewHeight)
     let picker = UserPickerView(presenter: self, frame: frame)
     picker.delegate = self
     return picker

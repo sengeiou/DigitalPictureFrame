@@ -17,13 +17,23 @@ protocol PickerViewPresentable: class {
 
 // MARK: - Size
 extension PickerViewPresentable {
+  var viewXPos: CGFloat {
+    return (presenterViewController?.view.bounds.origin.x ?? 0)
+  }
+  
+  var viewYPos: CGFloat {
+    return (presenterViewController?.view.bounds.origin.y ?? 0)
+  }
+  
   
   var viewHeight: CGFloat {
-    return presenterViewController?.view.frame.height ?? 0
+    let statusBarHeignt = UIApplication.shared.statusBarFrame.height
+    let customTabBarHeight = CGFloat(50)
+    return (presenterViewController?.view.bounds.height ?? 0) + statusBarHeignt + customTabBarHeight
   }
 
   var viewWidth: CGFloat {
-    return presenterViewController?.view.frame.width ?? 0
+    return presenterViewController?.view.bounds.width ?? 0
   }
 }
 

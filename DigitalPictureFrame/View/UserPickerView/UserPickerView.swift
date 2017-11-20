@@ -26,7 +26,7 @@ class UserPickerView: UIView, ViewSetupable, UIPickerViewDataSource, UIPickerVie
   convenience init(presenter: UIViewController, frame: CGRect) {
     self.init(frame: frame)
     self.presenterViewController = presenter
-    self.fadeView = UIView(frame: presenterViewController!.view.frame)
+    self.fadeView = UIView(frame: CGRect(x: viewXPos, y: viewYPos, width: viewWidth, height: viewHeight))
   }
   
   override init(frame: CGRect) {
