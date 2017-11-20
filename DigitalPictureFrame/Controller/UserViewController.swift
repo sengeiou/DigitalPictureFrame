@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserViewController: BaseViewController, SwitchableCellDelegate {
+class UserViewController: PageContentViewController, SwitchableCellDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()

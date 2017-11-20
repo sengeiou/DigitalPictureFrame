@@ -1,5 +1,5 @@
 //
-//  BaseViewController.swift
+//  PageContentViewController.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek
@@ -9,7 +9,7 @@
 import UIKit
 import NVActivityIndicatorView
 
-class BaseViewController: UIViewController, ViewSetupable {
+class PageContentViewController: UIViewController, ViewSetupable {
   @IBOutlet weak var tableView: UITableView!
   
   private var refreshControl: UIRefreshControl = {
@@ -18,7 +18,7 @@ class BaseViewController: UIViewController, ViewSetupable {
     let title = NSAttributedString(string: "Retrieving Data", attributes: attributes)
     refreshCtrl.attributedTitle = title
     refreshCtrl.tintColor = UIColor.appleBlue
-    refreshCtrl.addTarget(self, action: #selector(BaseViewController.refreshData(_:)), for: .valueChanged)
+    refreshCtrl.addTarget(self, action: #selector(PageContentViewController.refreshData(_:)), for: .valueChanged)
     return refreshCtrl
   }()
   
@@ -36,6 +36,11 @@ class BaseViewController: UIViewController, ViewSetupable {
     setupStyle()
   }
   
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    setupLayout()
+  }
+  
   deinit {
     unregisterNotifications()
   }
@@ -43,7 +48,7 @@ class BaseViewController: UIViewController, ViewSetupable {
 
 
 // MARK: - ViewSetupable protocol
-extension BaseViewController {
+extension PageContentViewController {
   
   func setup() {
     // TODO: Override in subclass
@@ -54,11 +59,13 @@ extension BaseViewController {
   func setupStyle() {
     tableView.separatorStyle = .none
   }
+  
+  func setupLayout() { }
 }
 
 
 // MARK: - Reload Rows
-extension BaseViewController {
+extension PageContentViewController {
   func registerNotifications() {
     addReloadDataNofificationObserver()
     addEndRefreshingIndicatorNofificationObserver()
@@ -71,7 +78,7 @@ extension BaseViewController {
   
   
   func addReloadDataNofificationObserver() {
-    NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.reloadData),
+    NotificationCenter.default.addObserver(self, selector: #selector(PageContentViewController.reloadData),
                                            name: NotificationName.reloadData.name, object: nil)
   }
   
@@ -80,7 +87,7 @@ extension BaseViewController {
   }
   
   func addEndRefreshingIndicatorNofificationObserver() {
-    NotificationCenter.default.addObserver(self, selector: #selector(BaseViewController.endRefreshingIndicator),
+    NotificationCenter.default.addObserver(self, selector: #selector(PageContentViewController.endRefreshingIndicator),
                                            name: NotificationName.endRefreshingIndicator.name, object: nil)
   }
   
@@ -104,7 +111,7 @@ extension BaseViewController {
 
 
 // MARK: - Reload Rows
-extension BaseViewController {
+extension PageContentViewController {
   
   func updateTableView() {
     if let dataSourceDelegate = dataSourceDelegate, dataSourceDelegate.numberOfSections > 0 {
@@ -127,7 +134,7 @@ extension BaseViewController {
 
 
 // MARK: - Create assign delegate
-extension BaseViewController {
+extension PageContentViewController {
   
   func clearDataSource() {
     createAndAssignDelegate(for: nil)
@@ -148,7 +155,7 @@ extension BaseViewController {
 
 
 // Show/Hide No data available message
-extension BaseViewController {
+extension PageContentViewController {
   
   var isAvailableMessageVisible: Bool {
     if let _ = tableView.viewWithTag(EmbeddedViewTag.availabilityMessage.rawValue) {

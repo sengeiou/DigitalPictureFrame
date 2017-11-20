@@ -15,6 +15,7 @@ enum NotificationName: String {
   case reloadData = "ReloadData"
   case refreshData = "RefreshData"
   case endRefreshingIndicator = "EndRefreshingIndicator"
+  case tabBarItemSelectedAtIndex = "TabBarItemSelectedAtIndex"
   
   var name: Notification.Name {
     return Notification.Name(self.rawValue)

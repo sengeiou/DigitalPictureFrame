@@ -2,7 +2,7 @@
 //  String+IsEqual.swift
 //  DigitalPictureFrame
 //
-//  Created by Pawel Milek on 11/15/17.
+//  Created by Pawel Milek.
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 

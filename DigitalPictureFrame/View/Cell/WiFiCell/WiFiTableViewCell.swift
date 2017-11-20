@@ -39,7 +39,7 @@ class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, V
         } else {
           descriptionLabel.text = connectedNetworkSSID
           passwordTextField.text = ""
-          sendNotificationToShowMessageViewEnterNewWirelessNetworkPassword()
+//          sendNotificationToShowMessageViewEnterNewWirelessNetworkPassword()
         }
       }
       

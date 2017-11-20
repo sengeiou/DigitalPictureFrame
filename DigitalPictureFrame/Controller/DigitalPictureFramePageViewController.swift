@@ -1,16 +1,38 @@
 //
-//  DigitalPictureFrameViewController.swift
+//  DigitalPictureFramePageViewController.swift
 //  DigitalPictureFrame
 //
-//  Created by Pawel Milek
+//  Created by Pawel Milek.
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
 import UIKit
 import NVActivityIndicatorView
 
-class DigitalPictureFrameViewController: UITabBarController, ViewSetupable {
-  @IBOutlet weak var topTabBar: UITabBar!
+class DigitalPictureFramePageViewController: UIPageViewController {
+  lazy private var orderedViewControllers: [UIViewController] = {
+    let mainStoryboard = UIStoryboard(storyboard: .main)
+    let usersVC = mainStoryboard.instantiateViewController(UserViewController.self)
+    let settingsVC = mainStoryboard.instantiateViewController(SettingsViewController.self)
+    let wifiVC = mainStoryboard.instantiateViewController(WiFiViewController.self)
+    return [usersVC, settingsVC, wifiVC]
+  }()
+  
+  private var currentPageIndex: Int? {
+    get {
+      guard let visibleVC = viewControllers?.first else { return nil }
+      return orderedViewControllers.index(of: visibleVC)
+    }
+    
+    set {
+      guard let currentPageIndex = currentPageIndex,
+            let newValue = newValue, newValue >= 0, newValue < orderedViewControllers.count else { return }
+      let vc = orderedViewControllers[newValue]
+      let direction: UIPageViewControllerNavigationDirection = (newValue > currentPageIndex ? .forward : .reverse)
+      self.setViewControllers([vc], direction: direction, animated: true, completion: nil)
+    }
+  }
+  
   private var data: DigitalPictureFrameData?
   private let defaults = UserDefaults.standard
   private let hasUserVerifiedPhoneNumberKey = "HasUserVerifiedPhoneNumber"
@@ -19,11 +41,9 @@ class DigitalPictureFrameViewController: UITabBarController, ViewSetupable {
     return ActivityData(size: CGSize(width: 50, height: 50), type: .ballRotateChase, color: UIColor.appleBlue)
   }
   
-  
   private var isUserPhoneNumberVerified: Bool {
     guard let data = data, let storedPhoneNumber = data.phoneNumber else { return false }
     guard let enteredPhoneNumber = defaults.string(forKey: usersEnteredPhoneNumber) else { return false }
-    
     return enteredPhoneNumber.isEqual(to: storedPhoneNumber) && defaults.bool(forKey: hasUserVerifiedPhoneNumberKey)
   }
   
@@ -33,11 +53,10 @@ class DigitalPictureFrameViewController: UITabBarController, ViewSetupable {
     setup()
   }
   
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     setupLayout()
   }
-
   
   deinit {
     unregisterNotifications()
@@ -46,31 +65,29 @@ class DigitalPictureFrameViewController: UITabBarController, ViewSetupable {
 
 
 // MARK: - ViewSetupable protocol
-extension DigitalPictureFrameViewController {
+extension DigitalPictureFramePageViewController: ViewSetupable {
   
   func setup() {
+    dataSource = self
+    delegate = self
     registerNotifications()
     loadData()
+    
   }
   
-  
   func setupLayout() {
-    func moveTabBarToTopOfScreen() {
-      let statusBarHeight = UIApplication.shared.statusBarFrame.height
-      let tabYPos = view.frame.origin.y + statusBarHeight
-      var tabFrame = topTabBar.frame
-      
-      tabFrame.origin.y = tabYPos
-      topTabBar.frame = tabFrame
-    }
-    
-    moveTabBarToTopOfScreen()
+    initialiseFirstViewController()
+  }
+  
+  func initialiseFirstViewController() {
+    guard let usersVC = orderedViewControllers.first as? UserViewController else { return }
+    setViewControllers([usersVC], direction: .forward, animated: true)
   }
 }
 
 
 // MARK: - Add Notification Observer
-extension DigitalPictureFrameViewController {
+extension DigitalPictureFramePageViewController {
   
   func registerNotifications() {
     addRefreshDataNofificationObserver()
@@ -82,7 +99,7 @@ extension DigitalPictureFrameViewController {
   
   
   func addRefreshDataNofificationObserver() {
-    NotificationCenter.default.addObserver(self, selector: #selector(DigitalPictureFrameViewController.refreshData(_:)),
+    NotificationCenter.default.addObserver(self, selector: #selector(DigitalPictureFramePageViewController.refreshData(_:)),
                                            name: NotificationName.refreshData.name, object: nil)
   }
   
@@ -99,7 +116,7 @@ extension DigitalPictureFrameViewController {
 
 
 // MARK: - Load data
-private extension DigitalPictureFrameViewController {
+private extension DigitalPictureFramePageViewController {
   
   func loadData() {
     NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
@@ -125,7 +142,7 @@ private extension DigitalPictureFrameViewController {
   func sendNotificationToReloadUserData() {
     NotificationCenter.default.post(name: NotificationName.reloadData.name, object: nil)
   }
-
+  
   func sendNotificationToEndRefreshingIndicator() {
     NotificationCenter.default.post(name: NotificationName.endRefreshingIndicator.name, object: nil)
   }
@@ -133,18 +150,7 @@ private extension DigitalPictureFrameViewController {
 
 
 // MARK: - Verify user credential
-private extension DigitalPictureFrameViewController {
-  
-//  func verifyUserCredentialsAndCreateDatabaseBased(on data: DigitalPictureFrameData) { //46F45C7C-F002-4763-85B7-6136E0F4098A
-//    guard let currentUserUDID = UIDevice.current.identifierForVendor?.uuidString, let providedUDID = data.UDID, currentUserUDID.isEqual(to: providedUDID) else {
-//      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: "Warning", message: DigitalPictureFrameDataError.invalidUserCredentials.description)
-//      DatabaseManager.shared().clearData()
-//      return
-//    }
-//
-//    let _ = DatabaseManager.shared(data: data)
-//  }
-  
+private extension DigitalPictureFramePageViewController {
   
   func verifyUserCredentials() {
     guard !isUserPhoneNumberVerified else {
@@ -165,7 +171,7 @@ private extension DigitalPictureFrameViewController {
       textField.clearButtonMode = .whileEditing
     })
   }
-
+  
   
   func initDatabase() {
     let _ = DatabaseManager.shared(data: data)
@@ -174,7 +180,7 @@ private extension DigitalPictureFrameViewController {
 
 
 // MARK: - AlertViewPresenterDelegate protocol
-extension DigitalPictureFrameViewController: AlertViewPresenterDelegate {
+extension DigitalPictureFramePageViewController: AlertViewPresenterDelegate {
   
   func alertView(_ alertViewPresenter: AlertViewPresenter, didSubmit result: String) {
     guard !result.isEmpty else { return }
@@ -202,3 +208,46 @@ extension DigitalPictureFrameViewController: AlertViewPresenterDelegate {
   
 }
 
+
+// MARK: - UIPageViewControllerDataSource protocol
+extension DigitalPictureFramePageViewController: UIPageViewControllerDataSource {
+  
+  func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else { return nil }
+    
+    let previousIndex = viewControllerIndex - 1
+    guard previousIndex >= 0, orderedViewControllers.count > previousIndex else { return nil }
+    return orderedViewControllers[previousIndex]
+  }
+  
+  
+  func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else { return nil }
+    
+    let nextIndex = viewControllerIndex + 1
+    let orderedViewControllersCount = orderedViewControllers.count
+    guard orderedViewControllersCount != nextIndex, orderedViewControllersCount > nextIndex else { return nil }
+    return orderedViewControllers[nextIndex]
+  }
+  
+}
+
+// MARK: - UIPageViewControllerDelegate protocol
+extension DigitalPictureFramePageViewController: UIPageViewControllerDelegate {
+  
+  func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    guard let currentPageIndex = currentPageIndex, completed else { return }
+    NotificationCenter.default.post(name: NotificationName.tabBarItemSelectedAtIndex.name, object: nil, userInfo: ["currentPageIndex": currentPageIndex])
+  }
+  
+}
+
+
+// MARK: - ContainerViewControllerDelegate protocol
+extension DigitalPictureFramePageViewController: ContainerViewControllerDelegate {
+  
+  func containerViewController(_ containerViewController: ContainerViewController, didSelectPageAt index: Int) {
+    currentPageIndex = index
+  }
+  
+}

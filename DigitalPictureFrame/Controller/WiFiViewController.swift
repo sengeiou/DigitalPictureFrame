@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WiFiViewController: BaseViewController {
+class WiFiViewController: PageContentViewController {
   private var modifiedItemIndexPath: IndexPath?
   
   override func viewDidLoad() {

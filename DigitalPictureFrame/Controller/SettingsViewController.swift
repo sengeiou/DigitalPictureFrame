@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: BaseViewController, SwitchableCellDelegate {
+class SettingsViewController: PageContentViewController, SwitchableCellDelegate {
   lazy private var timePicker: TimePickerView = {
     let pickerViewHeight = CGFloat(220.0)
     let xPos = CGFloat(0)
