@@ -22,16 +22,16 @@ class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, V
       guard let wifiItem = item as? WiFiItem, let row = rowInSection else { return }
       let wifiCell = wifiItem.cells[row]
       
-      func checkConnectedWirelessNetwork(decriptionHandler: ((_ base64EncryptedPassword: String)->())) {
+      func checkConnectedWirelessNetwork(passwordHandler: ((_ base64EncryptedPassword: String)->())) {
         guard let connectedNetworkSSID = NetworkConnectionUtility.fetchSSIDInfo() else {
-          sendNotificationToShowMessageViewThatNoWirelessNetworkConnected()
+          passwordTextField.isEnabled = false
           return
         }
         
         if connectedNetworkSSID.isEqual(to: wifiCell.description) {
           let wifiComponents = WiFiInfo.extractComponents(from: wifiCell.value as! String)
           descriptionLabel.text = wifiComponents.name
-          decriptionHandler(wifiComponents.password)
+          passwordHandler(wifiComponents.password)
           
           let templateImage = thumbnailImageView.image?.withRenderingMode(.alwaysTemplate)
           thumbnailImageView.image = templateImage
@@ -39,11 +39,12 @@ class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, V
         } else {
           descriptionLabel.text = connectedNetworkSSID
           passwordTextField.text = ""
-//          sendNotificationToShowMessageViewEnterNewWirelessNetworkPassword()
         }
       }
       
       
+      descriptionLabel.text = ""
+      passwordTextField.text = ""
       thumbnailImageView.image = UIImage(named: wifiCell.thumbnailImageName)
       checkConnectedWirelessNetwork() {
         let crypt = Crypt()
@@ -58,6 +59,7 @@ class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, V
     super.awakeFromNib()
     setup()
   }
+  
 }
 
 
@@ -66,6 +68,7 @@ extension WiFiTableViewCell {
   
   func setup() {
     selectionStyle = .none
+    passwordTextField.isEnabled = true
     passwordTextField.isUserInteractionEnabled = false
     passwordTextField.isSecureTextEntry = true
     passwordTextField.textAlignment = .right
@@ -87,24 +90,11 @@ extension WiFiTableViewCell {
 }
 
 
-// MARK: - Send notification to enter new network password
-private extension WiFiTableViewCell {
-  
-  func sendNotificationToShowMessageViewEnterNewWirelessNetworkPassword() {
-    NotificationCenter.default.post(name: NotificationName.showAlertViewMessageToEnterNewWirelessNetworkPassword.name, object: nil)
-  }
-  
-  func sendNotificationToShowMessageViewThatNoWirelessNetworkConnected() {
-    NotificationCenter.default.post(name: NotificationName.showAlertViewMessageNoWirelessNetworkConnected.name, object: nil)
-  }
-  
-}
-
-
 // MARK: Actions
 extension WiFiTableViewCell {
   
   @IBAction func enterPasswordButtonPressed(_ sender: TableSectionButton) {
+    guard passwordTextField.isEnabled else { return }
     delegate?.wifiCell(self, didPressPasswordButtonAt: sender.indexPath)
   }
   

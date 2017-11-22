@@ -22,7 +22,6 @@ extension SwitchableCellDelegate where Self: PageContentViewController {
     
     let item = modifiedTimeFrameItem.cells[indexPath.row]
     item.value = switchState
-    print("switchableCell at: \(indexPath.row)")
   }
   
 }
