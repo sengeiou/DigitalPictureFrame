@@ -14,9 +14,9 @@ class PageContentViewController: UIViewController, ViewSetupable {
   
   private var refreshControl: UIRefreshControl = {
     let refreshCtrl = UIRefreshControl()
-    let attributes = [NSAttributedStringKey.foregroundColor: UIColor.appleBlue]
-    let title = NSAttributedString(string: "Retrieving Data", attributes: attributes)
-    refreshCtrl.attributedTitle = title
+//    let attributes = [NSAttributedStringKey.foregroundColor: UIColor.appleBlue]
+//    let title = NSAttributedString(string: "Retrieving Data", attributes: attributes)
+//    refreshCtrl.attributedTitle = title
     refreshCtrl.tintColor = UIColor.appleBlue
     refreshCtrl.addTarget(self, action: #selector(PageContentViewController.refreshData(_:)), for: .valueChanged)
     return refreshCtrl
