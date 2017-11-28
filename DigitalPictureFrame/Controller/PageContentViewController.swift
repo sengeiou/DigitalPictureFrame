@@ -14,9 +14,6 @@ class PageContentViewController: UIViewController, ViewSetupable {
   
   private var refreshControl: UIRefreshControl = {
     let refreshCtrl = UIRefreshControl()
-//    let attributes = [NSAttributedStringKey.foregroundColor: UIColor.appleBlue]
-//    let title = NSAttributedString(string: "Retrieving Data", attributes: attributes)
-//    refreshCtrl.attributedTitle = title
     refreshCtrl.tintColor = UIColor.appleBlue
     refreshCtrl.addTarget(self, action: #selector(PageContentViewController.refreshData(_:)), for: .valueChanged)
     return refreshCtrl
@@ -95,9 +92,11 @@ extension PageContentViewController {
     NotificationCenter.default.removeObserver(self, name: NotificationName.endRefreshingIndicator.name, object: nil)
   }
   
+  
   @objc func reloadData() {
     // TODO: Override in subclass
   }
+  
   
   @objc func refreshData(_ sender: Any) {
     NotificationCenter.default.post(name: NotificationName.refreshData.name, object: nil)

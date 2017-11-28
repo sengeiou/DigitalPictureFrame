@@ -10,6 +10,15 @@ import UIKit
 import NVActivityIndicatorView
 
 class DigitalPictureFramePageViewController: UIPageViewController {
+  private var data: DigitalPictureFrameData?
+  private let defaults = UserDefaults.standard
+  private let hasUserVerifiedPhoneNumberKey = "HasUserVerifiedPhoneNumber"
+  private let usersEnteredPhoneNumber = "UsersEnteredPhoneNumber"
+  
+  private var activityData: ActivityData {
+    return ActivityData(size: CGSize(width: 40, height: 40), type: .ballSpinFadeLoader, color: UIColor.appleBlue)
+  }
+  
   lazy private var orderedViewControllers: [UIViewController] = {
     let mainStoryboard = UIStoryboard(storyboard: .main)
     let usersVC = mainStoryboard.instantiateViewController(UserViewController.self)
@@ -33,13 +42,7 @@ class DigitalPictureFramePageViewController: UIPageViewController {
     }
   }
   
-  private var data: DigitalPictureFrameData?
-  private let defaults = UserDefaults.standard
-  private let hasUserVerifiedPhoneNumberKey = "HasUserVerifiedPhoneNumber"
-  private let usersEnteredPhoneNumber = "UsersEnteredPhoneNumber"
-  private var activityData: ActivityData {
-    return ActivityData(size: CGSize(width: 50, height: 50), type: .ballRotateChase, color: UIColor.appleBlue)
-  }
+
   
   private var isUserPhoneNumberVerified: Bool {
     guard let data = data, let storedPhoneNumber = data.phoneNumber else { return false }
