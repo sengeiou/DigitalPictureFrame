@@ -26,6 +26,7 @@
 		E20FF6B81FAB748A00F89850 /* WiFiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FF6B71FAB748A00F89850 /* WiFiViewController.swift */; };
 		E20FF6BA1FAB770E00F89850 /* TopTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FF6B91FAB770E00F89850 /* TopTabBarItemType.swift */; };
 		E20FF6C21FAB818A00F89850 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FF6C11FAB818A00F89850 /* UserViewController.swift */; };
+		E21D6CA31FD9A04F00E966B1 /* AccessVerifierError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CA21FD9A04F00E966B1 /* AccessVerifierError.swift */; };
 		E2204F7A1FACB85700F7E8DC /* AlertViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2204F791FACB85700F7E8DC /* AlertViewPresenter.swift */; };
 		E2204F7C1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2204F7B1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift */; };
 		E2204F7F1FACCF3400F7E8DC /* GeneralSettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2204F7E1FACCF3400F7E8DC /* GeneralSettingsSection.swift */; };
@@ -103,6 +104,8 @@
 		E2E769D61FB27DA000F5C37E /* SwitchableCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E769D51FB27DA000F5C37E /* SwitchableCellDelegate.swift */; };
 		E2E769D81FB2BB7D00F5C37E /* UserInfoSettingsCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E769D71FB2BB7D00F5C37E /* UserInfoSettingsCellDelegate.swift */; };
 		E2E769DA1FB2CCB100F5C37E /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E769D91FB2CCB100F5C37E /* TimePickerView.swift */; };
+		E2EB4AE41FCE21940062A8CD /* PhoneNumberVerificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EB4AE31FCE21940062A8CD /* PhoneNumberVerificationKey.swift */; };
+		E2EB4AE61FCE23010062A8CD /* AccessVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EB4AE51FCE23010062A8CD /* AccessVerifier.swift */; };
 		E2F0596C1FB2469B0054C424 /* UIColor+CustomRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */; };
 		E2FB8E2B1FB0EF5500724889 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E2A1FB0EF5500724889 /* NotificationName.swift */; };
 		E2FB8E301FB0F13D00724889 /* TimePickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E2F1FB0F13D00724889 /* TimePickerViewDelegate.swift */; };
@@ -138,6 +141,7 @@
 		E20FF6B71FAB748A00F89850 /* WiFiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiViewController.swift; sourceTree = "<group>"; };
 		E20FF6B91FAB770E00F89850 /* TopTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabBarItemType.swift; sourceTree = "<group>"; };
 		E20FF6C11FAB818A00F89850 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		E21D6CA21FD9A04F00E966B1 /* AccessVerifierError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessVerifierError.swift; sourceTree = "<group>"; };
 		E2204F791FACB85700F7E8DC /* AlertViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewPresenter.swift; sourceTree = "<group>"; };
 		E2204F7B1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewPresenterDelegate.swift; sourceTree = "<group>"; };
 		E2204F7E1FACCF3400F7E8DC /* GeneralSettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsSection.swift; sourceTree = "<group>"; };
@@ -216,6 +220,8 @@
 		E2E769D51FB27DA000F5C37E /* SwitchableCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchableCellDelegate.swift; sourceTree = "<group>"; };
 		E2E769D71FB2BB7D00F5C37E /* UserInfoSettingsCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSettingsCellDelegate.swift; sourceTree = "<group>"; };
 		E2E769D91FB2CCB100F5C37E /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
+		E2EB4AE31FCE21940062A8CD /* PhoneNumberVerificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberVerificationKey.swift; sourceTree = "<group>"; };
+		E2EB4AE51FCE23010062A8CD /* AccessVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessVerifier.swift; sourceTree = "<group>"; };
 		E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomRGB.swift"; sourceTree = "<group>"; };
 		E2FB8E2A1FB0EF5500724889 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		E2FB8E2F1FB0F13D00724889 /* TimePickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewDelegate.swift; sourceTree = "<group>"; };
@@ -342,6 +348,7 @@
 				E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */,
 				E2D8AD941FBB77F6000DA60C /* Crypt.swift */,
 				E298EE9F1FC24A08006BC203 /* SegueIdentifierType.swift */,
+				E21D6CA11FD99DAE00E966B1 /* AccessVerifier */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -378,6 +385,15 @@
 				E20FF6AB1FAB739200F89850 /* UIViewController+StoryboardIdentifiable.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		E21D6CA11FD99DAE00E966B1 /* AccessVerifier */ = {
+			isa = PBXGroup;
+			children = (
+				E2EB4AE51FCE23010062A8CD /* AccessVerifier.swift */,
+				E2EB4AE31FCE21940062A8CD /* PhoneNumberVerificationKey.swift */,
+			);
+			path = AccessVerifier;
 			sourceTree = "<group>";
 		};
 		E2204F7D1FACCEC600F7E8DC /* Response */ = {
@@ -568,6 +584,7 @@
 				E24F69541FAB93380099343B /* FileLoaderError.swift */,
 				E2D8AD891FBA388B000DA60C /* DigitalPictureFrameDataError.swift */,
 				E24F69561FAB93380099343B /* NetworkError.swift */,
+				E21D6CA21FD9A04F00E966B1 /* AccessVerifierError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -576,8 +593,8 @@
 			isa = PBXGroup;
 			children = (
 				E2E660151FB374DD00948B3D /* UserPickerView.swift */,
-				E2E660191FB3754000948B3D /* UserPickerView.xib */,
 				E2E660171FB3751E00948B3D /* UserPickerView+Actions.swift */,
+				E2E660191FB3754000948B3D /* UserPickerView.xib */,
 				E2E6601B1FB3760300948B3D /* UserPickerViewDelegate.swift */,
 			);
 			path = UserPickerView;
@@ -775,6 +792,7 @@
 				E2204F7F1FACCF3400F7E8DC /* GeneralSettingsSection.swift in Sources */,
 				E2CED88A1FBC9FEE00FCD90E /* String+IsEqual.swift in Sources */,
 				E24F695C1FAB93380099343B /* NetworkResultType.swift in Sources */,
+				E2EB4AE61FCE23010062A8CD /* AccessVerifier.swift in Sources */,
 				E24F695D1FAB93380099343B /* DataLoader.swift in Sources */,
 				E2E769D81FB2BB7D00F5C37E /* UserInfoSettingsCellDelegate.swift in Sources */,
 				E298EE9E1FC245E1006BC203 /* ContainerViewControllerDelegate.swift in Sources */,
@@ -795,6 +813,7 @@
 				E29369591FC1EED00001D7AB /* DigitalPictureFramePageViewController.swift in Sources */,
 				E2204F7A1FACB85700F7E8DC /* AlertViewPresenter.swift in Sources */,
 				E20FF6B41FAB73F800F89850 /* UIView+ReusableView.swift in Sources */,
+				E2EB4AE41FCE21940062A8CD /* PhoneNumberVerificationKey.swift in Sources */,
 				E2D8AD8A1FBA388B000DA60C /* DigitalPictureFrameDataError.swift in Sources */,
 				E27D956F1FAE850D0099430B /* TimeFrameSettingsTableViewCell.swift in Sources */,
 				E24F69841FABC6CD0099343B /* UserItem.swift in Sources */,
@@ -829,6 +848,7 @@
 				E298EE9C1FC23DDD006BC203 /* ContainerViewController.swift in Sources */,
 				E2204F991FACDECB00F7E8DC /* DigitalPictureFrameCellDequeueble.swift in Sources */,
 				E22ED44E1FB3684F0080570A /* Style.swift in Sources */,
+				E21D6CA31FD9A04F00E966B1 /* AccessVerifierError.swift in Sources */,
 				E2FB8E361FB106DB00724889 /* TimeFrameSettingsCellDelegate.swift in Sources */,
 				E27D95631FAE84D30099430B /* UserTableViewCell.swift in Sources */,
 				E24F696C1FABA8E80099343B /* DigitalPictureFrameData.swift in Sources */,

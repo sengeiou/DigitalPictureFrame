@@ -10,10 +10,8 @@ import UIKit
 import NVActivityIndicatorView
 
 class DigitalPictureFramePageViewController: UIPageViewController {
+  private let userDefaults = UserDefaults.standard
   private var data: DigitalPictureFrameData?
-  private let defaults = UserDefaults.standard
-  private let hasUserVerifiedPhoneNumberKey = "HasUserVerifiedPhoneNumber"
-  private let usersEnteredPhoneNumber = "UsersEnteredPhoneNumber"
   
   private var activityData: ActivityData {
     return ActivityData(size: CGSize(width: 40, height: 40), type: .ballSpinFadeLoader, color: UIColor.appleBlue)
@@ -41,13 +39,10 @@ class DigitalPictureFramePageViewController: UIPageViewController {
       self.setViewControllers([vc], direction: direction, animated: true, completion: nil)
     }
   }
-  
 
   
   private var isUserPhoneNumberVerified: Bool {
-    guard let data = data, let storedPhoneNumber = data.phoneNumber else { return false }
-    guard let enteredPhoneNumber = defaults.string(forKey: usersEnteredPhoneNumber) else { return false }
-    return enteredPhoneNumber.isEqual(to: storedPhoneNumber) && defaults.bool(forKey: hasUserVerifiedPhoneNumberKey)
+    return AccessVerifier(data: data).isAccessGranted
   }
   
   
@@ -62,7 +57,7 @@ class DigitalPictureFramePageViewController: UIPageViewController {
   }
   
   deinit {
-    unregisterNotifications()
+    unregisterNotification()
   }
 }
 
@@ -71,32 +66,43 @@ class DigitalPictureFramePageViewController: UIPageViewController {
 extension DigitalPictureFramePageViewController: ViewSetupable {
   
   func setup() {
-    dataSource = self
-    delegate = self
-    registerNotifications()
+    assignDelegate()
+    registerNotification()
     loadData()
     
   }
   
   func setupLayout() {
+    func initialiseFirstViewController() {
+      guard let usersVC = orderedViewControllers.first as? UserViewController else { return }
+      setViewControllers([usersVC], direction: .forward, animated: true)
+    }
+    
+    
     initialiseFirstViewController()
   }
+}
+
+
+// MARK: - Assign delegate
+private extension DigitalPictureFramePageViewController {
   
-  func initialiseFirstViewController() {
-    guard let usersVC = orderedViewControllers.first as? UserViewController else { return }
-    setViewControllers([usersVC], direction: .forward, animated: true)
+  func assignDelegate() {
+    dataSource = self
+    delegate = self
   }
+  
 }
 
 
 // MARK: - Add Notification Observer
 extension DigitalPictureFramePageViewController {
   
-  func registerNotifications() {
+  func registerNotification() {
     addRefreshDataNofificationObserver()
   }
   
-  func unregisterNotifications() {
+  func unregisterNotification() {
     removeRefreshDataNofificationObserver()
   }
   
@@ -156,27 +162,29 @@ private extension DigitalPictureFramePageViewController {
 private extension DigitalPictureFramePageViewController {
   
   func verifyUserCredentials() {
-    guard !isUserPhoneNumberVerified else {
-      initDatabase()
+    guard isUserPhoneNumberVerified else {
+      DatabaseManager.shared().clearData()
+      sendNotificationToReloadUserData()
+      
+      let title = "User verification"
+      let message = "Please type in current Phone Number"
+      AlertViewPresenter.sharedInstance.delegate = self
+      AlertViewPresenter.sharedInstance.presentSubmitAlert(in: self, title: title, message: message, textFieldConfiguration: { textField in
+        textField.placeholder = "Phone Number"
+        textField.keyboardAppearance = .dark
+        textField.keyboardType = .phonePad
+        textField.clearButtonMode = .whileEditing
+      })
+      
       return
     }
     
-    DatabaseManager.shared().clearData()
-    sendNotificationToReloadUserData()
     
-    let title = "User verification"
-    let message = "Please type in current Phone Number"
-    AlertViewPresenter.sharedInstance.delegate = self
-    AlertViewPresenter.sharedInstance.presentSubmitAlert(in: self, title: title, message: message, textFieldConfiguration: { textField in
-      textField.placeholder = "Phone Number"
-      textField.keyboardAppearance = .dark
-      textField.keyboardType = .phonePad
-      textField.clearButtonMode = .whileEditing
-    })
+    initializeDatabase()
   }
   
   
-  func initDatabase() {
+  func initializeDatabase() {
     let _ = DatabaseManager.shared(data: data)
   }
 }
@@ -187,25 +195,25 @@ extension DigitalPictureFramePageViewController: AlertViewPresenterDelegate {
   
   func alertView(_ alertViewPresenter: AlertViewPresenter, didSubmit result: String) {
     guard !result.isEmpty else { return }
-    guard let retrivedData = data, let phoneNumber = retrivedData.phoneNumber else { return }
+    let title = "Error"
     
-    let enteredPhoneNumber = result
-    
-    if phoneNumber.isEqual(to: enteredPhoneNumber) {
+    do {
+      let verifier = AccessVerifier(data: data)
+      try verifier.verify(enteredPhoneNumber: result)
       NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
-      defaults.set(true, forKey: hasUserVerifiedPhoneNumberKey)
-      defaults.set(enteredPhoneNumber, forKey: usersEnteredPhoneNumber)
-      initDatabase()
+      initializeDatabase()
       sendNotificationToReloadUserData()
       NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
       
-    } else {
+    } catch AccessVerifierError.dataNotAvailable(let desc) {
+      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: "Data Not Available: " + desc)
       
-      let title = "Error"
+    } catch AccessVerifierError.accessDenied {
       let message = "Phone Number is different than what is currently associated with user."
       AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
-      defaults.set(false, forKey: hasUserVerifiedPhoneNumberKey)
-      defaults.set("", forKey: usersEnteredPhoneNumber)
+      
+    } catch let error {
+      print(error.localizedDescription)
     }
   }
   
