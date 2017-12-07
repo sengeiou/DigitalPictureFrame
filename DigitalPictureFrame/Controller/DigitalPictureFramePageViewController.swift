@@ -22,7 +22,8 @@ class DigitalPictureFramePageViewController: UIPageViewController {
     let usersVC = mainStoryboard.instantiateViewController(UserViewController.self)
     let settingsVC = mainStoryboard.instantiateViewController(SettingsViewController.self)
     let wifiVC = mainStoryboard.instantiateViewController(WiFiViewController.self)
-    return [usersVC, settingsVC, wifiVC]
+    let bluetoothVC = mainStoryboard.instantiateViewController(BluetoothConnectivityViewController.self)
+    return [usersVC, settingsVC, wifiVC, bluetoothVC]
   }()
   
   private var currentPageIndex: Int? {

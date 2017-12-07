@@ -30,6 +30,15 @@ struct Style {
     static var pickerItemLabelNumberOfLines = 0
   }
 
+  
+  // MARK: - BluetoothConnectivityVC
+  struct BluetoothConnectivityVC {
+    static func roundCorners(for buttons: UIButton...) {
+      buttons.forEach {
+        $0.layer.cornerRadius = 10
+      }
+    }
+  }
 }
 
 

@@ -20,10 +20,11 @@ class ContainerViewController: UIViewController {
   }()
   
   lazy private var tabBarItems: [CustomTabBarItem] = {
-    let users = CustomTabBarItem(image: UIImage(named: "icon-users")!, title: "Users")
-    let settings = CustomTabBarItem(image: UIImage(named: "icon-settings")!, title: "Settings")
-    let wifi = CustomTabBarItem(image: UIImage(named: "icon-wifi")!, title: "Wi-Fi")
-    return [users, settings, wifi]
+    let users = CustomTabBarItem(image: TopTabBarItemType.users.icon, title: TopTabBarItemType.users.description)
+    let settings = CustomTabBarItem(image: TopTabBarItemType.settings.icon, title: TopTabBarItemType.settings.description)
+    let wifi = CustomTabBarItem(image: TopTabBarItemType.wifi.icon, title: TopTabBarItemType.wifi.description)
+    let bluetooth = CustomTabBarItem(image: TopTabBarItemType.bluetoothConnectivity.icon, title: TopTabBarItemType.bluetoothConnectivity.description)
+    return [users, settings, wifi, bluetooth]
   }()
   
   var turningPageDelegate: ContainerViewControllerDelegate?

@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 enum TopTabBarItemType: Int, CustomStringConvertible {
   case users = 1
   case settings = 2
   case wifi = 3
+  case bluetoothConnectivity = 4
 }
 
 
@@ -28,6 +30,31 @@ extension TopTabBarItemType {
       
     case .wifi:
       return "WiFi"
+      
+    case .bluetoothConnectivity:
+      return "Bluetooth"
+    }
+  }
+  
+}
+
+
+// MARK: Icon
+extension TopTabBarItemType {
+  
+  var icon: UIImage {
+    switch self {
+    case .users:
+      return UIImage(named: "icon-users")!
+      
+    case .settings:
+      return UIImage(named: "icon-settings")!
+      
+    case .wifi:
+      return UIImage(named: "icon-wifi")!
+      
+    case .bluetoothConnectivity:
+      return UIImage(named: "icon-bluetooth")!
     }
   }
   
