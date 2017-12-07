@@ -185,34 +185,26 @@
                                     <constraint firstAttribute="width" constant="306" id="WmA-uW-Wv4"/>
                                 </constraints>
                             </stackView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CQQ-qR-VvN">
-                                <rect key="frame" x="190" y="220" width="150" height="2"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="qre-pu-lyw"/>
-                                </constraints>
-                            </progressView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Scs-fB-iwe">
-                                <rect key="frame" x="16" y="320" width="343" height="347"/>
+                                <rect key="frame" x="13" y="320" width="349" height="334"/>
                                 <color key="backgroundColor" red="1" green="0.14954377690000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Scs-fB-iwe" firstAttribute="top" secondItem="bDD-yr-4yq" secondAttribute="bottom" constant="100" id="56h-06-WIG"/>
-                            <constraint firstItem="CQQ-qR-VvN" firstAttribute="trailing" secondItem="bDD-yr-4yq" secondAttribute="trailing" id="KIf-a3-ODt"/>
-                            <constraint firstItem="CQQ-qR-VvN" firstAttribute="top" secondItem="bDD-yr-4yq" secondAttribute="bottom" id="Lv1-u9-ny8"/>
                             <constraint firstItem="bDD-yr-4yq" firstAttribute="top" secondItem="RUx-jf-LlV" secondAttribute="top" constant="50" id="a0B-Za-B2E"/>
                             <constraint firstItem="bDD-yr-4yq" firstAttribute="centerX" secondItem="yvT-Ik-Ymh" secondAttribute="centerX" id="hNy-mK-gWL"/>
-                            <constraint firstItem="Scs-fB-iwe" firstAttribute="bottom" secondItem="RUx-jf-LlV" secondAttribute="bottom" id="n8m-3y-lG4"/>
-                            <constraint firstItem="Scs-fB-iwe" firstAttribute="leading" secondItem="RUx-jf-LlV" secondAttribute="leading" constant="16" id="nL7-2u-nmE"/>
-                            <constraint firstItem="RUx-jf-LlV" firstAttribute="trailing" secondItem="Scs-fB-iwe" secondAttribute="trailing" constant="16" id="nme-6G-VZ2"/>
+                            <constraint firstItem="Scs-fB-iwe" firstAttribute="top" secondItem="bDD-yr-4yq" secondAttribute="bottom" constant="100" id="jtb-ru-iVx"/>
+                            <constraint firstItem="RUx-jf-LlV" firstAttribute="bottom" secondItem="Scs-fB-iwe" secondAttribute="bottom" constant="13" id="n8x-Nb-ufb"/>
+                            <constraint firstItem="Scs-fB-iwe" firstAttribute="leading" secondItem="RUx-jf-LlV" secondAttribute="leading" constant="13" id="nL7-2u-nmE"/>
+                            <constraint firstItem="RUx-jf-LlV" firstAttribute="trailing" secondItem="Scs-fB-iwe" secondAttribute="trailing" constant="13" id="nme-6G-VZ2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RUx-jf-LlV"/>
                     </view>
                     <connections>
                         <outlet property="searchDevicesButton" destination="JX6-9W-B9a" id="a5L-wZ-yhe"/>
                         <outlet property="sendJSONFileButton" destination="JC0-G8-9P5" id="Xvz-k4-CFx"/>
-                        <outlet property="tableView" destination="Scs-fB-iwe" id="7VJ-yB-M68"/>
+                        <outlet property="tableView" destination="Scs-fB-iwe" id="AoT-xV-mu7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fnk-yC-M7H" userLabel="First Responder" sceneMemberID="firstResponder"/>

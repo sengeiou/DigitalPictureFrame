@@ -17,6 +17,7 @@ class BluetoothConnectivityViewController: UIViewController {
   private var dataSourceDelegate: BluetoothConnectivityDataSourceDelegate?
   
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
@@ -25,11 +26,19 @@ class BluetoothConnectivityViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    setupLayout()
     setupStyle()
   }
 
 
+  /*
+   // MARK: - Navigation
+   
+   // In a storyboard-based application, you will often want to do a little preparation before navigation
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+   // Get the new view controller using segue.destinationViewController.
+   // Pass the selected object to the new view controller.
+   }
+   */
 }
 
 
@@ -37,17 +46,14 @@ class BluetoothConnectivityViewController: UIViewController {
 extension BluetoothConnectivityViewController: ViewSetupable {
   
   func setup() {
+    searchDevicesButton.setTitle("Serach Devices", for: .normal)
+    sendJSONFileButton.setTitle("Send JSON", for: .normal)
+    
     dataSourceDelegate = BluetoothConnectivityDataSource(self, items: [])
     tableView.dataSource = dataSourceDelegate
     tableView.delegate = dataSourceDelegate
   }
-  
-  
-  func setupLayout() {
-    searchDevicesButton.setTitle("Serach Devices", for: .normal)
-    sendJSONFileButton.setTitle("Send JSON", for: .normal)
-  }
-  
+
   
   func setupStyle() {
     typealias BluetoothStyle = Style.BluetoothConnectivityVC

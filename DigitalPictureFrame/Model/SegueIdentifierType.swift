@@ -10,4 +10,5 @@ import Foundation
 
 enum SegueIdentifierType: String {
   case digitalPictureFramePageSegue = "DigitalPictureFramePageSegue"
+  case bluetoothScannerVCSegue = "BluetoothScannerVCSegue"
 }
