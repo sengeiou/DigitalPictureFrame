@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WiFiViewController: BaseViewController {
+class WiFiViewController: PageContentViewController {
   private var modifiedItemIndexPath: IndexPath?
   
   override func viewDidLoad() {
@@ -16,8 +16,9 @@ class WiFiViewController: BaseViewController {
     setup()
   }
   
-  deinit {
-    unregisterWiFiNotifications()
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    verifyConnectedNetwork()
   }
 }
 
@@ -29,7 +30,6 @@ extension WiFiViewController {
     super.setup()
     registerCells()
     reloadData()
-    registerWiFiNotifications()
   }
   
 }
@@ -42,21 +42,6 @@ extension WiFiViewController {
     tableView.register(cell: WiFiTableViewCell.self)
   }
 
-
-}
-
-
-// MARK: - Create assign delegate
-extension WiFiViewController {
-  
-  func createAndAssignWiFiDelegate() {
-    guard let wifiInfo = DatabaseManager.shared().wifiInfo else {
-      clearDataSource()
-      return
-    }
-    let infoItem = WiFiItem(wiFi: wifiInfo)
-    createAndAssignDelegate(for: [infoItem])
-  }
 }
 
 
@@ -71,49 +56,48 @@ extension WiFiViewController {
 }
 
 
-// MARK: - Add Notification Observer
+// MARK: - Create assign delegate
 extension WiFiViewController {
   
-  func registerWiFiNotifications() {
-    addShowMessageToEnterNewWirelessNetworkPasswordNofificationObserver()
-    addShowMessageNoWirelessNetworkConnectedNofificationObserver()
+  func createAndAssignWiFiDelegate() {
+    guard let wifiInfo = DatabaseManager.shared().wifiInfo else {
+      clearDataSource()
+      return
+    }
+    let infoItem = WiFiItem(wiFi: wifiInfo)
+    createAndAssignDelegate(for: [infoItem])
+  }
+
+}
+
+
+// MARK: - Verify Connected Network
+private extension WiFiViewController {
+
+  func verifyConnectedNetwork() {
+    guard let wifiInfo = DatabaseManager.shared().wifiInfo else { return }
+    guard let connectedNetworkSSID = NetworkConnectionUtility.fetchSSIDInfo() else {
+      showMessageNoWirelessNetworkConnected()
+      return
+    }
+    
+    if !connectedNetworkSSID.isEqual(to: wifiInfo.name) {
+      showMessageToEnterNewWirelessNetworkPassword()
+    }
   }
   
-  func unregisterWiFiNotifications() {
-    removeShowMessageToEnterNewWirelessNetworkPasswordNofificationObserver()
-    removeShowMessageNoWirelessNetworkConnectedNofificationObserver()
-  }
-  
-  
-  func addShowMessageToEnterNewWirelessNetworkPasswordNofificationObserver() {
-    NotificationCenter.default.addObserver(self, selector: #selector(WiFiViewController.showMessageToEnterNewWirelessNetworkPassword(_:)),
-                                           name: NotificationName.showAlertViewMessageToEnterNewWirelessNetworkPassword.name, object: nil)
-  }
-  
-  func removeShowMessageToEnterNewWirelessNetworkPasswordNofificationObserver() {
-    NotificationCenter.default.removeObserver(self, name: NotificationName.showAlertViewMessageToEnterNewWirelessNetworkPassword.name, object: nil)
-  }
-  
-  func addShowMessageNoWirelessNetworkConnectedNofificationObserver() {
-    NotificationCenter.default.addObserver(self, selector: #selector(WiFiViewController.showMessageNoWirelessNetworkConnected(_:)),
-                                           name: NotificationName.showAlertViewMessageNoWirelessNetworkConnected.name, object: nil)
-  }
-  
-  func removeShowMessageNoWirelessNetworkConnectedNofificationObserver() {
-    NotificationCenter.default.removeObserver(self, name: NotificationName.showAlertViewMessageNoWirelessNetworkConnected.name, object: nil)
-  }
-  
-  @objc func showMessageToEnterNewWirelessNetworkPassword(_ sender: Any) {
+  func showMessageToEnterNewWirelessNetworkPassword() {
     let title = "Alert"
     let message = "Wireless network is different than what is currently associated with user.\nEnter password for new Wi-Fi name."
     sharedAlert.presentPopupAlert(in: self, title: title, message: message)
   }
   
-  @objc func showMessageNoWirelessNetworkConnected(_ sender: Any) {
+  func showMessageNoWirelessNetworkConnected() {
     let title = "Alert"
     let message = "No wireless network connected"
     sharedAlert.presentPopupAlert(in: self, title: title, message: message)
   }
+  
 }
 
 

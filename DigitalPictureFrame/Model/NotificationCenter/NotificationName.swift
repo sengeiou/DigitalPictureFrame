@@ -12,9 +12,11 @@ enum NotificationName: String {
   case showNoDataAvailableMessage = "ShowNoDataAvailableMessage"
   case showAlertViewMessageToEnterNewWirelessNetworkPassword = "ShowAlertViewMessageToEnterNewWirelessNetworkPassword"
   case showAlertViewMessageNoWirelessNetworkConnected = "ShowAlertViewNoWirelessNetworkConnected"
+  case verifyConnectedNetwork = "VerifyConnectedNetwork"
   case reloadData = "ReloadData"
   case refreshData = "RefreshData"
   case endRefreshingIndicator = "EndRefreshingIndicator"
+  case tabBarItemSelectedAtIndex = "TabBarItemSelectedAtIndex"
   
   var name: Notification.Name {
     return Notification.Name(self.rawValue)

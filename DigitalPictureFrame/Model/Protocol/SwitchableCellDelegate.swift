@@ -14,7 +14,7 @@ protocol SwitchableCellDelegate: class {
 }
 
 
-extension SwitchableCellDelegate where Self: BaseViewController {
+extension SwitchableCellDelegate where Self: PageContentViewController {
   
   func switchableCell(_ cell: UITableViewCell, didPressSwitch button: UISwitch, at indexPath: IndexPath) {
     guard let modifiedTimeFrameItem = dataSourceDelegate?.item(at: indexPath) else { return }
@@ -22,7 +22,6 @@ extension SwitchableCellDelegate where Self: BaseViewController {
     
     let item = modifiedTimeFrameItem.cells[indexPath.row]
     item.value = switchState
-    print("switchableCell at: \(indexPath.row)")
   }
   
 }

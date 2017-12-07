@@ -26,6 +26,7 @@
 		E20FF6B81FAB748A00F89850 /* WiFiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FF6B71FAB748A00F89850 /* WiFiViewController.swift */; };
 		E20FF6BA1FAB770E00F89850 /* TopTabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FF6B91FAB770E00F89850 /* TopTabBarItemType.swift */; };
 		E20FF6C21FAB818A00F89850 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20FF6C11FAB818A00F89850 /* UserViewController.swift */; };
+		E21D6CA31FD9A04F00E966B1 /* AccessVerifierError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CA21FD9A04F00E966B1 /* AccessVerifierError.swift */; };
 		E2204F7A1FACB85700F7E8DC /* AlertViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2204F791FACB85700F7E8DC /* AlertViewPresenter.swift */; };
 		E2204F7C1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2204F7B1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift */; };
 		E2204F7F1FACCF3400F7E8DC /* GeneralSettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2204F7E1FACCF3400F7E8DC /* GeneralSettingsSection.swift */; };
@@ -46,7 +47,6 @@
 		E22ED44A1FB366FD0080570A /* AvailabilityMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22ED4491FB366FC0080570A /* AvailabilityMessageView.swift */; };
 		E22ED44C1FB3678B0080570A /* EmbeddedViewTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22ED44B1FB3678B0080570A /* EmbeddedViewTag.swift */; };
 		E22ED44E1FB3684F0080570A /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22ED44D1FB3684F0080570A /* Style.swift */; };
-		E23DB6E81FAE227A00976957 /* DigitalPictureFrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23DB6E71FAE227A00976957 /* DigitalPictureFrameViewController.swift */; };
 		E24F69591FAB93380099343B /* FileLoaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69541FAB93380099343B /* FileLoaderError.swift */; };
 		E24F695B1FAB93380099343B /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69561FAB93380099343B /* NetworkError.swift */; };
 		E24F695C1FAB93380099343B /* NetworkResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69571FAB93380099343B /* NetworkResultType.swift */; };
@@ -63,7 +63,7 @@
 		E24F69821FABC4610099343B /* DigitalPictureFrameCellSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69811FABC4610099343B /* DigitalPictureFrameCellSectionType.swift */; };
 		E24F69841FABC6CD0099343B /* UserItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69831FABC6CD0099343B /* UserItem.swift */; };
 		E24F69861FABC8090099343B /* SettingsGeneralItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69851FABC8090099343B /* SettingsGeneralItem.swift */; };
-		E24F69891FABCE5D0099343B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69881FABCE5D0099343B /* BaseViewController.swift */; };
+		E24F69891FABCE5D0099343B /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69881FABCE5D0099343B /* PageContentViewController.swift */; };
 		E24F69951FABF15A0099343B /* TimeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69941FABF15A0099343B /* TimeFrame.swift */; };
 		E24F69971FABF1AD0099343B /* SideInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69961FABF1AD0099343B /* SideInfo.swift */; };
 		E27D95631FAE84D30099430B /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95611FAE84D30099430B /* UserTableViewCell.swift */; };
@@ -79,6 +79,16 @@
 		E27D95771FAE85360099430B /* WiFiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95751FAE85360099430B /* WiFiTableViewCell.swift */; };
 		E27D95781FAE85360099430B /* WiFiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27D95761FAE85360099430B /* WiFiTableViewCell.xib */; };
 		E27D957A1FAE9CF70099430B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95791FAE9CF70099430B /* DatabaseManager.swift */; };
+		E29369591FC1EED00001D7AB /* DigitalPictureFramePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29369581FC1EECF0001D7AB /* DigitalPictureFramePageViewController.swift */; };
+		E298EE941FC22C7C006BC203 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EE931FC22C7C006BC203 /* CustomTabBar.swift */; };
+		E298EE961FC22F3D006BC203 /* CustomTabBarDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EE951FC22F3D006BC203 /* CustomTabBarDataSource.swift */; };
+		E298EE981FC22F48006BC203 /* CustomTabBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EE971FC22F48006BC203 /* CustomTabBarDelegate.swift */; };
+		E298EE9A1FC232AE006BC203 /* CustomTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EE991FC232AE006BC203 /* CustomTabBarItem.swift */; };
+		E298EE9C1FC23DDD006BC203 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EE9B1FC23DDD006BC203 /* ContainerViewController.swift */; };
+		E298EE9E1FC245E1006BC203 /* ContainerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EE9D1FC245E1006BC203 /* ContainerViewControllerDelegate.swift */; };
+		E298EEA01FC24A08006BC203 /* SegueIdentifierType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EE9F1FC24A08006BC203 /* SegueIdentifierType.swift */; };
+		E298EEA21FC24EEA006BC203 /* UIImageView+TintImageColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EEA11FC24EEA006BC203 /* UIImageView+TintImageColor.swift */; };
+		E2A3B3171FC33740002A3B88 /* CustomTabBarItemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A3B3161FC33740002A3B88 /* CustomTabBarItemDelegate.swift */; };
 		E2CED88A1FBC9FEE00FCD90E /* String+IsEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CED8891FBC9FEE00FCD90E /* String+IsEqual.swift */; };
 		E2D8AD881FB65A7C000DA60C /* NetworkConnectionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */; };
 		E2D8AD8A1FBA388B000DA60C /* DigitalPictureFrameDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD891FBA388B000DA60C /* DigitalPictureFrameDataError.swift */; };
@@ -94,6 +104,8 @@
 		E2E769D61FB27DA000F5C37E /* SwitchableCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E769D51FB27DA000F5C37E /* SwitchableCellDelegate.swift */; };
 		E2E769D81FB2BB7D00F5C37E /* UserInfoSettingsCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E769D71FB2BB7D00F5C37E /* UserInfoSettingsCellDelegate.swift */; };
 		E2E769DA1FB2CCB100F5C37E /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E769D91FB2CCB100F5C37E /* TimePickerView.swift */; };
+		E2EB4AE41FCE21940062A8CD /* PhoneNumberVerificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EB4AE31FCE21940062A8CD /* PhoneNumberVerificationKey.swift */; };
+		E2EB4AE61FCE23010062A8CD /* AccessVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EB4AE51FCE23010062A8CD /* AccessVerifier.swift */; };
 		E2F0596C1FB2469B0054C424 /* UIColor+CustomRGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */; };
 		E2FB8E2B1FB0EF5500724889 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E2A1FB0EF5500724889 /* NotificationName.swift */; };
 		E2FB8E301FB0F13D00724889 /* TimePickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB8E2F1FB0F13D00724889 /* TimePickerViewDelegate.swift */; };
@@ -129,6 +141,7 @@
 		E20FF6B71FAB748A00F89850 /* WiFiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiViewController.swift; sourceTree = "<group>"; };
 		E20FF6B91FAB770E00F89850 /* TopTabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabBarItemType.swift; sourceTree = "<group>"; };
 		E20FF6C11FAB818A00F89850 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		E21D6CA21FD9A04F00E966B1 /* AccessVerifierError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessVerifierError.swift; sourceTree = "<group>"; };
 		E2204F791FACB85700F7E8DC /* AlertViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewPresenter.swift; sourceTree = "<group>"; };
 		E2204F7B1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewPresenterDelegate.swift; sourceTree = "<group>"; };
 		E2204F7E1FACCF3400F7E8DC /* GeneralSettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsSection.swift; sourceTree = "<group>"; };
@@ -149,7 +162,6 @@
 		E22ED4491FB366FC0080570A /* AvailabilityMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailabilityMessageView.swift; sourceTree = "<group>"; };
 		E22ED44B1FB3678B0080570A /* EmbeddedViewTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedViewTag.swift; sourceTree = "<group>"; };
 		E22ED44D1FB3684F0080570A /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
-		E23DB6E71FAE227A00976957 /* DigitalPictureFrameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameViewController.swift; sourceTree = "<group>"; };
 		E24F69541FAB93380099343B /* FileLoaderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLoaderError.swift; sourceTree = "<group>"; };
 		E24F69561FAB93380099343B /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		E24F69571FAB93380099343B /* NetworkResultType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResultType.swift; sourceTree = "<group>"; };
@@ -166,7 +178,7 @@
 		E24F69811FABC4610099343B /* DigitalPictureFrameCellSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameCellSectionType.swift; sourceTree = "<group>"; };
 		E24F69831FABC6CD0099343B /* UserItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItem.swift; sourceTree = "<group>"; };
 		E24F69851FABC8090099343B /* SettingsGeneralItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGeneralItem.swift; sourceTree = "<group>"; };
-		E24F69881FABCE5D0099343B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		E24F69881FABCE5D0099343B /* PageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		E24F69941FABF15A0099343B /* TimeFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFrame.swift; sourceTree = "<group>"; };
 		E24F69961FABF1AD0099343B /* SideInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideInfo.swift; sourceTree = "<group>"; };
 		E27D95611FAE84D30099430B /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
@@ -183,6 +195,16 @@
 		E27D95761FAE85360099430B /* WiFiTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WiFiTableViewCell.xib; sourceTree = "<group>"; };
 		E27D95791FAE9CF70099430B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		E29369511FBF464D0001D7AB /* DigitalPictureFrame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DigitalPictureFrame.entitlements; sourceTree = "<group>"; };
+		E29369581FC1EECF0001D7AB /* DigitalPictureFramePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFramePageViewController.swift; sourceTree = "<group>"; };
+		E298EE931FC22C7C006BC203 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		E298EE951FC22F3D006BC203 /* CustomTabBarDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarDataSource.swift; sourceTree = "<group>"; };
+		E298EE971FC22F48006BC203 /* CustomTabBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarDelegate.swift; sourceTree = "<group>"; };
+		E298EE991FC232AE006BC203 /* CustomTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarItem.swift; sourceTree = "<group>"; };
+		E298EE9B1FC23DDD006BC203 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		E298EE9D1FC245E1006BC203 /* ContainerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewControllerDelegate.swift; sourceTree = "<group>"; };
+		E298EE9F1FC24A08006BC203 /* SegueIdentifierType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifierType.swift; sourceTree = "<group>"; };
+		E298EEA11FC24EEA006BC203 /* UIImageView+TintImageColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+TintImageColor.swift"; sourceTree = "<group>"; };
+		E2A3B3161FC33740002A3B88 /* CustomTabBarItemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarItemDelegate.swift; sourceTree = "<group>"; };
 		E2CED8891FBC9FEE00FCD90E /* String+IsEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IsEqual.swift"; sourceTree = "<group>"; };
 		E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionUtility.swift; sourceTree = "<group>"; };
 		E2D8AD891FBA388B000DA60C /* DigitalPictureFrameDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameDataError.swift; sourceTree = "<group>"; };
@@ -198,6 +220,8 @@
 		E2E769D51FB27DA000F5C37E /* SwitchableCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchableCellDelegate.swift; sourceTree = "<group>"; };
 		E2E769D71FB2BB7D00F5C37E /* UserInfoSettingsCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSettingsCellDelegate.swift; sourceTree = "<group>"; };
 		E2E769D91FB2CCB100F5C37E /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
+		E2EB4AE31FCE21940062A8CD /* PhoneNumberVerificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberVerificationKey.swift; sourceTree = "<group>"; };
+		E2EB4AE51FCE23010062A8CD /* AccessVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessVerifier.swift; sourceTree = "<group>"; };
 		E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomRGB.swift"; sourceTree = "<group>"; };
 		E2FB8E2A1FB0EF5500724889 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		E2FB8E2F1FB0F13D00724889 /* TimePickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewDelegate.swift; sourceTree = "<group>"; };
@@ -276,10 +300,12 @@
 		E20608D51FAB62B400F06260 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E23DB6E71FAE227A00976957 /* DigitalPictureFrameViewController.swift */,
-				E24F69881FABCE5D0099343B /* BaseViewController.swift */,
-				E20FF6C11FAB818A00F89850 /* UserViewController.swift */,
+				E298EE9B1FC23DDD006BC203 /* ContainerViewController.swift */,
+				E298EE9D1FC245E1006BC203 /* ContainerViewControllerDelegate.swift */,
+				E29369581FC1EECF0001D7AB /* DigitalPictureFramePageViewController.swift */,
+				E24F69881FABCE5D0099343B /* PageContentViewController.swift */,
 				E20FF6B51FAB747300F89850 /* SettingsViewController.swift */,
+				E20FF6C11FAB818A00F89850 /* UserViewController.swift */,
 				E20FF6B71FAB748A00F89850 /* WiFiViewController.swift */,
 			);
 			path = Controller;
@@ -321,6 +347,8 @@
 				E22ED44B1FB3678B0080570A /* EmbeddedViewTag.swift */,
 				E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */,
 				E2D8AD941FBB77F6000DA60C /* Crypt.swift */,
+				E298EE9F1FC24A08006BC203 /* SegueIdentifierType.swift */,
+				E21D6CA11FD99DAE00E966B1 /* AccessVerifier */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -328,6 +356,7 @@
 		E20608DA1FAB632700F06260 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E298EE921FC22C42006BC203 /* CustomTabBar */,
 				E22ED44D1FB3684F0080570A /* Style.swift */,
 				E22ED4491FB366FC0080570A /* AvailabilityMessageView.swift */,
 				E2FB8E371FB10A8700724889 /* TableSectionButton.swift */,
@@ -346,6 +375,7 @@
 				E2CED8891FBC9FEE00FCD90E /* String+IsEqual.swift */,
 				E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */,
 				E2204F901FACD99B00F7E8DC /* UIImageView+RoundThumbnail.swift */,
+				E298EEA11FC24EEA006BC203 /* UIImageView+TintImageColor.swift */,
 				E20FF6A91FAB739200F89850 /* UIStoryboard+Storyboard.swift */,
 				E2204F9A1FACDFB700F7E8DC /* UITableView+DigitalPictureFrameCellDequeueble.swift */,
 				E20FF6AA1FAB739200F89850 /* UITableView+Registrable.swift */,
@@ -355,6 +385,15 @@
 				E20FF6AB1FAB739200F89850 /* UIViewController+StoryboardIdentifiable.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		E21D6CA11FD99DAE00E966B1 /* AccessVerifier */ = {
+			isa = PBXGroup;
+			children = (
+				E2EB4AE51FCE23010062A8CD /* AccessVerifier.swift */,
+				E2EB4AE31FCE21940062A8CD /* PhoneNumberVerificationKey.swift */,
+			);
+			path = AccessVerifier;
 			sourceTree = "<group>";
 		};
 		E2204F7D1FACCEC600F7E8DC /* Response */ = {
@@ -527,12 +566,25 @@
 			path = WiFiCell;
 			sourceTree = "<group>";
 		};
+		E298EE921FC22C42006BC203 /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				E298EE931FC22C7C006BC203 /* CustomTabBar.swift */,
+				E298EE991FC232AE006BC203 /* CustomTabBarItem.swift */,
+				E2A3B3161FC33740002A3B88 /* CustomTabBarItemDelegate.swift */,
+				E298EE951FC22F3D006BC203 /* CustomTabBarDataSource.swift */,
+				E298EE971FC22F48006BC203 /* CustomTabBarDelegate.swift */,
+			);
+			path = CustomTabBar;
+			sourceTree = "<group>";
+		};
 		E2D8AD8B1FBA3B0E000DA60C /* Errors */ = {
 			isa = PBXGroup;
 			children = (
 				E24F69541FAB93380099343B /* FileLoaderError.swift */,
 				E2D8AD891FBA388B000DA60C /* DigitalPictureFrameDataError.swift */,
 				E24F69561FAB93380099343B /* NetworkError.swift */,
+				E21D6CA21FD9A04F00E966B1 /* AccessVerifierError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -541,8 +593,8 @@
 			isa = PBXGroup;
 			children = (
 				E2E660151FB374DD00948B3D /* UserPickerView.swift */,
-				E2E660191FB3754000948B3D /* UserPickerView.xib */,
 				E2E660171FB3751E00948B3D /* UserPickerView+Actions.swift */,
+				E2E660191FB3754000948B3D /* UserPickerView.xib */,
 				E2E6601B1FB3760300948B3D /* UserPickerViewDelegate.swift */,
 			);
 			path = UserPickerView;
@@ -561,8 +613,8 @@
 			isa = PBXGroup;
 			children = (
 				E2E769D91FB2CCB100F5C37E /* TimePickerView.swift */,
-				E2FB8E311FB0F2F100724889 /* TimePickerView.xib */,
 				E2FB8E331FB0F61500724889 /* TimePickerView+Actions.swift */,
+				E2FB8E311FB0F2F100724889 /* TimePickerView.xib */,
 				E2FB8E2F1FB0F13D00724889 /* TimePickerViewDelegate.swift */,
 			);
 			path = TimePickerView;
@@ -740,30 +792,35 @@
 				E2204F7F1FACCF3400F7E8DC /* GeneralSettingsSection.swift in Sources */,
 				E2CED88A1FBC9FEE00FCD90E /* String+IsEqual.swift in Sources */,
 				E24F695C1FAB93380099343B /* NetworkResultType.swift in Sources */,
+				E2EB4AE61FCE23010062A8CD /* AccessVerifier.swift in Sources */,
 				E24F695D1FAB93380099343B /* DataLoader.swift in Sources */,
 				E2E769D81FB2BB7D00F5C37E /* UserInfoSettingsCellDelegate.swift in Sources */,
+				E298EE9E1FC245E1006BC203 /* ContainerViewControllerDelegate.swift in Sources */,
 				E2F0596C1FB2469B0054C424 /* UIColor+CustomRGB.swift in Sources */,
 				E20FF6AD1FAB739200F89850 /* UITableView+Registrable.swift in Sources */,
 				E2204F971FACDDC300F7E8DC /* DigitalPictureFrameDataSource.swift in Sources */,
 				E27D957A1FAE9CF70099430B /* DatabaseManager.swift in Sources */,
+				E298EE961FC22F3D006BC203 /* CustomTabBarDataSource.swift in Sources */,
 				E2204F8B1FACD28F00F7E8DC /* SettingsUserInfoItem.swift in Sources */,
 				E24F69681FAB9B960099343B /* WiFiInfo.swift in Sources */,
-				E24F69891FABCE5D0099343B /* BaseViewController.swift in Sources */,
+				E24F69891FABCE5D0099343B /* PageContentViewController.swift in Sources */,
 				E20FF6B61FAB747300F89850 /* SettingsViewController.swift in Sources */,
 				E2204F7C1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift in Sources */,
 				E24F69971FABF1AD0099343B /* SideInfo.swift in Sources */,
 				E2E660161FB374DD00948B3D /* UserPickerView.swift in Sources */,
 				E20FF6A51FAB738B00F89850 /* ReusableView.swift in Sources */,
 				E24F69661FAB9ADA0099343B /* Settings.swift in Sources */,
+				E29369591FC1EED00001D7AB /* DigitalPictureFramePageViewController.swift in Sources */,
 				E2204F7A1FACB85700F7E8DC /* AlertViewPresenter.swift in Sources */,
 				E20FF6B41FAB73F800F89850 /* UIView+ReusableView.swift in Sources */,
-				E23DB6E81FAE227A00976957 /* DigitalPictureFrameViewController.swift in Sources */,
+				E2EB4AE41FCE21940062A8CD /* PhoneNumberVerificationKey.swift in Sources */,
 				E2D8AD8A1FBA388B000DA60C /* DigitalPictureFrameDataError.swift in Sources */,
 				E27D956F1FAE850D0099430B /* TimeFrameSettingsTableViewCell.swift in Sources */,
 				E24F69841FABC6CD0099343B /* UserItem.swift in Sources */,
 				E20FF6A61FAB738B00F89850 /* ViewSetupable.swift in Sources */,
 				E22ED44A1FB366FD0080570A /* AvailabilityMessageView.swift in Sources */,
 				E24F697B1FABB9400099343B /* DigitalPictureFrameCellType.swift in Sources */,
+				E298EEA01FC24A08006BC203 /* SegueIdentifierType.swift in Sources */,
 				E2E769D61FB27DA000F5C37E /* SwitchableCellDelegate.swift in Sources */,
 				E27D956B1FAE84FB0099430B /* UserInfoSettingsTableViewCell.swift in Sources */,
 				E2204F931FACDA7A00F7E8DC /* DigitalPictureFrameCellConfigurable.swift in Sources */,
@@ -788,23 +845,30 @@
 				E2E6601E1FB37F8600948B3D /* PickerViewPresentable.swift in Sources */,
 				E2204F8F1FACD6AC00F7E8DC /* WiFiItem.swift in Sources */,
 				E2204F9B1FACDFB700F7E8DC /* UITableView+DigitalPictureFrameCellDequeueble.swift in Sources */,
+				E298EE9C1FC23DDD006BC203 /* ContainerViewController.swift in Sources */,
 				E2204F991FACDECB00F7E8DC /* DigitalPictureFrameCellDequeueble.swift in Sources */,
 				E22ED44E1FB3684F0080570A /* Style.swift in Sources */,
+				E21D6CA31FD9A04F00E966B1 /* AccessVerifierError.swift in Sources */,
 				E2FB8E361FB106DB00724889 /* TimeFrameSettingsCellDelegate.swift in Sources */,
 				E27D95631FAE84D30099430B /* UserTableViewCell.swift in Sources */,
 				E24F696C1FABA8E80099343B /* DigitalPictureFrameData.swift in Sources */,
+				E298EE981FC22F48006BC203 /* CustomTabBarDelegate.swift in Sources */,
 				E2FB8E381FB10A8700724889 /* TableSectionButton.swift in Sources */,
+				E298EE941FC22C7C006BC203 /* CustomTabBar.swift in Sources */,
 				E27D95671FAE84EB0099430B /* GeneralSettingsTableViewCell.swift in Sources */,
 				E2E660181FB3751E00948B3D /* UserPickerView+Actions.swift in Sources */,
+				E2A3B3171FC33740002A3B88 /* CustomTabBarItemDelegate.swift in Sources */,
 				E20FF6BA1FAB770E00F89850 /* TopTabBarItemType.swift in Sources */,
 				E20FF6B81FAB748A00F89850 /* WiFiViewController.swift in Sources */,
 				E20FF6AE1FAB739200F89850 /* UIViewController+StoryboardIdentifiable.swift in Sources */,
 				E2204F891FACD25E00F7E8DC /* UserInfoSettingsSection.swift in Sources */,
 				E2204F871FACD1E100F7E8DC /* SettingsWeatherZipCodeItem.swift in Sources */,
+				E298EE9A1FC232AE006BC203 /* CustomTabBarItem.swift in Sources */,
 				E22ED44C1FB3678B0080570A /* EmbeddedViewTag.swift in Sources */,
 				E2D8AD881FB65A7C000DA60C /* NetworkConnectionUtility.swift in Sources */,
 				E2E769D41FB2744200F5C37E /* Observable.swift in Sources */,
 				E2E769D31FB2744200F5C37E /* Observer.swift in Sources */,
+				E298EEA21FC24EEA006BC203 /* UIImageView+TintImageColor.swift in Sources */,
 				E2E0784B1FB0D58200E9EAF7 /* Date+Utility.swift in Sources */,
 				E24F69951FABF15A0099343B /* TimeFrame.swift in Sources */,
 				E20FF6AC1FAB739200F89850 /* UIStoryboard+Storyboard.swift in Sources */,
