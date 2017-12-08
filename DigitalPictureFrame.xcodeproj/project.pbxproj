@@ -29,12 +29,16 @@
 		E21D6CA31FD9A04F00E966B1 /* AccessVerifierError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CA21FD9A04F00E966B1 /* AccessVerifierError.swift */; };
 		E21D6CA51FD9CC3100E966B1 /* BluetoothConnectivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CA41FD9CC3100E966B1 /* BluetoothConnectivityViewController.swift */; };
 		E21D6CA91FD9E77000E966B1 /* BluetoothConnectivityDataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CA81FD9E77000E966B1 /* BluetoothConnectivityDataSourceDelegate.swift */; };
-		E21D6CAB1FD9E81000E966B1 /* BluetoothItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CAA1FD9E81000E966B1 /* BluetoothItem.swift */; };
+		E21D6CAB1FD9E81000E966B1 /* PeripheralItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CAA1FD9E81000E966B1 /* PeripheralItem.swift */; };
 		E21D6CAD1FD9E87C00E966B1 /* BluetoothConnectivityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CAC1FD9E87C00E966B1 /* BluetoothConnectivityDataSource.swift */; };
 		E21D6CAF1FD9EB2200E966B1 /* BluetoothConnectivityViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CAE1FD9EB2200E966B1 /* BluetoothConnectivityViewController+Actions.swift */; };
-		E21D6CB21FDA020000E966B1 /* BluetoothScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CB11FDA020000E966B1 /* BluetoothScannerViewController.swift */; };
 		E21D6CB51FDA06DE00E966B1 /* BluetoothSerial.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CB41FDA06DE00E966B1 /* BluetoothSerial.swift */; };
 		E21D6CB71FDA070D00E966B1 /* BluetoothSerialDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CB61FDA070D00E966B1 /* BluetoothSerialDelegate.swift */; };
+		E21D6CB91FDAF2B500E966B1 /* BluetoothSerialSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CB81FDAF2B500E966B1 /* BluetoothSerialSingleton.swift */; };
+		E21D6CBC1FDB223000E966B1 /* MBProgressHUD+showHUDWithMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CBB1FDB223000E966B1 /* MBProgressHUD+showHUDWithMessage.swift */; };
+		E21D6CBF1FDB259F00E966B1 /* BluetoothScanningTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CBD1FDB259F00E966B1 /* BluetoothScanningTableViewCell.swift */; };
+		E21D6CC01FDB259F00E966B1 /* BluetoothScanningTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E21D6CBE1FDB259F00E966B1 /* BluetoothScanningTableViewCell.xib */; };
+		E21D6CC21FDB29D300E966B1 /* BluetoothConnectivityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CC11FDB29D300E966B1 /* BluetoothConnectivityDelegate.swift */; };
 		E2204F7A1FACB85700F7E8DC /* AlertViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2204F791FACB85700F7E8DC /* AlertViewPresenter.swift */; };
 		E2204F7C1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2204F7B1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift */; };
 		E2204F7F1FACCF3400F7E8DC /* GeneralSettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2204F7E1FACCF3400F7E8DC /* GeneralSettingsSection.swift */; };
@@ -152,12 +156,16 @@
 		E21D6CA21FD9A04F00E966B1 /* AccessVerifierError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessVerifierError.swift; sourceTree = "<group>"; };
 		E21D6CA41FD9CC3100E966B1 /* BluetoothConnectivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothConnectivityViewController.swift; sourceTree = "<group>"; };
 		E21D6CA81FD9E77000E966B1 /* BluetoothConnectivityDataSourceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothConnectivityDataSourceDelegate.swift; sourceTree = "<group>"; };
-		E21D6CAA1FD9E81000E966B1 /* BluetoothItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothItem.swift; sourceTree = "<group>"; };
+		E21D6CAA1FD9E81000E966B1 /* PeripheralItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralItem.swift; sourceTree = "<group>"; };
 		E21D6CAC1FD9E87C00E966B1 /* BluetoothConnectivityDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothConnectivityDataSource.swift; sourceTree = "<group>"; };
 		E21D6CAE1FD9EB2200E966B1 /* BluetoothConnectivityViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetoothConnectivityViewController+Actions.swift"; sourceTree = "<group>"; };
-		E21D6CB11FDA020000E966B1 /* BluetoothScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothScannerViewController.swift; sourceTree = "<group>"; };
 		E21D6CB41FDA06DE00E966B1 /* BluetoothSerial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothSerial.swift; sourceTree = "<group>"; };
 		E21D6CB61FDA070D00E966B1 /* BluetoothSerialDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothSerialDelegate.swift; sourceTree = "<group>"; };
+		E21D6CB81FDAF2B500E966B1 /* BluetoothSerialSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothSerialSingleton.swift; sourceTree = "<group>"; };
+		E21D6CBB1FDB223000E966B1 /* MBProgressHUD+showHUDWithMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MBProgressHUD+showHUDWithMessage.swift"; sourceTree = "<group>"; };
+		E21D6CBD1FDB259F00E966B1 /* BluetoothScanningTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothScanningTableViewCell.swift; sourceTree = "<group>"; };
+		E21D6CBE1FDB259F00E966B1 /* BluetoothScanningTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BluetoothScanningTableViewCell.xib; sourceTree = "<group>"; };
+		E21D6CC11FDB29D300E966B1 /* BluetoothConnectivityDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothConnectivityDelegate.swift; sourceTree = "<group>"; };
 		E2204F791FACB85700F7E8DC /* AlertViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewPresenter.swift; sourceTree = "<group>"; };
 		E2204F7B1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewPresenterDelegate.swift; sourceTree = "<group>"; };
 		E2204F7E1FACCF3400F7E8DC /* GeneralSettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsSection.swift; sourceTree = "<group>"; };
@@ -300,9 +308,9 @@
 			isa = PBXGroup;
 			children = (
 				E29369511FBF464D0001D7AB /* DigitalPictureFrame.entitlements */,
+				E20608C31FAB629B00F06260 /* AppDelegate.swift */,
 				E24F695E1FAB93400099343B /* ServerData */,
 				E24F69531FAB93380099343B /* DataLoader */,
-				E20608C31FAB629B00F06260 /* AppDelegate.swift */,
 				E20608DB1FAB633300F06260 /* Extension */,
 				E20608D91FAB632100F06260 /* Model */,
 				E20608DA1FAB632700F06260 /* View */,
@@ -367,7 +375,7 @@
 				E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */,
 				E2D8AD941FBB77F6000DA60C /* Crypt.swift */,
 				E298EE9F1FC24A08006BC203 /* SegueIdentifierType.swift */,
-				E21D6CAA1FD9E81000E966B1 /* BluetoothItem.swift */,
+				E21D6CAA1FD9E81000E966B1 /* PeripheralItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -402,6 +410,7 @@
 				E20FF6B11FAB73D200F89850 /* UIView+NibLoadableView.swift */,
 				E20FF6B31FAB73F800F89850 /* UIView+ReusableView.swift */,
 				E20FF6AB1FAB739200F89850 /* UIViewController+StoryboardIdentifiable.swift */,
+				E21D6CBB1FDB223000E966B1 /* MBProgressHUD+showHUDWithMessage.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -419,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				E21D6CB41FDA06DE00E966B1 /* BluetoothSerial.swift */,
+				E21D6CB81FDAF2B500E966B1 /* BluetoothSerialSingleton.swift */,
 				E21D6CB61FDA070D00E966B1 /* BluetoothSerialDelegate.swift */,
 			);
 			path = BluetoothSerial;
@@ -429,9 +439,17 @@
 			children = (
 				E21D6CA41FD9CC3100E966B1 /* BluetoothConnectivityViewController.swift */,
 				E21D6CAE1FD9EB2200E966B1 /* BluetoothConnectivityViewController+Actions.swift */,
-				E21D6CB11FDA020000E966B1 /* BluetoothScannerViewController.swift */,
 			);
 			path = BluetoothConnectivity;
+			sourceTree = "<group>";
+		};
+		E21D6CBA1FDB182C00E966B1 /* BluetoothScanningCell */ = {
+			isa = PBXGroup;
+			children = (
+				E21D6CBD1FDB259F00E966B1 /* BluetoothScanningTableViewCell.swift */,
+				E21D6CBE1FDB259F00E966B1 /* BluetoothScanningTableViewCell.xib */,
+			);
+			path = BluetoothScanningCell;
 			sourceTree = "<group>";
 		};
 		E2204F7D1FACCEC600F7E8DC /* Response */ = {
@@ -498,6 +516,7 @@
 				E20FF6A11FAB738B00F89850 /* ReusableView.swift */,
 				E20FF6A31FAB738B00F89850 /* StoryboardIdentifiable.swift */,
 				E20FF6A21FAB738B00F89850 /* ViewSetupable.swift */,
+				E21D6CC11FDB29D300E966B1 /* BluetoothConnectivityDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -516,6 +535,7 @@
 		E24F697C1FABBAB40099343B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				E21D6CBA1FDB182C00E966B1 /* BluetoothScanningCell */,
 				E27D955A1FAE83B40099430B /* UserCell */,
 				E27D955F1FAE844D0099430B /* SettingsCells */,
 				E27D95601FAE84500099430B /* WiFiCell */,
@@ -740,6 +760,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2FB8E321FB0F2F100724889 /* TimePickerView.xib in Resources */,
+				E21D6CC01FDB259F00E966B1 /* BluetoothScanningTableViewCell.xib in Resources */,
 				E27D95641FAE84D30099430B /* UserTableViewCell.xib in Resources */,
 				E27D95741FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.xib in Resources */,
 				E24F69601FAB93400099343B /* ServerData.json in Resources */,
@@ -783,9 +804,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DigitalPictureFrame/Pods-DigitalPictureFrame-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ConcentricProgressRingView/ConcentricProgressRingView.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/LionheartExtensions/LionheartExtensions.framework",
+				"${BUILT_PRODUCTS_DIR}/KYCircularProgress/KYCircularProgress.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/RNCryptor/RNCryptor.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -793,9 +814,9 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ConcentricProgressRingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LionheartExtensions.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KYCircularProgress.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCryptor.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -833,6 +854,7 @@
 				E2204F911FACD99B00F7E8DC /* UIImageView+RoundThumbnail.swift in Sources */,
 				E24F69861FABC8090099343B /* SettingsGeneralItem.swift in Sources */,
 				E2E6601C1FB3760300948B3D /* UserPickerViewDelegate.swift in Sources */,
+				E21D6CBF1FDB259F00E966B1 /* BluetoothScanningTableViewCell.swift in Sources */,
 				E21D6CB71FDA070D00E966B1 /* BluetoothSerialDelegate.swift in Sources */,
 				E2204F7F1FACCF3400F7E8DC /* GeneralSettingsSection.swift in Sources */,
 				E2CED88A1FBC9FEE00FCD90E /* String+IsEqual.swift in Sources */,
@@ -864,6 +886,7 @@
 				E27D956F1FAE850D0099430B /* TimeFrameSettingsTableViewCell.swift in Sources */,
 				E24F69841FABC6CD0099343B /* UserItem.swift in Sources */,
 				E20FF6A61FAB738B00F89850 /* ViewSetupable.swift in Sources */,
+				E21D6CB91FDAF2B500E966B1 /* BluetoothSerialSingleton.swift in Sources */,
 				E22ED44A1FB366FD0080570A /* AvailabilityMessageView.swift in Sources */,
 				E24F697B1FABB9400099343B /* DigitalPictureFrameCellType.swift in Sources */,
 				E298EEA01FC24A08006BC203 /* SegueIdentifierType.swift in Sources */,
@@ -871,6 +894,7 @@
 				E27D956B1FAE84FB0099430B /* UserInfoSettingsTableViewCell.swift in Sources */,
 				E2204F931FACDA7A00F7E8DC /* DigitalPictureFrameCellConfigurable.swift in Sources */,
 				E2204F951FACDD6700F7E8DC /* DigitalPictureFrameDataSourceDelegate.swift in Sources */,
+				E21D6CBC1FDB223000E966B1 /* MBProgressHUD+showHUDWithMessage.swift in Sources */,
 				E20608C41FAB629B00F06260 /* AppDelegate.swift in Sources */,
 				E24F69641FAB9A660099343B /* User.swift in Sources */,
 				E2FB8E301FB0F13D00724889 /* TimePickerViewDelegate.swift in Sources */,
@@ -885,14 +909,14 @@
 				E20FF6A81FAB738B00F89850 /* Registrable.swift in Sources */,
 				E21D6CA51FD9CC3100E966B1 /* BluetoothConnectivityViewController.swift in Sources */,
 				E2FB8E3C1FB127DE00724889 /* WeatherZipcodeSettingsCellDelegate.swift in Sources */,
-				E21D6CAB1FD9E81000E966B1 /* BluetoothItem.swift in Sources */,
+				E21D6CAB1FD9E81000E966B1 /* PeripheralItem.swift in Sources */,
 				E20FF6B21FAB73D200F89850 /* UIView+NibLoadableView.swift in Sources */,
 				E2FB8E341FB0F61600724889 /* TimePickerView+Actions.swift in Sources */,
 				E20FF6B01FAB73B600F89850 /* NibLoadableView.swift in Sources */,
+				E21D6CC21FDB29D300E966B1 /* BluetoothConnectivityDelegate.swift in Sources */,
 				E24F695B1FAB93380099343B /* NetworkError.swift in Sources */,
 				E2E6601E1FB37F8600948B3D /* PickerViewPresentable.swift in Sources */,
 				E2204F8F1FACD6AC00F7E8DC /* WiFiItem.swift in Sources */,
-				E21D6CB21FDA020000E966B1 /* BluetoothScannerViewController.swift in Sources */,
 				E2204F9B1FACDFB700F7E8DC /* UITableView+DigitalPictureFrameCellDequeueble.swift in Sources */,
 				E298EE9C1FC23DDD006BC203 /* ContainerViewController.swift in Sources */,
 				E2204F991FACDECB00F7E8DC /* DigitalPictureFrameCellDequeueble.swift in Sources */,

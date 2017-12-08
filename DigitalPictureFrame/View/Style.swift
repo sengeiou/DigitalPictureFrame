@@ -33,14 +33,21 @@ struct Style {
   
   // MARK: - BluetoothConnectivityVC
   struct BluetoothConnectivityVC {
+    static let buttonTitleFont = UIFont.systemFont(ofSize: 25, weight: .bold)
+    
     static func roundCorners(for buttons: UIButton...) {
       buttons.forEach {
+        $0.layer.borderColor = UIColor.appleBlue.cgColor
+        $0.layer.borderWidth = 0.5
         $0.layer.cornerRadius = 10
       }
     }
   }
+  
+  
+  // MARK: - BluetoothScanningTableViewCell
+  struct BluetoothScanningCell {
+    static let peripheralNameFont = UIFont.systemFont(ofSize: 15, weight: .regular)
+    static let connectButtonTitleFont = UIFont.systemFont(ofSize: 13, weight: .medium)
+  }
 }
-
-
-
-

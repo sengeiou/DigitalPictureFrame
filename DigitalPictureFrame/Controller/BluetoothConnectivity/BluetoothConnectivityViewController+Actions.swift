@@ -8,32 +8,52 @@
 
 import Foundation
 import UIKit
-import ConcentricProgressRingView
+import KYCircularProgress
 
 extension BluetoothConnectivityViewController {
   
   @IBAction func sendJSONButtonPressed(_ sender: UIButton) {
-    // TODO: Implement
+    let circularProgress = KYCircularProgress(frame: sender.bounds, showGuide: true)
+    circularProgress.progressChanged {
+      (progress: Double, circularProgress: KYCircularProgress) in
+      print("progress: \(progress)")
+    }
     
-    let fgColor1 = UIColor.yellow
-    let bgColor1 = UIColor.darkGray
-    let fgColor2 = UIColor.green
-    let bgColor2 = UIColor.darkGray
+    sender.addSubview(circularProgress)
     
-    let rings = [
-      ProgressRing(color: fgColor1, backgroundColor: bgColor1, width: 18),
-      ProgressRing(color: fgColor2, backgroundColor: bgColor2, width: 18),
-      ]
-    
-    let margin: CGFloat = 2
-    let radius: CGFloat = 80
-    let progressRingView = ConcentricProgressRingView(center: sendJSONFileButton.center, radius: radius, margin: margin, rings: rings)
-    sendJSONFileButton.addSubview(progressRingView)
+    if !sharedInstance.serial.isReady {
+      let title = "Not connected"
+      let message = "No bluetooth connected"
+      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
+    } else {
+      let msg = "TEST MESSAGE"
+      sharedInstance.serial.sendMessageToDevice(msg)
+    }
+
   }
   
   
-  @IBAction func searchDevicesButtonPressed(_ sender: UIButton) {
-    // TODO: Implement
+  @IBAction func scanDevicesButtonPressed(_ sender: UIButton) {
+    if sharedInstance.serial.connectedPeripheral == nil {
+      startScanningIndicatorAnimating()
+      sharedInstance.serial.startScan()
+      connectedPeripheralLabel.text = "Scanning..."
+      searchDevicesButton.isEnabled = false
+      Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(BluetoothConnectivityViewController.scanTimeOut),
+                           userInfo: nil, repeats: false)
+      
+    } else {
+      sharedInstance.serial.disconnect()
+      reloadView()
+    }
+  }
+  
+  
+  @objc func scanTimeOut() {
+    sharedInstance.serial.stopScan()
+    searchDevicesButton.isEnabled = true
+    connectedPeripheralLabel.text = "Done scanning"
+    stopScanningIndicatorAnimating()
   }
   
 }

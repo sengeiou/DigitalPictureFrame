@@ -7,19 +7,16 @@
 //
 
 import Foundation
-import UIKit
 import CoreBluetooth
 
 
 @objc protocol BluetoothSerialDelegate {
-  // ** Required **
-  /// Called when de state of the CBCentralManager changes (e.g. when bluetooth is turned on/off)
+  /// Called when the state of the CBCentralManager changes (e.g. when bluetooth is turned on/off)
   func serialDidChangeState()
   
   /// Called when a peripheral disconnected
   func serialDidDisconnect(_ peripheral: CBPeripheral, error: NSError?)
   
-  // ** Optionals **
   /// Called when a message is received
   @objc optional func serialDidReceiveString(_ message: String)
   

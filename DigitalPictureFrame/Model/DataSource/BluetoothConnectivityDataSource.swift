@@ -10,17 +10,17 @@ import Foundation
 import UIKit
 
 final class BluetoothConnectivityDataSource: NSObject, BluetoothConnectivityDataSourceDelegate {
-  var items: [BluetoothItem]?
-  var delegateVC: UIViewController
+  var items: [PeripheralItem]?
+  var delegateVC: BluetoothScanningCellDelegate
   
   
-  init(_ delegateVC: UIViewController, items: [BluetoothItem]?) {
+  init(_ delegateVC: BluetoothScanningCellDelegate, items: [PeripheralItem]?) {
     self.delegateVC = delegateVC
     self.items = items
   }
   
   
-  func item(at indexPath: IndexPath) -> BluetoothItem? {
+  func item(at indexPath: IndexPath) -> PeripheralItem? {
     return items?[indexPath.row]
   }
 }
@@ -35,12 +35,17 @@ extension BluetoothConnectivityDataSource {
   
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "Devices"
+    return "Peripheral List"
   }
   
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    guard let item = item(at: indexPath) else { return UITableViewCell() }
+    
+    let cell = tableView.dequeueReusableCell(withIdentifier: BluetoothScanningTableViewCell.reuseIdentifier) as! BluetoothScanningTableViewCell
+    cell.configure(by: item, at: indexPath)
+    cell.delegate = delegateVC
+    return cell
   }
   
 }
@@ -50,7 +55,7 @@ extension BluetoothConnectivityDataSource {
 extension BluetoothConnectivityDataSource {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 55
+    return 50
   }
   
 }
