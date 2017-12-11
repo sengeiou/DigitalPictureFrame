@@ -111,7 +111,7 @@ extension ContainerViewController {
   
   
   @objc func itemSelected(_ notification: NSNotification) {
-    guard let currentPageIndex = notification.userInfo?["currentPageIndex"] as? Int else { return }
+    guard let currentPageIndex = notification.userInfo?[NotificationUserInfoKey.currentPageIndex.rawValue] as? Int else { return }
     tabBarItems[currentPageIndex].sendActions(for: .touchUpInside)
   }
   

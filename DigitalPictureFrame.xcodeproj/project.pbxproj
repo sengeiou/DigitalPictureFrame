@@ -93,6 +93,7 @@
 		E27D95781FAE85360099430B /* WiFiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27D95761FAE85360099430B /* WiFiTableViewCell.xib */; };
 		E27D957A1FAE9CF70099430B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95791FAE9CF70099430B /* DatabaseManager.swift */; };
 		E288CEC31FDF37F100B0E075 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E288CEC51FDF37F100B0E075 /* Localizable.strings */; };
+		E288CECD1FDF43B800B0E075 /* NotificationUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E288CECC1FDF43B800B0E075 /* NotificationUserInfoKey.swift */; };
 		E29369591FC1EED00001D7AB /* DigitalPictureFramePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29369581FC1EECF0001D7AB /* DigitalPictureFramePageViewController.swift */; };
 		E298EE941FC22C7C006BC203 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EE931FC22C7C006BC203 /* CustomTabBar.swift */; };
 		E298EE961FC22F3D006BC203 /* CustomTabBarDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EE951FC22F3D006BC203 /* CustomTabBarDataSource.swift */; };
@@ -222,6 +223,7 @@
 		E27D95761FAE85360099430B /* WiFiTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WiFiTableViewCell.xib; sourceTree = "<group>"; };
 		E27D95791FAE9CF70099430B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		E288CEC41FDF37F100B0E075 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E288CECC1FDF43B800B0E075 /* NotificationUserInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUserInfoKey.swift; sourceTree = "<group>"; };
 		E29369511FBF464D0001D7AB /* DigitalPictureFrame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DigitalPictureFrame.entitlements; sourceTree = "<group>"; };
 		E29369581FC1EECF0001D7AB /* DigitalPictureFramePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFramePageViewController.swift; sourceTree = "<group>"; };
 		E298EE931FC22C7C006BC203 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
@@ -690,6 +692,7 @@
 			isa = PBXGroup;
 			children = (
 				E2FB8E2A1FB0EF5500724889 /* NotificationName.swift */,
+				E288CECC1FDF43B800B0E075 /* NotificationUserInfoKey.swift */,
 			);
 			path = NotificationCenter;
 			sourceTree = "<group>";
@@ -897,6 +900,7 @@
 				E22ED44A1FB366FD0080570A /* AvailabilityMessageView.swift in Sources */,
 				E24F697B1FABB9400099343B /* DigitalPictureFrameCellType.swift in Sources */,
 				E298EEA01FC24A08006BC203 /* SegueIdentifierType.swift in Sources */,
+				E288CECD1FDF43B800B0E075 /* NotificationUserInfoKey.swift in Sources */,
 				E2E769D61FB27DA000F5C37E /* SwitchableCellDelegate.swift in Sources */,
 				E27D956B1FAE84FB0099430B /* UserInfoSettingsTableViewCell.swift in Sources */,
 				E2204F931FACDA7A00F7E8DC /* DigitalPictureFrameCellConfigurable.swift in Sources */,

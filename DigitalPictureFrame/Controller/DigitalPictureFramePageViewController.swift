@@ -249,7 +249,7 @@ extension DigitalPictureFramePageViewController: UIPageViewControllerDelegate {
   
   func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
     guard let currentPageIndex = currentPageIndex, completed else { return }
-    NotificationCenter.default.post(name: NotificationName.tabBarItemSelectedAtIndex.name, object: nil, userInfo: ["currentPageIndex": currentPageIndex])
+    NotificationCenter.default.post(name: NotificationName.tabBarItemSelectedAtIndex.name, object: nil, userInfo: [NotificationUserInfoKey.currentPageIndex.rawValue: currentPageIndex])
   }
   
 }

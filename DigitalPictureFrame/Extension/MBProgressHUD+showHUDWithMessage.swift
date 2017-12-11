@@ -15,7 +15,7 @@ extension MBProgressHUD {
     let hud = MBProgressHUD.showAdded(to: view, animated: true)
     hud.mode = MBProgressHUDMode.text
     hud.label.text = message
-    hud.hide(animated: true, afterDelay: 1.0)
+    hud.hide(animated: true, afterDelay: 1.5)
   }
   
 }

@@ -78,6 +78,14 @@ extension BluetoothConnectivityViewController: ViewSetupable {
   
     searchDevicesButton.titleLabel?.font = BluetoothStyle.buttonTitleFont
     sendJSONFileButton.titleLabel?.font = BluetoothStyle.buttonTitleFont
+    
+    connectivityTitleLabel.font = BluetoothStyle.connectivityTitleLabelFont
+    connectivityTitleLabel.numberOfLines = BluetoothStyle.connectivityTitleLabelNumberOfLines
+    connectivityTitleLabel.textAlignment = BluetoothStyle.connectivityTitleLabelAlignment
+    
+    centralManagerStateLabel.font = BluetoothStyle.centralManagerStateLabelFont
+    centralManagerStateLabel.numberOfLines = BluetoothStyle.centralManagerStateLabelNumberOfLines
+    centralManagerStateLabel.textAlignment = BluetoothStyle.centralManagerStateLabelAlignment
     reloadView()
   }
   
