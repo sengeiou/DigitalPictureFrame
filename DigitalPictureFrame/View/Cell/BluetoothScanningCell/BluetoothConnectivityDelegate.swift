@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import UIKit
 
 protocol BluetoothScanningCellDelegate: class {
-  func bluetoothScanningCell(_ bluetoothScanningCell: BluetoothScanningTableViewCell, didConnectPeripheral at: Int)
+  func bluetoothScanningCell(_ bluetoothScanningCell: BluetoothScanningTableViewCell, didPressConnect button: UIButton)
 }

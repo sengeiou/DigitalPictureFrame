@@ -160,20 +160,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="bDD-yr-4yq">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="bDD-yr-4yq">
                                 <rect key="frame" x="34.5" y="70" width="306" height="150"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JX6-9W-B9a">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                        <color key="backgroundColor" red="0.7830433269" green="1" blue="0.54696785390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JX6-9W-B9a" customClass="ShadowButton" customModule="DigitalPictureFrame" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="147" height="150"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="scanDevicesButtonPressed:" destination="Br1-ti-SHM" eventType="touchUpInside" id="nQj-kf-swD"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JC0-G8-9P5">
-                                        <rect key="frame" x="156" y="0.0" width="150" height="150"/>
-                                        <color key="backgroundColor" red="0.96014178640000003" green="0.35446651689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JC0-G8-9P5" customClass="ShadowButton" customModule="DigitalPictureFrame" customModuleProvider="target">
+                                        <rect key="frame" x="159" y="0.0" width="147" height="150"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="sendJSONButtonPressed:" destination="Br1-ti-SHM" eventType="touchUpInside" id="WIY-aC-Ig5"/>

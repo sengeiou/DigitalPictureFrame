@@ -15,12 +15,12 @@ class BluetoothConnectivityViewController: UIViewController {
   @IBOutlet weak var connectedPeripheralLabel: UILabel!
   @IBOutlet weak var centralManagerStateLabel: UILabel!
   @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var searchDevicesButton: UIButton!
-  @IBOutlet weak var sendJSONFileButton: UIButton!
+  @IBOutlet weak var searchDevicesButton: ShadowButton!
+  @IBOutlet weak var sendJSONFileButton: ShadowButton!
   
   lazy private var scanningIndicator: NVActivityIndicatorView = {
     let tableViewSize = self.tableView.frame.size
-    let size = CGSize(width: 200, height: 200)
+    let size = CGSize(width: 210, height: 210)
     let originPoint = CGPoint(x: (tableViewSize.width / 2) - (size.width / 2), y: (tableViewSize.height / 2) - (size.height / 2))
     let frame = CGRect(origin: originPoint, size: size)
     let indicator = NVActivityIndicatorView(frame: frame, type: .ballScaleRippleMultiple, color: UIColor.appleBlue)
@@ -28,16 +28,16 @@ class BluetoothConnectivityViewController: UIViewController {
     return indicator
   }()
   
-  var sharedInstance = BluetoothSerialSingleton.sharedInstance
   private var dataSourceDelegate: BluetoothConnectivityDataSourceDelegate?
-  
+  var sharedInstance = BluetoothSerialSingleton.sharedInstance
   var selectedPeripheral: CBPeripheral?
   var peripherals: [PeripheralItem] = [] {
     didSet {
-      // TODO:
+      dataSourceDelegate?.items = peripherals
     }
   }
-
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
@@ -48,14 +48,15 @@ class BluetoothConnectivityViewController: UIViewController {
     setupStyle()
   }
   
-  
-  func startScanningIndicatorAnimating() {
-    
-    scanningIndicator.startAnimating()
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    setupLayout()
   }
   
-  func stopScanningIndicatorAnimating() {
-    scanningIndicator.stopAnimating()
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+
   }
 }
 
@@ -64,10 +65,8 @@ class BluetoothConnectivityViewController: UIViewController {
 extension BluetoothConnectivityViewController: ViewSetupable {
   
   func setup() {
-    peripherals = [PeripheralItem(name: "Test", RSSI: 12.3),
-                   PeripheralItem(name: "Test2", RSSI: 12.3),
-                   PeripheralItem(name: "Test3", RSSI: 12.3),
-                   PeripheralItem(name: "Test4", RSSI: 12.3)]
+    // MARK: - TEST CASE!
+//    peripherals = [PeripheralItem(RSSI: 12.3), PeripheralItem(RSSI: 12.3), PeripheralItem(RSSI: 12.3), PeripheralItem(RSSI: 12.3)]
     
     sharedInstance.serial = BluetoothSerial(delegate: self)
     dataSourceDelegate = BluetoothConnectivityDataSource(self, items: peripherals)
@@ -85,10 +84,13 @@ extension BluetoothConnectivityViewController: ViewSetupable {
   
     searchDevicesButton.titleLabel?.font = BluetoothStyle.buttonTitleFont
     sendJSONFileButton.titleLabel?.font = BluetoothStyle.buttonTitleFont
-    BluetoothStyle.roundCorners(for: searchDevicesButton, sendJSONFileButton)
     reloadView()
   }
   
+  
+  func setupLayout() {
+    renderNoPeripheralsAvailableMessage()
+  }
 }
 
 
@@ -97,9 +99,26 @@ extension BluetoothConnectivityViewController {
   
   func reloadView() {
     renderSerialConnectionStateTitle()
-    
+    renderButtonsTitle()
+  }
+  
+  func clearPeripherals() {
+    peripherals = []
+    tableView.reloadData()
+  }
+}
+
+
+// MARK: - Render titles
+private extension BluetoothConnectivityViewController {
+  
+  func renderSerialConnectionStateTitle() {
+    centralManagerStateLabel.text = sharedInstance.serial.stateDescription
+  }
+  
+  func renderButtonsTitle() {
     if sharedInstance.serial.isReady {
-      connectedPeripheralLabel.text = sharedInstance.serial.connectedPeripheral!.name
+      connectedPeripheralLabel.text = sharedInstance.serial.connectedPeripheralName
       searchDevicesButton.setTitle("Disconnect", for: .normal)
       searchDevicesButton.tintColor = UIColor.red
       searchDevicesButton.isEnabled = true
@@ -107,7 +126,7 @@ extension BluetoothConnectivityViewController {
       sendJSONFileButton.setTitle("Send JSON", for: .normal)
       sendJSONFileButton.isEnabled = true
       
-    } else if sharedInstance.serial.centralManager.state == .poweredOn {
+    } else if sharedInstance.serial.isPoweredOn {
       connectedPeripheralLabel.text = "Bluetooth Serial"
       searchDevicesButton.setTitle("Scan", for: .normal)
       searchDevicesButton.tintColor = view.tintColor
@@ -127,16 +146,11 @@ extension BluetoothConnectivityViewController {
     }
   }
   
-  
-  func renderSerialConnectionStateTitle() {
-    centralManagerStateLabel.text = sharedInstance.serial.centralManagerStateDescription
-  }
-  
 }
 
 
 // Show/Hide No data available message
-private extension BluetoothConnectivityViewController {
+extension BluetoothConnectivityViewController {
   
   var isAvailableMessageVisible: Bool {
     if let _ = tableView.viewWithTag(EmbeddedViewTag.availabilityMessage.rawValue) {
@@ -145,6 +159,11 @@ private extension BluetoothConnectivityViewController {
     
     return false
   }
+  
+  var shouldShowAvailableMessage: Bool {
+    return dataSourceDelegate?.numberOfRowsInSection == 0 ? true : false
+  }
+  
   
   func showNoPeripheralsAvailableMessage() {
     guard !isAvailableMessageVisible else { return }
@@ -171,37 +190,84 @@ private extension BluetoothConnectivityViewController {
   
   
   func removeTableViewEmptyCells() {
-    tableView.tableFooterView = UIView()
+    tableView.tableFooterView = UIView(frame: .zero)
   }
   
+  
+  func renderNoPeripheralsAvailableMessage() {
+    shouldShowAvailableMessage ? showNoPeripheralsAvailableMessage() : hideNoPeripheralsAvailableMessage()
+  }
 }
 
+
+// MARK: - Start/Stop scanning animation
+extension BluetoothConnectivityViewController {
+  
+  func startScanningIndicator() {
+    scanningIndicator.startAnimating()
+  }
+  
+  func stopScanningIndicator() {
+    scanningIndicator.stopAnimating()
+  }
+}
 
 
 // MARK: - BluetoothSerialDelegate protocol
 extension BluetoothConnectivityViewController: BluetoothSerialDelegate {
   
+//  func fakeSerialDidDiscoverPeripheral(_ peripheral: PeripheralItem, RSSI: NSNumber?) {
+//    print("serialDidDiscoverPeripheral: \(String(describing: peripheral.name))")
+//    let foundPeripheral = peripheral
+//    peripherals.append(foundPeripheral)
+//    peripherals.sort { $0.RSSI < $1.RSSI }
+//  }
+  
+    
+  func serialDidDiscoverPeripheral(_ peripheral: CBPeripheral, RSSI: NSNumber?) {
+    print("serialDidDiscoverPeripheral: \(String(describing: peripheral.name))")
+    
+    for exisiting in peripherals {
+      if exisiting.peripheral?.identifier == peripheral.identifier { return }
+    }
+    
+    let theRSSI = RSSI?.floatValue ?? 0.0
+    let foundPeripheral = PeripheralItem(peripheral: peripheral, RSSI: theRSSI)
+    peripherals.append(foundPeripheral)
+    peripherals.sort { $0.RSSI < $1.RSSI }
+  }
+  
+  
+  func serialDidFailToConnect(_ peripheral: CBPeripheral, error: NSError?) {
+    searchDevicesButton.isEnabled = true
+    MBProgressHUD.showHUD(in: view, with: "Failed to connect")
+  }
+
+  
   func serialDidReceiveData(_ data: Data) {
-    print("serialDidReceiveData")
     MBProgressHUD.showHUD(in: view, with: "Peripheral did receive data")
   }
   
+  
+  func serialDidConnect(_ peripheral: CBPeripheral) {
+    sendJSONFileButton.isEnabled = true
+    MBProgressHUD.showHUD(in: view, with: "Connected")
+  }
+  
+  
   func serialDidDisconnect(_ peripheral: CBPeripheral, error: NSError?) {
-    print("serialDidDisconnect")
     reloadView()
     MBProgressHUD.showHUD(in: view, with: "Disconnected")
   }
   
   func serialIsReady(_ peripheral: CBPeripheral) {
-    print("serialIsReady")
     MBProgressHUD.showHUD(in: view, with: "Peripheral is ready for communication")
-    /// Called when a peripheral is ready for communication
   }
   
   func serialDidChangeState() {
     print("serialDidChangeState")
     reloadView()
-    if sharedInstance.serial.centralManager.state != .poweredOn {
+    if !sharedInstance.serial.isPoweredOn {
       MBProgressHUD.showHUD(in: view, with: "Bluetooth turned off")
     }
   }
@@ -212,8 +278,81 @@ extension BluetoothConnectivityViewController: BluetoothSerialDelegate {
 // MARK: - BluetoothScanningCellDelegate protocol
 extension BluetoothConnectivityViewController: BluetoothScanningCellDelegate {
   
-  func bluetoothScanningCell(_ bluetoothScanningCell: BluetoothScanningTableViewCell, didConnectPeripheral at: Int) {
-    print("didConnectPeripheral")
+  func bluetoothScanningCell(_ bluetoothScanningCell: BluetoothScanningTableViewCell, didPressConnect button: UIButton) {
+    print("didPressConnect at row: \(button.tag)")
+    sharedInstance.serial.stopScan()
+    
+    let row = button.tag
+    guard let selectedPeripheral = peripherals[row].peripheral else { return }
+    sharedInstance.serial.connectToPeripheral(selectedPeripheral)
+    MBProgressHUD.showHUD(in: view, with: "Connecting")
+    scheduleTimerForConnectTimeOut()
+  }
+  
+  
+  @objc func connectTimeOut() {
+    guard !sharedInstance.serial.isConnectedToPeripheral else { return }
+    
+    if let _ = selectedPeripheral {
+      sharedInstance.serial.disconnect()
+      selectedPeripheral = nil
+    }
+    
+    MBProgressHUD.showHUD(in: view, with: "Failed to connect")
+  }
+  
+  
+  @objc func scanTimeOut() {
+    sharedInstance.serial.stopScan()
+    searchDevicesButton.isEnabled = true
+    connectedPeripheralLabel.text = "Done scanning"
+    stopScanningIndicator()
+    renderNoPeripheralsAvailableMessage()
+    tableView.reloadData()
   }
   
 }
+
+
+// MARK: - Schedule Timer
+extension BluetoothConnectivityViewController {
+  
+  func scheduleTimerForScanTimeOut() {
+    Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(BluetoothConnectivityViewController.scanTimeOut),
+                         userInfo: nil, repeats: false)
+  }
+  
+  func scheduleTimerForConnectTimeOut() {
+    Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(BluetoothConnectivityViewController.connectTimeOut),
+                         userInfo: nil, repeats: false)
+  }
+}
+
+
+
+//// MARK: - Reload Rows
+//extension BluetoothConnectivityViewController {
+//
+//  func registerNotification() {
+//    addReloadDataNofificationObserver()
+//  }
+//
+//  func unregisterNotification() {
+//    removeReloadDataNofificationObserver()
+//  }
+//
+//
+//  func addReloadDataNofificationObserver() {
+//    NotificationCenter.default.addObserver(self, selector: #selector(BluetoothConnectivityViewController.reloadData),
+//                                           name: NotificationName.reloadData.name, object: nil)
+//  }
+//
+//  func removeReloadDataNofificationObserver() {
+//    NotificationCenter.default.removeObserver(self, name: NotificationName.reloadData.name, object: nil)
+//  }
+//
+//  @objc func reloadData() {
+//
+//  }
+//}
+

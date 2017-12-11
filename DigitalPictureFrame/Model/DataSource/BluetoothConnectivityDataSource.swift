@@ -35,7 +35,7 @@ extension BluetoothConnectivityDataSource {
   
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "Peripheral List"
+    return "List of devices"
   }
   
   

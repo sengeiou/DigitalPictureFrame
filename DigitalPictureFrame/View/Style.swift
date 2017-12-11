@@ -34,14 +34,6 @@ struct Style {
   // MARK: - BluetoothConnectivityVC
   struct BluetoothConnectivityVC {
     static let buttonTitleFont = UIFont.systemFont(ofSize: 25, weight: .bold)
-    
-    static func roundCorners(for buttons: UIButton...) {
-      buttons.forEach {
-        $0.layer.borderColor = UIColor.appleBlue.cgColor
-        $0.layer.borderWidth = 0.5
-        $0.layer.cornerRadius = 10
-      }
-    }
   }
   
   

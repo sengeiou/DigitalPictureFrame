@@ -69,7 +69,7 @@ extension BluetoothScanningTableViewCell {
 extension BluetoothScanningTableViewCell {
   
   @IBAction func connectButtonPressed(_ sender: UIButton) {
-    delegate?.bluetoothScanningCell(self, didConnectPeripheral: sender.tag)
+    delegate?.bluetoothScanningCell(self, didPressConnect: sender)
   }
   
 }

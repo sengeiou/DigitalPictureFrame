@@ -40,5 +40,10 @@ import CoreBluetooth
   
   /// Called when a peripheral is ready for communication
   @objc optional func serialIsReady(_ peripheral: CBPeripheral)
+  
+  
+  
+  /// MARK: -TEST
+  @objc optional func fakeSerialDidDiscoverPeripheral(_ peripheral: PeripheralItem, RSSI: NSNumber?)
 }
 
