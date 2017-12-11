@@ -12,7 +12,7 @@ import NVActivityIndicatorView
 import MBProgressHUD
 
 class BluetoothConnectivityViewController: UIViewController {
-  @IBOutlet weak var connectedPeripheralLabel: UILabel!
+  @IBOutlet weak var connectivityTitleLabel: UILabel!
   @IBOutlet weak var centralManagerStateLabel: UILabel!
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var searchDevicesButton: ShadowButton!
@@ -51,12 +51,6 @@ class BluetoothConnectivityViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     setupLayout()
-  }
-  
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-
   }
 }
 
@@ -118,30 +112,30 @@ private extension BluetoothConnectivityViewController {
   
   func renderButtonsTitle() {
     if sharedInstance.serial.isReady {
-      connectedPeripheralLabel.text = sharedInstance.serial.connectedPeripheralName
-      searchDevicesButton.setTitle("Disconnect", for: .normal)
-      searchDevicesButton.tintColor = UIColor.red
+      connectivityTitleLabel.text = sharedInstance.serial.connectedPeripheralName
+      searchDevicesButton.setTitle(NSLocalizedString("BLUETOOTH_CONNECTIVITY_BUTTON_DISCONNECT_TITLE", comment: ""), for: .normal)
+      searchDevicesButton.tintColor = .red
       searchDevicesButton.isEnabled = true
       
-      sendJSONFileButton.setTitle("Send JSON", for: .normal)
+      sendJSONFileButton.setTitle(NSLocalizedString("BLUETOOTH_CONNECTIVITY_BUTTON_SCAN_TITLE", comment: ""), for: .normal)
       sendJSONFileButton.isEnabled = true
       
     } else if sharedInstance.serial.isPoweredOn {
-      connectedPeripheralLabel.text = "Bluetooth Serial"
-      searchDevicesButton.setTitle("Scan", for: .normal)
+      connectivityTitleLabel.text = NSLocalizedString("BLUETOOTH_CONNECTIVITY_LABEL_TITLE", comment: "")
+      searchDevicesButton.setTitle(NSLocalizedString("BLUETOOTH_CONNECTIVITY_BUTTON_SCAN_TITLE", comment: ""), for: .normal)
       searchDevicesButton.tintColor = view.tintColor
       searchDevicesButton.isEnabled = true
       
-      sendJSONFileButton.setTitle("Send JSON", for: .normal)
+      sendJSONFileButton.setTitle(NSLocalizedString("BLUETOOTH_CONNECTIVITY_BUTTON_SEND_TITLE", comment: ""), for: .normal)
       sendJSONFileButton.isEnabled = false
       
     } else {
-      connectedPeripheralLabel.text = "Bluetooth Serial"
-      searchDevicesButton.setTitle("Scan", for: .normal)
+      connectivityTitleLabel.text = NSLocalizedString("BLUETOOTH_CONNECTIVITY_LABEL_TITLE", comment: "")
+      searchDevicesButton.setTitle(NSLocalizedString("BLUETOOTH_CONNECTIVITY_BUTTON_SCAN_TITLE", comment: ""), for: .normal)
       searchDevicesButton.tintColor = view.tintColor
       searchDevicesButton.isEnabled = false
       
-      sendJSONFileButton.setTitle("Send JSON", for: .normal)
+      sendJSONFileButton.setTitle(NSLocalizedString("BLUETOOTH_CONNECTIVITY_BUTTON_SEND_TITLE", comment: ""), for: .normal)
       sendJSONFileButton.isEnabled = false
     }
   }
@@ -173,8 +167,8 @@ extension BluetoothConnectivityViewController {
     let xPos = CGFloat(0)
     let yPos = (tableView.frame.size.height - (messageHeight * 2)) / 2
     let width = tableView.frame.size.width
-    let titleMessage = "No peripherals available"
-    let subtitleMessage = "Scan again"
+    let titleMessage = NSLocalizedString("BLUETOOTH_CONNECTIVITY_LABEL_NO_PERIPHERALS_AVAILABLE_TITLE", comment: "")
+    let subtitleMessage = NSLocalizedString("BLUETOOTH_CONNECTIVITY_LABEL_NO_PERIPHERALS_AVAILABLE_SUBTITLE", comment: "")
     
     let frame = CGRect(x: xPos, y: yPos, width: width, height: messageHeight * 2)
     let availabilityMessage = AvailabilityMessageView(frame: frame, titles: titleMessage, subtitleMessage)
@@ -225,7 +219,7 @@ extension BluetoothConnectivityViewController: BluetoothSerialDelegate {
   
     
   func serialDidDiscoverPeripheral(_ peripheral: CBPeripheral, RSSI: NSNumber?) {
-    print("serialDidDiscoverPeripheral: \(String(describing: peripheral.name))")
+    print("serialDidDiscoverPeripheral: \(String(describing: peripheral.name))")  // TODO: TEST REMOVE!
     
     for exisiting in peripherals {
       if exisiting.peripheral?.identifier == peripheral.identifier { return }
@@ -240,35 +234,35 @@ extension BluetoothConnectivityViewController: BluetoothSerialDelegate {
   
   func serialDidFailToConnect(_ peripheral: CBPeripheral, error: NSError?) {
     searchDevicesButton.isEnabled = true
-    MBProgressHUD.showHUD(in: view, with: "Failed to connect")
+    MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_FAILED_TO_CONNECT", comment: ""))
   }
 
   
   func serialDidReceiveData(_ data: Data) {
-    MBProgressHUD.showHUD(in: view, with: "Peripheral did receive data")
+    MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_PERIPHERAL_RECEIVED_DATA", comment: ""))
   }
   
   
   func serialDidConnect(_ peripheral: CBPeripheral) {
     sendJSONFileButton.isEnabled = true
-    MBProgressHUD.showHUD(in: view, with: "Connected")
+    MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_CONNECTED", comment: ""))
   }
   
   
   func serialDidDisconnect(_ peripheral: CBPeripheral, error: NSError?) {
     reloadView()
-    MBProgressHUD.showHUD(in: view, with: "Disconnected")
+    MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_DISCONNECTED", comment: ""))
   }
   
   func serialIsReady(_ peripheral: CBPeripheral) {
-    MBProgressHUD.showHUD(in: view, with: "Peripheral is ready for communication")
+    MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_READY", comment: ""))
   }
   
   func serialDidChangeState() {
-    print("serialDidChangeState")
+    print("serialDidChangeState") // TODO: TEST REMOVE!
     reloadView()
     if !sharedInstance.serial.isPoweredOn {
-      MBProgressHUD.showHUD(in: view, with: "Bluetooth turned off")
+      MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_BT_OFF", comment: ""))
     }
   }
   
@@ -279,13 +273,14 @@ extension BluetoothConnectivityViewController: BluetoothSerialDelegate {
 extension BluetoothConnectivityViewController: BluetoothScanningCellDelegate {
   
   func bluetoothScanningCell(_ bluetoothScanningCell: BluetoothScanningTableViewCell, didPressConnect button: UIButton) {
-    print("didPressConnect at row: \(button.tag)")
+    print("didPressConnect at row: \(button.tag)") // TODO: TEST REMOVE!
     sharedInstance.serial.stopScan()
     
     let row = button.tag
     guard let selectedPeripheral = peripherals[row].peripheral else { return }
+    self.selectedPeripheral = selectedPeripheral
     sharedInstance.serial.connectToPeripheral(selectedPeripheral)
-    MBProgressHUD.showHUD(in: view, with: "Connecting")
+    MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_CONNECTING", comment: ""))
     scheduleTimerForConnectTimeOut()
   }
   
@@ -298,14 +293,14 @@ extension BluetoothConnectivityViewController: BluetoothScanningCellDelegate {
       selectedPeripheral = nil
     }
     
-    MBProgressHUD.showHUD(in: view, with: "Failed to connect")
+    MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_FAILED_TO_CONNECT", comment: ""))
   }
   
   
   @objc func scanTimeOut() {
     sharedInstance.serial.stopScan()
     searchDevicesButton.isEnabled = true
-    connectedPeripheralLabel.text = "Done scanning"
+    connectivityTitleLabel.text = NSLocalizedString("BLUETOOTH_CONNECTIVITY_LABEL_TITLE_DONE_SCANNING", comment: "")
     stopScanningIndicator()
     renderNoPeripheralsAvailableMessage()
     tableView.reloadData()

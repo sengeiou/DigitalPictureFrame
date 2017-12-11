@@ -23,8 +23,8 @@ extension BluetoothConnectivityViewController {
 //    sender.addSubview(circularProgress)
     
     if !sharedInstance.serial.isReady {
-      let title = "Not connected"
-      let message = "No bluetooth connected"
+      let title = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_TITLE_NOT_CONNECTED", comment: "")
+      let message = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_MESSAGE_NOT_CONNECTED", comment: "")
       AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
     } else {
 //      let msg = "TEST MESSAGE"
@@ -41,7 +41,7 @@ extension BluetoothConnectivityViewController {
       hideNoPeripheralsAvailableMessage()
       startScanningIndicator()
       sharedInstance.serial.startScan()
-      connectedPeripheralLabel.text = "Scanning..."
+      connectivityTitleLabel.text = NSLocalizedString("BLUETOOTH_CONNECTIVITY_LABEL_TITLE_SCANNING", comment: "")
       searchDevicesButton.isEnabled = false
       scheduleTimerForScanTimeOut()
       

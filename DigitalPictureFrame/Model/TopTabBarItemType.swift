@@ -23,16 +23,16 @@ extension TopTabBarItemType {
   var description: String {
     switch self {
     case .users:
-      return "Users"
+      return NSLocalizedString("TABBAR_ITEM_USERS_TITLE", comment: "")
       
     case .settings:
-      return "Settings"
+      return NSLocalizedString("TABBAR_ITEM_SETTINGS_TITLE", comment: "")
       
     case .wifi:
-      return "WiFi"
+      return NSLocalizedString("TABBAR_ITEM_WIFI_TITLE", comment: "")
       
     case .bluetoothConnectivity:
-      return "Bluetooth"
+      return NSLocalizedString("TABBAR_ITEM_BLUETOOTH_TITLE", comment: "")
     }
   }
   

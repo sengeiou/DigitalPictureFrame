@@ -92,6 +92,7 @@
 		E27D95771FAE85360099430B /* WiFiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95751FAE85360099430B /* WiFiTableViewCell.swift */; };
 		E27D95781FAE85360099430B /* WiFiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27D95761FAE85360099430B /* WiFiTableViewCell.xib */; };
 		E27D957A1FAE9CF70099430B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D95791FAE9CF70099430B /* DatabaseManager.swift */; };
+		E288CEC31FDF37F100B0E075 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E288CEC51FDF37F100B0E075 /* Localizable.strings */; };
 		E29369591FC1EED00001D7AB /* DigitalPictureFramePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29369581FC1EECF0001D7AB /* DigitalPictureFramePageViewController.swift */; };
 		E298EE941FC22C7C006BC203 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EE931FC22C7C006BC203 /* CustomTabBar.swift */; };
 		E298EE961FC22F3D006BC203 /* CustomTabBarDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EE951FC22F3D006BC203 /* CustomTabBarDataSource.swift */; };
@@ -220,6 +221,7 @@
 		E27D95751FAE85360099430B /* WiFiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiTableViewCell.swift; sourceTree = "<group>"; };
 		E27D95761FAE85360099430B /* WiFiTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WiFiTableViewCell.xib; sourceTree = "<group>"; };
 		E27D95791FAE9CF70099430B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		E288CEC41FDF37F100B0E075 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E29369511FBF464D0001D7AB /* DigitalPictureFrame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DigitalPictureFrame.entitlements; sourceTree = "<group>"; };
 		E29369581FC1EECF0001D7AB /* DigitalPictureFramePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFramePageViewController.swift; sourceTree = "<group>"; };
 		E298EE931FC22C7C006BC203 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				E20608CA1FAB629B00F06260 /* Assets.xcassets */,
 				E20608CF1FAB629B00F06260 /* Info.plist */,
 				E24F69611FAB99090099343B /* GoogleService-Info.plist */,
+				E288CEC51FDF37F100B0E075 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 			files = (
 				E2FB8E321FB0F2F100724889 /* TimePickerView.xib in Resources */,
 				E21D6CC01FDB259F00E966B1 /* BluetoothScanningTableViewCell.xib in Resources */,
+				E288CEC31FDF37F100B0E075 /* Localizable.strings in Resources */,
 				E27D95641FAE84D30099430B /* UserTableViewCell.xib in Resources */,
 				E27D95741FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.xib in Resources */,
 				E24F69601FAB93400099343B /* ServerData.json in Resources */,
@@ -980,6 +984,14 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		E288CEC51FDF37F100B0E075 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E288CEC41FDF37F100B0E075 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -987,6 +999,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1046,6 +1059,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
