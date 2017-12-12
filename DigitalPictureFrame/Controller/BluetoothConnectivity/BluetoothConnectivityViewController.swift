@@ -217,14 +217,6 @@ extension BluetoothConnectivityViewController {
 
 // MARK: - BluetoothSerialDelegate protocol
 extension BluetoothConnectivityViewController: BluetoothSerialDelegate {
-  
-//  func fakeSerialDidDiscoverPeripheral(_ peripheral: PeripheralItem, RSSI: NSNumber?) {
-//    print("serialDidDiscoverPeripheral: \(String(describing: peripheral.name))")
-//    let foundPeripheral = peripheral
-//    peripherals.append(foundPeripheral)
-//    peripherals.sort { $0.RSSI < $1.RSSI }
-//  }
-  
     
   func serialDidDiscoverPeripheral(_ peripheral: CBPeripheral, RSSI: NSNumber?) {
     print("serialDidDiscoverPeripheral: \(String(describing: peripheral.name))")  // TODO: TEST REMOVE!
@@ -267,7 +259,6 @@ extension BluetoothConnectivityViewController: BluetoothSerialDelegate {
   }
   
   func serialDidChangeState() {
-    print("serialDidChangeState") // TODO: TEST REMOVE!
     reloadView()
     if !sharedInstance.serial.isPoweredOn {
       MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_BT_OFF", comment: ""))
@@ -281,7 +272,6 @@ extension BluetoothConnectivityViewController: BluetoothSerialDelegate {
 extension BluetoothConnectivityViewController: BluetoothScanningCellDelegate {
   
   func bluetoothScanningCell(_ bluetoothScanningCell: BluetoothScanningTableViewCell, didPressConnect button: UIButton) {
-    print("didPressConnect at row: \(button.tag)") // TODO: TEST REMOVE!
     sharedInstance.serial.stopScan()
     
     let row = button.tag

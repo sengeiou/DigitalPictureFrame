@@ -27,9 +27,8 @@ extension BluetoothConnectivityViewController {
       let message = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_MESSAGE_NOT_CONNECTED", comment: "")
       AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
     } else {
-//      let msg = "TEST MESSAGE"
-//      sharedInstance.serial.sendMessageToDevice(msg)
-      MBProgressHUD.showHUD(in: view, with: "Peripheral is Ready. Sending file not implemented.")
+      let msg = "TEST MESSAGE"
+      sharedInstance.serial.sendMessageToDevice(msg)
     }
 
   }

@@ -77,17 +77,10 @@ extension BluetoothSerial {
     centralManager.scanForPeripherals(withServices: [serviceUUID], options: nil)
     
     // retrieve peripherals that are already connected
-    // see this stackoverflow question http://stackoverflow.com/questions/13286487
     let peripherals = centralManager.retrieveConnectedPeripherals(withServices: [serviceUUID])
     for peripheral in peripherals {
       delegate.serialDidDiscoverPeripheral?(peripheral, RSSI: nil)
     }
-    
-//    // MARK: - TEST CASE!
-//    let peripherals = [PeripheralItem(RSSI: 12.3), PeripheralItem(RSSI: 12.3), PeripheralItem(RSSI: 12.3), PeripheralItem(RSSI: 12.3)]
-//    for peripheral in peripherals {
-//      delegate.fakeSerialDidDiscoverPeripheral?(peripheral, RSSI: nil)
-//    }
   }
   
 
