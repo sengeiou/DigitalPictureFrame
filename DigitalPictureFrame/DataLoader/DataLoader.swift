@@ -11,7 +11,7 @@ import Foundation
 final class DataLoader {
   typealias DecodeCompletion = ((_ profile: User?)->())
   
-  static func loadUserFromJSONFile(fileName: String, decodeCompletion: DecodeCompletion) throws {
+  static func loadJSONFile(fileName: String, decodeCompletion: DecodeCompletion) throws {
     guard let path = Bundle.main.path(forResource: fileName, ofType: "json") else {
       throw FileLoaderError.fileNotFound(name: fileName)
     }

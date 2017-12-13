@@ -31,7 +31,6 @@
 		E21D6CA91FD9E77000E966B1 /* BluetoothConnectivityDataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CA81FD9E77000E966B1 /* BluetoothConnectivityDataSourceDelegate.swift */; };
 		E21D6CAB1FD9E81000E966B1 /* PeripheralItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CAA1FD9E81000E966B1 /* PeripheralItem.swift */; };
 		E21D6CAD1FD9E87C00E966B1 /* BluetoothConnectivityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CAC1FD9E87C00E966B1 /* BluetoothConnectivityDataSource.swift */; };
-		E21D6CAF1FD9EB2200E966B1 /* BluetoothConnectivityViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CAE1FD9EB2200E966B1 /* BluetoothConnectivityViewController+Actions.swift */; };
 		E21D6CB51FDA06DE00E966B1 /* BluetoothSerial.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CB41FDA06DE00E966B1 /* BluetoothSerial.swift */; };
 		E21D6CB71FDA070D00E966B1 /* BluetoothSerialDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CB61FDA070D00E966B1 /* BluetoothSerialDelegate.swift */; };
 		E21D6CB91FDAF2B500E966B1 /* BluetoothSerialSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CB81FDAF2B500E966B1 /* BluetoothSerialSingleton.swift */; };
@@ -161,7 +160,6 @@
 		E21D6CA81FD9E77000E966B1 /* BluetoothConnectivityDataSourceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothConnectivityDataSourceDelegate.swift; sourceTree = "<group>"; };
 		E21D6CAA1FD9E81000E966B1 /* PeripheralItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralItem.swift; sourceTree = "<group>"; };
 		E21D6CAC1FD9E87C00E966B1 /* BluetoothConnectivityDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothConnectivityDataSource.swift; sourceTree = "<group>"; };
-		E21D6CAE1FD9EB2200E966B1 /* BluetoothConnectivityViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BluetoothConnectivityViewController+Actions.swift"; sourceTree = "<group>"; };
 		E21D6CB41FDA06DE00E966B1 /* BluetoothSerial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothSerial.swift; sourceTree = "<group>"; };
 		E21D6CB61FDA070D00E966B1 /* BluetoothSerialDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothSerialDelegate.swift; sourceTree = "<group>"; };
 		E21D6CB81FDAF2B500E966B1 /* BluetoothSerialSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothSerialSingleton.swift; sourceTree = "<group>"; };
@@ -374,13 +372,13 @@
 				E24F69871FABCDD30099343B /* Items */,
 				E2204F7D1FACCEC600F7E8DC /* Response */,
 				E2FB8E2E1FB0F06600724889 /* NotificationCenter */,
+				E2D8AD941FBB77F6000DA60C /* Crypt.swift */,
 				E20FF6B91FAB770E00F89850 /* TopTabBarItemType.swift */,
 				E24F697D1FABBAFA0099343B /* DigitalPictureFrameItem.swift */,
 				E24F697A1FABB9400099343B /* DigitalPictureFrameCellType.swift */,
 				E24F69811FABC4610099343B /* DigitalPictureFrameCellSectionType.swift */,
 				E22ED44B1FB3678B0080570A /* EmbeddedViewTag.swift */,
 				E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */,
-				E2D8AD941FBB77F6000DA60C /* Crypt.swift */,
 				E298EE9F1FC24A08006BC203 /* SegueIdentifierType.swift */,
 				E21D6CAA1FD9E81000E966B1 /* PeripheralItem.swift */,
 			);
@@ -446,7 +444,6 @@
 			isa = PBXGroup;
 			children = (
 				E21D6CA41FD9CC3100E966B1 /* BluetoothConnectivityViewController.swift */,
-				E21D6CAE1FD9EB2200E966B1 /* BluetoothConnectivityViewController+Actions.swift */,
 			);
 			path = BluetoothConnectivity;
 			sourceTree = "<group>";
@@ -814,8 +811,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DigitalPictureFrame/Pods-DigitalPictureFrame-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTProgressBar/GTProgressBar.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/KYCircularProgress/KYCircularProgress.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/RNCryptor/RNCryptor.framework",
@@ -824,8 +821,8 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTProgressBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KYCircularProgress.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCryptor.framework",
@@ -962,7 +959,6 @@
 				E2D8AD951FBB77F6000DA60C /* Crypt.swift in Sources */,
 				E2217F331FB3ADB5002CCD9C /* WiFiCellDelegate.swift in Sources */,
 				E2FB8E3A1FB113BD00724889 /* UIView+AddConstraintsWithFormat.swift in Sources */,
-				E21D6CAF1FD9EB2200E966B1 /* BluetoothConnectivityViewController+Actions.swift in Sources */,
 				E20FF6C21FAB818A00F89850 /* UserViewController.swift in Sources */,
 				E20FF6A71FAB738B00F89850 /* StoryboardIdentifiable.swift in Sources */,
 				E24F69821FABC4610099343B /* DigitalPictureFrameCellSectionType.swift in Sources */,

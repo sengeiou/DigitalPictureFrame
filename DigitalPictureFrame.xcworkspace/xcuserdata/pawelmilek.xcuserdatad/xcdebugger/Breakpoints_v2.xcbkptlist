@@ -361,13 +361,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Model/BluetoothSerial/BluetoothSerial.swift"
-            timestampString = "534786299.166709"
+            filePath = "DigitalPictureFrame/Controller/BluetoothConnectivity/BluetoothConnectivityViewController.swift"
+            timestampString = "534891182.453161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "startScan()"
+            startingLineNumber = "273"
+            endingLineNumber = "273"
+            landmarkName = "serialDidFailToConnect(_:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalPictureFrame/Controller/BluetoothConnectivity/BluetoothConnectivityViewController+Actions.swift"
+            timestampString = "534813805.645181"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "sendJSONButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -378,12 +394,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/BluetoothSerial.swift"
-            timestampString = "534786299.166992"
+            timestampString = "534891182.453601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "startScan()"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
+            landmarkName = "peripheral(_:didWriteValueFor:error:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -394,60 +410,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/BluetoothSerial.swift"
-            timestampString = "534786299.167204"
+            timestampString = "534891182.453886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "centralManager(_:didConnect:)"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
+            landmarkName = "peripheral(_:didWriteValueFor:error:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Model/BluetoothSerial/BluetoothSerial.swift"
-            timestampString = "534786299.167416"
+            filePath = "DigitalPictureFrame/Controller/BluetoothConnectivity/BluetoothConnectivityViewController.swift"
+            timestampString = "534891182.454104"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "BluetoothSerial"
-            landmarkType = "21">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Model/BluetoothSerial/BluetoothSerial.swift"
-            timestampString = "534786299.167622"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "sendBytesToDevice(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Model/BluetoothSerial/BluetoothSerial.swift"
-            timestampString = "534786299.167853"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "sendBytesToDevice(_:)"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
+            landmarkName = "serialDidChangeState()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -458,12 +442,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Controller/BluetoothConnectivity/BluetoothConnectivityViewController.swift"
-            timestampString = "534786665.23557"
+            timestampString = "534891182.454328"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
-            landmarkName = "serialDidDisconnect(_:error:)"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
+            landmarkName = "sendJSONButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -473,13 +457,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DigitalPictureFrame/Controller/BluetoothConnectivity/BluetoothConnectivityViewController.swift"
-            timestampString = "534786665.561602"
+            filePath = "Pods/KYCircularProgress/Source/KYCircularProgress.swift"
+            timestampString = "534889973.275642"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
-            landmarkName = "serialDidDisconnect(_:error:)"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "progressChanged(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

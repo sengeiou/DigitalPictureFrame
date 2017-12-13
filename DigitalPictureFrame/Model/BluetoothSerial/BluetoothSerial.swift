@@ -13,7 +13,7 @@ import CoreBluetooth
 final class BluetoothSerial: NSObject {
   /// The CBCentralManager this bluetooth serial handler uses for... well, everything really
   private var centralManager: CBCentralManager!
-  
+
   /// UUID of the service to look for.
   private var serviceUUID = CBUUID(string: "EC00")
 //  private var serviceUUID = CBUUID(string: "FFE0")
@@ -58,6 +58,13 @@ final class BluetoothSerial: NSObject {
     return connectedPeripheral?.name ?? "Not available"
   }
   
+  // First up, check if we're meant to be sending an EOM
+  private var isSendingEOM = false
+  private var writeDataLength: Int = 0
+  private var maximumWriteLength: Int = 0
+  private var writtenData: Data = Data()
+  
+  
   
   init(delegate: BluetoothSerialDelegate) {
     super.init()
@@ -99,12 +106,43 @@ extension BluetoothSerial {
     centralManager.connect(peripheral, options: nil)
   }
   
+
   func disconnect() {
     if let connectedPeripheral = connectedPeripheral {
       centralManager.cancelPeripheralConnection(connectedPeripheral)
       
     } else if let pendingPeripheral = pendingPeripheral {
-      centralManager.cancelPeripheralConnection(pendingPeripheral) //TODO: Test whether its neccesary to set p to nil
+      centralManager.cancelPeripheralConnection(pendingPeripheral)
+    }
+  }
+
+}
+
+
+// MARK: - Clean up
+private extension BluetoothSerial {
+  /** Call this when things either go wrong, or you're done with the connection.
+   *  This cancels any subscriptions if there are any, or straight disconnects if not.
+   *  (didUpdateNotificationStateForCharacteristic will cancel the connection if a subscription is involved)
+   */
+  func cleanup() {
+    guard connectedPeripheral?.state == .connected else { return }
+    
+    // See if we are subscribed to a characteristic on the peripheral
+    guard let services = connectedPeripheral?.services else {
+      disconnect()
+      return
+    }
+    
+    for service in services {
+      guard let characteristics = service.characteristics else { continue }
+      
+      for characteristic in characteristics {
+        if characteristic.uuid.isEqual(characteristicUUID) && characteristic.isNotifying {
+          connectedPeripheral?.setNotifyValue(false, for: characteristic)
+          return
+        }
+      }
     }
   }
   
@@ -133,8 +171,45 @@ extension BluetoothSerial {
   
   func sendDataToDevice(_ data: Data) {
     guard let connectedPeripheral = connectedPeripheral, isReady else { return }
-    
-    connectedPeripheral.writeValue(data, for: writeCharacteristic!, type: writeType)
+
+    if isSendingEOM {
+      // send it again
+      connectedPeripheral.writeValue("EOM".data(using: String.Encoding.utf8)!, for: writeCharacteristic!, type: writeType)
+      isSendingEOM = false
+      return
+    }
+
+    // There's data left, so send until the callback fails, or we're done.
+    maximumWriteLength = connectedPeripheral.maximumWriteValueLength(for: writeType)
+    while isSendingEOM == false {
+      var amountToSend = data.count - writeDataLength;
+      
+      // Can't be longer than 512 bytes
+      if (amountToSend > maximumWriteLength) {
+        amountToSend = maximumWriteLength
+      }
+      
+      // Copy out the data we want
+      let chunk: Data = data.withUnsafeBytes {(body: UnsafePointer<UInt8>) in
+        return Data(bytes: body + writeDataLength, count: amountToSend)
+      }
+      
+      // Send chunk
+      connectedPeripheral.writeValue(chunk, for: writeCharacteristic!, type: writeType)
+//      let stringFromData = NSString(data: chunk, encoding: String.Encoding.utf8.rawValue)
+//      print("Sent: \(String(describing: stringFromData))")
+      
+      // It did send, so update our index
+      writeDataLength += amountToSend;
+      delegate.serialDidSendBytes?(chunk: writeDataLength, of: data.count)
+      // Was it the last one?
+      if (writeDataLength >= data.count) {
+        // Send End Of Message
+        connectedPeripheral.writeValue("EOM".data(using: String.Encoding.utf8)!, for: writeCharacteristic!, type: writeType)
+        isSendingEOM = true
+        return
+      }
+    }
   }
   
   
@@ -146,40 +221,11 @@ extension BluetoothSerial {
   
 }
 
-// MARK: - centralManagerStateDescription
-extension BluetoothSerial {
-  
-  var stateDescription: String {
-    
-    switch centralManager.state {
-    case .unknown:
-      return "State unknown, update imminent."
-      
-    case .resetting:
-      return "The connection with the system service was momentarily lost, update imminent."
-      
-    case .unsupported:
-      return "The platform doesn't support the Bluetooth Low Energy Central/Client role."
-      
-    case .unauthorized:
-      return "The application is not authorized to use the Bluetooth Low Energy role."
-      
-    case .poweredOff:
-      return "Bluetooth is currently powered off."
-      
-    case .poweredOn:
-      return "Bluetooth is currently powered on and available to use."
-    }
-  }
-  
-}
-
 
 // MARK: - CBCentralManagerDelegate protocol
 extension BluetoothSerial: CBCentralManagerDelegate {
   
   func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-    // just send it to the delegate
     delegate.serialDidDiscoverPeripheral?(peripheral, RSSI: RSSI)
   }
   
@@ -212,32 +258,53 @@ extension BluetoothSerial: CBCentralManagerDelegate {
     delegate.serialDidFailToConnect?(peripheral, error: error as NSError?)
   }
   
-  
   func centralManagerDidUpdateState(_ central: CBCentralManager) {
     // note that "didDisconnectPeripheral" won't be called if BLE is turned off while connected
     connectedPeripheral = nil
     pendingPeripheral = nil
+    writeDataLength = 0
     delegate.serialDidChangeState()
   }
-  
+
 }
 
 
 // MARK: - CBPeripheralDelegate protocol
 extension BluetoothSerial: CBPeripheralDelegate {
   
+  /** The Transfer Service was discovered
+   */
   func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+    guard error == nil else {
+      print("Error discovering services: \(error!.localizedDescription)")
+      cleanup()
+      return
+    }
+    
+    guard let services = peripheral.services else { return }
+    
     // discover the 0xFFE1 characteristic for all services (though there should only be one)
-    for service in peripheral.services! {
+    for service in services {
       peripheral.discoverCharacteristics([characteristicUUID], for: service)
     }
   }
   
   
+  /** The Transfer characteristic was discovered.
+   *  Once this has been found, we want to subscribe to it, which lets the peripheral know we want the data it contains
+   */
   func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+    guard error == nil else {
+      print("Error discovering services: \(error!.localizedDescription)")
+      cleanup()
+      return
+    }
+    
+    guard let characteristics = service.characteristics else { return }
+    
     // check whether the characteristic we're looking for (0xFFE1) is present - just to be sure
-    for characteristic in service.characteristics! {
-      if characteristic.uuid == characteristicUUID {
+    for characteristic in characteristics {
+      if characteristic.uuid.isEqual(characteristicUUID) {
         // subscribe to this value (so we'll get notified when there is serial data for us..)
         peripheral.setNotifyValue(true, for: characteristic)
         
@@ -254,26 +321,91 @@ extension BluetoothSerial: CBPeripheralDelegate {
   }
   
   
-  func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-    guard let data = characteristic.value else { return }
-    
-    delegate.serialDidReceiveData?(data)
-    
-    if let str = String(data: data, encoding: String.Encoding.utf8) {
-      delegate.serialDidReceiveString?(str)
-    } else {
-      print("Received an invalid string!") //uncomment for debugging
+  /** Invoked when you write data to a characteristic’s value.
+   */
+  func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+    guard error == nil else {
+      print("Error discovering services: \(error!.localizedDescription)")
+      return
     }
     
-    // now the bytes array
-    var bytes = [UInt8](repeating: 0, count: data.count / MemoryLayout<UInt8>.size)
-    (data as NSData).getBytes(&bytes, length: data.count)
-    delegate.serialDidReceiveBytes?(bytes)
+    guard let characteristicValue = characteristic.value else { return }
+    guard let stringFromData = NSString(data: characteristicValue, encoding: String.Encoding.utf8.rawValue) else {
+      print("Invalid data")
+      return
+    }
+    
+    // Have we got everything we need?
+    if stringFromData.isEqual(to: "EOM") {
+      delegate.serialDidReceiveString?(stringFromData as String)
+      delegate.serialDidReceiveData?(writtenData)
+      
+      // Cancel our subscription to the characteristic
+      peripheral.setNotifyValue(false, for: characteristic)
+      // and disconnect from the peripehral
+      centralManager.cancelPeripheralConnection(peripheral)
+    } else {
+      // Otherwise, just add the data on to what we already have
+      writtenData.append(characteristicValue)
+      
+      // Log it
+      //      print("didUpdateValueFor Received: \(stringFromData)")
+    }
+  }
+  
+
+  /** Invoked after you call readRSSI() to retrieve the value of the peripheral’s current RSSI while it is connected to the central manager.
+   */
+  func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+    delegate.serialDidReadRSSI?(RSSI)
   }
   
   
-  func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
-    delegate.serialDidReadRSSI?(RSSI)
+  /** The peripheral letting us know whether our subscribe/unsubscribe happened or not
+   */
+  func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+    print("Error changing notification state: \(String(describing: error?.localizedDescription))")
+    
+    // Exit if it's not the transfer characteristic
+    guard characteristic.uuid.isEqual(characteristicUUID) else { return }
+    
+    // Notification has started
+    if (characteristic.isNotifying) {
+      print("Notification began on \(characteristic)")
+      
+    } else { // Notification has stopped
+      print("Notification stopped on (\(characteristic)) Disconnecting")
+      centralManager.cancelPeripheralConnection(peripheral)
+    }
+  }
+  
+}
+
+
+// MARK: - centralManagerStateDescription
+extension BluetoothSerial {
+  
+  var stateDescription: String {
+    
+    switch centralManager.state {
+    case .unknown:
+      return "State unknown, update imminent."
+      
+    case .resetting:
+      return "The connection with the system service was momentarily lost, update imminent."
+      
+    case .unsupported:
+      return "The platform doesn't support the Bluetooth Low Energy Central/Client role."
+      
+    case .unauthorized:
+      return "The application is not authorized to use the Bluetooth Low Energy role."
+      
+    case .poweredOff:
+      return "Bluetooth is currently powered off."
+      
+    case .poweredOn:
+      return "Bluetooth is currently powered on and available to use."
+    }
   }
   
 }

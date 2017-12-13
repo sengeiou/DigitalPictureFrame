@@ -33,7 +33,7 @@ struct Style {
   
   // MARK: - BluetoothConnectivityVC
   struct BluetoothConnectivityVC {
-    static let buttonTitleFont = UIFont.systemFont(ofSize: 25, weight: .bold)
+    static let buttonTitleFont = UIFont.systemFont(ofSize: 23, weight: .bold)
     
     static let connectivityTitleLabelFont = UIFont.systemFont(ofSize: 17, weight: .light)
     static let connectivityTitleLabelNumberOfLines = 1

@@ -40,5 +40,8 @@ import CoreBluetooth
   
   /// Called when a peripheral is ready for communication
   @objc optional func serialIsReady(_ peripheral: CBPeripheral)
+  
+  // Called when a CBCentralManager did write value for characteristic
+  @objc optional func serialDidSendBytes(chunk: Int, of data: Int)
 }
 

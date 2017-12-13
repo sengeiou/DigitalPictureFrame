@@ -20,7 +20,6 @@ class BluetoothScanningTableViewCell: UITableViewCell {
       guard let peripheral = peripheral else { return }
       statusIcon.image = peripheral.statusIcon
       peripheralNameLabel.text = peripheral.name
-      connectButton.setTitle("Connect", for: .normal)
     }
   }
   
@@ -37,7 +36,8 @@ class BluetoothScanningTableViewCell: UITableViewCell {
 extension BluetoothScanningTableViewCell: ViewSetupable {
   
   func setup() {
-    
+    connectButton.setTitle(NSLocalizedString("BLUETOOTH_SCANNING_CELL_BUTTON_CONNECT_TITLE", comment: ""), for: .normal)
+    connectButton.isEnabled = true
   }
   
   
@@ -51,6 +51,7 @@ extension BluetoothScanningTableViewCell: ViewSetupable {
     connectButton.layer.borderWidth = 0.5
     connectButton.layer.cornerRadius = 8
   }
+  
 }
 
 
@@ -60,6 +61,14 @@ extension BluetoothScanningTableViewCell {
   func configure(by item: PeripheralItem, at indexPath: IndexPath) {
     peripheral = item
     connectButton.tag = indexPath.row
+    connectButton.isEnabled = true
+    connectButton.setTitle(NSLocalizedString("BLUETOOTH_SCANNING_CELL_BUTTON_CONNECT_TITLE", comment: ""), for: .normal)
+  }
+  
+  
+  func configureConnectedButton() {
+    connectButton.setTitle(NSLocalizedString("BLUETOOTH_SCANNING_CELL_BUTTON_CONNECTED_TITLE", comment: ""), for: .normal)
+    connectButton.isEnabled = false
   }
   
 }

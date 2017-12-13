@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double KYCircularProgressVersionNumber;
-FOUNDATION_EXPORT const unsigned char KYCircularProgressVersionString[];
+FOUNDATION_EXPORT double GTProgressBarVersionNumber;
+FOUNDATION_EXPORT const unsigned char GTProgressBarVersionString[];
 
