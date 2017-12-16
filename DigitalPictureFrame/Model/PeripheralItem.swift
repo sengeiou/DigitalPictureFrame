@@ -10,17 +10,19 @@ import Foundation
 import UIKit
 import CoreBluetooth
 
-class PeripheralItem: NSObject {
-  var peripheral: CBPeripheral?
+final class PeripheralItem: NSObject {
+  var peripheral: CBPeripheral
+  var advertisementData: [String : Any]
   var RSSI: Float
   var name: String
-  var statusIcon: UIImage?
+  var signalStrengthIcon: UIImage?
   
   
-  init(peripheral: CBPeripheral? = nil, RSSI: Float, statusIcon: UIImage? = UIImage(named: "icon-bluetooth-disconnected")) {
+  init(peripheral: CBPeripheral, advertisementData: [String : Any], RSSI: Float, signalStrengthIcon: UIImage? = nil) {
     self.peripheral = peripheral
+    self.advertisementData = advertisementData
     self.RSSI = RSSI
-    self.name = peripheral?.name ?? "Not Available"
-    self.statusIcon = statusIcon
+    self.name = peripheral.name ?? "Not Available"
+    self.signalStrengthIcon = signalStrengthIcon
   }
 }

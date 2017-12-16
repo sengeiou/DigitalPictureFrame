@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import NVActivityIndicatorView
 
 final class BluetoothConnectivityDataSource: NSObject, BluetoothConnectivityDataSourceDelegate {
   var items: [PeripheralItem]?
@@ -34,11 +35,20 @@ extension BluetoothConnectivityDataSource {
   }
   
   
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "List of devices"
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
+    let titleLabel = UILabel(frame: .zero)
+    titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+    titleLabel.text = "Peripherals nearby"
+    
+    view.backgroundColor = UIColor.groupGray
+    view.addSubview(titleLabel)
+    view.addConstraintsWith(format: "H:|-8-[view0]|", forView: titleLabel)
+    view.addConstraintsWith(format: "V:|[view0]|", forView: titleLabel)
+    return view
   }
   
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let item = item(at: indexPath) else { return UITableViewCell() }
     
@@ -55,7 +65,11 @@ extension BluetoothConnectivityDataSource {
 extension BluetoothConnectivityDataSource {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 50
+    return 60
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 40
   }
   
 }

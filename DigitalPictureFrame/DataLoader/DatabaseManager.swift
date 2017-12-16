@@ -12,7 +12,7 @@ import Firebase
 final class DatabaseManager {
   private static var sharedInstance: DatabaseManager!
   private var databaseReference: DatabaseReference
-  private(set) var data: DigitalPictureFrameData?
+  private var data: DigitalPictureFrameData?
   
   
   static func shared(data: DigitalPictureFrameData? = nil) -> DatabaseManager {
@@ -136,6 +136,18 @@ extension DatabaseManager {
   
   var wifiInfo: WiFiInfo? {
     return data?.wifiInfo
+  }
+  
+  
+  var encodedJsonData: Data? {
+    if let data = data, let encodedData = try? JSONEncoder().encode(data) {
+      if let _ = try? JSONSerialization.jsonObject(with: encodedData, options: .allowFragments) {
+        //          print("DigitalPictureFrameData JSON:\n" + String(describing: json) + "\n")
+        return encodedData
+      }
+    }
+    
+    return nil
   }
   
 }

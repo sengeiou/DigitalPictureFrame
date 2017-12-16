@@ -11,16 +11,17 @@ import UIKit
 import CoreBluetooth
 
 final class BluetoothSerial: NSObject {
+  static let newLineEndOfMessage = "\nEOM"
   /// The CBCentralManager this bluetooth serial handler uses for... well, everything really
   private var centralManager: CBCentralManager!
-
+  
   /// UUID of the service to look for.
   private var serviceUUID = CBUUID(string: "EC00")
-//  private var serviceUUID = CBUUID(string: "FFE0")
+//    private var serviceUUID = CBUUID(string: "FFE0")
   
   /// UUID of the characteristic to look for. ec0e
   private var characteristicUUID = CBUUID(string: "EC0E")
-//  private var characteristicUUID = CBUUID(string: "FFE1")
+//    private var characteristicUUID = CBUUID(string: "FFE1")
   
   /// The connected peripheral
   private var connectedPeripheral: CBPeripheral?
@@ -32,7 +33,7 @@ final class BluetoothSerial: NSObject {
   /// Legit HM10 modules (from JNHuaMao) require 'Write without Response',
   /// while fake modules (e.g. from Bolutek) require 'Write with Response'.
   private var writeType: CBCharacteristicWriteType = .withoutResponse
-
+  
   /// The characteristic 0xFFE1 we need to write to, of the connectedPeripheral
   weak var writeCharacteristic: CBCharacteristic?
   var delegate: BluetoothSerialDelegate!
@@ -42,27 +43,55 @@ final class BluetoothSerial: NSObject {
     return centralManager.state == .poweredOn && connectedPeripheral != nil && writeCharacteristic != nil
   }
   
-  var isScanning: Bool {
-    return centralManager.isScanning
+
+  var centralManagerState: CBManagerState {
+    return centralManager.state
   }
+  
   
   var isPoweredOn: Bool {
     return centralManager.state == .poweredOn
   }
   
+  var isPoweredOff: Bool {
+    return centralManager.state == .poweredOff
+  }
+  
+  var isScanning: Bool {
+    return centralManager.isScanning
+  }
+  
+  var isResetting: Bool {
+    return centralManager.state == .resetting
+  }
+  
+  var isUnauthorized: Bool {
+    return centralManager.state == .unauthorized
+  }
+  
+  var isUnknown: Bool {
+    return centralManager.state == .unknown
+  }
+  
+  var isUnsupported: Bool {
+    return centralManager.state == .unsupported
+  }
+  
+  
   var isConnectedToPeripheral: Bool {
-    return connectedPeripheral == nil ? false : true
+    return connectedPeripheral?.state == .connected ? true : false
   }
   
   var connectedPeripheralName: String {
-    return connectedPeripheral?.name ?? "Not available"
+    return connectedPeripheral?.name ?? "Name not available"
   }
   
   // First up, check if we're meant to be sending an EOM
   private var isSendingEOM = false
   private var writeDataLength: Int = 0
   private var maximumWriteLength: Int = 0
-  private var writtenData: Data = Data()
+  private var writtenData: Data?
+  private var totalWrittenData: Data?
   
   
   
@@ -90,7 +119,7 @@ extension BluetoothSerial {
     }
   }
   
-
+  
   func stopScan() {
     centralManager.stopScan()
   }
@@ -106,7 +135,7 @@ extension BluetoothSerial {
     centralManager.connect(peripheral, options: nil)
   }
   
-
+  
   func disconnect() {
     if let connectedPeripheral = connectedPeripheral {
       centralManager.cancelPeripheralConnection(connectedPeripheral)
@@ -115,7 +144,21 @@ extension BluetoothSerial {
       centralManager.cancelPeripheralConnection(pendingPeripheral)
     }
   }
+  
+}
 
+
+// MARK: - Reset sending states
+private extension BluetoothSerial {
+  
+  func resetSendingStates() {
+    maximumWriteLength = 0
+    writeDataLength = 0
+    writtenData = Data()
+    totalWrittenData = Data()
+    isSendingEOM = false
+  }
+  
 }
 
 
@@ -169,45 +212,42 @@ extension BluetoothSerial {
   }
   
   
-  func sendDataToDevice(_ data: Data) {
+  func sendDataToDevice(_ data: Data, progressHandler: @escaping (_ bytesSent: Int, _ totalBytesExpectedToSend: Int) -> ()) {
     guard let connectedPeripheral = connectedPeripheral, isReady else { return }
-
-    if isSendingEOM {
-      // send it again
-      connectedPeripheral.writeValue("EOM".data(using: String.Encoding.utf8)!, for: writeCharacteristic!, type: writeType)
-      isSendingEOM = false
-      return
-    }
-
+    
     // There's data left, so send until the callback fails, or we're done.
     maximumWriteLength = connectedPeripheral.maximumWriteValueLength(for: writeType)
-    while isSendingEOM == false {
-      var amountToSend = data.count - writeDataLength;
-      
-      // Can't be longer than 512 bytes
-      if (amountToSend > maximumWriteLength) {
-        amountToSend = maximumWriteLength
-      }
-      
-      // Copy out the data we want
-      let chunk: Data = data.withUnsafeBytes {(body: UnsafePointer<UInt8>) in
-        return Data(bytes: body + writeDataLength, count: amountToSend)
-      }
-      
-      // Send chunk
-      connectedPeripheral.writeValue(chunk, for: writeCharacteristic!, type: writeType)
-//      let stringFromData = NSString(data: chunk, encoding: String.Encoding.utf8.rawValue)
-//      print("Sent: \(String(describing: stringFromData))")
-      
-      // It did send, so update our index
-      writeDataLength += amountToSend;
-      delegate.serialDidSendBytes?(chunk: writeDataLength, of: data.count)
-      // Was it the last one?
-      if (writeDataLength >= data.count) {
-        // Send End Of Message
-        connectedPeripheral.writeValue("EOM".data(using: String.Encoding.utf8)!, for: writeCharacteristic!, type: writeType)
-        isSendingEOM = true
-        return
+    totalWrittenData = Data()
+    
+    DispatchQueue.global(qos: .background).async {
+      while self.isSendingEOM == false {
+        var bytesToSend = data.count - self.writeDataLength
+        
+        // Can't be longer than 512 bytes
+        if bytesToSend > self.maximumWriteLength {
+          bytesToSend = self.maximumWriteLength
+        }
+        
+        // Copy out the data we want
+        let chunk: Data = data.withUnsafeBytes {(body: UnsafePointer<UInt8>) in
+          return Data(bytes: body + self.writeDataLength, count: bytesToSend)
+        }
+        
+        // Send data chunk
+        connectedPeripheral.writeValue(chunk, for: self.writeCharacteristic!, type: self.writeType)
+        self.totalWrittenData!.append(chunk)
+        self.writeDataLength += bytesToSend
+        progressHandler(self.writeDataLength, data.count)
+        
+        if self.writeDataLength >= data.count {
+          // Send End Of Message
+          let stringFromData = String(data: self.totalWrittenData!, encoding: String.Encoding.utf8)!
+          print(stringFromData)
+          
+          connectedPeripheral.writeValue(BluetoothSerial.newLineEndOfMessage.data(using: String.Encoding.utf8)!, for: self.writeCharacteristic!, type: self.writeType)
+          self.isSendingEOM = true
+          return
+        }
       }
     }
   }
@@ -226,14 +266,17 @@ extension BluetoothSerial {
 extension BluetoothSerial: CBCentralManagerDelegate {
   
   func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+    print("Bluetooth Manager --> didDiscoverPeripheral, RSSI:\(RSSI)")
     delegate.serialDidDiscoverPeripheral?(peripheral, RSSI: RSSI)
   }
   
   
   func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
     peripheral.delegate = self
-    pendingPeripheral = nil
+    
     connectedPeripheral = peripheral
+    pendingPeripheral = nil
+    resetSendingStates()
     delegate.serialDidConnect?(peripheral)
     
     // Okay, the peripheral is connected but we're not ready yet!
@@ -249,6 +292,7 @@ extension BluetoothSerial: CBCentralManagerDelegate {
   func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
     connectedPeripheral = nil
     pendingPeripheral = nil
+    resetSendingStates()
     delegate.serialDidDisconnect(peripheral, error: error as NSError?)
   }
   
@@ -262,10 +306,10 @@ extension BluetoothSerial: CBCentralManagerDelegate {
     // note that "didDisconnectPeripheral" won't be called if BLE is turned off while connected
     connectedPeripheral = nil
     pendingPeripheral = nil
-    writeDataLength = 0
-    delegate.serialDidChangeState()
+    resetSendingStates()
+    delegate.serialDidChangeState(central.state)
   }
-
+  
 }
 
 
@@ -321,6 +365,35 @@ extension BluetoothSerial: CBPeripheralDelegate {
   }
   
   
+  func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+    guard error == nil else {
+      print("Error discovering services: \(error!.localizedDescription)")
+      return
+    }
+    
+    guard let characteristicValue = characteristic.value else { return }
+    guard let stringFromData = NSString(data: characteristicValue, encoding: String.Encoding.utf8.rawValue) else {
+      print("Invalid data")
+      return
+    }
+    
+//    // Have we got everything we need?
+//    if let writtenData = writtenData, stringFromData.isEqual(to: BluetoothSerial.newLineEndOfMessage) {
+//      delegate.serialDidReceiveData?(writtenData)
+//      delegate.serialDidReceiveString?(stringFromData as String)
+//
+//      // Cancel our subscription to the characteristic
+//      peripheral.setNotifyValue(false, for: characteristic)
+//      // and disconnect from the peripehral
+//      centralManager.cancelPeripheralConnection(peripheral)
+//    } else {
+//      // Otherwise, just add the data on to what we already have
+//      writtenData?.append(characteristicValue)
+//      delegate.serialDidSendToPeripheral?(data: writtenData!, totalExpectedToSend: totalWrittenData!)
+//    }
+  }
+  
+  
   /** Invoked when you write data to a characteristic’s value.
    */
   func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
@@ -336,24 +409,22 @@ extension BluetoothSerial: CBPeripheralDelegate {
     }
     
     // Have we got everything we need?
-    if stringFromData.isEqual(to: "EOM") {
+    if let writtenData = writtenData, stringFromData.isEqual(to: BluetoothSerial.newLineEndOfMessage) {
       delegate.serialDidReceiveString?(stringFromData as String)
       delegate.serialDidReceiveData?(writtenData)
-      
+
       // Cancel our subscription to the characteristic
       peripheral.setNotifyValue(false, for: characteristic)
       // and disconnect from the peripehral
       centralManager.cancelPeripheralConnection(peripheral)
     } else {
       // Otherwise, just add the data on to what we already have
-      writtenData.append(characteristicValue)
-      
-      // Log it
-      //      print("didUpdateValueFor Received: \(stringFromData)")
+      writtenData?.append(characteristicValue)
+      delegate.serialDidSendToPeripheral?(data: writtenData!, totalExpectedToSend: totalWrittenData!)
     }
   }
   
-
+  
   /** Invoked after you call readRSSI() to retrieve the value of the peripheral’s current RSSI while it is connected to the central manager.
    */
   func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {

@@ -1,5 +1,5 @@
 //
-//  DataLoader.swift
+//  FileLoader.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek
@@ -8,8 +8,9 @@
 
 import Foundation
 
-final class DataLoader {
-  typealias DecodeCompletion = ((_ profile: User?)->())
+final class FileLoader {
+  typealias DecodeCompletion = ((_ digitalPictureFrameData: DigitalPictureFrameData?) -> ())
+  
   
   static func loadJSONFile(fileName: String, decodeCompletion: DecodeCompletion) throws {
     guard let path = Bundle.main.path(forResource: fileName, ofType: "json") else {
@@ -19,8 +20,9 @@ final class DataLoader {
     do {
       let pathURL = URL(fileURLWithPath: path)
       let data = try Data(contentsOf: pathURL)
-      let profile = try JSONDecoder().decode(User.self, from: data)
-      decodeCompletion(profile)
+      let digitalPictureFrameData = try JSONDecoder().decode(DigitalPictureFrameData.self, from: data)
+      
+      decodeCompletion(digitalPictureFrameData)
     } catch let error {
       throw error
     }

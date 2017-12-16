@@ -1,6 +1,6 @@
 //
 //  StoryboardIdentifiable.swift
-//  ARPuzzle15
+//  DigitalPictureFrame
 //
 //  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.

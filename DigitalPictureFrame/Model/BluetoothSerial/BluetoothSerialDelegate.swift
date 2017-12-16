@@ -12,7 +12,7 @@ import CoreBluetooth
 
 @objc protocol BluetoothSerialDelegate {
   /// Called when the state of the CBCentralManager changes (e.g. when bluetooth is turned on/off)
-  func serialDidChangeState()
+  func serialDidChangeState(_ state: CBManagerState)
   
   /// Called when a peripheral disconnected
   func serialDidDisconnect(_ peripheral: CBPeripheral, error: NSError?)
@@ -25,6 +25,9 @@ import CoreBluetooth
   
   /// Called when a message is received
   @objc optional func serialDidReceiveData(_ data: Data)
+  
+  /// Called when a peripheral is receiving data
+  @objc optional func serialDidSendToPeripheral(data: Data, totalExpectedToSend: Data)
   
   /// Called when the RSSI of the connected peripheral is read
   @objc optional func serialDidReadRSSI(_ rssi: NSNumber)
@@ -40,8 +43,5 @@ import CoreBluetooth
   
   /// Called when a peripheral is ready for communication
   @objc optional func serialIsReady(_ peripheral: CBPeripheral)
-  
-  // Called when a CBCentralManager did write value for characteristic
-  @objc optional func serialDidSendBytes(chunk: Int, of data: Int)
 }
 

@@ -20,9 +20,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVg-y0-kZn">
-                        <rect key="frame" x="295" y="7" width="80" height="35.5"/>
+                        <rect key="frame" x="272" y="12" width="95" height="25.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="nIx-xr-klV"/>
+                            <constraint firstAttribute="width" constant="95" id="nIx-xr-klV"/>
                         </constraints>
                         <state key="normal" title="ConnenctButton"/>
                         <connections>
@@ -30,34 +30,47 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PeripheralNameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNQ-W7-Rdm">
-                        <rect key="frame" x="24" y="14.5" width="164" height="21"/>
+                        <rect key="frame" x="32" y="14.5" width="164" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="poG-6K-ECd">
-                        <rect key="frame" x="0.0" y="15" width="20" height="20"/>
+                        <rect key="frame" x="8" y="15" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="P3V-5K-5Oo"/>
                             <constraint firstAttribute="width" constant="20" id="Qda-te-m4L"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNx-rd-qD3">
+                        <rect key="frame" x="8" y="35" width="20" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="oCN-Ij-rfs"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="fVg-y0-kZn" secondAttribute="trailing" id="0Aq-7Y-lGR"/>
+                    <constraint firstAttribute="trailing" secondItem="fVg-y0-kZn" secondAttribute="trailing" constant="8" id="0Aq-7Y-lGR"/>
+                    <constraint firstItem="wNx-rd-qD3" firstAttribute="top" secondItem="poG-6K-ECd" secondAttribute="bottom" id="91t-xO-cmI"/>
                     <constraint firstItem="poG-6K-ECd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CwZ-Tf-hgf"/>
                     <constraint firstItem="vNQ-W7-Rdm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="EbD-GI-7tx"/>
-                    <constraint firstItem="poG-6K-ECd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="NpJ-uk-BFT"/>
+                    <constraint firstItem="poG-6K-ECd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="NpJ-uk-BFT"/>
                     <constraint firstItem="vNQ-W7-Rdm" firstAttribute="leading" secondItem="poG-6K-ECd" secondAttribute="trailing" constant="4" id="QcB-B0-IIf"/>
-                    <constraint firstItem="fVg-y0-kZn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="aE9-4b-Jzf"/>
-                    <constraint firstAttribute="bottom" secondItem="fVg-y0-kZn" secondAttribute="bottom" constant="7" id="bC7-cU-Huw"/>
+                    <constraint firstItem="fVg-y0-kZn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="aE9-4b-Jzf"/>
+                    <constraint firstAttribute="bottom" secondItem="fVg-y0-kZn" secondAttribute="bottom" constant="12" id="bC7-cU-Huw"/>
+                    <constraint firstItem="wNx-rd-qD3" firstAttribute="trailing" secondItem="poG-6K-ECd" secondAttribute="trailing" id="fE1-Us-ULq"/>
+                    <constraint firstAttribute="bottom" secondItem="wNx-rd-qD3" secondAttribute="bottom" id="hTt-nj-Z65"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="connectButton" destination="fVg-y0-kZn" id="a7Z-VU-MuW"/>
                 <outlet property="peripheralNameLabel" destination="vNQ-W7-Rdm" id="kdU-nm-HJ1"/>
-                <outlet property="statusIcon" destination="poG-6K-ECd" id="VcD-M8-lin"/>
+                <outlet property="signalStrengthImageView" destination="poG-6K-ECd" id="VcD-M8-lin"/>
+                <outlet property="signalStrengthLabel" destination="wNx-rd-qD3" id="wCC-Hw-wOg"/>
             </connections>
             <point key="canvasLocation" x="35.5" y="54"/>
         </tableViewCell>

@@ -9,17 +9,41 @@
 import UIKit
 
 class BluetoothScanningTableViewCell: UITableViewCell {
-  @IBOutlet weak var statusIcon: UIImageView!
+  @IBOutlet weak var signalStrengthImageView: UIImageView!
   @IBOutlet weak var peripheralNameLabel: UILabel!
   @IBOutlet weak var connectButton: UIButton!
+  @IBOutlet weak var signalStrengthLabel: UILabel!
   
   weak var delegate: BluetoothScanningCellDelegate?
   
   private var peripheral: PeripheralItem? {
     didSet {
       guard let peripheral = peripheral else { return }
-      statusIcon.image = peripheral.statusIcon
+      signalStrengthImageView.image = peripheral.signalStrengthIcon
       peripheralNameLabel.text = peripheral.name
+      
+      let RSSI = Int(peripheral.RSSI)
+      signalStrengthLabel.text = "\(RSSI)"
+      
+      switch labs(RSSI) {
+      case 0...40:
+        signalStrengthImageView.image = UIImage(named: "icon-signal-strength-5")
+        
+      case 41...53:
+        signalStrengthImageView.image = UIImage(named: "icon-signal-strength-4")
+        
+      case 54...65:
+        signalStrengthImageView.image = UIImage(named: "icon-signal-strength-3")
+        
+      case 66...77:
+        signalStrengthImageView.image = UIImage(named: "icon-signal-strength-2")
+        
+      case 77...89:
+        signalStrengthImageView.image = UIImage(named: "icon-signal-strength-1")
+        
+      default:
+        signalStrengthImageView.image = UIImage(named: "icon-signal-strength-0")
+      }
     }
   }
   
@@ -45,6 +69,7 @@ extension BluetoothScanningTableViewCell: ViewSetupable {
     typealias StyleBluetoothScanningCell = Style.BluetoothScanningCell
     
     selectionStyle = .none
+    signalStrengthLabel.font = StyleBluetoothScanningCell.signalStrengthFont
     peripheralNameLabel.font = StyleBluetoothScanningCell.peripheralNameFont
     connectButton.titleLabel?.font = StyleBluetoothScanningCell.connectButtonTitleFont
     connectButton.layer.borderColor = UIColor.appleBlue.cgColor

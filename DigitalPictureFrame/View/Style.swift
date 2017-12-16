@@ -47,6 +47,7 @@ struct Style {
   
   // MARK: - BluetoothScanningTableViewCell
   struct BluetoothScanningCell {
+    static let signalStrengthFont = UIFont.systemFont(ofSize: 9, weight: .regular)
     static let peripheralNameFont = UIFont.systemFont(ofSize: 15, weight: .regular)
     static let connectButtonTitleFont = UIFont.systemFont(ofSize: 13, weight: .medium)
   }
