@@ -22,7 +22,7 @@ final class PeripheralItem: NSObject {
     self.peripheral = peripheral
     self.advertisementData = advertisementData
     self.RSSI = RSSI
-    self.name = peripheral.name ?? "Not Available"
+    self.name = peripheral.name ?? "Name not available"
     self.signalStrengthIcon = signalStrengthIcon
   }
 }

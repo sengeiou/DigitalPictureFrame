@@ -1,5 +1,5 @@
 //
-//  PeripheralViewController.swift
+//  BluetoothPeripheralViewController.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek.
@@ -12,13 +12,14 @@ import CoreBluetooth
 class BluetoothPeripheralViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, BluetoothDelegate, UINavigationBarDelegate {
   typealias PeripheralStyle = Style.PeripheralVC
   
-  fileprivate let sharedBluetoothManager = BluetoothManager.shared()
-  fileprivate var showAdvertisementData = false
-  fileprivate var services: [CBService]?
-  fileprivate var characteristicsDic = [CBUUID : [CBCharacteristic]]()
+  private let serviceCellIdentifier = "ServiceCellIdentifier"
+  private let sharedBluetoothManager = BluetoothManager.shared()
+  private var showAdvertisementData = false
+  private var services: [CBService]?
+  private var characteristicsDic = [CBUUID : [CBCharacteristic]]()
   
-  var lastAdvertisementData: [String: Any]?
-  fileprivate var advertisementDataKeys: [String]?
+  var advertisementData: [String: Any]?
+  private var advertisementDataKeys: [String]?
   
   @IBOutlet weak var navigationBar: UINavigationBar!
   @IBOutlet weak var peripheralNameLabel: UILabel!
@@ -29,7 +30,7 @@ class BluetoothPeripheralViewController: UIViewController, UITableViewDelegate, 
   @IBOutlet weak var sendButton: UIButton!
   @IBOutlet weak var centralSentProgressBar: UIProgressView!
   
-  var delegate: BluetoothPeripheralDataSourceDelegate?
+  var dataSourceDelegate: BluetoothPeripheralDataSourceDelegate?
   
   
   override func viewDidLoad() {
@@ -107,14 +108,14 @@ class BluetoothPeripheralViewController: UIViewController, UITableViewDelegate, 
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var cell = tableView.dequeueReusableCell(withIdentifier: "serviceCell")
+    var cell = tableView.dequeueReusableCell(withIdentifier: serviceCellIdentifier)
     if cell == nil {
-      cell = UITableViewCell(style: .subtitle, reuseIdentifier: "serviceCell")
+      cell = UITableViewCell(style: .subtitle, reuseIdentifier: serviceCellIdentifier)
       cell?.selectionStyle = .none
       cell?.accessoryType = .disclosureIndicator
     }
     if (indexPath as NSIndexPath).section == 0 {
-      cell?.textLabel?.text = CBAdvertisementData.getAdvertisementDataStringValue(lastAdvertisementData!, key: advertisementDataKeys![(indexPath as NSIndexPath).row])
+      cell?.textLabel?.text = CBAdvertisementData.getAdvertisementDataStringValue(advertisementData!, key: advertisementDataKeys![(indexPath as NSIndexPath).row])
       cell?.textLabel?.adjustsFontSizeToFitWidth = true
       
       cell?.detailTextLabel?.text = CBAdvertisementData.getAdvertisementDataName(advertisementDataKeys![(indexPath as NSIndexPath).row])
@@ -190,16 +191,30 @@ class BluetoothPeripheralViewController: UIViewController, UITableViewDelegate, 
 
 
 // MARK: - ViewSetupable protocol
-extension PeripheralViewController: ViewSetupable {
+extension BluetoothPeripheralViewController: ViewSetupable {
   
   func setup() {
     navigationBar.topItem?.title = NSLocalizedString("BLUETOOTH_PERIPHERAL_NAVIGATIONBAR_TITLE", comment: "")
     
-    advertisementDataKeys = ([String](lastAdvertisementData!.keys)).sorted()
+    advertisementDataKeys = ([String](advertisementData!.keys)).sorted()
     sharedBluetoothManager.discoverCharacteristics()
     services = sharedBluetoothManager.connectedPeripheral?.services
     peripheralNameLabel.text = sharedBluetoothManager.connectedPeripheral?.name
     peripheralUUIDLabel.text = sharedBluetoothManager.connectedPeripheral?.identifier.uuidString
+    
+    
+    sharedBluetoothManager.delegate = self
+//    dataSourceDelegate = BluetoothPeripheralDataSource(self, items: advertisementData)
+    
+//    tableView.register(cell: BluetoothScanningTableViewCell.self)
+//    tableView.dataSource = dataSourceDelegate
+//    tableView.delegate = dataSourceDelegate
+//    tableView.isScrollEnabled = true
+//    tableView.bounces = false
+//    tableView.estimatedRowHeight = 60
+//    tableView.rowHeight = UITableViewAutomaticDimension
+//    tableView.tableFooterView = UIView(frame: .zero)
+    
     reloadTableView()
   }
   
@@ -224,7 +239,7 @@ extension PeripheralViewController: ViewSetupable {
 
 
 // MARK: - Render titles
-private extension PeripheralViewController {
+private extension BluetoothPeripheralViewController {
   
   func setupProgressBar() {
     centralSentProgressBar.progress = 0
@@ -242,7 +257,7 @@ private extension PeripheralViewController {
 }
 
 // MARK: - Send JSON data to Arduino
-private extension PeripheralViewController {
+private extension BluetoothPeripheralViewController {
   
   func sendDataToArduino() {
     guard let dataForArduino = DatabaseManager.shared().encodedJsonData else { return }
@@ -266,7 +281,7 @@ private extension PeripheralViewController {
 
 
 // MARK: - BluetoothSerialDelegate protocol
-extension PeripheralViewController {
+extension BluetoothPeripheralViewController {
   
   //  func serialDidReceiveData(_ data: Data) {
   //    reloadView()
@@ -299,7 +314,7 @@ extension PeripheralViewController {
 
 
 // MARK: - Actions
-private extension PeripheralViewController {
+private extension BluetoothPeripheralViewController {
   
   @IBAction func sendButtonPressed(_ sender: UIButton) {
     if !sharedBluetoothManager.isReady {

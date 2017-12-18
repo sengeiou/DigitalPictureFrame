@@ -1,5 +1,5 @@
 //
-//  BluetoothSerial.swift
+//  BluetoothManager.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek.

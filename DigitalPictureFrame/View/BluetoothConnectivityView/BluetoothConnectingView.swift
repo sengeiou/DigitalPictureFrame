@@ -7,17 +7,22 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class BluetoothConnectingView: UIView {
   static private let sharedInstance = BluetoothConnectingView()
   
-  private let tipLbl = UILabel()
-  private let tipNameLbl = UILabel()
-  
+  private let contentView = UIView()
+  private let titleLabel = UILabel()
+  private let subtitleLabel = UILabel()
+  private var scanningIndicator: NVActivityIndicatorView = {
+    return NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 35, height: 35), type: .ballSpinFadeLoader, color: .white)
+  }()
   
   fileprivate init() {
     super.init(frame: UIScreen.main.bounds)
     self.setup()
+    self.setupLayout()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -30,50 +35,62 @@ class BluetoothConnectingView: UIView {
 extension BluetoothConnectingView: ViewSetupable {
   
   func setup() {
-    self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
-    let contentView = UIView()
+    backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+    
+    contentView.backgroundColor = UIColor.appleBlue
+    contentView.layer.cornerRadius = 20
+    
+    titleLabel.text = "Connecting..."
+    titleLabel.textColor = .white
+    titleLabel.font = UIFont.systemFont(ofSize: 19, weight: .medium)
+    
+    subtitleLabel.text = "Peripheral Name"
+    subtitleLabel.textColor = .white
+    subtitleLabel.font = UIFont.systemFont(ofSize: 16, weight: .light)
+    
+    scanningIndicator.startAnimating()
+  }
+ 
+  func setupLayout() {
+    setupConstraints()
+  }
+}
+
+
+// MARK: -
+extension BluetoothConnectingView {
+  
+  func setupConstraints() {
+    contentView.addSubview(titleLabel)
+    contentView.addSubview(subtitleLabel)
+    contentView.addSubview(scanningIndicator)
+    addSubview(contentView)
+    
     contentView.translatesAutoresizingMaskIntoConstraints = false
-    contentView.backgroundColor = UIColor.white
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+    scanningIndicator.translatesAutoresizingMaskIntoConstraints = false
     
-    
-    tipLbl.translatesAutoresizingMaskIntoConstraints = false
-    tipLbl.text = "Connecting..."
-    tipLbl.font = UIFont.systemFont(ofSize: 18)
-    contentView.addSubview(tipLbl)
-    
-    tipNameLbl.translatesAutoresizingMaskIntoConstraints = false
-    tipNameLbl.text = "Pluto Y-BLE"
-    tipNameLbl.font = UIFont.systemFont(ofSize: 16)
-    contentView.addSubview(tipNameLbl)
-    
-    let activityIndicatorView =  UIActivityIndicatorView()
-    activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-    activityIndicatorView.activityIndicatorViewStyle = .gray
-    activityIndicatorView.startAnimating()
-    contentView.addSubview(activityIndicatorView)
-    
-    self.addSubview(contentView)
-    
-    let contentViewLeading = contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50)
-    let contentViewTrailing = contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50)
+    let contentViewLeading = contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 80)
+    let contentViewTrailing = contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -80)
     let contentViewHeight = contentView.heightAnchor.constraint(equalToConstant: 120)
-    let contentViewCenterY = contentView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -90)
+    let contentViewCenterY = contentView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0)
     NSLayoutConstraint.activate([contentViewLeading, contentViewTrailing, contentViewHeight, contentViewCenterY])
     
-    let tipLblTop = tipLbl.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20)
-    let tipLblCenterX = tipLbl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
-    let tipLblWidth = tipLbl.widthAnchor.constraint(greaterThanOrEqualToConstant: 20)
-    NSLayoutConstraint.activate([tipLblTop, tipLblCenterX, tipLblWidth])
+    let titleLabelTopConstraint = titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20)
+    let titleLabelCenterXConstraint = titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+    let titleLabelWidthConstraint = titleLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 20)
+    NSLayoutConstraint.activate([titleLabelTopConstraint, titleLabelCenterXConstraint, titleLabelWidthConstraint])
     
-    let tipNameLblTop = tipNameLbl.topAnchor.constraint(equalTo: tipLbl.bottomAnchor, constant: 10)
-    let tipNameLblCenterX = tipNameLbl.centerXAnchor.constraint(equalTo: tipLbl.centerXAnchor)
-    let tipNameLblWidth = tipNameLbl.widthAnchor.constraint(greaterThanOrEqualToConstant: 20)
-    NSLayoutConstraint.activate([tipNameLblTop, tipNameLblCenterX, tipNameLblWidth])
+    let subtitleLabelTopConstraint = subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10)
+    let subtitleLabelCenterXConstraint = subtitleLabel.centerXAnchor.constraint(equalTo: titleLabel.centerXAnchor)
+    let subtitleLabelWidthConstraint = subtitleLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 20)
+    NSLayoutConstraint.activate([subtitleLabelTopConstraint, subtitleLabelCenterXConstraint, subtitleLabelWidthConstraint])
     
-    let activityViewTop = activityIndicatorView.topAnchor.constraint(equalTo: tipNameLbl.bottomAnchor, constant: 10)
-    let activityViewCenterX = activityIndicatorView.centerXAnchor.constraint(equalTo: tipNameLbl.centerXAnchor)
-    let activityViewWidth = activityIndicatorView.widthAnchor.constraint(equalToConstant: 10)
-    NSLayoutConstraint.activate([activityViewTop, activityViewWidth, activityViewCenterX])
+    let scanningIndicatorViewTopConstraint = scanningIndicator.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 5)
+    let scanningIndicatorViewCenterXConstraint = scanningIndicator.centerXAnchor.constraint(equalTo: subtitleLabel.centerXAnchor)
+    let scanningIndicatorViewWidthConstraint = scanningIndicator.widthAnchor.constraint(equalToConstant: 50)
+    NSLayoutConstraint.activate([scanningIndicatorViewTopConstraint, scanningIndicatorViewWidthConstraint, scanningIndicatorViewCenterXConstraint])
   }
   
 }
@@ -82,17 +99,16 @@ extension BluetoothConnectingView: ViewSetupable {
 // MARK: - Show/Hide view
 extension BluetoothConnectingView {
   
-  static func show() -> BluetoothConnectingView {
+  static func show() {
     if let window = UIApplication.shared.keyWindow {
       window.addSubview(sharedInstance)
     }
-    return sharedInstance
   }
   
   
   static func showWith(name: String) {
     if let window = UIApplication.shared.keyWindow {
-      sharedInstance.tipNameLbl.text = name
+      sharedInstance.subtitleLabel.text = name
       window.addSubview(sharedInstance)
     }
   }

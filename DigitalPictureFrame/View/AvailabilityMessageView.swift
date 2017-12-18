@@ -11,11 +11,13 @@ import UIKit
 
 
 class AvailabilityMessageView: UIView, ViewSetupable {
-  fileprivate var isVisible = false
-  fileprivate var title: String?
-  fileprivate var subtitle: String?
-  fileprivate var labelHeight: CGFloat!
-  fileprivate lazy var titleLabel: UILabel = {
+  static private var parentView: UIView?
+  
+  private var isVisible = false
+  private var title: String?
+  private var subtitle: String?
+  private var labelHeight: CGFloat!
+  private lazy var titleLabel: UILabel = {
     let xPos = CGFloat(0)
     let yPos = CGFloat(0)
     let width = self.frame.size.width
@@ -26,7 +28,7 @@ class AvailabilityMessageView: UIView, ViewSetupable {
   }()
   
   
-  fileprivate lazy var subTitleLabel: UILabel = {
+  private lazy var subTitleLabel: UILabel = {
     let xPos = CGFloat(0)
     let yPos = self.titleLabel.frame.size.height
     let width = self.frame.size.width
@@ -80,4 +82,41 @@ extension AvailabilityMessageView {
     addConstraintsWith(format: "H:|[view0]|", forView: titleLabel)
     addConstraintsWith(format: "H:|[view0]|", forView: subTitleLabel)
   }
+}
+
+
+// MARK: - Show/Hide view
+extension AvailabilityMessageView {
+  
+  private static var isViewVisible: Bool {
+    guard let _ = parentView?.viewWithTag(EmbeddedViewTag.availabilityMessage.rawValue) else {
+      return false
+    }
+    
+    return true
+  }
+  
+  
+  static func show(on view: UIView, title: String, subtitle: String? = nil) {
+    parentView = view
+    guard !isViewVisible else { return }
+    
+    let messageHeight = CGFloat(25)
+    let xPos = CGFloat(0)
+    let yPos = (view.frame.size.height - (messageHeight * 2)) / 2
+    let width = view.frame.size.width
+    let titleMessage = NSLocalizedString("BLUETOOTH_CONNECTIVITY_LABEL_NO_PERIPHERALS_AVAILABLE_TITLE", comment: "")
+    let subtitleMessage = NSLocalizedString("BLUETOOTH_CONNECTIVITY_LABEL_NO_PERIPHERALS_AVAILABLE_SUBTITLE", comment: "")
+    
+    let frame = CGRect(x: xPos, y: yPos, width: width, height: messageHeight * 2)
+    let availabilityMessage = AvailabilityMessageView(frame: frame, titles: titleMessage, subtitleMessage)
+    view.addSubview(availabilityMessage)
+  }
+  
+  static func hide() {
+    guard isViewVisible else { return }
+    let availabilityMessageView = parentView?.viewWithTag(EmbeddedViewTag.availabilityMessage.rawValue)
+    availabilityMessageView?.removeFromSuperview()
+  }
+  
 }

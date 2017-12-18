@@ -19,7 +19,7 @@ protocol BluetoothConnectivityDataSourceDelegate: class, UITableViewDataSource, 
 
 extension BluetoothConnectivityDataSourceDelegate {
   
-  var numberOfRowsInSection: Int {
+  var numberOfRows: Int {
     return items?.count ?? 0
   }
   

@@ -1,5 +1,5 @@
 //
-//  BluetoothConnectivityDataSource.swift
+//  BluetoothPeripheralDataSource.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek.
@@ -8,31 +8,55 @@
 
 import Foundation
 import UIKit
+import CoreBluetooth
 
-final class BluetoothConnectivityDataSource: NSObject, BluetoothConnectivityDataSourceDelegate {
-  var items: [PeripheralItem]?
-  var delegateVC: BluetoothScanningCellDelegate
+final class BluetoothPeripheralDataSource: NSObject, BluetoothPeripheralDataSourceDelegate {
+  fileprivate let sharedBluetoothManager = BluetoothManager.shared()
+  
+  var advertisementData: [String: Any]?
+  var advertisementDataKeys: [String]?
+  var showAdvertisementData = false
+  var characteristicsDic = [CBUUID : [CBCharacteristic]]()
+//  var delegateVC: BluetoothScanningCellDelegate
   
   
-  init(_ delegateVC: BluetoothScanningCellDelegate, items: [PeripheralItem]?) {
-    self.delegateVC = delegateVC
-    self.items = items
+  init(advertisementData: [String: Any]?) {
+//    self.delegateVC = delegateVC
+    self.advertisementData = advertisementData
+    self.advertisementDataKeys = ([String](advertisementData!.keys)).sorted()
   }
   
   
-  func item(at indexPath: IndexPath) -> PeripheralItem? {
-    return items?[indexPath.row]
+  func item(at indexPath: IndexPath) -> [String: Any]? {
+//    return advertisementData?[indexPath.row]
+    return nil
   }
 }
 
 
 // MARK: - UITableViewDataSource protocol
-extension BluetoothConnectivityDataSource {
+extension BluetoothPeripheralDataSource {
 
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return numberOfRows
+  func numberOfSections(in tableView: UITableView) -> Int {
+    print("numberOfSectionsInTableView:\(sharedBluetoothManager.connectedPeripheral!.services!.count + 1)")
+    return sharedBluetoothManager.connectedPeripheral!.services!.count + 1
   }
   
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if section == 0 {
+      if showAdvertisementData {
+        return advertisementDataKeys!.count
+      } else {
+        return 0
+      }
+    }
+//    let characteristics = characteristicsDic[services![section - 1].uuid]
+//    return characteristics == nil ? 0 : characteristics!.count
+    return 0
+  }
+
+
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     typealias HeaderStyle = Style.BluetoothConnectivityTableViewHeader
@@ -52,13 +76,13 @@ extension BluetoothConnectivityDataSource {
     return view
   }
   
-
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let item = item(at: indexPath) else { return UITableViewCell() }
     
     let cell = tableView.dequeueReusableCell(withIdentifier: BluetoothScanningTableViewCell.reuseIdentifier, for: indexPath) as! BluetoothScanningTableViewCell
-    cell.configure(by: item, at: indexPath)
-    cell.delegate = delegateVC
+//    cell.configure(by: item, at: indexPath)
+//    cell.delegate = delegateVC
     return cell
   }
   
@@ -66,10 +90,11 @@ extension BluetoothConnectivityDataSource {
 
 
 // MARK: - UITableViewDelegate protocol
-extension BluetoothConnectivityDataSource {
+extension BluetoothPeripheralDataSource {
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 40
   }
   
 }
+

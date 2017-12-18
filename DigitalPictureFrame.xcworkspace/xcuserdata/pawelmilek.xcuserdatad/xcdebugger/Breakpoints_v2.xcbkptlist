@@ -362,7 +362,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/BluetoothSerial.swift"
-            timestampString = "535151924.282132"
+            timestampString = "535326386.987032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "309"
@@ -378,7 +378,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/BluetoothSerial.swift"
-            timestampString = "535151924.282556"
+            timestampString = "535326386.987935"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "295"
@@ -394,7 +394,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/BluetoothSerial.swift"
-            timestampString = "535151924.282911"
+            timestampString = "535326386.988666"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "247"
@@ -410,7 +410,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/BluetoothSerial.swift"
-            timestampString = "535151924.283944"
+            timestampString = "535326386.989803"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "414"
@@ -426,7 +426,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/BluetoothSerial.swift"
-            timestampString = "535151924.284291"
+            timestampString = "535326386.990337"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "423"
@@ -442,7 +442,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/CBAdvertisementData+LightBlue.swift"
-            timestampString = "535151924.284723"
+            timestampString = "535325480.283505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "88"
@@ -458,7 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/CBAdvertisementData+LightBlue.swift"
-            timestampString = "535151924.285509"
+            timestampString = "535325480.283725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
@@ -474,7 +474,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/CBAdvertisementData+LightBlue.swift"
-            timestampString = "535151924.285712"
+            timestampString = "535325480.283777"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
@@ -490,7 +490,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/CBAdvertisementData+LightBlue.swift"
-            timestampString = "535151924.285831"
+            timestampString = "535325480.283826"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
@@ -506,7 +506,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/CBAdvertisementData+LightBlue.swift"
-            timestampString = "535151924.285954"
+            timestampString = "535325480.283869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "77"
@@ -522,7 +522,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/CBAdvertisementData+LightBlue.swift"
-            timestampString = "535151924.286071"
+            timestampString = "535325480.283913"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "15"
@@ -538,7 +538,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Model/BluetoothSerial/BluetoothManager.swift"
-            timestampString = "535151924.2862"
+            timestampString = "535326386.991382"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
@@ -554,12 +554,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DigitalPictureFrame/Controller/BluetoothConnectivity/BluetoothConnectivityViewController.swift"
-            timestampString = "535151924.286891"
+            timestampString = "535326386.992373"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
             landmarkName = "didUpdateState(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalPictureFrame/Controller/BluetoothConnectivity/PeripheralViewController.swift"
+            timestampString = "535326386.994455"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "setup()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalPictureFrame/Controller/BluetoothConnectivity/PeripheralViewController.swift"
+            timestampString = "535326386.995042"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "setup()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalPictureFrame/Controller/BluetoothConnectivity/PeripheralViewController.swift"
+            timestampString = "535326386.995185"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
+            landmarkName = "setup()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalPictureFrame/Controller/BluetoothConnectivity/BluetoothConnectivityViewController.swift"
+            timestampString = "535326386.995302"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "bluetoothScanningCell(_:didPressConnect:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalPictureFrame/Controller/BluetoothConnectivity/BluetoothConnectivityViewController.swift"
+            timestampString = "535326386.99591"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
+            landmarkName = "bluetoothScanningCell(_:didPressConnect:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DigitalPictureFrame/View/Cell/BluetoothScanningCell/BluetoothScanningTableViewCell.swift"
+            timestampString = "535326386.996427"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "connectButtonPressed(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -11,8 +11,9 @@ import UIKit
 class BluetoothScanningTableViewCell: UITableViewCell {
   @IBOutlet weak var signalStrengthImageView: UIImageView!
   @IBOutlet weak var peripheralNameLabel: UILabel!
-  @IBOutlet weak var connectButton: UIButton!
+  @IBOutlet weak var serviceCounterLabel: UILabel!
   @IBOutlet weak var signalStrengthLabel: UILabel!
+  @IBOutlet weak var connectButton: UIButton!
   
   weak var delegate: BluetoothScanningCellDelegate?
   
@@ -21,6 +22,16 @@ class BluetoothScanningTableViewCell: UITableViewCell {
       guard let peripheral = peripheral else { return }
       signalStrengthImageView.image = peripheral.signalStrengthIcon
       peripheralNameLabel.text = peripheral.name
+      
+      if let serviceUUIDs = peripheral.advertisementData["kCBAdvDataServiceUUIDs"] as? NSArray, serviceUUIDs.count > 0 {
+        let counter = serviceUUIDs.count
+        let stringFromFormat = String(format: NSLocalizedString("BLUETOOTH_SCANNING_CELL_SERVICE_COUNTER", comment: ""), counter)
+        serviceCounterLabel.text = stringFromFormat + (counter > 1 ? "s" : "")
+        
+      } else {
+        serviceCounterLabel.text = NSLocalizedString("BLUETOOTH_SCANNING_CELL_NO_SERVICE_COUNTER", comment: "")
+      }
+
       
       let RSSI = Int(peripheral.RSSI)
       signalStrengthLabel.text = "\(RSSI)"
@@ -68,14 +79,31 @@ extension BluetoothScanningTableViewCell: ViewSetupable {
   func setupStyle() {
     typealias StyleBluetoothScanningCell = Style.BluetoothScanningCell
     
+    alpha = 1.0
     selectionStyle = .none
-    signalStrengthLabel.font = StyleBluetoothScanningCell.signalStrengthFont
-    peripheralNameLabel.font = StyleBluetoothScanningCell.peripheralNameFont
+    backgroundColor = StyleBluetoothScanningCell.defaultBackgroundColor
+    
+    peripheralNameLabel.font = StyleBluetoothScanningCell.peripheralNameLabelFont
+    peripheralNameLabel.textColor = StyleBluetoothScanningCell.peripheralNameLabelTextColor
+    peripheralNameLabel.textAlignment = StyleBluetoothScanningCell.peripheralNameLabelAlignment
+    peripheralNameLabel.numberOfLines = StyleBluetoothScanningCell.peripheralNameLabelNumberOfLines
+    
+    serviceCounterLabel.font = StyleBluetoothScanningCell.serviceDescriptionLabelFont
+    serviceCounterLabel.textAlignment = StyleBluetoothScanningCell.serviceDescriptionLabelAlignment
+    serviceCounterLabel.numberOfLines = StyleBluetoothScanningCell.serviceDescriptionLabelNumberOfLines
+    
+    signalStrengthLabel.font = StyleBluetoothScanningCell.signalStrengthLabelFont
+    signalStrengthLabel.textAlignment = StyleBluetoothScanningCell.signalStrengthLabelAlignment
+    signalStrengthLabel.numberOfLines = StyleBluetoothScanningCell.signalStrengthLabelNumberOfLines
+
+    signalStrengthImageView.backgroundColor = StyleBluetoothScanningCell.defaultBackgroundColor
+    
     connectButton.titleLabel?.font = StyleBluetoothScanningCell.connectButtonTitleFont
     connectButton.layer.borderColor = UIColor.appleBlue.cgColor
     connectButton.layer.borderWidth = 0.5
     connectButton.layer.cornerRadius = 8
   }
+  
   
 }
 

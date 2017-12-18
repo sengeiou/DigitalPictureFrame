@@ -1,5 +1,5 @@
 //
-//  CBAdvertisementData+LightBlue.swift
+//  CBAdvertisementData.swift
 //  Swift-LightBlue
 //
 //  Created by Pluto Y on 16/1/21.
@@ -9,9 +9,13 @@
 import Foundation
 import CoreBluetooth
 
-open class CBAdvertisementData {
+
+
+
+
+class CBAdvertisementData {
   
-  class open func getAdvertisementDataName(_ key: String) -> String {
+  static func getAdvertisementDataName(_ key: String) -> String {
     if key == CBAdvertisementDataLocalNameKey {
       return "Local Name"
       
@@ -41,7 +45,7 @@ open class CBAdvertisementData {
   }
   
   
-  class open func getAdvertisementDataStringValue(_ datas: [String: Any], key : String) -> String {
+  static func getAdvertisementDataStringValue(_ datas: [String: Any], key : String) -> String {
     var resultString = ""
     
     switch key {
