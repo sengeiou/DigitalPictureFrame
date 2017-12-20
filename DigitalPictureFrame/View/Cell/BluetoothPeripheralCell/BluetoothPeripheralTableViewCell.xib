@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BluetoothPeripheralTableViewCell" rowHeight="91" id="KGk-i7-Jjw" customClass="BluetoothPeripheralTableViewCell" customModule="DigitalPictureFrame" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="358" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="358" height="109.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="a6b-qb-9QY" userLabel="Labels Stack View">
+                        <rect key="frame" x="8" y="4" width="342" height="41"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ServiceTitleLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTQ-FJ-XiI">
+                                <rect key="frame" x="0.0" y="0.0" width="342" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ServiceDescriptionLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e92-eN-xD1">
+                                <rect key="frame" x="0.0" y="20.5" width="342" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="fOz-HI-P62" userLabel="Action Buttons Stack View">
+                        <rect key="frame" x="8" y="55" width="342" height="50"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAM-pI-A38">
+                                <rect key="frame" x="0.0" y="0.0" width="169" height="50"/>
+                                <state key="normal" title="Send"/>
+                                <connections>
+                                    <action selector="sendButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Li9-Jq-k7V"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fak-hR-bTo">
+                                <rect key="frame" x="173" y="0.0" width="169" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Listen Notifications"/>
+                                <connections>
+                                    <action selector="listenNotificationsButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Hdj-kW-ZQa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
+                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uwP-IC-1hB">
+                        <rect key="frame" x="8" y="106" width="342" height="2"/>
+                    </progressView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7E-x5-nwv" userLabel="Separator View">
+                        <rect key="frame" x="0.0" y="108.5" width="358" height="1"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="OvV-yO-WwS"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="a6b-qb-9QY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="1Zt-3E-t3T"/>
+                    <constraint firstAttribute="trailing" secondItem="fOz-HI-P62" secondAttribute="trailing" constant="8" id="1qe-m8-UuA"/>
+                    <constraint firstAttribute="bottom" secondItem="J7E-x5-nwv" secondAttribute="bottom" id="3gt-iQ-kHf"/>
+                    <constraint firstAttribute="trailing" secondItem="a6b-qb-9QY" secondAttribute="trailing" constant="8" id="8Ye-gR-5EP"/>
+                    <constraint firstItem="uwP-IC-1hB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="P8c-0s-TwY"/>
+                    <constraint firstItem="J7E-x5-nwv" firstAttribute="top" secondItem="uwP-IC-1hB" secondAttribute="bottom" constant="0.5" id="Pl8-u1-LOA"/>
+                    <constraint firstItem="uwP-IC-1hB" firstAttribute="top" secondItem="fOz-HI-P62" secondAttribute="bottom" constant="1" id="Uft-Wo-DZZ"/>
+                    <constraint firstItem="uwP-IC-1hB" firstAttribute="width" secondItem="fOz-HI-P62" secondAttribute="width" id="Zcg-iz-IrU"/>
+                    <constraint firstItem="J7E-x5-nwv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dEu-4T-SmZ"/>
+                    <constraint firstItem="fOz-HI-P62" firstAttribute="top" secondItem="a6b-qb-9QY" secondAttribute="bottom" constant="10" id="hGo-3g-CIo"/>
+                    <constraint firstItem="a6b-qb-9QY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="nQO-bW-mqX"/>
+                    <constraint firstItem="fOz-HI-P62" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="oeS-Fm-nWc"/>
+                    <constraint firstAttribute="trailing" secondItem="J7E-x5-nwv" secondAttribute="trailing" id="u6T-JU-c0c"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="centralSentProgressBar" destination="uwP-IC-1hB" id="1hY-0d-BIz"/>
+                <outlet property="listenNotificationsButton" destination="Fak-hR-bTo" id="7hr-OM-EsF"/>
+                <outlet property="sendButton" destination="uAM-pI-A38" id="lYD-fE-cEw"/>
+                <outlet property="serviceDescriptionLabel" destination="e92-eN-xD1" id="6fM-6r-iej"/>
+                <outlet property="serviceTitleLabel" destination="OTQ-FJ-XiI" id="LVg-29-hr3"/>
+            </connections>
+            <point key="canvasLocation" x="24" y="-22.5"/>
+        </tableViewCell>
+    </objects>
+</document>

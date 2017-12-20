@@ -1,5 +1,5 @@
 //
-//  BluetoothConnectivityDelegate.swift
+//  BluetoothScanningCellDelegate.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek.

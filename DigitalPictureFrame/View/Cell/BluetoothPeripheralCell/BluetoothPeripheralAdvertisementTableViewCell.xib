@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BluetoothPeripheralAdvertisementTableViewCell" id="KGk-i7-Jjw" customClass="BluetoothPeripheralAdvertisementTableViewCell" customModule="DigitalPictureFrame" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="iad-NK-ZI2">
+                        <rect key="frame" x="8" y="8" width="312" height="33.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smc-Ph-Ed5" userLabel="NameLabel">
+                                <rect key="frame" x="0.0" y="0.0" width="312" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DescriptionLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWp-Go-He9" userLabel="DescriptionLabel">
+                                <rect key="frame" x="0.0" y="17" width="312" height="16.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FBq-8a-2Us" userLabel="Separator View">
+                        <rect key="frame" x="0.0" y="48.5" width="320" height="1"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="3Kl-og-8BF"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="FBq-8a-2Us" secondAttribute="trailing" id="7Ms-ow-uQr"/>
+                    <constraint firstItem="iad-NK-ZI2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="G9e-9j-0kw"/>
+                    <constraint firstAttribute="bottom" secondItem="iad-NK-ZI2" secondAttribute="bottom" constant="8" id="Hgk-fT-sT8"/>
+                    <constraint firstItem="iad-NK-ZI2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="SIG-xh-9LF"/>
+                    <constraint firstItem="FBq-8a-2Us" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XLi-b6-Ka3"/>
+                    <constraint firstAttribute="bottom" secondItem="FBq-8a-2Us" secondAttribute="bottom" id="sv1-Va-8wk"/>
+                    <constraint firstAttribute="trailing" secondItem="iad-NK-ZI2" secondAttribute="trailing" id="wEY-bK-pbW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="hWp-Go-He9" id="8Ti-BY-yho"/>
+                <outlet property="nameLabel" destination="smc-Ph-Ed5" id="WMA-02-q3B"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

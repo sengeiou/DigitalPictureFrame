@@ -29,20 +29,20 @@ struct Style {
   }
 
   
-  // MARK: - PeripheralViewController
-  struct PeripheralVC {
-    static let sendButtonTitleFont = UIFont.systemFont(ofSize: 15, weight: .bold)
-    static let sendButtonBorderColor = UIColor.appleBlue.cgColor
+  // MARK: - BluetoothPeripheralViewController
+  struct BluetoothPeripheralVC {
+    static let navigationBarBackgroundColor = UIColor.groupGray
+    static let navigationBarTextColor = UIColor.appleBlue
     
     static let peripheralNameLabelFont = UIFont.systemFont(ofSize: 25, weight: .regular)
     static let peripheralNameLabelNumberOfLines = 1
     static let peripheralNameLabelAlignment = NSTextAlignment.left
     
-    static let peripheralUUIDLabelFont = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+    static let peripheralUUIDLabelFont = UIFont.systemFont(ofSize: 16, weight: .ultraLight)
     static let peripheralUUIDLabelNumberOfLines = 1
     static let peripheralUUIDLabelAlignment = NSTextAlignment.left
     
-    static let connectedLabelFont = UIFont.systemFont(ofSize: 15, weight: .bold)
+    static let connectedLabelFont = UIFont.systemFont(ofSize: 18, weight: .bold)
     static let connectedLabelTextColor = UIColor.red
     static let connectedLabelNumberOfLines = 1
     static let connectedLabelAlignment = NSTextAlignment.left
@@ -63,12 +63,12 @@ struct Style {
   struct BluetoothScanningCell {
     static let defaultBackgroundColor = UIColor.white
     
-    static let peripheralNameLabelFont = UIFont.systemFont(ofSize: 16, weight: .medium)
+    static let peripheralNameLabelFont = UIFont.systemFont(ofSize: 18, weight: .regular)
     static let peripheralNameLabelTextColor = UIColor.black
     static let peripheralNameLabelAlignment = NSTextAlignment.left
     static let peripheralNameLabelNumberOfLines = 1
     
-    static let signalStrengthLabelFont = UIFont.systemFont(ofSize: 9, weight: .regular)
+    static let signalStrengthLabelFont = UIFont.systemFont(ofSize: 10, weight: .regular)
     static let signalStrengthLabelAlignment = NSTextAlignment.center
     static let signalStrengthLabelNumberOfLines = 1
     
@@ -76,7 +76,58 @@ struct Style {
     static let serviceDescriptionLabelAlignment = NSTextAlignment.left
     static let serviceDescriptionLabelNumberOfLines = 1
     
-    static let connectButtonTitleFont = UIFont.systemFont(ofSize: 13, weight: .medium)
+    static let connectButtonTitleFont = UIFont.systemFont(ofSize: 15, weight: .regular)
+  }
+  
+  
+  // MARK: - BluetoothPeripheralTableViewCell
+  struct BluetoothPeripheralCell {
+    static let defaultBackgroundColor = UIColor.white
+    
+    static let serviceTitleLabelFont = UIFont.systemFont(ofSize: 16, weight: .regular)
+    static let serviceTitleLabelTextColor = UIColor.black
+    static let serviceTitleLabelAlignment = NSTextAlignment.left
+    static let serviceTitleLabelNumberOfLines = 1
+    
+    static let serviceDescriptionLabelFont = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+    static let serviceDescriptionLabelTextColor = UIColor.black
+    static let serviceDescriptionLabelAlignment = NSTextAlignment.left
+    static let serviceDescriptionLabelNumberOfLines = 1
+    
+    static let sendButtonTitleFont = UIFont.systemFont(ofSize: 15, weight: .regular)
+    static let listenNotificationsButtonTitleFont = UIFont.systemFont(ofSize: 15, weight: .regular)
+    static let buttonBoarderColor = UIColor.appleBlue.cgColor
+  }
+  
+  
+  // MARK: - BluetoothPeripheralTableViewCell
+  struct BluetoothPeripheralAdvertisementCell {
+    static let defaultBackgroundColor = UIColor.white
+    
+    static let nameLabelFont = UIFont.systemFont(ofSize: 16, weight: .regular)
+    static let nameLabelTextColor = UIColor.black
+    static let nameLabelAlignment = NSTextAlignment.left
+    static let nameLabelNumberOfLines = 1
+    
+    static let descriptionLabelFont = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+    static let descriptionLabelTextColor = UIColor.black
+    static let descriptionLabelAlignment = NSTextAlignment.left
+    static let descriptionLabelNumberOfLines = 1
+  }
+  
+  // MARK: - BluetoothPeripheralDeviceInfoTableViewCell
+  struct BluetoothPeripheralDeviceInfoCell {
+    static let defaultBackgroundColor = UIColor.white
+    
+    static let nameLabelFont = UIFont.systemFont(ofSize: 16, weight: .regular)
+    static let nameLabelTextColor = UIColor.black
+    static let nameLabelAlignment = NSTextAlignment.left
+    static let nameLabelNumberOfLines = 1
+    
+    static let descriptionLabelFont = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+    static let descriptionLabelTextColor = UIColor.black
+    static let descriptionLabelAlignment = NSTextAlignment.left
+    static let descriptionLabelNumberOfLines = 1
   }
   
   
@@ -86,6 +137,6 @@ struct Style {
     static let messageLabelFont = UIFont.systemFont(ofSize: 12, weight: .bold)
     static let messageLabelTextColor = UIColor.white
     static let messageLabelTextAlignment = NSTextAlignment.center
-    static let messageLabelNumberOfLines = 1
+    static let messageLabelNumberOfLines = 2
   }
 }

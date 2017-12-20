@@ -1,5 +1,5 @@
 //
-//  DigitalPictureFrameDataSource.swift
+//  DigitalPictureFrameDataModel.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-final class DigitalPictureFrameDataSource: NSObject, DigitalPictureFrameDataSourceDelegate {
+final class DigitalPictureFrameDataModel: NSObject, DigitalPictureFrameDataModelDelegate {
   var items: [DigitalPictureFrameItem]?
   var delegateVC: UIViewController
   
@@ -35,7 +35,7 @@ final class DigitalPictureFrameDataSource: NSObject, DigitalPictureFrameDataSour
 
 
 // MARK: - UITableViewDataSource protocol
-extension DigitalPictureFrameDataSource {
+extension DigitalPictureFrameDataModel {
   
   func numberOfSections(in tableView: UITableView) -> Int {
     return numberOfSections
@@ -69,7 +69,7 @@ extension DigitalPictureFrameDataSource {
     case is UserViewController where frameItem.type == .user:
       let cell = tableView.dequeueDigitalPictureFrameCell(cell: UserTableViewCell.self)
       cell.delegate = delegateVC as! UserViewController
-      cell.configure(by: frameItem, at: indexPath)
+      cell.configure(with: frameItem, at: indexPath)
       return cell
       
     case is SettingsViewController:
@@ -77,25 +77,25 @@ extension DigitalPictureFrameDataSource {
       case .generalSettings:
         let cell = tableView.dequeueDigitalPictureFrameCell(cell: GeneralSettingsTableViewCell.self)
         cell.delegate = delegateVC as! SettingsViewController
-        cell.configure(by: frameItem, at: indexPath)
+        cell.configure(with: frameItem, at: indexPath)
         return cell
         
       case .timeFrameSettings:
         let cell = tableView.dequeueDigitalPictureFrameCell(cell: TimeFrameSettingsTableViewCell.self)
         cell.delegate = delegateVC as! SettingsViewController
-        cell.configure(by: frameItem, at: indexPath)
+        cell.configure(with: frameItem, at: indexPath)
         return cell
         
       case .userInfoSettings:
         let cell = tableView.dequeueDigitalPictureFrameCell(cell: UserInfoSettingsTableViewCell.self)
         cell.delegate = delegateVC as! SettingsViewController
-        cell.configure(by: frameItem, at: indexPath)
+        cell.configure(with: frameItem, at: indexPath)
         return cell
         
       case .weatherZipcodeSettings:
         let cell = tableView.dequeueDigitalPictureFrameCell(cell: WeatherZipcodeSettingsTableViewCell.self)
         cell.delegate = delegateVC as! SettingsViewController
-        cell.configure(by: frameItem, at: indexPath)
+        cell.configure(with: frameItem, at: indexPath)
         return cell
         
       default:
@@ -105,7 +105,7 @@ extension DigitalPictureFrameDataSource {
     case is WiFiViewController where frameItem.type == .wifi:
       let cell = tableView.dequeueDigitalPictureFrameCell(cell: WiFiTableViewCell.self)
       cell.delegate = delegateVC as! WiFiViewController
-      cell.configure(by: frameItem, at: indexPath)
+      cell.configure(with: frameItem, at: indexPath)
       return cell
       
     default:
@@ -117,7 +117,7 @@ extension DigitalPictureFrameDataSource {
 
 
 // MARK: - UITableViewDelegate protocol
-extension DigitalPictureFrameDataSource {
+extension DigitalPictureFrameDataModel {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 65

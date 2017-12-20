@@ -41,7 +41,7 @@ import CoreBluetooth
      - parameter connectedPeripheral: The peripheral which connected failure.
      - parameter error:               The connected failed error message.
      */
-    @objc optional func failToConnectPeripheral(_ peripheral: CBPeripheral, error: Error)
+    @objc optional func didFailToConnectPeripheral(_ peripheral: CBPeripheral, error: Error)
     
     /**
      The callback function when the services has been discovered.
@@ -62,7 +62,7 @@ import CoreBluetooth
      
      - parameter peripheral: The peripheral which is failed to discover service
      */
-    @objc optional func didFailedToInterrogate(_ peripheral: CBPeripheral)
+    @objc optional func didFailToInterrogate(_ peripheral: CBPeripheral)
     
     /**
      The callback function when discover characteritics successfully.

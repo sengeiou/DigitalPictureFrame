@@ -15,7 +15,7 @@ class BluetoothConnectivityViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
   private var bluetoothConnectingView: BluetoothConnectingView?
-  private var dataSourceDelegate: BluetoothConnectivityDataSourceDelegate?
+  private var dataSourceDelegate: BluetoothConnectivityDataModelDelegate?
   private var selectedPeripheral: PeripheralItem?
   private var availablePeripherals: [PeripheralItem] = [] {
     didSet {
@@ -43,23 +43,22 @@ extension BluetoothConnectivityViewController: ViewSetupable {
   
   func setup() {
     sharedBluetoothManager.delegate = self
-    dataSourceDelegate = BluetoothConnectivityDataSource(self, items: availablePeripherals)
+    dataSourceDelegate = BluetoothConnectivityDataModel(self, items: availablePeripherals)
     
     tableView.register(cell: BluetoothScanningTableViewCell.self)
     tableView.dataSource = dataSourceDelegate
     tableView.delegate = dataSourceDelegate
     tableView.isScrollEnabled = true
     tableView.bounces = false
-    tableView.estimatedRowHeight = 60
+    tableView.estimatedRowHeight = 65
     tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.separatorStyle = .none
     tableView.tableFooterView = UIView(frame: .zero)
   }
   
   
   func setupStyle() {
-    DispatchQueue.main.async {
-      self.reloadView()
-    }
+    self.reloadView()
   }
 
 }
@@ -69,9 +68,11 @@ extension BluetoothConnectivityViewController: ViewSetupable {
 private extension BluetoothConnectivityViewController {
   
   func reloadView() {
-    renderNoPeripheralsAvailableMessage()
-    checkAndShowBluetoothPopupStateView()
-    reloadPeripheralsList()
+    DispatchQueue.main.async {
+      self.renderNoPeripheralsAvailableMessage()
+      self.checkAndShowBluetoothPopupStateView()
+      self.reloadPeripheralsList()
+    }
   }
   
   
@@ -81,9 +82,7 @@ private extension BluetoothConnectivityViewController {
   
   
   func reloadPeripheralsList() {
-    DispatchQueue.main.async {
-      self.tableView.reloadData()
-    }
+    tableView.reloadData()
   }
   
 
@@ -209,7 +208,7 @@ extension BluetoothConnectivityViewController: BluetoothDelegate {
   
   func didConnectedPeripheral(_ connectedPeripheral: CBPeripheral) {
     print("BluetoothConnectivityViewController --> didConnectedPeripheral")
-//    connectingView?.tipLbl.text = "Interrogating..."
+    BluetoothConnectingView.conectingInProgressWith(title: NSLocalizedString("BLUETOOTH_CONNECTING_VIEW_LABEL_TITLE_INTERROGATE", comment: ""))
   }
   
   
@@ -222,18 +221,36 @@ extension BluetoothConnectivityViewController: BluetoothDelegate {
   func didDiscoverServices(_ peripheral: CBPeripheral) {
     print("BluetoothConnectivityViewController --> didDiscoverService:\(String(describing: peripheral.services))")
     BluetoothConnectingView.hide()
-    
-    let storyboard = UIStoryboard(storyboard: .main)
-    let peripheralViewController = storyboard.instantiateViewController(BluetoothPeripheralViewController.self)
-    peripheralViewController.advertisementData = selectedPeripheral?.advertisementData
-    self.present(peripheralViewController, animated: true)
+    presentPeripheralViewController()
   }
   
   
-  func didFailedToInterrogate(_ peripheral: CBPeripheral) {
-    let title = "Connection Alert"
-    let message = "The perapheral disconnected while being interrogated."
+  func didFailToInterrogate(_ peripheral: CBPeripheral) {
+    let title = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_CONNECTION_TITLE", comment: "")
+    let message = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_MESSAGE_FAILED_INTERROGATE", comment: "")
+    BluetoothConnectingView.hide()
     AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
+  }
+  
+  
+  func didFailToConnectPeripheral(_ peripheral: CBPeripheral, error: Error) {
+    let title = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_CONNECTION_TITLE", comment: "")
+    let message = error.localizedDescription
+    BluetoothConnectingView.hide()
+    AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
+  }
+}
+
+
+// MARK: - Present BluetoothPeripheralViewController
+private extension BluetoothConnectivityViewController {
+  
+  func presentPeripheralViewController() {
+    let storyboard = UIStoryboard(storyboard: .main)
+    let peripheralViewController = storyboard.instantiateViewController(BluetoothPeripheralViewController.self)
+    let characteriticServiceItem = CharacteristicServiceItem(advertisementData: selectedPeripheral?.advertisementData)
+    peripheralViewController.characteriticServiceItem = characteriticServiceItem
+    self.present(peripheralViewController, animated: true)
   }
   
 }
@@ -246,10 +263,9 @@ extension BluetoothConnectivityViewController: BluetoothScanningCellDelegate {
     let row = button.tag
     selectedPeripheral = availablePeripherals[row]
     
-    BluetoothConnectingView.showWith(name: selectedPeripheral!.name)
+    BluetoothConnectingView.showWithSubtitle(selectedPeripheral!.name)
     sharedBluetoothManager.connectPeripheral(selectedPeripheral!.peripheral)
     stopScanPeripherals()
-    bluetoothScanningCell.configureConnectedButton()
   }
   
 }

@@ -9,28 +9,20 @@
 import UIKit
 import CoreBluetooth 
 
-class BluetoothPeripheralViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, BluetoothDelegate, UINavigationBarDelegate {
-  typealias PeripheralStyle = Style.PeripheralVC
+class BluetoothPeripheralViewController: UIViewController, UINavigationBarDelegate {
+  typealias PeripheralStyle = Style.BluetoothPeripheralVC
   
-  private let serviceCellIdentifier = "ServiceCellIdentifier"
   private let sharedBluetoothManager = BluetoothManager.shared()
-  private var showAdvertisementData = false
-  private var services: [CBService]?
-  private var characteristicsDic = [CBUUID : [CBCharacteristic]]()
-  
-  var advertisementData: [String: Any]?
-  private var advertisementDataKeys: [String]?
-  
+
   @IBOutlet weak var navigationBar: UINavigationBar!
   @IBOutlet weak var peripheralNameLabel: UILabel!
   @IBOutlet weak var peripheralUUIDLabel: UILabel!
   @IBOutlet weak var connectedLabel: UILabel!
-  @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
   @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var sendButton: UIButton!
-  @IBOutlet weak var centralSentProgressBar: UIProgressView!
   
-  var dataSourceDelegate: BluetoothPeripheralDataSourceDelegate?
+  
+  var characteriticServiceItem: CharacteristicServiceItem?
+  private var dataModelSource: BluetoothPeripheralDataModelDelegate?
   
   
   override func viewDidLoad() {
@@ -43,147 +35,35 @@ class BluetoothPeripheralViewController: UIViewController, UITableViewDelegate, 
     setupStyle()
     sharedBluetoothManager.delegate = self
   }
-  
-  
-  @IBAction func backBarButtonPressed(_ sender: UIBarButtonItem) {
-    dismiss(animated: true, completion: nil)
-  }
-  
-  /**
-   The callback function of the Show Advertisement Data button click
-   */
-  @objc func showAdvertisementDataBtnClick() {
-    print("PeripheralController --> showAdvertisementDataBtnClick")
-    showAdvertisementData = !showAdvertisementData
-    reloadTableView()
-  }
-  
-  /**
-   Reload tableView
-   */
+}
+
+
+// MARK: - Reload TableView
+extension BluetoothPeripheralViewController {
+
   func reloadTableView() {
-    tableView.reloadData()
-    
-    // Fix the contentSize.height is greater than frame.size.height bug(Approximately 20 unit)
-    tableViewHeight.constant = tableView.contentSize.height
-  }
-  
-  /**
-   According the characteristic property array get the properties string
-   
-   - parameter array: characteristic property array
-   
-   - returns: properties string
-   */
-  func getPropertiesFromArray(_ array : [String]) -> String {
-    var propertiesString = "Properties:"
-    let containWrite = array.contains("Write")
-    for property in array {
-      if containWrite && property == "Write Without Response" {
-        continue
-      }
-      propertiesString += " " + property
-    }
-    return propertiesString
-  }
-  
-  
-  // MARK: Delegate
-  // Mark: UITableViewDelegate
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if section == 0 {
-      if showAdvertisementData {
-        return advertisementDataKeys!.count
-      } else {
-        return 0
-      }
-    }
-    let characteristics = characteristicsDic[services![section - 1].uuid]
-    return characteristics == nil ? 0 : characteristics!.count
-  }
-  
-  func numberOfSections(in tableView: UITableView) -> Int {
-    print("numberOfSectionsInTableView:\(sharedBluetoothManager.connectedPeripheral!.services!.count + 1)")
-    return sharedBluetoothManager.connectedPeripheral!.services!.count + 1
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var cell = tableView.dequeueReusableCell(withIdentifier: serviceCellIdentifier)
-    if cell == nil {
-      cell = UITableViewCell(style: .subtitle, reuseIdentifier: serviceCellIdentifier)
-      cell?.selectionStyle = .none
-      cell?.accessoryType = .disclosureIndicator
-    }
-    if (indexPath as NSIndexPath).section == 0 {
-      cell?.textLabel?.text = CBAdvertisementData.getAdvertisementDataStringValue(advertisementData!, key: advertisementDataKeys![(indexPath as NSIndexPath).row])
-      cell?.textLabel?.adjustsFontSizeToFitWidth = true
-      
-      cell?.detailTextLabel?.text = CBAdvertisementData.getAdvertisementDataName(advertisementDataKeys![(indexPath as NSIndexPath).row])
-    } else {
-      let characteristic = characteristicsDic[services![(indexPath as NSIndexPath).section - 1].uuid]![(indexPath as NSIndexPath).row]
-      cell?.textLabel?.text = characteristic.name
-      cell?.detailTextLabel?.text = getPropertiesFromArray(characteristic.getProperties())
-    }
-    return cell!
-  }
-  
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    print("section:\(section)")
-    let view = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    view.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 239/255.0, alpha: 1)
-    
-    let serviceNameLbl = UILabel(frame: CGRect(x: 10, y: 20, width: UIScreen.main.bounds.size.width - 100, height: 20))
-    serviceNameLbl.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
-    
-    view.addSubview(serviceNameLbl)
-    
-    if section == 0 {
-      serviceNameLbl.text = "ADVERTISEMENT DATA"
-      let showBtn = UIButton(type: .system)
-      showBtn.frame = CGRect(x: UIScreen.main.bounds.size.width - 80, y: 20, width: 60, height: 20)
-      if showAdvertisementData {
-        showBtn.setTitle("Hide", for: UIControlState())
-      } else {
-        showBtn.setTitle("Show", for: UIControlState())
-      }
-      
-      showBtn.addTarget(self, action: #selector(self.showAdvertisementDataBtnClick), for: .touchUpInside)
-      view.addSubview(showBtn)
-    } else {
-      let service = sharedBluetoothManager.connectedPeripheral!.services![section - 1]
-      serviceNameLbl.text = service.name
-    }
-    
-    return view
-  }
-  
-  // Need overide this method for fix start section from 1(not 0) in the method 'tableView:viewForHeaderInSection:' after iOS 7
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 60
-  }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if (indexPath as NSIndexPath).section == 0 {
-      
-    } else {
-      print("Click at section: \((indexPath as NSIndexPath).section), row: \((indexPath as NSIndexPath).row)")
-      //      let controller = CharacteristicController()
-      //      controller.characteristic = characteristicsDic[services![(indexPath as NSIndexPath).section - 1].uuid]![(indexPath as NSIndexPath).row]
-      //      self.navigationController?.pushViewController(controller, animated: true)
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
     }
   }
   
-  // MARK: BluetoothDelegate
+}
+
+
+// MARK: - BluetoothDelegate protocol
+extension BluetoothPeripheralViewController: BluetoothDelegate {
+  
   func didDisconnectPeripheral(_ peripheral: CBPeripheral) {
     print("PeripheralController --> didDisconnectPeripheral")
-    connectedLabel.text = "Disconnected. Data is Stale."
-    connectedLabel.textColor = UIColor.red
+    connectedLabel.text = NSLocalizedString("BLUETOOTH_PERIPHERAL_LABEL_DISCONNECTED_STATUS", comment: "")
+    connectedLabel.textColor = .red
     
   }
   
   func didDiscoverCharacteritics(_ service: CBService) {
     print("Service.characteristics:\(String(describing: service.characteristics))")
-    characteristicsDic[service.uuid] = service.characteristics
+    characteriticServiceItem?.service = service
+    dataModelSource?.characteriticServiceItem = characteriticServiceItem
     reloadTableView()
   }
   
@@ -194,31 +74,50 @@ class BluetoothPeripheralViewController: UIViewController, UITableViewDelegate, 
 extension BluetoothPeripheralViewController: ViewSetupable {
   
   func setup() {
-    navigationBar.topItem?.title = NSLocalizedString("BLUETOOTH_PERIPHERAL_NAVIGATIONBAR_TITLE", comment: "")
-    
-    advertisementDataKeys = ([String](advertisementData!.keys)).sorted()
+    sharedBluetoothManager.delegate = self
     sharedBluetoothManager.discoverCharacteristics()
-    services = sharedBluetoothManager.connectedPeripheral?.services
+    dataModelSource = BluetoothPeripheralDataModel(self, characteriticServiceItem: characteriticServiceItem)
+    
+    tableView.register(cell: BluetoothPeripheralAdvertisementTableViewCell.self)
+    tableView.register(cell: BluetoothPeripheralDeviceInfoTableViewCell.self)
+    tableView.register(cell: BluetoothPeripheralTableViewCell.self)
+    tableView.dataSource = dataModelSource
+    tableView.delegate = dataModelSource
+    tableView.isScrollEnabled = true
+    tableView.separatorStyle = .none
+    tableView.tableFooterView = UIView(frame: .zero)
+
     peripheralNameLabel.text = sharedBluetoothManager.connectedPeripheral?.name
     peripheralUUIDLabel.text = sharedBluetoothManager.connectedPeripheral?.identifier.uuidString
-    
-    
-    sharedBluetoothManager.delegate = self
-//    dataSourceDelegate = BluetoothPeripheralDataSource(self, items: advertisementData)
-    
-//    tableView.register(cell: BluetoothScanningTableViewCell.self)
-//    tableView.dataSource = dataSourceDelegate
-//    tableView.delegate = dataSourceDelegate
-//    tableView.isScrollEnabled = true
-//    tableView.bounces = false
-//    tableView.estimatedRowHeight = 60
-//    tableView.rowHeight = UITableViewAutomaticDimension
-//    tableView.tableFooterView = UIView(frame: .zero)
-    
     reloadTableView()
   }
   
   func setupStyle() {
+    renderStatusBarBackgroundColor()
+    setupNavigationBar()
+    setupLabels()
+  }
+  
+}
+
+
+// MARK: - Render titles
+private extension BluetoothPeripheralViewController {
+  
+  func renderStatusBarBackgroundColor() {
+    let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
+    let statusBarColor = UIColor.groupGray
+    statusBarView.backgroundColor = statusBarColor
+    view.addSubview(statusBarView)
+  }
+  
+  func setupNavigationBar() {
+    navigationBar.barTintColor = PeripheralStyle.navigationBarBackgroundColor
+    navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: PeripheralStyle.navigationBarTextColor]
+    navigationBar.topItem?.title = NSLocalizedString("BLUETOOTH_PERIPHERAL_NAVIGATIONBAR_TITLE", comment: "")
+  }
+  
+  func setupLabels() {
     peripheralNameLabel.font = PeripheralStyle.peripheralNameLabelFont
     peripheralNameLabel.numberOfLines = PeripheralStyle.peripheralNameLabelNumberOfLines
     peripheralNameLabel.textAlignment = PeripheralStyle.peripheralNameLabelAlignment
@@ -227,42 +126,22 @@ extension BluetoothPeripheralViewController: ViewSetupable {
     peripheralUUIDLabel.numberOfLines = PeripheralStyle.peripheralUUIDLabelNumberOfLines
     peripheralUUIDLabel.textAlignment = PeripheralStyle.peripheralUUIDLabelAlignment
     
+    connectedLabel.text = NSLocalizedString("BLUETOOTH_PERIPHERAL_LABEL_CONNECTED_STATUS", comment: "")
     connectedLabel.font = PeripheralStyle.connectedLabelFont
     connectedLabel.textColor = PeripheralStyle.connectedLabelTextColor
     connectedLabel.numberOfLines = PeripheralStyle.connectedLabelNumberOfLines
     connectedLabel.textAlignment = PeripheralStyle.connectedLabelAlignment
-    
-    setupButtonTitle()
-    setupProgressBar()
   }
+
 }
 
-
-// MARK: - Render titles
-private extension BluetoothPeripheralViewController {
-  
-  func setupProgressBar() {
-    centralSentProgressBar.progress = 0
-    centralSentProgressBar.isHidden = !sharedBluetoothManager.isReady
-  }
-  
-  func setupButtonTitle() {
-    sendButton.isEnabled = sharedBluetoothManager.isReady
-    sendButton.setTitle(NSLocalizedString("BLUETOOTH_CONNECTIVITY_BUTTON_SEND_TITLE", comment: ""), for: .normal)
-    sendButton.titleLabel?.font = PeripheralStyle.sendButtonTitleFont
-    sendButton.layer.borderColor = PeripheralStyle.sendButtonBorderColor
-    sendButton.layer.borderWidth = 0.5
-    sendButton.layer.cornerRadius = 8
-  }
-}
 
 // MARK: - Send JSON data to Arduino
 private extension BluetoothPeripheralViewController {
   
   func sendDataToArduino() {
     guard let dataForArduino = DatabaseManager.shared().encodedJsonData else { return }
-    sendButton.isEnabled = false
-    
+//    sharedBluetoothManager.writeValue(data: dataForArduino, forCharacteristic: <#T##CBCharacteristic#>, writeType: <#T##CBCharacteristicWriteType#>, progressHandler: <#T##(Int, Int) -> ()#>)
 //    sharedInstance.serial.sendDataToDevice(dataForArduino) { [weak self] bytesSent, totalBytesExpectedToSend in
 //      guard let strongSelf = self else { return }
 //      DispatchQueue.main.async {
@@ -313,16 +192,34 @@ extension BluetoothPeripheralViewController {
 }
 
 
+// MARK: - BluetoothPeripheralCellDelegate protocol
+extension BluetoothPeripheralViewController: BluetoothPeripheralCellDelegate {
+  
+  func bluetoothPeripheralCell(_ bluetoothPeripheralCell: BluetoothPeripheralTableViewCell, didPressSend button: UIButton) {
+    print("didPressSend")
+  }
+  
+  func bluetoothPeripheralCell(_ bluetoothPeripheralCell: BluetoothPeripheralTableViewCell, didPressListenNotifications button: UIButton) {
+    print("didPressListenNotifications")
+  }
+  
+}
+
+
 // MARK: - Actions
 private extension BluetoothPeripheralViewController {
   
+  @IBAction func backBarButtonPressed(_ sender: UIBarButtonItem) {
+    dismiss(animated: true, completion: nil)
+  }
+  
+  
   @IBAction func sendButtonPressed(_ sender: UIButton) {
     if !sharedBluetoothManager.isReady {
-      let title = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_TITLE_NOT_CONNECTED", comment: "")
-      let message = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_MESSAGE_NOT_CONNECTED", comment: "")
+      let title = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_CONNECTION_TITLE", comment: "")
+      let message = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_MESSAGE_PERIPHERAL_NOT_READY", comment: "")
       AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
     } else {
-      setupProgressBar()
       sendDataToArduino()
     }
   }

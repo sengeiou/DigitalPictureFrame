@@ -20,7 +20,7 @@ class PageContentViewController: UIViewController, ViewSetupable {
   }()
   
   let sharedAlert = AlertViewPresenter.sharedInstance
-  var dataSourceDelegate: DigitalPictureFrameDataSourceDelegate?
+  var dataSourceDelegate: DigitalPictureFrameDataModelDelegate?
   
   
   override func viewDidLoad() {
@@ -154,7 +154,7 @@ extension PageContentViewController {
     if let dataSourceDelegate = dataSourceDelegate {
       dataSourceDelegate.items = items
     } else {
-      dataSourceDelegate = DigitalPictureFrameDataSource(self, items: items)
+      dataSourceDelegate = DigitalPictureFrameDataModel(self, items: items)
       tableView.dataSource = dataSourceDelegate
       tableView.delegate = dataSourceDelegate
     }

@@ -13,13 +13,15 @@ final class BluetoothManager: NSObject {
   private static var sharedInstance: BluetoothManager!
   
   private var centralManager: CBCentralManager?
-  private var timeoutMonitor : Timer? /// Timeout monitor of connect to peripheral
-  private var interrogateMonitor : Timer? /// Timeout monitor of interrogate the peripheral
+  private var connectingTimeoutMonitor : Timer?
+  private var interrogatingTimeoutMonitor : Timer?
   private let notifCenter = NotificationCenter.default
   private var isConnecting = false
   private(set) var connected = false
   private(set) var connectedPeripheral: CBPeripheral?
   private(set) var connectedServices: [CBService]?
+  
+  private let notifyMaximumTransferUnit = 20
   
   var logs: [String] = []
   var delegate: BluetoothDelegate?
@@ -96,7 +98,7 @@ final class BluetoothManager: NSObject {
     if !isConnecting {
       isConnecting = true
       centralManager?.connect(peripheral, options: [CBConnectPeripheralOptionNotifyOnDisconnectionKey : true])
-      timeoutMonitor = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.connectTimeout(_:)), userInfo: peripheral, repeats: false)
+      connectingTimeoutMonitor = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.connectTimeout(_:)), userInfo: peripheral, repeats: false)
     }
   }
   
@@ -128,11 +130,14 @@ final class BluetoothManager: NSObject {
    - parameter timer: The timer touch off this selector
    */
   @objc func connectTimeout(_ timer : Timer) {
-    if isConnecting {
-      isConnecting = false
-      connectPeripheral(timer.userInfo as! CBPeripheral)
-      timeoutMonitor = nil
-    }
+    guard let connectingPeripheral = timer.userInfo as? CBPeripheral, isConnecting == true else { return }
+    
+    isConnecting = false
+    connected = false
+    connectingTimeoutMonitor = nil
+    disconnectPeripheral()
+    let connectingError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Failed connection to peripheral \(connectingPeripheral.name ?? "Unnamed")"])
+    delegate?.didFailToConnectPeripheral?(connectingPeripheral, error: connectingError)
   }
   
   /**
@@ -142,7 +147,7 @@ final class BluetoothManager: NSObject {
    */
   @objc func integrrogateTimeout(_ timer: Timer) {
     disconnectPeripheral()
-    delegate?.didFailedToInterrogate?((timer.userInfo as! CBPeripheral))
+    delegate?.didFailToInterrogate?((timer.userInfo as! CBPeripheral))
   }
   
   /**
@@ -173,7 +178,7 @@ final class BluetoothManager: NSObject {
    - parameter enable:         If you want to start listening, the value is true, others is false
    - parameter characteristic: The characteristic which provides notifications
    */
-  func setNotification(enable: Bool, forCharacteristic characteristic: CBCharacteristic){
+  func setNotification(enable: Bool, forCharacteristic characteristic: CBCharacteristic) {
     guard let connectedPeripheral = connectedPeripheral, isReady else { return }
     connectedPeripheral.setNotifyValue(enable, for: characteristic)
   }
@@ -190,14 +195,14 @@ final class BluetoothManager: NSObject {
     guard let connectedPeripheral = connectedPeripheral, isReady else { return }
     
     // There's data left, so send until the callback fails, or we're done.
-    maximumWriteLength = connectedPeripheral.maximumWriteValueLength(for: writeType)
+    maximumWriteLength = notifyMaximumTransferUnit //connectedPeripheral.maximumWriteValueLength(for: writeType)
     totalWrittenData = Data()
 
     DispatchQueue.global(qos: .background).async {
       while self.isSendingEOM == false {
         var bytesToSend = data.count - self.writeDataLength
 
-        // Can't be longer than 512 bytes
+        // Can't be longer than 20 bytes
         if bytesToSend > self.maximumWriteLength {
           bytesToSend = self.maximumWriteLength
         }
@@ -281,9 +286,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
   public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
     print("Bluetooth Manager --> didConnectPeripheral")
     isConnecting = false
-    if timeoutMonitor != nil {
-      timeoutMonitor!.invalidate()
-      timeoutMonitor = nil
+    if connectingTimeoutMonitor != nil {
+      connectingTimeoutMonitor!.invalidate()
+      connectingTimeoutMonitor = nil
     }
     connected = true
     connectedPeripheral = peripheral
@@ -291,7 +296,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     stopScanPeripheral()
     peripheral.delegate = self
     peripheral.discoverServices(nil)
-    interrogateMonitor = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.integrrogateTimeout(_:)), userInfo: peripheral, repeats: false)
+    interrogatingTimeoutMonitor = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.integrrogateTimeout(_:)), userInfo: peripheral, repeats: false)
   }
   
   /**
@@ -304,12 +309,12 @@ extension BluetoothManager: CBCentralManagerDelegate {
   public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
     print("Bluetooth Manager --> didFailToConnectPeripheral")
     isConnecting = false
-    if timeoutMonitor != nil {
-      timeoutMonitor!.invalidate()
-      timeoutMonitor = nil
+    if connectingTimeoutMonitor != nil {
+      connectingTimeoutMonitor!.invalidate()
+      connectingTimeoutMonitor = nil
     }
     connected = false
-    delegate?.failToConnectPeripheral?(peripheral, error: error!)
+    delegate?.didFailToConnectPeripheral?(peripheral, error: error!)
   }
   
   /**
@@ -385,9 +390,9 @@ extension BluetoothManager: CBPeripheralDelegate {
     }
     
     // If discover services, then invalidate the timeout monitor
-    if interrogateMonitor != nil {
-      interrogateMonitor?.invalidate()
-      interrogateMonitor = nil
+    if interrogatingTimeoutMonitor != nil {
+      interrogatingTimeoutMonitor?.invalidate()
+      interrogatingTimeoutMonitor = nil
     }
     
     self.delegate?.didDiscoverServices?(peripheral)
@@ -427,7 +432,6 @@ extension BluetoothManager: CBPeripheralDelegate {
     //        delegate.serialIsReady?(peripheral)
     //      }
     //    }
-    
     delegate?.didDiscoverCharacteritics?(service)
   }
   

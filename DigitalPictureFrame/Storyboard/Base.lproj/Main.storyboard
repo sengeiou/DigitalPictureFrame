@@ -185,7 +185,7 @@
         <!--Peripheral View Controller-->
         <scene sceneID="qTE-RH-SUS">
             <objects>
-                <viewController storyboardIdentifier="PeripheralViewController" title="Peripheral View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="g02-28-RGv" customClass="BluetoothPeripheralViewController" customModule="DigitalPictureFrame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BluetoothPeripheralViewController" title="Peripheral View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="g02-28-RGv" customClass="BluetoothPeripheralViewController" customModule="DigitalPictureFrame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rdz-b4-Mci">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,7 +194,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="LW3-eI-Qxr">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="7FB-8D-dvU">
+                                        <barButtonItem key="leftBarButtonItem" image="icon-arrow-back" id="7FB-8D-dvU">
                                             <connections>
                                                 <action selector="backBarButtonPressed:" destination="g02-28-RGv" id="Y7j-eR-ZoZ"/>
                                             </connections>
@@ -205,8 +205,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8d0-K7-IAf">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Peripheral" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vx1-mm-XL8">
-                                        <rect key="frame" x="10" y="10" width="121" height="33.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PeripheralNameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vx1-mm-XL8">
+                                        <rect key="frame" x="8" y="10" width="258.5" height="33.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="33.5" id="ELi-lE-6pg"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="eH6-jn-JpA"/>
@@ -215,8 +215,8 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UUID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQF-dA-a0A">
-                                        <rect key="frame" x="10" y="53" width="34.5" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UUIDLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQF-dA-a0A">
+                                        <rect key="frame" x="8" y="53" width="69.5" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="oay-8l-Lkc"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="tpb-VB-mr3"/>
@@ -225,8 +225,8 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plj-qd-Bqh">
-                                        <rect key="frame" x="10" y="85" width="86.5" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ConnectionStatusLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plj-qd-Bqh">
+                                        <rect key="frame" x="8" y="85" width="183.5" height="20.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="JTx-K8-YRK"/>
                                             <constraint firstAttribute="height" constant="20.5" id="zYE-jq-EBf"/>
@@ -235,44 +235,35 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rb8-iO-gE8">
-                                        <rect key="frame" x="285" y="80" width="80" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="39S-4O-swd"/>
-                                            <constraint firstAttribute="height" constant="30" id="ogp-1t-CoP"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="sendButtonPressed:" destination="g02-28-RGv" eventType="touchUpInside" id="G6X-jr-Qrf"/>
-                                        </connections>
-                                    </button>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MdA-XS-Osk">
-                                        <rect key="frame" x="10" y="117.5" width="355" height="2"/>
-                                    </progressView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="50" sectionHeaderHeight="60" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="3w3-iI-RDS">
-                                        <rect key="frame" x="0.0" y="125.5" width="375" height="457.5"/>
+                                        <rect key="frame" x="0.0" y="126" width="375" height="478"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="457.5" id="0l9-X3-gTu"/>
+                                            <constraint firstAttribute="height" constant="478" id="TJH-Iz-TM4"/>
                                         </constraints>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BluetoothPeripheralTableViewCell" id="BBU-Zr-1wu">
+                                                <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BBU-Zr-1wu" id="Luc-bb-l0i">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
                                     </tableView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="MdA-XS-Osk" secondAttribute="trailing" constant="10" id="26O-9N-z3B"/>
                                     <constraint firstItem="3w3-iI-RDS" firstAttribute="top" secondItem="Plj-qd-Bqh" secondAttribute="bottom" constant="20" id="4kF-zU-0sC"/>
                                     <constraint firstItem="nQF-dA-a0A" firstAttribute="top" secondItem="Vx1-mm-XL8" secondAttribute="bottom" constant="9.5" id="8vQ-Cm-ppQ"/>
-                                    <constraint firstItem="MdA-XS-Osk" firstAttribute="top" secondItem="Plj-qd-Bqh" secondAttribute="bottom" constant="12" id="Ofb-HG-kHw"/>
+                                    <constraint firstAttribute="bottom" secondItem="3w3-iI-RDS" secondAttribute="bottom" id="CG0-hg-DYG"/>
                                     <constraint firstItem="Vx1-mm-XL8" firstAttribute="top" secondItem="8d0-K7-IAf" secondAttribute="top" constant="10" id="QNi-lR-KZy"/>
-                                    <constraint firstAttribute="trailing" secondItem="Rb8-iO-gE8" secondAttribute="trailing" constant="10" id="dXk-sf-iLP"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nQF-dA-a0A" secondAttribute="trailing" constant="20" symbolic="YES" id="ebK-9M-Uur"/>
                                     <constraint firstItem="Plj-qd-Bqh" firstAttribute="top" secondItem="nQF-dA-a0A" secondAttribute="bottom" constant="15" id="fcd-1a-Ain"/>
-                                    <constraint firstItem="MdA-XS-Osk" firstAttribute="leading" secondItem="8d0-K7-IAf" secondAttribute="leading" constant="10" id="jdb-Mw-eLX"/>
-                                    <constraint firstItem="Vx1-mm-XL8" firstAttribute="leading" secondItem="8d0-K7-IAf" secondAttribute="leading" constant="10" id="lIT-L0-eP6"/>
+                                    <constraint firstItem="Vx1-mm-XL8" firstAttribute="leading" secondItem="8d0-K7-IAf" secondAttribute="leading" constant="8" id="lIT-L0-eP6"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Vx1-mm-XL8" secondAttribute="trailing" constant="20" symbolic="YES" id="lig-ne-HuC"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Plj-qd-Bqh" secondAttribute="trailing" constant="20" symbolic="YES" id="mkN-kb-Jmt"/>
                                     <constraint firstItem="3w3-iI-RDS" firstAttribute="leading" secondItem="8d0-K7-IAf" secondAttribute="leading" id="oc5-Ra-V2E"/>
-                                    <constraint firstItem="Rb8-iO-gE8" firstAttribute="centerY" secondItem="Plj-qd-Bqh" secondAttribute="centerY" id="trm-Rj-htW"/>
-                                    <constraint firstAttribute="bottom" secondItem="3w3-iI-RDS" secondAttribute="bottom" constant="20" id="uUr-Ga-bGc"/>
                                     <constraint firstItem="Plj-qd-Bqh" firstAttribute="leading" secondItem="nQF-dA-a0A" secondAttribute="leading" id="vVf-PK-UyE"/>
                                     <constraint firstItem="nQF-dA-a0A" firstAttribute="leading" secondItem="Vx1-mm-XL8" secondAttribute="leading" id="wkX-gU-Nfo"/>
                                     <constraint firstAttribute="trailing" secondItem="3w3-iI-RDS" secondAttribute="trailing" id="xwP-v7-7bO"/>
@@ -293,22 +284,20 @@
                         <viewLayoutGuide key="safeArea" id="Jmz-dk-FtJ"/>
                     </view>
                     <connections>
-                        <outlet property="centralSentProgressBar" destination="MdA-XS-Osk" id="ueO-Am-ZZa"/>
                         <outlet property="connectedLabel" destination="Plj-qd-Bqh" id="VaU-0H-KSh"/>
                         <outlet property="navigationBar" destination="AHT-tn-oH6" id="Eyp-i7-FTW"/>
                         <outlet property="peripheralNameLabel" destination="Vx1-mm-XL8" id="mQN-8S-MYq"/>
                         <outlet property="peripheralUUIDLabel" destination="nQF-dA-a0A" id="YNx-mG-lz7"/>
-                        <outlet property="sendButton" destination="Rb8-iO-gE8" id="MoQ-9b-PyO"/>
                         <outlet property="tableView" destination="3w3-iI-RDS" id="77N-Oz-ida"/>
-                        <outlet property="tableViewHeight" destination="0l9-X3-gTu" id="PTl-V4-eFm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXJ-28-9tW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3786" y="98"/>
+            <point key="canvasLocation" x="3784.8000000000002" y="97.601199400299862"/>
         </scene>
     </scenes>
     <resources>
+        <image name="icon-arrow-back" width="25" height="25"/>
         <image name="icon-settings" width="25" height="25"/>
         <image name="icon-users" width="25" height="25"/>
         <image name="icon-wifi" width="25" height="25"/>

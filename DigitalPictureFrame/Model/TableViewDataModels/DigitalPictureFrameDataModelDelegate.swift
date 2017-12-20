@@ -1,5 +1,5 @@
 //
-//  DigitalPictureFrameTableViewDataSourceDelegate.swift
+//  DigitalPictureFrameDataModelSDelegate.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol DigitalPictureFrameDataSourceDelegate: class, UITableViewDataSource, UITableViewDelegate {
+protocol DigitalPictureFrameDataModelDelegate: class, UITableViewDataSource, UITableViewDelegate {
   var items: [DigitalPictureFrameItem]? { get set }
   var delegateVC: UIViewController { get set }
   
@@ -19,7 +19,7 @@ protocol DigitalPictureFrameDataSourceDelegate: class, UITableViewDataSource, UI
 }
 
 
-extension DigitalPictureFrameDataSourceDelegate {
+extension DigitalPictureFrameDataModelDelegate {
   
   var numberOfSections: Int {
     return items?.count ?? 0

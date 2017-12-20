@@ -98,12 +98,13 @@ extension BluetoothScanningTableViewCell: ViewSetupable {
 
     signalStrengthImageView.backgroundColor = StyleBluetoothScanningCell.defaultBackgroundColor
     
+    connectButton.setTitleColor(.red, for: .highlighted)
+    connectButton.setTitleColor(.red, for: .selected)
     connectButton.titleLabel?.font = StyleBluetoothScanningCell.connectButtonTitleFont
     connectButton.layer.borderColor = UIColor.appleBlue.cgColor
     connectButton.layer.borderWidth = 0.5
     connectButton.layer.cornerRadius = 8
   }
-  
   
 }
 
@@ -111,19 +112,13 @@ extension BluetoothScanningTableViewCell: ViewSetupable {
 // MARK: Configure cell
 extension BluetoothScanningTableViewCell {
   
-  func configure(by item: PeripheralItem, at indexPath: IndexPath) {
+  func configureWith(item: PeripheralItem, at indexPath: IndexPath) {
     peripheral = item
     connectButton.tag = indexPath.row
     connectButton.isEnabled = true
     connectButton.setTitle(NSLocalizedString("BLUETOOTH_SCANNING_CELL_BUTTON_CONNECT_TITLE", comment: ""), for: .normal)
   }
-  
-  
-  func configureConnectedButton() {
-    connectButton.setTitle(NSLocalizedString("BLUETOOTH_SCANNING_CELL_BUTTON_CONNECTED_TITLE", comment: ""), for: .normal)
-    connectButton.isEnabled = false
-  }
-  
+
 }
 
 
@@ -131,7 +126,7 @@ extension BluetoothScanningTableViewCell {
 extension BluetoothScanningTableViewCell {
   
   @IBAction func connectButtonPressed(_ sender: UIButton) {
-    delegate?.bluetoothScanningCell(self, didPressConnect: sender)
+    self.delegate?.bluetoothScanningCell(self, didPressConnect: sender)
   }
   
 }

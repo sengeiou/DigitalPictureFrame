@@ -40,13 +40,13 @@ extension BluetoothConnectingView: ViewSetupable {
     contentView.backgroundColor = UIColor.appleBlue
     contentView.layer.cornerRadius = 20
     
-    titleLabel.text = "Connecting..."
     titleLabel.textColor = .white
     titleLabel.font = UIFont.systemFont(ofSize: 19, weight: .medium)
+    titleLabel.textAlignment = .center
     
-    subtitleLabel.text = "Peripheral Name"
     subtitleLabel.textColor = .white
     subtitleLabel.font = UIFont.systemFont(ofSize: 16, weight: .light)
+    subtitleLabel.textAlignment = .center
     
     scanningIndicator.startAnimating()
   }
@@ -101,20 +101,26 @@ extension BluetoothConnectingView {
   
   static func show() {
     if let window = UIApplication.shared.keyWindow {
+      sharedInstance.titleLabel.text = NSLocalizedString("BLUETOOTH_CONNECTING_VIEW_LABEL_TITLE_CONNECT", comment: "")
       window.addSubview(sharedInstance)
     }
   }
   
   
-  static func showWith(name: String) {
+  static func showWithSubtitle(_ title: String) {
     if let window = UIApplication.shared.keyWindow {
-      sharedInstance.subtitleLabel.text = name
+      sharedInstance.titleLabel.text = NSLocalizedString("BLUETOOTH_CONNECTING_VIEW_LABEL_TITLE_CONNECT", comment: "")
+      sharedInstance.subtitleLabel.text = title
       window.addSubview(sharedInstance)
     }
   }
 
   static func hide() {
     sharedInstance.removeFromSuperview()
+  }
+  
+  static func conectingInProgressWith(title: String) {
+    sharedInstance.titleLabel.text = title
   }
   
 }

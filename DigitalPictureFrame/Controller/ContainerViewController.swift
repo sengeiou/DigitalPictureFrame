@@ -46,7 +46,7 @@ class ContainerViewController: UIViewController {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let identifier = segue.identifier, identifier == SegueIdentifierType.digitalPictureFramePageSegue.rawValue else { return }
+    guard let identifier = segue.identifier, identifier.isEqual(to: SegueIdentifierType.digitalPictureFramePageSegue.rawValue) else { return }
     let destinationVC = segue.destination as! DigitalPictureFramePageViewController
     turningPageDelegate = destinationVC
   }

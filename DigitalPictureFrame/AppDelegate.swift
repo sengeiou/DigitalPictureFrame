@@ -15,7 +15,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     FirebaseApp.configure()
+//    renderStatusBarBackgroundColor()
     return true
   }
 }
 
+
+// MARK: - Render StatusBar background color
+private extension AppDelegate {
+  
+  func renderStatusBarBackgroundColor() {
+    UIApplication.shared.isStatusBarHidden = false
+    UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+
+    let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+    statusBar.backgroundColor = UIColor.groupGray
+  }
+  
+}
