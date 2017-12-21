@@ -54,53 +54,48 @@ extension AdvertisementDataType: CustomStringConvertible {
 }
 
 
-// MARK: -
+// MARK: - Get value from Advertisement Data
 extension AdvertisementDataType {
   
-  func getStringValue(from data: [String: Any]) -> String {
-    var resultString = ""
+  func getValue(from data: [String: Any]) -> String {
+    var result = ""
     
     switch self {
     case .localNameKey:
-      resultString = data[CBAdvertisementDataLocalNameKey] as? String ?? ""
+      guard let data = data[CBAdvertisementDataLocalNameKey] as? String else { return "" }
+      result = data
       
     case .txPowerLevelKey:
-      resultString = data[CBAdvertisementDataTxPowerLevelKey] as? String ?? ""
+      guard let data = data[CBAdvertisementDataTxPowerLevelKey] as? String else { return "" }
+      result = data
       
     case .serviceUUIDsKey:
-      if let serviceUUIDs = data[CBAdvertisementDataServiceUUIDsKey] as? NSArray {
-        serviceUUIDs.forEach { resultString = resultString + "\($0)," }
-        
-        print(resultString)
-        resultString = resultString.substring(to: resultString.characters.index(resultString.endIndex, offsetBy: -1))
-      } else {
-        return ""
-      }
+      guard let serviceUUIDs = data[CBAdvertisementDataServiceUUIDsKey] as? NSArray else { return "" }
+      serviceUUIDs.forEach { result = result + "\($0)," }
+//      print(result)
+      result = String(result.dropLast())
       
     case .serviceDataKey:
-      let data = (data[CBAdvertisementDataServiceDataKey]!) as? NSDictionary
-      if data == nil {
-        return ""
-      }
-      print("\(data!)")
-      resultString = data!.description.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "")
+      guard let data = data[CBAdvertisementDataServiceDataKey] as? NSDictionary else { return "" }
+//      print("\(data)")
+      result = data.description.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "")
       
     case .manufacturerDataKey:
-      resultString = ((data[CBAdvertisementDataManufacturerDataKey] as? Data)?.description)!
+      guard let data = data[CBAdvertisementDataManufacturerDataKey] as? Data else { return "" }
+      result = data.description
     
     case .overflowServiceUUIDsKey:
-      resultString = ""
+      result = ""
     
     case .isConnectable:
-      if let connectable = data[self.rawValue] as? NSNumber {
-        resultString = connectable.boolValue ? "true" : "false"
-      }
+      guard let connectable = data[self.rawValue] as? NSNumber else { return "" }
+      result = connectable.boolValue ? "true" : "false"
       
     case .solicitedServiceUUIDsKey:
-      resultString = ""
+      result = ""
     }
     
-    return resultString
+    return result
   }
   
 }

@@ -51,11 +51,7 @@ class DigitalPictureFramePageViewController: UIPageViewController {
     super.viewDidLoad()
     setup()
   }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    setupLayout()
-  }
+
   
   deinit {
     unregisterNotification()
@@ -70,16 +66,6 @@ extension DigitalPictureFramePageViewController: ViewSetupable {
     assignDelegate()
     registerNotification()
     loadData()
-    
-  }
-  
-  func setupLayout() {
-    func initialiseFirstViewController() {
-      guard let usersVC = orderedViewControllers.first as? UserViewController else { return }
-      setViewControllers([usersVC], direction: .forward, animated: true)
-    }
-    
-    
     initialiseFirstViewController()
   }
 }
@@ -156,6 +142,17 @@ private extension DigitalPictureFramePageViewController {
   func sendNotificationToEndRefreshingIndicator() {
     NotificationCenter.default.post(name: NotificationName.endRefreshingIndicator.name, object: nil)
   }
+}
+
+
+// MARK: Initialise Users ViewController
+private extension DigitalPictureFramePageViewController {
+  
+  func initialiseFirstViewController() {
+    guard let usersVC = orderedViewControllers.first as? UserViewController else { return }
+    setViewControllers([usersVC], direction: .forward, animated: true)
+  }
+
 }
 
 

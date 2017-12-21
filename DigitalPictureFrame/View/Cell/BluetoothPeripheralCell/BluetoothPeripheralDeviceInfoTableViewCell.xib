@@ -13,23 +13,29 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BluetoothPeripheralDeviceInfoTableViewCell" id="KGk-i7-Jjw" customClass="BluetoothPeripheralDeviceInfoTableViewCell" customModule="DigitalPictureFrame" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="74.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="xqf-eL-PZv">
-                        <rect key="frame" x="8" y="8" width="312" height="33.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="xqf-eL-PZv">
+                        <rect key="frame" x="8" y="4" width="312" height="66.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Dg-SP-YEO" userLabel="NameLabel">
-                                <rect key="frame" x="0.0" y="0.0" width="312" height="17"/>
+                                <rect key="frame" x="0.0" y="0.0" width="312" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DescriptionLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKK-k3-cUr" userLabel="DescriptionLabel">
-                                <rect key="frame" x="0.0" y="17" width="312" height="16.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rxh-Nh-P9w" userLabel="CharacteristicUUIDLabel">
+                                <rect key="frame" x="0.0" y="23" width="312" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DescriptionLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKK-k3-cUr" userLabel="PropertiesDescriptionLabel">
+                                <rect key="frame" x="0.0" y="45.5" width="312" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -37,7 +43,7 @@
                         </subviews>
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJr-XQ-lJ5" userLabel="Separator View">
-                        <rect key="frame" x="0.0" y="48.5" width="320" height="1"/>
+                        <rect key="frame" x="0.0" y="73.5" width="320" height="1"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="JFt-Ew-ewW"/>
@@ -46,9 +52,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="HJr-XQ-lJ5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5Ng-ms-kes"/>
-                    <constraint firstAttribute="bottom" secondItem="xqf-eL-PZv" secondAttribute="bottom" constant="8" id="8sN-tx-MHH"/>
+                    <constraint firstAttribute="bottom" secondItem="xqf-eL-PZv" secondAttribute="bottom" constant="4" id="8sN-tx-MHH"/>
                     <constraint firstItem="xqf-eL-PZv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="9KI-bj-t5w"/>
-                    <constraint firstItem="xqf-eL-PZv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Hra-eY-eBO"/>
+                    <constraint firstItem="xqf-eL-PZv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Hra-eY-eBO"/>
                     <constraint firstAttribute="trailing" secondItem="xqf-eL-PZv" secondAttribute="trailing" id="Pla-GT-Jp9"/>
                     <constraint firstAttribute="trailing" secondItem="HJr-XQ-lJ5" secondAttribute="trailing" id="c1g-BA-uUv"/>
                     <constraint firstAttribute="bottom" secondItem="HJr-XQ-lJ5" secondAttribute="bottom" id="kna-Wr-Rkv"/>
@@ -56,8 +62,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="descriptionLabel" destination="SKK-k3-cUr" id="SEb-I9-omw"/>
+                <outlet property="characteristicUUIDLabel" destination="Rxh-Nh-P9w" id="rvB-o1-Nfl"/>
                 <outlet property="nameLabel" destination="2Dg-SP-YEO" id="Y7b-lN-KLC"/>
+                <outlet property="propertiesDescriptionLabel" destination="SKK-k3-cUr" id="SEb-I9-omw"/>
             </connections>
         </tableViewCell>
     </objects>

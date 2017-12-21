@@ -27,6 +27,7 @@ class ContainerViewController: UIViewController {
     return [users, settings, wifi, bluetooth]
   }()
   
+  private var selectedTabBarItem: CustomTabBarItem!
   var turningPageDelegate: ContainerViewControllerDelegate?
   
   
@@ -37,7 +38,7 @@ class ContainerViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    selectFirstItem()
+    selectTabItem()
   }
   
   override func viewDidLayoutSubviews() {
@@ -62,6 +63,7 @@ extension ContainerViewController: ViewSetupable {
   
   func setup() {
     registerNotification()
+    selectedTabBarItem = tabBarItems.first!
   }
   
   func setupLayout() {
@@ -74,8 +76,8 @@ extension ContainerViewController: ViewSetupable {
 // MARK: - Select first item and change StatusBar color
 private extension ContainerViewController {
   
-  func selectFirstItem() {
-    tabBarItems.first!.sendActions(for: .touchUpInside)
+  func selectTabItem() {
+    selectedTabBarItem.sendActions(for: .touchUpInside)
   }
   
   func renderStatusBarBackgroundColor() {
@@ -112,7 +114,8 @@ extension ContainerViewController {
   
   @objc func itemSelected(_ notification: NSNotification) {
     guard let currentPageIndex = notification.userInfo?[NotificationUserInfoKey.currentPageIndex.rawValue] as? Int else { return }
-    tabBarItems[currentPageIndex].sendActions(for: .touchUpInside)
+    selectedTabBarItem = tabBarItems[currentPageIndex]
+    selectedTabBarItem.sendActions(for: .touchUpInside)
   }
   
 }
@@ -132,6 +135,7 @@ extension ContainerViewController: CustomTabBarDelegate {
   
   func customTabBar(_ customTabBar: CustomTabBar, didSelectTabBarButtonAt index: Int) {
     turningPageDelegate?.containerViewController(self, didSelectPageAt: index)
+    selectedTabBarItem = tabBarItems[index]
   }
   
 }

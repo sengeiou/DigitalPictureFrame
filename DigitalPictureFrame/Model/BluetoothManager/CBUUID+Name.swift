@@ -51,7 +51,7 @@ public let LBStandardServiceUUIDObjectTransfer              = CBUUID(string: "18
 
 /**
  The standard characteristic UUID define in the `Bluetooth Developer Portal` website.
- It will be used to create the standard characteristic and otain the standard characteristic name.
+ It will be used to create the standard characteristic and obtain the standard characteristic name.
  */
 public let LBStandardCharacteristicUUIDDeviceName                                     = CBUUID(string: "2A00")
 public let LBStandardCharacteristicUUIDAppearance                                     = CBUUID(string: "2A01")
@@ -165,7 +165,7 @@ public let LBStandardCharacteristicUUIDAnaerobicHeartRateLowerLimit             
 public let LBStandardCharacteristicUUIDAnaerobicHeartRateUpperLimit                   = CBUUID(string: "2A82")
 public let LBStandardCharacteristicUUIDAnaerobicThreshold                             = CBUUID(string: "2A83")
 public let LBStandardCharacteristicUUIDAerobicHeartRateUpperLimit                     = CBUUID(string: "2A84")
-public let LBStandardCharacteristicUUIDDateOfBirth                                     = CBUUID(string: "2A85")
+public let LBStandardCharacteristicUUIDDateOfBirth                                    = CBUUID(string: "2A85")
 public let LBStandardCharacteristicUUIDDateOfThresholdAssessment                      = CBUUID(string: "2A86")
 public let LBStandardCharacteristicUUIDEmailAddress                                   = CBUUID(string: "2A87")
 public let LBStandardCharacteristicUUIDFatHeartRateLowerLimit                         = CBUUID(string: "2A88")
@@ -243,7 +243,6 @@ func == (leftUUID : CBUUID, rightUUID: CBUUID) -> Bool {
 }
 
 extension CBUUID {
-  
   /**
    Obtain the UUID name
    If the UUID is the standard service UUID return the standard name

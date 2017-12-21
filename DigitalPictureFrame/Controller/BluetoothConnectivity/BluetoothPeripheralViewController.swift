@@ -13,15 +13,15 @@ class BluetoothPeripheralViewController: UIViewController, UINavigationBarDelega
   typealias PeripheralStyle = Style.BluetoothPeripheralVC
   
   private let sharedBluetoothManager = BluetoothManager.shared()
-
+  private var isListeningNotifications = false
+  
   @IBOutlet weak var navigationBar: UINavigationBar!
   @IBOutlet weak var peripheralNameLabel: UILabel!
   @IBOutlet weak var peripheralUUIDLabel: UILabel!
   @IBOutlet weak var connectedLabel: UILabel!
   @IBOutlet weak var tableView: UITableView!
   
-  
-  var characteriticServiceItem: CharacteristicServiceItem?
+  var characteriticServiceItem: PeripheralCharacteristicServiceItem?
   private var dataModelSource: BluetoothPeripheralDataModelDelegate?
   
   
@@ -80,7 +80,7 @@ extension BluetoothPeripheralViewController: ViewSetupable {
     
     tableView.register(cell: BluetoothPeripheralAdvertisementTableViewCell.self)
     tableView.register(cell: BluetoothPeripheralDeviceInfoTableViewCell.self)
-    tableView.register(cell: BluetoothPeripheralTableViewCell.self)
+    tableView.register(cell: BluetoothPeripheralTransferDataTableViewCell.self)
     tableView.dataSource = dataModelSource
     tableView.delegate = dataModelSource
     tableView.isScrollEnabled = true
@@ -193,14 +193,23 @@ extension BluetoothPeripheralViewController {
 
 
 // MARK: - BluetoothPeripheralCellDelegate protocol
-extension BluetoothPeripheralViewController: BluetoothPeripheralCellDelegate {
+extension BluetoothPeripheralViewController: BluetoothPeripheralTransferDataCellDelegate {
   
-  func bluetoothPeripheralCell(_ bluetoothPeripheralCell: BluetoothPeripheralTableViewCell, didPressSend button: UIButton) {
+  func bluetoothPeripheralCell(_ bluetoothPeripheralCell: BluetoothPeripheralTransferDataTableViewCell, didPressSend button: PeripheralButton) {
     print("didPressSend")
   }
   
-  func bluetoothPeripheralCell(_ bluetoothPeripheralCell: BluetoothPeripheralTableViewCell, didPressListenNotifications button: UIButton) {
+  func bluetoothPeripheralCell(_ bluetoothPeripheralCell: BluetoothPeripheralTransferDataTableViewCell, didPressListenNotifications button: PeripheralButton) {
     print("didPressListenNotifications")
+    
+    isListeningNotifications = !isListeningNotifications
+    if !isListeningNotifications {
+      button.setTitle(NSLocalizedString("BLUETOOTH_PERIPHERAL_CELL_BUTTON_LISTEN_NOTIFICATIONS_TITLE", comment: ""), for: .normal)
+    } else {
+      button.setTitle("Stop listening", for: .normal)
+    }
+    
+    sharedBluetoothManager.setNotification(enable: isListeningNotifications, forCharacteristic: bluetoothPeripheralCell.characteristicItem!)
   }
   
 }
@@ -210,7 +219,7 @@ extension BluetoothPeripheralViewController: BluetoothPeripheralCellDelegate {
 private extension BluetoothPeripheralViewController {
   
   @IBAction func backBarButtonPressed(_ sender: UIBarButtonItem) {
-    dismiss(animated: true, completion: nil)
+    transitionDismiss()
   }
   
   

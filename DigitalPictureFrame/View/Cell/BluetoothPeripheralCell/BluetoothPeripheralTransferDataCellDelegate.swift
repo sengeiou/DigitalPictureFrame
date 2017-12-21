@@ -1,5 +1,5 @@
 //
-//  BluetoothPeripheralCellDelegate.swift
+//  BluetoothPeripheralTransferDataCellDelegate.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek.

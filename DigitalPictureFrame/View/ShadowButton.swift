@@ -18,7 +18,7 @@ class ShadowButton: UIButton {
       shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 12).cgPath
       shadowLayer.fillColor = UIColor.white.cgColor
       
-      shadowLayer.shadowColor = UIColor.appleBlue.cgColor //UIColor.darkGray.cgColor
+      shadowLayer.shadowColor = UIColor.appleBlue.cgColor
       shadowLayer.shadowPath = shadowLayer.path
       shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
       shadowLayer.shadowOpacity = 0.8

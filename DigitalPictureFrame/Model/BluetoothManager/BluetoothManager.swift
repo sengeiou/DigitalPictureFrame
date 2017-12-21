@@ -15,13 +15,12 @@ final class BluetoothManager: NSObject {
   private var centralManager: CBCentralManager?
   private var connectingTimeoutMonitor : Timer?
   private var interrogatingTimeoutMonitor : Timer?
-  private let notifCenter = NotificationCenter.default
   private var isConnecting = false
   private(set) var connected = false
   private(set) var connectedPeripheral: CBPeripheral?
   private(set) var connectedServices: [CBService]?
   
-  private let notifyMaximumTransferUnit = 20
+  private let notifyMaximumTransferUnit = 20 // 20 bytes
   
   var logs: [String] = []
   var delegate: BluetoothDelegate?
@@ -328,7 +327,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     print("Bluetooth Manager --> didDisconnectPeripheral")
     connected = false
     self.delegate?.didDisconnectPeripheral?(peripheral)
-    notifCenter.post(name: NSNotification.Name(rawValue: PeripheralNotificationKeys.DisconnectNotif.rawValue), object: self)
+    NotificationCenter.default.post(name: NotificationName.peripheralDisconnectNotification.name, object: self)
   }
   
 }

@@ -1,5 +1,5 @@
 //
-//  CharacteristicServiceItem.swift
+//  PeripheralCharacteristicServiceItem.swift
 //  DigitalPictureFrame
 //
 //  Created by Pawel Milek.
@@ -9,12 +9,13 @@
 import Foundation
 import CoreBluetooth
 
-final class CharacteristicServiceItem {
+final class PeripheralCharacteristicServiceItem: PeripheralAdvertisement {
   typealias BluetoothCharacteristicDictionary = [CBUUID: [CBCharacteristic]]
-  
+
+  //  var cellType: BluetoothPeripheralCellType?
   private(set) var characteristics: BluetoothCharacteristicDictionary = [:]
-  var advertisementData: [String: Any]?
-  var advertisementDataTypes: [AdvertisementDataType]?
+  private(set) var advertisementDataTypes: [AdvertisementDataType]?
+  var advertisementData: [String: Any]
   
   var service: CBService? {
     didSet {
@@ -26,8 +27,8 @@ final class CharacteristicServiceItem {
   }
   
   
-  init(advertisementData: [String: Any]?) {
+  init(advertisementData: [String: Any]) {
     self.advertisementData = advertisementData
-    self.advertisementDataTypes = (advertisementData!.keys).sorted().flatMap { AdvertisementDataType(rawValue: $0) }
+    self.advertisementDataTypes = (advertisementData.keys).sorted().flatMap { AdvertisementDataType(rawValue: $0) }
   }
 }

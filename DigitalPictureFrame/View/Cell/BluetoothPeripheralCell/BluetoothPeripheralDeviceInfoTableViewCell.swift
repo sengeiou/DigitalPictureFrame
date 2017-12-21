@@ -10,10 +10,20 @@ import UIKit
 import CoreBluetooth
 
 class BluetoothPeripheralDeviceInfoTableViewCell: UITableViewCell {
-  typealias StyleDeviceInfoCell = Style.BluetoothPeripheralDeviceInfoCell
-  
   @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet weak var characteristicUUIDLabel: UILabel!
+  @IBOutlet weak var propertiesDescriptionLabel: UILabel!
+  
+  
+  var characteristicItem: CBCharacteristic? {
+    didSet {
+      guard let characteristicItem = characteristicItem else { return }
+      nameLabel.text = characteristicItem.name
+      characteristicUUIDLabel.text = characteristicItem.uuid.uuidString
+      propertiesDescriptionLabel.text = characteristicItem.createPropertiesDescription()
+    }
+  }
+  
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -30,52 +40,39 @@ extension BluetoothPeripheralDeviceInfoTableViewCell: ViewSetupable {
   
   func setup() {
     selectionStyle = .none
+    nameLabel.text = ""
+    characteristicUUIDLabel.text = ""
+    propertiesDescriptionLabel.text = ""
   }
   
   
   func setupStyle() {
+    typealias StyleDeviceInfoCell = Style.BluetoothPeripheralDeviceInfoCell
     backgroundColor = StyleDeviceInfoCell.defaultBackgroundColor
-    setupLabels()
-  }
-  
-}
-
-
-// MARK: Render
-private extension BluetoothPeripheralDeviceInfoTableViewCell {
-  
-  func setupLabels() {
     nameLabel.font = StyleDeviceInfoCell.nameLabelFont
     nameLabel.textColor = StyleDeviceInfoCell.nameLabelTextColor
     nameLabel.textAlignment = StyleDeviceInfoCell.nameLabelAlignment
     nameLabel.numberOfLines = StyleDeviceInfoCell.nameLabelNumberOfLines
     
-    descriptionLabel.font = StyleDeviceInfoCell.descriptionLabelFont
-    descriptionLabel.textColor = StyleDeviceInfoCell.descriptionLabelTextColor
-    descriptionLabel.textAlignment = StyleDeviceInfoCell.descriptionLabelAlignment
-    descriptionLabel.numberOfLines = StyleDeviceInfoCell.descriptionLabelNumberOfLines
+    characteristicUUIDLabel.font = StyleDeviceInfoCell.characteristicUUIDLabelFont
+    characteristicUUIDLabel.textColor = StyleDeviceInfoCell.characteristicUUIDLabelTextColor
+    characteristicUUIDLabel.textAlignment = StyleDeviceInfoCell.characteristicUUIDLabelAlignment
+    characteristicUUIDLabel.numberOfLines = StyleDeviceInfoCell.characteristicUUIDLabelNumberOfLines
+    
+    propertiesDescriptionLabel.font = StyleDeviceInfoCell.propertiesDescriptionLabelFont
+    propertiesDescriptionLabel.textColor = StyleDeviceInfoCell.propertiesDescriptionLabelTextColor
+    propertiesDescriptionLabel.textAlignment = StyleDeviceInfoCell.propertiesDescriptionLabelAlignment
+    propertiesDescriptionLabel.numberOfLines = StyleDeviceInfoCell.propertiesDescriptionLabelNumberOfLines
   }
+  
 }
+
 
 
 // MARK: Configure cell
 extension BluetoothPeripheralDeviceInfoTableViewCell {
 
-  func getPropertiesFromArray(_ array : [String]) -> String {
-    var propertiesString = "Properties:"
-    let containWrite = array.contains("Write")
-    for property in array {
-      if containWrite && property == "Write Without Response" {
-        continue
-      }
-      propertiesString += " " + property
-    }
-    return propertiesString
-  }
-  
-  
   func configureWith(item: CBCharacteristic?, at indexPath: IndexPath) {
-    nameLabel.text = item?.name
-    descriptionLabel.text = getPropertiesFromArray((item?.getProperties())!)
+    characteristicItem = item
   }
 }
