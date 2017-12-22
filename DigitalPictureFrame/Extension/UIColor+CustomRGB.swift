@@ -1,6 +1,6 @@
 //
 //  UIColor+CustomRGB.swift
-//  ARPuzzle15
+//  DigitalPictureFrame
 //
 //  Created by Pawel Milek
 //  Copyright © 2017 Pawel Milek. All rights reserved.
@@ -19,7 +19,8 @@ extension UIColor {
     return UIColor.colorRGB(component: (red: CGFloat(235), green: CGFloat(235), blue: CGFloat(241)))
   }
   
-  static private func colorRGB(component: (red: CGFloat, green: CGFloat, blue: CGFloat), alpha: CGFloat = 1.0) -> UIColor {
-    return UIColor(red: component.red/255, green: component.green/255, blue: component.blue/255, alpha: alpha)
+  
+  static private func colorRGB(component: (red: CGFloat, green: CGFloat, blue: CGFloat)) -> UIColor {
+    return UIColor(red: component.red/255, green: component.green/255, blue: component.blue/255, alpha: 1.0)
   }
 }

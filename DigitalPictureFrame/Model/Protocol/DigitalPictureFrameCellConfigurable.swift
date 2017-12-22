@@ -17,7 +17,7 @@ protocol DigitalPictureFrameCellConfigurable: class {
 // MARK: - Setup item
 extension DigitalPictureFrameCellConfigurable where Self: UITableViewCell {
   
-  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+  func configure(with item: DigitalPictureFrameItem, at indexPath: IndexPath) {
     self.rowInSection = indexPath.row
     self.item = item
   }

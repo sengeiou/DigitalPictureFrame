@@ -47,5 +47,3 @@ extension Crypt {
     return data
   }
 }
-
-

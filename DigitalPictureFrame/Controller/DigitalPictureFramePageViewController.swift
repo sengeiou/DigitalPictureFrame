@@ -22,7 +22,8 @@ class DigitalPictureFramePageViewController: UIPageViewController {
     let usersVC = mainStoryboard.instantiateViewController(UserViewController.self)
     let settingsVC = mainStoryboard.instantiateViewController(SettingsViewController.self)
     let wifiVC = mainStoryboard.instantiateViewController(WiFiViewController.self)
-    return [usersVC, settingsVC, wifiVC]
+    let bluetoothVC = mainStoryboard.instantiateViewController(BluetoothConnectivityViewController.self)
+    return [usersVC, settingsVC, wifiVC, bluetoothVC]
   }()
   
   private var currentPageIndex: Int? {
@@ -50,11 +51,7 @@ class DigitalPictureFramePageViewController: UIPageViewController {
     super.viewDidLoad()
     setup()
   }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    setupLayout()
-  }
+
   
   deinit {
     unregisterNotification()
@@ -69,16 +66,6 @@ extension DigitalPictureFramePageViewController: ViewSetupable {
     assignDelegate()
     registerNotification()
     loadData()
-    
-  }
-  
-  func setupLayout() {
-    func initialiseFirstViewController() {
-      guard let usersVC = orderedViewControllers.first as? UserViewController else { return }
-      setViewControllers([usersVC], direction: .forward, animated: true)
-    }
-    
-    
     initialiseFirstViewController()
   }
 }
@@ -158,6 +145,17 @@ private extension DigitalPictureFramePageViewController {
 }
 
 
+// MARK: Initialise Users ViewController
+private extension DigitalPictureFramePageViewController {
+  
+  func initialiseFirstViewController() {
+    guard let usersVC = orderedViewControllers.first as? UserViewController else { return }
+    setViewControllers([usersVC], direction: .forward, animated: true)
+  }
+
+}
+
+
 // MARK: - Verify user credential
 private extension DigitalPictureFramePageViewController {
   
@@ -166,11 +164,11 @@ private extension DigitalPictureFramePageViewController {
       DatabaseManager.shared().clearData()
       sendNotificationToReloadUserData()
       
-      let title = "User verification"
-      let message = "Please type in current Phone Number"
+      let title = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_TITLE", comment: "")
+      let message = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_MSG", comment: "")
       AlertViewPresenter.sharedInstance.delegate = self
       AlertViewPresenter.sharedInstance.presentSubmitAlert(in: self, title: title, message: message, textFieldConfiguration: { textField in
-        textField.placeholder = "Phone Number"
+        textField.placeholder = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_PLACEHOLDER", comment: "")
         textField.keyboardAppearance = .dark
         textField.keyboardType = .phonePad
         textField.clearButtonMode = .whileEditing
@@ -206,10 +204,11 @@ extension DigitalPictureFramePageViewController: AlertViewPresenterDelegate {
       NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
       
     } catch AccessVerifierError.dataNotAvailable(let desc) {
-      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: "Data Not Available: " + desc)
+      let errorMessage = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_FAILED_MSG", comment: "") + desc
+      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: errorMessage)
       
     } catch AccessVerifierError.accessDenied {
-      let message = "Phone Number is different than what is currently associated with user."
+      let message = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_INFO_MSG", comment: "")
       AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
       
     } catch let error {
@@ -248,7 +247,7 @@ extension DigitalPictureFramePageViewController: UIPageViewControllerDelegate {
   
   func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
     guard let currentPageIndex = currentPageIndex, completed else { return }
-    NotificationCenter.default.post(name: NotificationName.tabBarItemSelectedAtIndex.name, object: nil, userInfo: ["currentPageIndex": currentPageIndex])
+    NotificationCenter.default.post(name: NotificationName.tabBarItemSelectedAtIndex.name, object: nil, userInfo: [NotificationUserInfoKey.currentPageIndex.rawValue: currentPageIndex])
   }
   
 }

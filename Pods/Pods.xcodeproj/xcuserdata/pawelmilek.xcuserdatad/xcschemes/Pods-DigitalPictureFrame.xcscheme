@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0920"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7581BDD5D131558EC8BCBD03DC7BD819"
+               BlueprintIdentifier = "C419BEC6FA003AFA89B145F1D1C4B4C7"
                BuildableName = "Pods_DigitalPictureFrame.framework"
                BlueprintName = "Pods-DigitalPictureFrame"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7581BDD5D131558EC8BCBD03DC7BD819"
+            BlueprintIdentifier = "C419BEC6FA003AFA89B145F1D1C4B4C7"
             BuildableName = "Pods_DigitalPictureFrame.framework"
             BlueprintName = "Pods-DigitalPictureFrame"
             ReferencedContainer = "container:Pods.xcodeproj">

@@ -87,14 +87,14 @@ private extension WiFiViewController {
   }
   
   func showMessageToEnterNewWirelessNetworkPassword() {
-    let title = "Alert"
-    let message = "Wireless network is different than what is currently associated with user.\nEnter password for new Wi-Fi name."
+    let title = NSLocalizedString("WIFI_NEW_WIRELESS_NETWORK_PASSWORD_ALERT_TITLE", comment: "")
+    let message = NSLocalizedString("WIFI_NEW_WIRELESS_NETWORK_PASSWORD_ALERT_MSG", comment: "")
     sharedAlert.presentPopupAlert(in: self, title: title, message: message)
   }
   
   func showMessageNoWirelessNetworkConnected() {
-    let title = "Alert"
-    let message = "No wireless network connected"
+    let title = NSLocalizedString("WIFI_NO_WIRELESS_NETWORK_CONNECTED_ALERT_TITLE", comment: "")
+    let message = NSLocalizedString("WIFI_NO_WIRELESS_NETWORK_CONNECTED_ALERT_MSG", comment: "")
     sharedAlert.presentPopupAlert(in: self, title: title, message: message)
   }
   
@@ -106,11 +106,11 @@ extension WiFiViewController: WiFiCellDelegate {
   
   func wifiCell(_ cell: WiFiTableViewCell, didPressPasswordButtonAt indexPath: IndexPath) {
     modifiedItemIndexPath = indexPath
-    let title = "Wi-Fi Password"
-    let message = "Please type in the current Wi-Fi Password"
+    let title = NSLocalizedString("WIFI_ENTER_WIRELESS_NETWORK_PASSWORD_ALERT_TITLE", comment: "")
+    let message = NSLocalizedString("WIFI_ENTER_WIRELESS_NETWORK_PASSWORD_ALERT_MSG", comment: "")
     sharedAlert.delegate = self
     sharedAlert.presentSubmitAlert(in: self, title: title, message: message, textFieldConfiguration: { textField in
-      textField.placeholder = "Current Password"
+      textField.placeholder = NSLocalizedString("WIFI_ENTER_WIRELESS_NETWORK_PASSWORD_ALERT_PLACEHOLDER", comment: "")
       textField.keyboardAppearance = .dark
       textField.keyboardType = .default
       textField.clearButtonMode = .whileEditing
@@ -134,7 +134,7 @@ extension WiFiViewController: AlertViewPresenterDelegate {
     let passwordEncodedBase64 = crypt.convertIntoBase64Encoded(data: encryptedBytes)
     
     let fetchedWiFiName = modifiedWiFiItem.wiFi.name
-    let connectedWiFiName = NetworkConnectionUtility.fetchSSIDInfo() ?? "Not available"
+    let connectedWiFiName = NetworkConnectionUtility.fetchSSIDInfo() ?? NSLocalizedString("WIFI_WIRELESS_NETWORK_CONNECTED_LABEL_NOT_AVAILABLE", comment: "")
     let wifiComponents = fetchedWiFiName.contains(connectedWiFiName) ? "\(fetchedWiFiName):\(passwordEncodedBase64)" : "\(connectedWiFiName):\(passwordEncodedBase64)"
     
     let wifiCell = modifiedWiFiItem.cells[modifiedItemIndexPath.row]

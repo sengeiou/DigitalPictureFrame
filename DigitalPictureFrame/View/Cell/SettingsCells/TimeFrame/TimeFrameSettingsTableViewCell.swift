@@ -30,7 +30,8 @@ class TimeFrameSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellCo
   }
   
   @IBAction func timePickerButtonPressed(_ sender: TableSectionButton) {
-    delegate?.timeFrameSettingsCell(self, didPressTimePickerButtonAt: sender.indexPath)
+    guard let indexPath = sender.indexPath else { return }
+    delegate?.timeFrameSettingsCell(self, didPressTimePickerButtonAt: indexPath)
   }
   
   
@@ -55,7 +56,7 @@ extension TimeFrameSettingsTableViewCell {
 // MARK: DigitalPictureFrameCellConfigurable protocol
 extension TimeFrameSettingsTableViewCell {
   
-  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+  func configure(with item: DigitalPictureFrameItem, at indexPath: IndexPath) {
     self.rowInSection = indexPath.row
     self.item = item
     self.timePickerButton.indexPath = indexPath
