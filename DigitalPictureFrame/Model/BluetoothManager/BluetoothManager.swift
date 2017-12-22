@@ -74,7 +74,7 @@ final class BluetoothManager: NSObject {
    The method provides for starting scan near by peripheral
    */
   func startScanPeripheral() {
-    centralManager?.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey:true])
+    centralManager?.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
   }
   
   /**
@@ -91,7 +91,7 @@ final class BluetoothManager: NSObject {
   func connectPeripheral(_ peripheral: CBPeripheral) {
     if !isConnecting {
       isConnecting = true
-      centralManager?.connect(peripheral, options: [CBConnectPeripheralOptionNotifyOnDisconnectionKey : true])
+      centralManager?.connect(peripheral, options: [CBConnectPeripheralOptionNotifyOnDisconnectionKey: true])
       connectingTimeoutMonitor = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.connectTimeout(_:)), userInfo: peripheral, repeats: false)
     }
   }
@@ -102,6 +102,10 @@ final class BluetoothManager: NSObject {
   func disconnectPeripheral() {
     if connectedPeripheral != nil {
       centralManager?.cancelPeripheralConnection(connectedPeripheral!)
+      startScanPeripheral()
+      connectedPeripheral = nil
+      totalWrittenData = nil
+    } else {
       startScanPeripheral()
       connectedPeripheral = nil
       totalWrittenData = nil
@@ -216,7 +220,7 @@ final class BluetoothManager: NSObject {
           let stringFromData = String(data: self.totalWrittenData!, encoding: String.Encoding.utf8)!
           print(stringFromData)
 
-          connectedPeripheral.writeValue(BluetoothSerial.newLineEndOfMessage.data(using: String.Encoding.utf8)!, for: characteristic, type: writeType)
+          connectedPeripheral.writeValue("\nEOM".data(using: String.Encoding.utf8)!, for: characteristic, type: writeType)
           self.isSendingEOM = true
           return
         }

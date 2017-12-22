@@ -56,7 +56,7 @@ extension TimeFrameSettingsTableViewCell {
 // MARK: DigitalPictureFrameCellConfigurable protocol
 extension TimeFrameSettingsTableViewCell {
   
-  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+  func configure(with item: DigitalPictureFrameItem, at indexPath: IndexPath) {
     self.rowInSection = indexPath.row
     self.item = item
     self.timePickerButton.indexPath = indexPath

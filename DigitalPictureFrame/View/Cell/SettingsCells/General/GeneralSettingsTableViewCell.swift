@@ -49,7 +49,7 @@ extension GeneralSettingsTableViewCell {
 // MARK: DigitalPictureFrameCellConfigurable protocol
 extension GeneralSettingsTableViewCell {
   
-  func configureWith(item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+  func configure(with item: DigitalPictureFrameItem, at indexPath: IndexPath) {
     self.rowInSection = indexPath.row
     self.item = item
     self.onOffSwitch.tag = indexPath.section

@@ -53,7 +53,7 @@ extension UserInfoSettingsTableViewCell {
 // MARK: DigitalPictureFrameCellConfigurable protocol
 extension UserInfoSettingsTableViewCell {
   
-  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+  func configure(with item: DigitalPictureFrameItem, at indexPath: IndexPath) {
     self.rowInSection = indexPath.row
     self.item = item
     self.userButton.indexPath = indexPath

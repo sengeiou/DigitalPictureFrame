@@ -48,7 +48,7 @@ extension WeatherZipcodeSettingsTableViewCell {
 // MARK: DigitalPictureFrameCellConfigurable protocol
 extension WeatherZipcodeSettingsTableViewCell {
   
-  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+  func configure(with item: DigitalPictureFrameItem, at indexPath: IndexPath) {
     self.rowInSection = indexPath.row
     self.item = item
     self.zipcodeButton.indexPath = indexPath
