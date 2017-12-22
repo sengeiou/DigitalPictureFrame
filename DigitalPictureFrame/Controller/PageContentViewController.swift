@@ -167,8 +167,8 @@ extension PageContentViewController {
 extension PageContentViewController {
   
   func showNoDataAvailableMessage() {
-    let title = "No data available" //NSLocalizedString("BLUETOOTH_CONNECTIVITY_LABEL_NO_PERIPHERALS_AVAILABLE_TITLE", comment: "")
-    let subtitle = "Pull to refresh" //NSLocalizedString("BLUETOOTH_CONNECTIVITY_LABEL_NO_PERIPHERALS_AVAILABLE_SUBTITLE", comment: "")
+    let title = NSLocalizedString("PAGE_CONTENT_NO_DATA_AVAILABLE_TITLE", comment: "")
+    let subtitle = NSLocalizedString("PAGE_CONTENT_NO_DATA_AVAILABLE_SUBTITLE", comment: "")
     AvailabilityMessageView.show(on: tableView, title: title, subtitle: subtitle)
   }
   

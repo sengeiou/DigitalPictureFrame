@@ -157,6 +157,7 @@ extension BluetoothConnectivityViewController: BluetoothDelegate {
   
   func didDiscoverPeripheral(_ peripheral: CBPeripheral, advertisementData: [String: Any], RSSI: NSNumber) {
     if let exisitingPeripheral = availablePeripherals.filter({ $0.peripheral.identifier == peripheral.identifier }).first {
+      exisitingPeripheral.peripheral = peripheral
       exisitingPeripheral.RSSI = RSSI.floatValue
       
     } else {
@@ -164,6 +165,7 @@ extension BluetoothConnectivityViewController: BluetoothDelegate {
       availablePeripherals.append(foundPeripheral)
       availablePeripherals.sort { $0.RSSI > $1.RSSI }
     }
+    
     
     renderNoPeripheralsAvailableMessage()
     reloadPeripheralsList()
@@ -260,10 +262,10 @@ private extension BluetoothConnectivityViewController {
 // MARK: - BluetoothScanningCellDelegate protocol
 extension BluetoothConnectivityViewController: BluetoothScanningCellDelegate {
   
-  func bluetoothScanningCell(_ bluetoothScanningCell: BluetoothScanningTableViewCell, didPressConnect button: UIButton) {
-    let row = button.tag
-    selectedPeripheral = availablePeripherals[row]
+  func bluetoothScanningCell(_ bluetoothScanningCell: BluetoothScanningTableViewCell, didPressConnect button: TableSectionButton) {
+    guard let row = button.indexPath?.row else { return }
     
+    selectedPeripheral = availablePeripherals[row]
     BluetoothConnectingView.showWithSubtitle(selectedPeripheral!.name)
     sharedBluetoothManager.connectPeripheral(selectedPeripheral!.peripheral)
     stopScanPeripherals()

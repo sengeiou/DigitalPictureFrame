@@ -47,8 +47,14 @@ extension BluetoothConnectivityDataModel {
     
     view.backgroundColor = HeaderStyle.defaultBackgroundColor
     view.addSubview(titleLabel)
-    view.addConstraintsWith(format: "H:|-8-[view0]|", forView: titleLabel)
-    view.addConstraintsWith(format: "V:|[view0]|", forView: titleLabel)
+    
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    let titleLabelLeading = titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8)
+    let titleLabelTrailing = titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
+    let titleLabelTopConstraint = titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0)
+    let titleLabelBottomConstraint = titleLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+    NSLayoutConstraint.activate([titleLabelLeading, titleLabelTrailing, titleLabelTopConstraint, titleLabelBottomConstraint])
+    
     return view
   }
   

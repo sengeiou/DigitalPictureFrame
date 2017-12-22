@@ -164,11 +164,11 @@ private extension DigitalPictureFramePageViewController {
       DatabaseManager.shared().clearData()
       sendNotificationToReloadUserData()
       
-      let title = "User verification"
-      let message = "Please type in current Phone Number"
+      let title = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_TITLE", comment: "")
+      let message = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_MSG", comment: "")
       AlertViewPresenter.sharedInstance.delegate = self
       AlertViewPresenter.sharedInstance.presentSubmitAlert(in: self, title: title, message: message, textFieldConfiguration: { textField in
-        textField.placeholder = "Phone Number"
+        textField.placeholder = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_PLACEHOLDER", comment: "")
         textField.keyboardAppearance = .dark
         textField.keyboardType = .phonePad
         textField.clearButtonMode = .whileEditing
@@ -204,10 +204,11 @@ extension DigitalPictureFramePageViewController: AlertViewPresenterDelegate {
       NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
       
     } catch AccessVerifierError.dataNotAvailable(let desc) {
-      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: "Data Not Available: " + desc)
+      let errorMessage = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_FAILED_MSG", comment: "") + desc
+      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: errorMessage)
       
     } catch AccessVerifierError.accessDenied {
-      let message = "Phone Number is different than what is currently associated with user."
+      let message = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_INFO_MSG", comment: "")
       AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
       
     } catch let error {

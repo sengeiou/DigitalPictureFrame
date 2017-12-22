@@ -13,7 +13,7 @@ class BluetoothScanningTableViewCell: UITableViewCell {
   @IBOutlet weak var peripheralNameLabel: UILabel!
   @IBOutlet weak var serviceCounterLabel: UILabel!
   @IBOutlet weak var signalStrengthLabel: UILabel!
-  @IBOutlet weak var connectButton: UIButton!
+  @IBOutlet weak var connectButton: TableSectionButton!
   
   weak var delegate: BluetoothScanningCellDelegate?
   
@@ -114,7 +114,7 @@ extension BluetoothScanningTableViewCell {
   
   func configureWith(item: PeripheralItem, at indexPath: IndexPath) {
     peripheral = item
-    connectButton.tag = indexPath.row
+    connectButton.indexPath = indexPath
     connectButton.isEnabled = true
     connectButton.setTitle(NSLocalizedString("BLUETOOTH_SCANNING_CELL_BUTTON_CONNECT_TITLE", comment: ""), for: .normal)
   }
@@ -125,7 +125,7 @@ extension BluetoothScanningTableViewCell {
 // MARK: Actions
 extension BluetoothScanningTableViewCell {
   
-  @IBAction func connectButtonPressed(_ sender: UIButton) {
+  @IBAction func connectButtonPressed(_ sender: TableSectionButton) {
     self.delegate?.bluetoothScanningCell(self, didPressConnect: sender)
   }
   

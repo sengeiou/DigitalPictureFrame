@@ -12,6 +12,7 @@ import CoreBluetooth
 final class BluetoothManager: NSObject {
   private static var sharedInstance: BluetoothManager!
   
+  private let notifyMaximumTransferUnit = 20 // 20 bytes
   private var centralManager: CBCentralManager?
   private var connectingTimeoutMonitor : Timer?
   private var interrogatingTimeoutMonitor : Timer?
@@ -19,8 +20,6 @@ final class BluetoothManager: NSObject {
   private(set) var connected = false
   private(set) var connectedPeripheral: CBPeripheral?
   private(set) var connectedServices: [CBService]?
-  
-  private let notifyMaximumTransferUnit = 20 // 20 bytes
   
   var logs: [String] = []
   var delegate: BluetoothDelegate?
@@ -45,12 +44,9 @@ final class BluetoothManager: NSObject {
   /// Whether to write to the HM10 with or without response. Set automatically.
   /// Legit HM10 modules (from JNHuaMao) require 'Write without Response',
   /// while fake modules (e.g. from Bolutek) require 'Write with Response'.
-//  private var writeType: CBCharacteristicWriteType = .withoutResponse
   
   // First up, check if we're meant to be sending an EOM
   private var isSendingEOM = false
-  private var writeDataLength: Int = 0
-  private var maximumWriteLength: Int = 0
   private var writtenData: Data?
   private var totalWrittenData: Data?
   
@@ -90,7 +86,6 @@ final class BluetoothManager: NSObject {
   
   /**
    The method provides for connecting the special peripheral
-   
    - parameter peripher: The peripheral you want to connect
    */
   func connectPeripheral(_ peripheral: CBPeripheral) {
@@ -109,12 +104,12 @@ final class BluetoothManager: NSObject {
       centralManager?.cancelPeripheralConnection(connectedPeripheral!)
       startScanPeripheral()
       connectedPeripheral = nil
+      totalWrittenData = nil
     }
   }
   
   /**
    The method provides for the user who want to obtain the descriptor
-   
    - parameter characteristic: The character which user want to obtain descriptor
    */
   func discoverDescriptor(_ characteristic: CBCharacteristic) {
@@ -132,16 +127,15 @@ final class BluetoothManager: NSObject {
     guard let connectingPeripheral = timer.userInfo as? CBPeripheral, isConnecting == true else { return }
     
     isConnecting = false
-    connected = false
     connectingTimeoutMonitor = nil
     disconnectPeripheral()
-    let connectingError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Failed connection to peripheral \(connectingPeripheral.name ?? "Unnamed")"])
+    let errorDescription = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_MESSAGE_CONNECTION_TIMEOUT", comment: "")
+    let connectingError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: errorDescription])
     delegate?.didFailToConnectPeripheral?(connectingPeripheral, error: connectingError)
   }
   
   /**
    This method is invoked when interrogate peripheral is timeout
-   
    - parameter timer: The timer touch off this selector
    */
   @objc func integrrogateTimeout(_ timer: Timer) {
@@ -173,7 +167,6 @@ final class BluetoothManager: NSObject {
   
   /**
    Start or stop listening for the value update action
-   
    - parameter enable:         If you want to start listening, the value is true, others is false
    - parameter characteristic: The characteristic which provides notifications
    */
@@ -184,7 +177,6 @@ final class BluetoothManager: NSObject {
   
   /**
    Write value to the peripheral which is connected
-   
    - parameter data:           The data which will be written to peripheral
    - parameter characteristic: The characteristic information
    - parameter type:           The write of the operation
@@ -193,31 +185,33 @@ final class BluetoothManager: NSObject {
                   progressHandler: @escaping (_ bytesSent: Int, _ totalBytesExpectedToSend: Int) -> ()) {
     guard let connectedPeripheral = connectedPeripheral, isReady else { return }
     
+    var writeDataLength: Int = 0
     // There's data left, so send until the callback fails, or we're done.
-    maximumWriteLength = notifyMaximumTransferUnit //connectedPeripheral.maximumWriteValueLength(for: writeType)
+//    var maximumWriteLength = connectedPeripheral.maximumWriteValueLength(for: writeType)
     totalWrittenData = Data()
-
+    isSendingEOM = false
+    
     DispatchQueue.global(qos: .background).async {
       while self.isSendingEOM == false {
-        var bytesToSend = data.count - self.writeDataLength
+        var bytesToSend = data.count - writeDataLength
 
         // Can't be longer than 20 bytes
-        if bytesToSend > self.maximumWriteLength {
-          bytesToSend = self.maximumWriteLength
+        if bytesToSend > self.notifyMaximumTransferUnit {
+          bytesToSend = self.notifyMaximumTransferUnit
         }
 
         // Copy out the data we want
         let chunk: Data = data.withUnsafeBytes {(body: UnsafePointer<UInt8>) in
-          return Data(bytes: body + self.writeDataLength, count: bytesToSend)
+          return Data(bytes: body + writeDataLength, count: bytesToSend)
         }
 
         // Send data chunk
         connectedPeripheral.writeValue(chunk, for: characteristic, type: writeType)
         self.totalWrittenData!.append(chunk)
-        self.writeDataLength += bytesToSend
-        progressHandler(self.writeDataLength, data.count)
+        writeDataLength += bytesToSend
+        progressHandler(writeDataLength, data.count)
 
-        if self.writeDataLength >= data.count {
+        if writeDataLength >= data.count {
           // Send End Of Message
           let stringFromData = String(data: self.totalWrittenData!, encoding: String.Encoding.utf8)!
           print(stringFromData)
@@ -264,7 +258,6 @@ extension BluetoothManager: CBCentralManagerDelegate {
   
   /**
    This method is invoked while scanning, upon the discovery of peripheral by central
-   
    - parameter central:           The central manager providing this update.
    - parameter peripheral:        The discovered peripheral.
    - parameter advertisementData: A dictionary containing any advertisement and scan response data.
@@ -289,7 +282,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
       connectingTimeoutMonitor!.invalidate()
       connectingTimeoutMonitor = nil
     }
+    
     connected = true
+    totalWrittenData = Data()
     connectedPeripheral = peripheral
     delegate?.didConnectedPeripheral?(peripheral)
     stopScanPeripheral()
@@ -300,7 +295,6 @@ extension BluetoothManager: CBCentralManagerDelegate {
   
   /**
    This method is invoked where a connection failed.
-   
    - parameter central:    The central manager providing this information.
    - parameter peripheral: The peripheral that you tried to connect.
    - parameter error:      The error infomation about connecting failed.
@@ -313,12 +307,12 @@ extension BluetoothManager: CBCentralManagerDelegate {
       connectingTimeoutMonitor = nil
     }
     connected = false
+    totalWrittenData = nil
     delegate?.didFailToConnectPeripheral?(peripheral, error: error!)
   }
   
   /**
    This method is invoked when the peripheral has been disconnected.
-   
    - parameter central:    The central manager providing this information
    - parameter peripheral: The disconnected peripheral
    - parameter error:      The error message
@@ -326,6 +320,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
   public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
     print("Bluetooth Manager --> didDisconnectPeripheral")
     connected = false
+    totalWrittenData = nil
     self.delegate?.didDisconnectPeripheral?(peripheral)
     NotificationCenter.default.post(name: NotificationName.peripheralDisconnectNotification.name, object: self)
   }
@@ -339,7 +334,6 @@ extension BluetoothManager: CBPeripheralDelegate {
   
   /**
    This method is invoked when the peripheral has found the descriptor for the characteristic
-   
    - parameter peripheral:     The peripheral providing this information
    - parameter characteristic: The characteristic which has the descriptor
    - parameter error:          The error message
@@ -357,7 +351,6 @@ extension BluetoothManager: CBPeripheralDelegate {
   
   /**
    Thie method is invoked when the user call the peripheral.readValueForCharacteristic
-   
    - parameter peripheral:     The periphreal which call the method
    - parameter characteristic: The characteristic with the new value
    - parameter error:          The error message
@@ -376,7 +369,6 @@ extension BluetoothManager: CBPeripheralDelegate {
   
   /**
    The method is invoked where services were discovered.
-   
    - parameter peripheral: The peripheral with service informations.
    - parameter error:      Errot message when discovered services.
    */
@@ -400,7 +392,6 @@ extension BluetoothManager: CBPeripheralDelegate {
   
   /**
    The method is invoked where characteristics were discovered.
-   
    - parameter peripheral: The peripheral provide this information
    - parameter service:    The service included the characteristics.
    - parameter error:      If an error occurred, the cause of the failure.
@@ -413,24 +404,6 @@ extension BluetoothManager: CBPeripheralDelegate {
       return
     }
     
-    //    guard let characteristics = service.characteristics else { return }
-    //
-    //    // check whether the characteristic we're looking for (0xFFE1) is present - just to be sure
-    //    for characteristic in characteristics {
-    //      if characteristic.uuid.isEqual(characteristicUUID) {
-    //        // subscribe to this value (so we'll get notified when there is serial data for us..)
-    //        peripheral.setNotifyValue(true, for: characteristic)
-    //
-    //        // keep a reference to this characteristic so we can write to it
-    //        writeCharacteristic = characteristic
-    //
-    //        // find out writeType
-    //        writeType = characteristic.properties.contains(.write) ? .withResponse : .withoutResponse
-    //
-    //        // notify the delegate we're ready for communication
-    //        delegate.serialIsReady?(peripheral)
-    //      }
-    //    }
     delegate?.didDiscoverCharacteritics?(service)
   }
   

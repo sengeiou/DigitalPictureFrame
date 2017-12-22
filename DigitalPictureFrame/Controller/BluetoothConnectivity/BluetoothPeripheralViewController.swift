@@ -38,37 +38,6 @@ class BluetoothPeripheralViewController: UIViewController, UINavigationBarDelega
 }
 
 
-// MARK: - Reload TableView
-extension BluetoothPeripheralViewController {
-
-  func reloadTableView() {
-    DispatchQueue.main.async {
-      self.tableView.reloadData()
-    }
-  }
-  
-}
-
-
-// MARK: - BluetoothDelegate protocol
-extension BluetoothPeripheralViewController: BluetoothDelegate {
-  
-  func didDisconnectPeripheral(_ peripheral: CBPeripheral) {
-    print("PeripheralController --> didDisconnectPeripheral")
-    connectedLabel.text = NSLocalizedString("BLUETOOTH_PERIPHERAL_LABEL_DISCONNECTED_STATUS", comment: "")
-    connectedLabel.textColor = .red
-    
-  }
-  
-  func didDiscoverCharacteritics(_ service: CBService) {
-    print("Service.characteristics:\(String(describing: service.characteristics))")
-    characteriticServiceItem?.service = service
-    dataModelSource?.characteriticServiceItem = characteriticServiceItem
-    reloadTableView()
-  }
-  
-}
-
 
 // MARK: - ViewSetupable protocol
 extension BluetoothPeripheralViewController: ViewSetupable {
@@ -86,7 +55,7 @@ extension BluetoothPeripheralViewController: ViewSetupable {
     tableView.isScrollEnabled = true
     tableView.separatorStyle = .none
     tableView.tableFooterView = UIView(frame: .zero)
-
+    
     peripheralNameLabel.text = sharedBluetoothManager.connectedPeripheral?.name
     peripheralUUIDLabel.text = sharedBluetoothManager.connectedPeripheral?.identifier.uuidString
     reloadTableView()
@@ -96,6 +65,18 @@ extension BluetoothPeripheralViewController: ViewSetupable {
     renderStatusBarBackgroundColor()
     setupNavigationBar()
     setupLabels()
+  }
+  
+}
+
+
+// MARK: - Reload TableView
+extension BluetoothPeripheralViewController {
+  
+  func reloadTableView() {
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
   }
   
 }
@@ -132,62 +113,6 @@ private extension BluetoothPeripheralViewController {
     connectedLabel.numberOfLines = PeripheralStyle.connectedLabelNumberOfLines
     connectedLabel.textAlignment = PeripheralStyle.connectedLabelAlignment
   }
-
-}
-
-
-// MARK: - Send JSON data to Arduino
-private extension BluetoothPeripheralViewController {
-  
-  func sendDataToArduino() {
-    guard let dataForArduino = DatabaseManager.shared().encodedJsonData else { return }
-//    sharedBluetoothManager.writeValue(data: dataForArduino, forCharacteristic: <#T##CBCharacteristic#>, writeType: <#T##CBCharacteristicWriteType#>, progressHandler: <#T##(Int, Int) -> ()#>)
-//    sharedInstance.serial.sendDataToDevice(dataForArduino) { [weak self] bytesSent, totalBytesExpectedToSend in
-//      guard let strongSelf = self else { return }
-//      DispatchQueue.main.async {
-//        guard strongSelf.centralSentProgressBar.progress < 1 else { return }
-//
-//        let progressRatio: Float = (Float(bytesSent) / Float(totalBytesExpectedToSend))
-//        print("Central sent \(Int(progressRatio * 100))%")
-//        strongSelf.centralSentProgressBar.setProgress(progressRatio, animated: true)
-//        strongSelf.centralSentProgressLabel.setNeedsDisplay()
-//        strongSelf.centralSentProgressBar.setNeedsDisplay()
-//      }
-//    }
-  }
-  
-}
-
-
-// MARK: - BluetoothSerialDelegate protocol
-extension BluetoothPeripheralViewController {
-  
-  //  func serialDidReceiveData(_ data: Data) {
-  //    reloadView()
-  //
-  //    MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_PERIPHERAL_RECEIVED_DATA", comment: ""))
-  //
-  //    let stringFromData = String(data: data, encoding: String.Encoding.utf8)!
-  //    print(stringFromData)
-  //    let jsonString = stringFromData.replacingOccurrences(of: BluetoothSerial.newLineEndOfMessage, with: "")
-  //    print(jsonString)
-  //    let jsonDataWithoutEOM = jsonString.data(using: String.Encoding.utf8)!
-  //
-  //    if let json = try? JSONSerialization.jsonObject(with: jsonDataWithoutEOM, options: .allowFragments) {
-  //      print("DigitalPictureFrameData JSON:\n" + String(describing: json) + "\n")
-  //    }
-  //  }
-  
-  
-  //  func serialDidSendToPeripheral(data: Data, totalExpectedToSend: Data) {
-  //    guard peripheralReceiveProgressBar.progress < 1 else { return }
-  //
-  //    let progressRatio: Float = (Float(data.count) / Float(totalExpectedToSend.count))
-  //    peripheralReceiveProgressLabel.text = "Arduino received \(Int(progressRatio * 100))%"
-  //    peripheralReceiveProgressBar.setProgress(progressRatio, animated: true)
-  //    peripheralReceiveProgressLabel.setNeedsDisplay()
-  //    peripheralReceiveProgressBar.setNeedsDisplay()
-  //  }
   
 }
 
@@ -195,18 +120,39 @@ extension BluetoothPeripheralViewController {
 // MARK: - BluetoothPeripheralCellDelegate protocol
 extension BluetoothPeripheralViewController: BluetoothPeripheralTransferDataCellDelegate {
   
-  func bluetoothPeripheralCell(_ bluetoothPeripheralCell: BluetoothPeripheralTransferDataTableViewCell, didPressSend button: PeripheralButton) {
-    print("didPressSend")
+  func bluetoothPeripheralCell(_ bluetoothPeripheralCell: BluetoothPeripheralTransferDataTableViewCell, didPressSend button: TableSectionButton) {
+    if !sharedBluetoothManager.isReady {
+      let title = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_CONNECTION_TITLE", comment: "")
+      let message = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_MESSAGE_PERIPHERAL_NOT_READY", comment: "")
+      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
+    } else {
+      guard let jsonDataForArduino = DatabaseManager.shared().encodedJsonData else { return }
+      guard let characteristic = bluetoothPeripheralCell.characteristicItem else { return }
+      BluetoothSendingView.show()
+      sharedBluetoothManager.writeValue(data: jsonDataForArduino, forCharacteristic: characteristic, writeType: bluetoothPeripheralCell.writeType, progressHandler: { bytesSent, totalBytesExpectedToSend in
+        DispatchQueue.main.async {
+          let progressRatio: Float = (Float(bytesSent) / Float(totalBytesExpectedToSend))
+          BluetoothSendingView.sharedInstance.progress = progressRatio
+          if bytesSent >= totalBytesExpectedToSend {
+            BluetoothSendingView.hide()
+          }
+        }
+      })
+    }
   }
   
-  func bluetoothPeripheralCell(_ bluetoothPeripheralCell: BluetoothPeripheralTransferDataTableViewCell, didPressListenNotifications button: PeripheralButton) {
-    print("didPressListenNotifications")
-    
+  
+  func bluetoothPeripheralCell(_ bluetoothPeripheralCell: BluetoothPeripheralTransferDataTableViewCell, didPressListenNotifications button: TableSectionButton) {
     isListeningNotifications = !isListeningNotifications
+    var title: String {
+      return isListeningNotifications == false ? NSLocalizedString("BLUETOOTH_PERIPHERAL_CELL_BUTTON_LISTEN_NOTIFICATIONS_TITLE", comment: "")
+        : NSLocalizedString("BLUETOOTH_PERIPHERAL_CELL_BUTTON_STOP_LISTEN_NOTIFICATIONS_TITLE", comment: "")
+    }
+    
     if !isListeningNotifications {
-      button.setTitle(NSLocalizedString("BLUETOOTH_PERIPHERAL_CELL_BUTTON_LISTEN_NOTIFICATIONS_TITLE", comment: ""), for: .normal)
+      button.setTitle(title, for: .normal)
     } else {
-      button.setTitle("Stop listening", for: .normal)
+      button.setTitle(title, for: .normal)
     }
     
     sharedBluetoothManager.setNotification(enable: isListeningNotifications, forCharacteristic: bluetoothPeripheralCell.characteristicItem!)
@@ -222,15 +168,23 @@ private extension BluetoothPeripheralViewController {
     transitionDismiss()
   }
   
+}
+
+
+// MARK: - BluetoothDelegate protocol
+extension BluetoothPeripheralViewController: BluetoothDelegate {
   
-  @IBAction func sendButtonPressed(_ sender: UIButton) {
-    if !sharedBluetoothManager.isReady {
-      let title = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_CONNECTION_TITLE", comment: "")
-      let message = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_MESSAGE_PERIPHERAL_NOT_READY", comment: "")
-      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
-    } else {
-      sendDataToArduino()
-    }
+  func didDisconnectPeripheral(_ peripheral: CBPeripheral) {
+    print("PeripheralController --> didDisconnectPeripheral")
+    connectedLabel.text = NSLocalizedString("BLUETOOTH_PERIPHERAL_LABEL_DISCONNECTED_STATUS", comment: "")
+    connectedLabel.textColor = .red
+    
+  }
+  
+  func didDiscoverCharacteritics(_ service: CBService) {
+    characteriticServiceItem?.service = service
+    dataModelSource?.characteriticServiceItem = characteriticServiceItem
+    reloadTableView()
   }
   
 }

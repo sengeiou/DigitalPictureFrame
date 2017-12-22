@@ -36,18 +36,18 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="fOz-HI-P62" userLabel="Action Buttons Stack View">
-                        <rect key="frame" x="8" y="69" width="342" height="36"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fOz-HI-P62" userLabel="Action Buttons Stack View">
+                        <rect key="frame" x="160" y="64" width="190" height="34.5"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAM-pI-A38" customClass="PeripheralButton" customModule="DigitalPictureFrame" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="169" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAM-pI-A38" customClass="TableSectionButton" customModule="DigitalPictureFrame" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="91" height="34.5"/>
                                 <state key="normal" title="Send"/>
                                 <connections>
                                     <action selector="sendButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Li9-Jq-k7V"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fak-hR-bTo" customClass="PeripheralButton" customModule="DigitalPictureFrame" customModuleProvider="target">
-                                <rect key="frame" x="173" y="0.0" width="169" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fak-hR-bTo" customClass="TableSectionButton" customModule="DigitalPictureFrame" customModuleProvider="target">
+                                <rect key="frame" x="99" y="0.0" width="91" height="34.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Listen Notifications"/>
                                 <connections>
@@ -56,9 +56,6 @@
                             </button>
                         </subviews>
                     </stackView>
-                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uwP-IC-1hB">
-                        <rect key="frame" x="8" y="106" width="342" height="2"/>
-                    </progressView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7E-x5-nwv" userLabel="Separator View">
                         <rect key="frame" x="0.0" y="108.5" width="358" height="1"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -72,20 +69,16 @@
                     <constraint firstAttribute="trailing" secondItem="fOz-HI-P62" secondAttribute="trailing" constant="8" id="1qe-m8-UuA"/>
                     <constraint firstAttribute="bottom" secondItem="J7E-x5-nwv" secondAttribute="bottom" id="3gt-iQ-kHf"/>
                     <constraint firstAttribute="trailing" secondItem="a6b-qb-9QY" secondAttribute="trailing" constant="8" id="8Ye-gR-5EP"/>
-                    <constraint firstItem="uwP-IC-1hB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="P8c-0s-TwY"/>
-                    <constraint firstItem="J7E-x5-nwv" firstAttribute="top" secondItem="uwP-IC-1hB" secondAttribute="bottom" constant="0.5" id="Pl8-u1-LOA"/>
-                    <constraint firstItem="uwP-IC-1hB" firstAttribute="top" secondItem="fOz-HI-P62" secondAttribute="bottom" constant="1" id="Uft-Wo-DZZ"/>
-                    <constraint firstItem="uwP-IC-1hB" firstAttribute="width" secondItem="fOz-HI-P62" secondAttribute="width" id="Zcg-iz-IrU"/>
+                    <constraint firstItem="J7E-x5-nwv" firstAttribute="top" secondItem="fOz-HI-P62" secondAttribute="bottom" constant="10" id="UPm-1e-4JW"/>
                     <constraint firstItem="J7E-x5-nwv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dEu-4T-SmZ"/>
-                    <constraint firstItem="fOz-HI-P62" firstAttribute="top" secondItem="a6b-qb-9QY" secondAttribute="bottom" constant="20" id="hGo-3g-CIo"/>
+                    <constraint firstItem="fOz-HI-P62" firstAttribute="top" secondItem="a6b-qb-9QY" secondAttribute="bottom" constant="15" id="hGo-3g-CIo"/>
                     <constraint firstItem="a6b-qb-9QY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="nQO-bW-mqX"/>
-                    <constraint firstItem="fOz-HI-P62" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="oeS-Fm-nWc"/>
+                    <constraint firstItem="fOz-HI-P62" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="160" id="oeS-Fm-nWc"/>
                     <constraint firstAttribute="trailing" secondItem="J7E-x5-nwv" secondAttribute="trailing" id="u6T-JU-c0c"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="centralSentProgressBar" destination="uwP-IC-1hB" id="1hY-0d-BIz"/>
                 <outlet property="listenNotificationsButton" destination="Fak-hR-bTo" id="7hr-OM-EsF"/>
                 <outlet property="propertiesDescriptionLabel" destination="e92-eN-xD1" id="6fM-6r-iej"/>
                 <outlet property="sendButton" destination="uAM-pI-A38" id="lYD-fE-cEw"/>

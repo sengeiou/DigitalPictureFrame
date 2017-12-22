@@ -35,7 +35,7 @@ class BluetoothConnectingView: UIView {
 extension BluetoothConnectingView: ViewSetupable {
   
   func setup() {
-    backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+    backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
     
     contentView.backgroundColor = UIColor.appleBlue
     contentView.layer.cornerRadius = 20

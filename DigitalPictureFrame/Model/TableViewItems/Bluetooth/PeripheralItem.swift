@@ -18,7 +18,7 @@ final class PeripheralItem: NSObject, PeripheralAdvertisement {
   var signalStrengthIcon: UIImage?
   
   
-  init(peripheral: CBPeripheral, advertisementData: [String : Any], RSSI: Float, signalStrengthIcon: UIImage? = nil) {
+  init(peripheral: CBPeripheral, advertisementData: [String: Any], RSSI: Float, signalStrengthIcon: UIImage? = nil) {
     self.peripheral = peripheral
     self.advertisementData = advertisementData
     self.RSSI = RSSI

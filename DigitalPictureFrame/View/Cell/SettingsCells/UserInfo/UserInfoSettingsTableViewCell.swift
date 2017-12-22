@@ -27,7 +27,8 @@ class UserInfoSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellCon
   }
   
   @IBAction func userPickerButtonPressed(_ sender: TableSectionButton) {
-    delegate?.userInfoSettingsCell(self, didPressUserPickerButtonAt: sender.indexPath)
+    guard let indexPath = sender.indexPath else { return }
+    delegate?.userInfoSettingsCell(self, didPressUserPickerButtonAt: indexPath)
   }
   
   override func awakeFromNib() {

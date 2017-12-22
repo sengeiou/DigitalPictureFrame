@@ -105,8 +105,8 @@ struct Style {
     static let propertiesDescriptionLabelAlignment = NSTextAlignment.left
     static let propertiesDescriptionLabelNumberOfLines = 1
     
-    static let sendButtonTitleFont = UIFont.systemFont(ofSize: 15, weight: .regular)
-    static let listenNotificationsButtonTitleFont = UIFont.systemFont(ofSize: 15, weight: .regular)
+    static let sendButtonTitleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
+    static let listenNotificationsButtonTitleFont = UIFont.systemFont(ofSize: 12, weight: .medium)
     static let buttonBoarderColor = UIColor.appleBlue.cgColor
   }
   
