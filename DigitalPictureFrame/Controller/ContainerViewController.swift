@@ -20,12 +20,14 @@ class ContainerViewController: UIViewController {
   }()
   
   lazy private var tabBarItems: [CustomTabBarItem] = {
-    let users = CustomTabBarItem(image: UIImage(named: "icon-users")!, title: "Users")
-    let settings = CustomTabBarItem(image: UIImage(named: "icon-settings")!, title: "Settings")
-    let wifi = CustomTabBarItem(image: UIImage(named: "icon-wifi")!, title: "Wi-Fi")
-    return [users, settings, wifi]
+    let users = CustomTabBarItem(image: TopTabBarItemType.users.icon, title: TopTabBarItemType.users.description)
+    let settings = CustomTabBarItem(image: TopTabBarItemType.settings.icon, title: TopTabBarItemType.settings.description)
+    let wifi = CustomTabBarItem(image: TopTabBarItemType.wifi.icon, title: TopTabBarItemType.wifi.description)
+    let bluetooth = CustomTabBarItem(image: TopTabBarItemType.bluetoothConnectivity.icon, title: TopTabBarItemType.bluetoothConnectivity.description)
+    return [users, settings, wifi, bluetooth]
   }()
   
+  private var selectedTabBarItem: CustomTabBarItem!
   var turningPageDelegate: ContainerViewControllerDelegate?
   
   
@@ -36,7 +38,7 @@ class ContainerViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    selectFirstItem()
+    selectTabItem()
   }
   
   override func viewDidLayoutSubviews() {
@@ -45,7 +47,7 @@ class ContainerViewController: UIViewController {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let identifier = segue.identifier, identifier == SegueIdentifierType.digitalPictureFramePageSegue.rawValue else { return }
+    guard let identifier = segue.identifier, identifier.isEqual(to: SegueIdentifierType.digitalPictureFramePageSegue.rawValue) else { return }
     let destinationVC = segue.destination as! DigitalPictureFramePageViewController
     turningPageDelegate = destinationVC
   }
@@ -61,6 +63,7 @@ extension ContainerViewController: ViewSetupable {
   
   func setup() {
     registerNotification()
+    selectedTabBarItem = tabBarItems.first!
   }
   
   func setupLayout() {
@@ -73,8 +76,8 @@ extension ContainerViewController: ViewSetupable {
 // MARK: - Select first item and change StatusBar color
 private extension ContainerViewController {
   
-  func selectFirstItem() {
-    tabBarItems.first!.sendActions(for: .touchUpInside)
+  func selectTabItem() {
+    selectedTabBarItem.sendActions(for: .touchUpInside)
   }
   
   func renderStatusBarBackgroundColor() {
@@ -110,8 +113,9 @@ extension ContainerViewController {
   
   
   @objc func itemSelected(_ notification: NSNotification) {
-    guard let currentPageIndex = notification.userInfo?["currentPageIndex"] as? Int else { return }
-    tabBarItems[currentPageIndex].sendActions(for: .touchUpInside)
+    guard let currentPageIndex = notification.userInfo?[NotificationUserInfoKey.currentPageIndex.rawValue] as? Int else { return }
+    selectedTabBarItem = tabBarItems[currentPageIndex]
+    selectedTabBarItem.sendActions(for: .touchUpInside)
   }
   
 }
@@ -131,6 +135,7 @@ extension ContainerViewController: CustomTabBarDelegate {
   
   func customTabBar(_ customTabBar: CustomTabBar, didSelectTabBarButtonAt index: Int) {
     turningPageDelegate?.containerViewController(self, didSelectPageAt: index)
+    selectedTabBarItem = tabBarItems[index]
   }
   
 }

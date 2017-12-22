@@ -9,19 +9,5 @@
 import UIKit
 
 class TableSectionButton: UIButton {
-  var indexPath: IndexPath
-  
-  
-  override init(frame: CGRect) {
-    self.indexPath = IndexPath()
-    
-    super.init(frame: frame)
-  }
-
-  required init?(coder aDecoder: NSCoder) {
-    self.indexPath = IndexPath()
-    
-    super.init(coder: aDecoder)
-  }
-  
+  var indexPath: IndexPath?
 }

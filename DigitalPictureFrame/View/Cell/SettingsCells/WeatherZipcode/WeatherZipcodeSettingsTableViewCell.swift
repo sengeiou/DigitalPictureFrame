@@ -40,7 +40,6 @@ extension WeatherZipcodeSettingsTableViewCell {
   func setup() {
     selectionStyle = .none
     thumbnailImageView.contentMode = .scaleAspectFit
-    //thumbnailImageView.roundThumbnail()
   }
   
 }
@@ -49,7 +48,7 @@ extension WeatherZipcodeSettingsTableViewCell {
 // MARK: DigitalPictureFrameCellConfigurable protocol
 extension WeatherZipcodeSettingsTableViewCell {
   
-  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+  func configure(with item: DigitalPictureFrameItem, at indexPath: IndexPath) {
     self.rowInSection = indexPath.row
     self.item = item
     self.zipcodeButton.indexPath = indexPath
@@ -61,7 +60,8 @@ extension WeatherZipcodeSettingsTableViewCell {
 extension WeatherZipcodeSettingsTableViewCell {
   
   @IBAction func zipcodeButtonPressed(_ sender: TableSectionButton) {
-    delegate?.weatherZipcodeSettingsCell(self, didPressZipcodeButtonAt: sender.indexPath)
+    guard let indexPath = sender.indexPath else { return }
+    delegate?.weatherZipcodeSettingsCell(self, didPressZipcodeButtonAt: indexPath)
   }
   
 }

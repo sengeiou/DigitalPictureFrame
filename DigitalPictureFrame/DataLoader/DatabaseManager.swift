@@ -79,7 +79,6 @@ extension DatabaseManager {
     databaseReference.child("\(DigitalPictureFrameData.Keys.users.rawValue)/\(userIndex)").updateChildValues(["\(User.Keys.enabled.rawValue)": user.enabled])
   }
   
-  
   func updateSettings(general: Any, key: String) {
     databaseReference.child(DigitalPictureFrameData.Keys.settings.rawValue).updateChildValues(["\(key)": general])
   }
@@ -107,13 +106,11 @@ extension DatabaseManager {
     databaseReference.child(DigitalPictureFrameData.Keys.settings.rawValue).updateChildValues([Settings.Keys.weatherZip.rawValue: weatherZipcode])
   }
   
-  
   func updateWiFiInfo(_ wifiInfo: WiFiInfo) {
     guard let _ = self.wifiInfo else { return }
     databaseReference.child(DigitalPictureFrameData.Keys.wifiInfo.rawValue).updateChildValues([WiFiInfo.Keys.name.rawValue: wifiInfo.name])
     databaseReference.child(DigitalPictureFrameData.Keys.wifiInfo.rawValue).updateChildValues([WiFiInfo.Keys.password.rawValue: wifiInfo.password])
   }
-  
   
   func clearData() {
     data = nil
@@ -122,7 +119,7 @@ extension DatabaseManager {
 }
 
 
-// MARK: - Retrive data
+// MARK: - Properties
 extension DatabaseManager {
   
   var phoneNumber: String? {
@@ -139,6 +136,18 @@ extension DatabaseManager {
   
   var wifiInfo: WiFiInfo? {
     return data?.wifiInfo
+  }
+  
+  
+  var encodedJsonData: Data? {
+    if let data = data, let encodedData = try? JSONEncoder().encode(data) {
+      if let _ = try? JSONSerialization.jsonObject(with: encodedData, options: .allowFragments) {
+        //          print("DigitalPictureFrameData JSON:\n" + String(describing: json) + "\n")
+        return encodedData
+      }
+    }
+    
+    return nil
   }
   
 }

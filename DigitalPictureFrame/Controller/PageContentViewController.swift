@@ -20,7 +20,7 @@ class PageContentViewController: UIViewController, ViewSetupable {
   }()
   
   let sharedAlert = AlertViewPresenter.sharedInstance
-  var dataSourceDelegate: DigitalPictureFrameDataSourceDelegate?
+  var dataSourceDelegate: DigitalPictureFrameDataModelDelegate?
   
   
   override func viewDidLoad() {
@@ -113,10 +113,20 @@ extension PageContentViewController {
 extension PageContentViewController {
   
   func updateTableView() {
-    if let dataSourceDelegate = dataSourceDelegate, dataSourceDelegate.numberOfSections > 0 {
-      hideNodataAvailableMessage()
-    } else {
+    func removeTableViewEmptyCells() {
+      tableView.tableFooterView = UIView()
+    }
+    
+    var shouldShowNoDataAvailableMessage: Bool {
+      return dataSourceDelegate?.numberOfSections == 0 ? true : false
+    }
+    
+    
+    if shouldShowNoDataAvailableMessage {
       showNoDataAvailableMessage()
+      removeTableViewEmptyCells()
+    } else {
+      hideNoDataAvailableMessage()
     }
     
     tableView.reloadData()
@@ -144,7 +154,7 @@ extension PageContentViewController {
     if let dataSourceDelegate = dataSourceDelegate {
       dataSourceDelegate.items = items
     } else {
-      dataSourceDelegate = DigitalPictureFrameDataSource(self, items: items)
+      dataSourceDelegate = DigitalPictureFrameDataModel(self, items: items)
       tableView.dataSource = dataSourceDelegate
       tableView.delegate = dataSourceDelegate
     }
@@ -156,39 +166,15 @@ extension PageContentViewController {
 // Show/Hide No data available message
 extension PageContentViewController {
   
-  var isAvailableMessageVisible: Bool {
-    if let _ = tableView.viewWithTag(EmbeddedViewTag.availabilityMessage.rawValue) {
-      return true
-    }
-    
-    return false
-  }
-  
   func showNoDataAvailableMessage() {
-    guard !isAvailableMessageVisible else { return }
-    removeTableViewEmptyCells()
-    
-    let messageHeight = CGFloat(25)
-    let xPos = CGFloat(0)
-    let yPos = (tableView.frame.size.height - (messageHeight * 2)) / 2
-    let width = tableView.frame.size.width
-    let titleMessage = "No data available"
-    let subtitleMessage = "Pull to refresh"
-    
-    let frame = CGRect(x: xPos, y: yPos, width: width, height: messageHeight * 2)
-    let availabilityMessage = AvailabilityMessageView(frame: frame, titles: titleMessage, subtitleMessage)
-    tableView.addSubview(availabilityMessage)
+    let title = NSLocalizedString("PAGE_CONTENT_NO_DATA_AVAILABLE_TITLE", comment: "")
+    let subtitle = NSLocalizedString("PAGE_CONTENT_NO_DATA_AVAILABLE_SUBTITLE", comment: "")
+    AvailabilityMessageView.show(on: tableView, title: title, subtitle: subtitle)
   }
   
   
-  func hideNodataAvailableMessage() {
-    guard isAvailableMessageVisible else { return }
-    let availabilityMessageView = tableView.viewWithTag(EmbeddedViewTag.availabilityMessage.rawValue)
-    availabilityMessageView?.removeFromSuperview()
+  func hideNoDataAvailableMessage() {
+    AvailabilityMessageView.hide()
   }
-  
-  
-  func removeTableViewEmptyCells() {
-    tableView.tableFooterView = UIView()
-  }
+
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BluetoothScanningTableViewCell" rowHeight="65" id="KGk-i7-Jjw" customClass="BluetoothScanningTableViewCell" customModule="DigitalPictureFrame" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVg-y0-kZn" customClass="TableSectionButton" customModule="DigitalPictureFrame" customModuleProvider="target">
+                        <rect key="frame" x="281" y="15" width="90" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="90" id="nIx-xr-klV"/>
+                            <constraint firstAttribute="height" constant="35" id="xBO-Jh-3mv"/>
+                        </constraints>
+                        <state key="normal" title="ConnenctButton"/>
+                        <connections>
+                            <action selector="connectButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="e93-16-trg"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="poG-6K-ECd">
+                        <rect key="frame" x="4" y="20" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="P3V-5K-5Oo"/>
+                            <constraint firstAttribute="width" constant="25" id="Qda-te-m4L"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNx-rd-qD3">
+                        <rect key="frame" x="4" y="45" width="25" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="WtT-WM-GF8">
+                        <rect key="frame" x="35" y="12" width="186" height="41"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PeripheralNameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNQ-W7-Rdm">
+                                <rect key="frame" x="0.0" y="0.0" width="186" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ServiceDescriptionLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gg3-PQ-WfF" userLabel="Service Description Label">
+                                <rect key="frame" x="0.0" y="20.5" width="186" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rDQ-nJ-PM4" userLabel="Separator View">
+                        <rect key="frame" x="0.0" y="63.5" width="375" height="1"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Wgx-Oi-aHt"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="fVg-y0-kZn" secondAttribute="trailing" constant="4" id="0Aq-7Y-lGR"/>
+                    <constraint firstItem="fVg-y0-kZn" firstAttribute="centerY" secondItem="WtT-WM-GF8" secondAttribute="centerY" id="77W-Dh-zNn"/>
+                    <constraint firstItem="wNx-rd-qD3" firstAttribute="top" secondItem="poG-6K-ECd" secondAttribute="bottom" id="91t-xO-cmI"/>
+                    <constraint firstItem="WtT-WM-GF8" firstAttribute="leading" secondItem="poG-6K-ECd" secondAttribute="trailing" constant="6" id="CDl-sp-yeP"/>
+                    <constraint firstItem="poG-6K-ECd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CwZ-Tf-hgf"/>
+                    <constraint firstItem="wNx-rd-qD3" firstAttribute="width" secondItem="poG-6K-ECd" secondAttribute="width" id="G2K-wr-cva"/>
+                    <constraint firstItem="rDQ-nJ-PM4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="LyX-hs-7aL"/>
+                    <constraint firstItem="poG-6K-ECd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="NpJ-uk-BFT"/>
+                    <constraint firstAttribute="trailing" secondItem="rDQ-nJ-PM4" secondAttribute="trailing" id="Ooe-uD-JJ7"/>
+                    <constraint firstItem="wNx-rd-qD3" firstAttribute="trailing" secondItem="poG-6K-ECd" secondAttribute="trailing" id="fE1-Us-ULq"/>
+                    <constraint firstAttribute="bottom" secondItem="wNx-rd-qD3" secondAttribute="bottom" id="hTt-nj-Z65"/>
+                    <constraint firstAttribute="bottom" secondItem="rDQ-nJ-PM4" secondAttribute="bottom" id="jHf-73-36I"/>
+                    <constraint firstItem="WtT-WM-GF8" firstAttribute="centerY" secondItem="poG-6K-ECd" secondAttribute="centerY" id="txD-Uh-6Es"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="connectButton" destination="fVg-y0-kZn" id="a7Z-VU-MuW"/>
+                <outlet property="peripheralNameLabel" destination="vNQ-W7-Rdm" id="kdU-nm-HJ1"/>
+                <outlet property="serviceCounterLabel" destination="gg3-PQ-WfF" id="MKN-ND-gdl"/>
+                <outlet property="signalStrengthImageView" destination="poG-6K-ECd" id="VcD-M8-lin"/>
+                <outlet property="signalStrengthLabel" destination="wNx-rd-qD3" id="wCC-Hw-wOg"/>
+            </connections>
+            <point key="canvasLocation" x="35.5" y="53.5"/>
+        </tableViewCell>
+    </objects>
+</document>

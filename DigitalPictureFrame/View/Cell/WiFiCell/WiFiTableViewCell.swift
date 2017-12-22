@@ -73,7 +73,6 @@ extension WiFiTableViewCell {
     passwordTextField.isSecureTextEntry = true
     passwordTextField.textAlignment = .right
     thumbnailImageView.contentMode = .scaleAspectFit
-    //thumbnailImageView.roundThumbnail()
   }
 }
 
@@ -81,7 +80,7 @@ extension WiFiTableViewCell {
 // MARK: DigitalPictureFrameCellConfigurable protocol
 extension WiFiTableViewCell {
   
-  func configure(by item: DigitalPictureFrameItem, at indexPath: IndexPath) {
+  func configure(with item: DigitalPictureFrameItem, at indexPath: IndexPath) {
     self.passwordButton.indexPath = indexPath
     self.rowInSection = indexPath.row
     self.item = item
@@ -94,8 +93,8 @@ extension WiFiTableViewCell {
 extension WiFiTableViewCell {
   
   @IBAction func enterPasswordButtonPressed(_ sender: TableSectionButton) {
-    guard passwordTextField.isEnabled else { return }
-    delegate?.wifiCell(self, didPressPasswordButtonAt: sender.indexPath)
+    guard let indexPath = sender.indexPath, passwordTextField.isEnabled else { return }
+    delegate?.wifiCell(self, didPressPasswordButtonAt: indexPath)
   }
   
 }

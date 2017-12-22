@@ -152,11 +152,11 @@ extension SettingsViewController: WeatherZipcodeSettingsCellDelegate {
   
   func weatherZipcodeSettingsCell(_ cell: WeatherZipcodeSettingsTableViewCell, didPressZipcodeButtonAt indexPath: IndexPath) {
     modifiedItemIndexPath = indexPath
-    let title = "Weather Zip Code"
-    let message = "Please type 5 digit zip code below"
+    let title = NSLocalizedString("SETTINGS_WEATHER_ZIPCODE_ALERT_TITLE", comment: "")
+    let message = NSLocalizedString("SETTINGS_WEATHER_ZIPCODE_ALERT_MSG", comment: "")
     sharedAlert.delegate = self
     sharedAlert.presentSubmitAlert(in: self, title: title, message: message, textFieldConfiguration: { textField in
-      textField.placeholder = "Zip Code"
+      textField.placeholder = NSLocalizedString("SETTINGS_WEATHER_ZIPCODE_ALERT_PLACEHOLDER", comment: "")
       textField.keyboardAppearance = .dark
       textField.keyboardType = .numberPad
       textField.clearButtonMode = .whileEditing
