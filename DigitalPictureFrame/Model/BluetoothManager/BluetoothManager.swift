@@ -14,8 +14,8 @@ final class BluetoothManager: NSObject {
   
   private let notifyMaximumTransferUnit = 20 // 20 bytes
   private var centralManager: CBCentralManager?
-  private var connectingTimeoutMonitor : Timer?
-  private var interrogatingTimeoutMonitor : Timer?
+  private var connectingTimeoutMonitor: Timer?
+  private var interrogatingTimeoutMonitor: Timer?
   private var isConnecting = false
   private(set) var connected = false
   private(set) var connectedPeripheral: CBPeripheral?
@@ -40,15 +40,6 @@ final class BluetoothManager: NSObject {
   var isPoweredOn: Bool {
     return state == .poweredOn
   }
-  
-  /// Whether to write to the HM10 with or without response. Set automatically.
-  /// Legit HM10 modules (from JNHuaMao) require 'Write without Response',
-  /// while fake modules (e.g. from Bolutek) require 'Write with Response'.
-  
-  // First up, check if we're meant to be sending an EOM
-  private var isSendingEOM = false
-  private var writtenData: Data?
-  private var totalWrittenData: Data?
   
   
   static func shared() -> BluetoothManager {
@@ -77,12 +68,14 @@ final class BluetoothManager: NSObject {
     centralManager?.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
   }
   
+  
   /**
    The method provides for stopping scan near by peripheral
    */
   func stopScanPeripheral() {
     centralManager?.stopScan()
   }
+  
   
   /**
    The method provides for connecting the special peripheral
@@ -96,6 +89,7 @@ final class BluetoothManager: NSObject {
     }
   }
   
+  
   /**
    The method provides for disconnecting with the peripheral which has connected
    */
@@ -104,13 +98,12 @@ final class BluetoothManager: NSObject {
       centralManager?.cancelPeripheralConnection(connectedPeripheral!)
       startScanPeripheral()
       connectedPeripheral = nil
-      totalWrittenData = nil
     } else {
       startScanPeripheral()
       connectedPeripheral = nil
-      totalWrittenData = nil
     }
   }
+  
   
   /**
    The method provides for the user who want to obtain the descriptor
@@ -122,9 +115,9 @@ final class BluetoothManager: NSObject {
     }
   }
   
+  
   /**
    The method is invoked when connect peripheral is timeout
-   
    - parameter timer: The timer touch off this selector
    */
   @objc func connectTimeout(_ timer : Timer) {
@@ -138,6 +131,7 @@ final class BluetoothManager: NSObject {
     delegate?.didFailToConnectPeripheral?(connectingPeripheral, error: connectingError)
   }
   
+  
   /**
    This method is invoked when interrogate peripheral is timeout
    - parameter timer: The timer touch off this selector
@@ -146,6 +140,7 @@ final class BluetoothManager: NSObject {
     disconnectPeripheral()
     delegate?.didFailToInterrogate?((timer.userInfo as! CBPeripheral))
   }
+  
   
   /**
    This method provides for discovering the characteristics.
@@ -159,15 +154,16 @@ final class BluetoothManager: NSObject {
     }
   }
   
+  
   /**
    Read characteristic value from the peripheral
-   
    - parameter characteristic: The characteristic which user should
    */
   func readValueForCharacteristic(characteristic: CBCharacteristic) {
     guard let connectedPeripheral = connectedPeripheral, isReady else { return }
     connectedPeripheral.readValue(for: characteristic)
   }
+  
   
   /**
    Start or stop listening for the value update action
@@ -179,51 +175,33 @@ final class BluetoothManager: NSObject {
     connectedPeripheral.setNotifyValue(enable, for: characteristic)
   }
   
+  
   /**
    Write value to the peripheral which is connected
    - parameter data:           The data which will be written to peripheral
    - parameter characteristic: The characteristic information
    - parameter type:           The write of the operation
+   - parameter progressHandler:The closure of progress
    */
   func writeValue(data: Data, forCharacteristic characteristic: CBCharacteristic, writeType: CBCharacteristicWriteType,
                   progressHandler: @escaping (_ bytesSent: Int, _ totalBytesExpectedToSend: Int) -> ()) {
     guard let connectedPeripheral = connectedPeripheral, isReady else { return }
-    
-    var writeDataLength: Int = 0
-    // There's data left, so send until the callback fails, or we're done.
-//    var maximumWriteLength = connectedPeripheral.maximumWriteValueLength(for: writeType)
-    totalWrittenData = Data()
-    isSendingEOM = false
+
+    let fragmentedData = Fragmenter.fragmentise(data: data)
+    var writtenDataLength: Int = 0
     
     DispatchQueue.global(qos: .background).async {
-      while self.isSendingEOM == false {
-        var bytesToSend = data.count - writeDataLength
-
-        // Can't be longer than 20 bytes
-        if bytesToSend > self.notifyMaximumTransferUnit {
-          bytesToSend = self.notifyMaximumTransferUnit
-        }
-
-        // Copy out the data we want
-        let chunk: Data = data.withUnsafeBytes {(body: UnsafePointer<UInt8>) in
-          return Data(bytes: body + writeDataLength, count: bytesToSend)
-        }
-
-        // Send data chunk
-        connectedPeripheral.writeValue(chunk, for: characteristic, type: writeType)
-        self.totalWrittenData!.append(chunk)
-        writeDataLength += bytesToSend
-        progressHandler(writeDataLength, data.count)
-
-        if writeDataLength >= data.count {
-          // Send End Of Message
-          let stringFromData = String(data: self.totalWrittenData!, encoding: String.Encoding.utf8)!
-          print(stringFromData)
-
-          connectedPeripheral.writeValue("\nEOM".data(using: String.Encoding.utf8)!, for: characteristic, type: writeType)
-          self.isSendingEOM = true
-          return
-        }
+      fragmentedData.forEach { fragment in
+        connectedPeripheral.writeValue(fragment, for: characteristic, type: writeType)
+        
+        writtenDataLength = writtenDataLength + fragment.count
+        progressHandler(writtenDataLength, Fragmenter.totalSize)
+      }
+      
+      // MARK: Testing
+      if let defragmentedData = Defragmenter.defragmentise(data: fragmentedData),
+         let stringFromData = String(data: defragmentedData, encoding: String.Encoding.utf8) {
+        print(stringFromData)
       }
     }
   }
@@ -260,6 +238,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     delegate?.didUpdateState?(central.state)
   }
   
+  
   /**
    This method is invoked while scanning, upon the discovery of peripheral by central
    - parameter central:           The central manager providing this update.
@@ -273,9 +252,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
     delegate?.didDiscoverPeripheral?(peripheral, advertisementData: advertisementData, RSSI: RSSI)
   }
   
+  
   /**
    This method is invoked when a connection succeeded
-   
    - parameter central:    The central manager providing this information.
    - parameter peripheral: The peripheral that has connected.
    */
@@ -288,7 +267,6 @@ extension BluetoothManager: CBCentralManagerDelegate {
     }
     
     connected = true
-    totalWrittenData = Data()
     connectedPeripheral = peripheral
     delegate?.didConnectedPeripheral?(peripheral)
     stopScanPeripheral()
@@ -296,6 +274,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     peripheral.discoverServices(nil)
     interrogatingTimeoutMonitor = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.integrrogateTimeout(_:)), userInfo: peripheral, repeats: false)
   }
+  
   
   /**
    This method is invoked where a connection failed.
@@ -311,9 +290,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
       connectingTimeoutMonitor = nil
     }
     connected = false
-    totalWrittenData = nil
     delegate?.didFailToConnectPeripheral?(peripheral, error: error!)
   }
+  
   
   /**
    This method is invoked when the peripheral has been disconnected.
@@ -324,7 +303,6 @@ extension BluetoothManager: CBCentralManagerDelegate {
   public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
     print("Bluetooth Manager --> didDisconnectPeripheral")
     connected = false
-    totalWrittenData = nil
     self.delegate?.didDisconnectPeripheral?(peripheral)
     NotificationCenter.default.post(name: NotificationName.peripheralDisconnectNotification.name, object: self)
   }

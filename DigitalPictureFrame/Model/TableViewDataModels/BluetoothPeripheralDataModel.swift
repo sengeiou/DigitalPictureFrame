@@ -45,6 +45,7 @@ extension BluetoothPeripheralDataModel {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if let peripheralSection = BluetoothPeripheralSectionType(rawValue: section), peripheralSection == .advertisementData {
       return characteriticServiceItem?.advertisementDataTypes?.count ?? 0
+      
     } else if let service = service(at: section), let characteristics = characteriticServiceItem?.characteristics[service.uuid] {
       return characteristics.count
     }
@@ -90,11 +91,11 @@ extension BluetoothPeripheralDataModel {
       cell.configureWith(item: characteriticServiceItem, at: indexPath)
       return cell
       
-    } else if let service = service(at: section), let characteristic = characteriticServiceItem?.characteristics[service.uuid]?[row],
-              let peripheralSection = BluetoothPeripheralSectionType(rawValue: section), peripheralSection == .deviceInfo {
-      let cell = tableView.dequeueReusableCell(withIdentifier: BluetoothPeripheralDeviceInfoTableViewCell.reuseIdentifier) as! BluetoothPeripheralDeviceInfoTableViewCell
-      cell.configureWith(item: characteristic, at: indexPath)
-      return cell
+//    } else if let service = service(at: section), let characteristic = characteriticServiceItem?.characteristics[service.uuid]?[row],
+//              let peripheralSection = BluetoothPeripheralSectionType(rawValue: section), peripheralSection == .deviceInfo {
+//      let cell = tableView.dequeueReusableCell(withIdentifier: BluetoothPeripheralDeviceInfoTableViewCell.reuseIdentifier) as! BluetoothPeripheralDeviceInfoTableViewCell
+//      cell.configureWith(item: characteristic, at: indexPath)
+//      return cell
 
     } else if let service = service(at: section), let characteristic = characteriticServiceItem?.characteristics[service.uuid]?[row] {
       let cell = tableView.dequeueReusableCell(withIdentifier: BluetoothPeripheralTransferDataTableViewCell.reuseIdentifier) as! BluetoothPeripheralTransferDataTableViewCell
@@ -122,9 +123,9 @@ extension BluetoothPeripheralDataModel {
     switch peripheralSection {
     case .advertisementData?:
       return peripheralSection!.sectionCellHeight
-      
-    case .deviceInfo?:
-      return peripheralSection!.sectionCellHeight
+//      
+//    case .deviceInfo?:
+//      return peripheralSection!.sectionCellHeight
       
     default:
       return BluetoothPeripheralSectionType.transferData.sectionCellHeight

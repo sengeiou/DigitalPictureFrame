@@ -16,12 +16,11 @@ class BluetoothPeripheralTransferDataTableViewCell: UITableViewCell {
   @IBOutlet weak var propertiesDescriptionLabel: UILabel!
   @IBOutlet weak var sendButton: TableSectionButton!
   @IBOutlet weak var listenNotificationsButton: TableSectionButton!
-//  @IBOutlet weak var centralSentProgressBar: UIProgressView!
+  @IBOutlet weak var actionButtonsStackView: UIStackView!
   
   weak var delegate: BluetoothPeripheralTransferDataCellDelegate?
   
   private(set) var writeType: CBCharacteristicWriteType = .withoutResponse
-  
   private(set) var characteristicItem: CBCharacteristic? {
     didSet {
       guard let characteristicItem = characteristicItem else { return }
@@ -97,14 +96,16 @@ extension BluetoothPeripheralTransferDataTableViewCell {
     
     characteristicItem = item
     let characteristicProperties = item.getProperties()
-    let isContainWriteProperty = characteristicProperties.contains(.write)
+    let isContainWriteProperty = (characteristicProperties.contains(.write) || characteristicProperties.contains(.writeWithoutResponse))
     let isContainNotifyProperty = characteristicProperties.contains(.notify)
+    let shouldHideActionButtonsStackView = !(isContainWriteProperty || isContainNotifyProperty)
     
     sendButton.isEnabled = isContainWriteProperty
     listenNotificationsButton.isEnabled = isContainNotifyProperty
     sendButton.indexPath = indexPath
     listenNotificationsButton.indexPath = indexPath
-
+    actionButtonsStackView.isHidden = shouldHideActionButtonsStackView
+    
     writeType = characteristicProperties.contains(.writeWithoutResponse) ? .withoutResponse : .withResponse
   }
 }

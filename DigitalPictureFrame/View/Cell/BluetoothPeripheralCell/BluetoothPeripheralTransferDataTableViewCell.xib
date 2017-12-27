@@ -79,6 +79,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="actionButtonsStackView" destination="fOz-HI-P62" id="FwR-vD-HZ5"/>
                 <outlet property="listenNotificationsButton" destination="Fak-hR-bTo" id="7hr-OM-EsF"/>
                 <outlet property="propertiesDescriptionLabel" destination="e92-eN-xD1" id="6fM-6r-iej"/>
                 <outlet property="sendButton" destination="uAM-pI-A38" id="lYD-fE-cEw"/>
