@@ -10,6 +10,6 @@ import Foundation
 import UIKit
 
 protocol BluetoothCharacteristicActionCellDelegate: class {
-  func bluetoothCharacteristicActionCell(_ bluetoothCharacteristicActionCell: BluetoothCharacteristicActionTableViewCell, didPressSend button: TableSectionButton)
-  func bluetoothCharacteristicActionCell(_ bluetoothCharacteristicActionCell: BluetoothCharacteristicActionTableViewCell, didPressListenNotifications button: TableSectionButton) 
+  func bluetoothCharacteristicActionCell(_ bluetoothCharacteristicActionCell: BluetoothCharacteristicActionTableViewCell, didPressSend button: TableSectionButton) throws
+  func bluetoothCharacteristicActionCell(_ bluetoothCharacteristicActionCell: BluetoothCharacteristicActionTableViewCell, didPressListenNotifications button: TableSectionButton) throws
 }

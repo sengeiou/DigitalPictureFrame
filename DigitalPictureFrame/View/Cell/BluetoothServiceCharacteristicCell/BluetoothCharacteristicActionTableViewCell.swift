@@ -19,7 +19,7 @@ open class BluetoothCharacteristicActionTableViewCell: UITableViewCell {
   private(set) var characteristicItem: CBCharacteristic?
   weak var delegate: BluetoothCharacteristicActionCellDelegate?
   
-
+  
   
   override open func awakeFromNib() {
     super.awakeFromNib()
@@ -48,8 +48,7 @@ extension BluetoothCharacteristicActionTableViewCell: ViewSetupable {
 // MARK: Configure cell
 extension BluetoothCharacteristicActionTableViewCell {
   
-  func configureWith(item: CBCharacteristic?, at indexPath: IndexPath) {
-    guard let item = item else { return }
+  func configureWith(item: CBCharacteristic, at indexPath: IndexPath) {
     characteristicItem = item
     
     configSendButton(at: indexPath)
@@ -106,11 +105,24 @@ private extension BluetoothCharacteristicActionTableViewCell {
 extension BluetoothCharacteristicActionTableViewCell {
   
   @IBAction func sendButtonPressed(_ sender: TableSectionButton) {
-    delegate?.bluetoothCharacteristicActionCell(self, didPressSend: sender)
+    do {
+      try delegate?.bluetoothCharacteristicActionCell(self, didPressSend: sender)
+    } catch let error as BluetoothError {
+      BluetoothError.handle(error: error)
+    } catch {
+      BluetoothError.handle()
+    }
+    
   }
   
   @IBAction func notifyButtonPressed(_ sender: TableSectionButton) {
-    delegate?.bluetoothCharacteristicActionCell(self, didPressListenNotifications: sender)
+    do {
+      try delegate?.bluetoothCharacteristicActionCell(self, didPressListenNotifications: sender)
+    } catch let error as BluetoothError {
+      BluetoothError.handle(error: error)
+    } catch {
+      BluetoothError.handle()
+    }
   }
   
 }

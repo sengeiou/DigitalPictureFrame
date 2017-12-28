@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import CoreBluetooth 
+import CoreBluetooth
+import MBProgressHUD
 
 class BluetoothPeripheralViewController: UIViewController, UINavigationBarDelegate {
   typealias PeripheralStyle = Style.BluetoothPeripheralVC
@@ -47,23 +48,31 @@ class BluetoothPeripheralViewController: UIViewController, UINavigationBarDelega
 extension BluetoothPeripheralViewController: ViewSetupable {
   
   func setup() {
-    sharedBluetoothManager.delegate = self
-    sharedBluetoothManager.discoverCharacteristics()
-    dataModelSource = BluetoothPeripheralDataModel(peripheralServiceItem: peripheralServiceItem)
     
-    tableView.register(cell: BluetoothPeripheralAdvertisementTableViewCell.self)
-    tableView.register(cell: BluetoothCharacteristicTableViewCell.self)
-    
-    tableView.dataSource = dataModelSource
-    tableView.delegate = dataModelSource
-    tableView.isScrollEnabled = true
-    tableView.separatorStyle = .none
-    tableView.tableFooterView = UIView(frame: .zero)
-    
-    peripheralNameLabel.text = sharedBluetoothManager.connectedPeripheral?.name
-    peripheralUUIDLabel.text = sharedBluetoothManager.connectedPeripheral?.identifier.uuidString
-    reloadTableView()
-    registerNotification()
+    do {
+      sharedBluetoothManager.delegate = self
+      try sharedBluetoothManager.discoverCharacteristics()
+      
+      tableView.register(cell: BluetoothPeripheralAdvertisementTableViewCell.self)
+      tableView.register(cell: BluetoothCharacteristicTableViewCell.self)
+      
+      dataModelSource = BluetoothPeripheralDataModel(peripheralServiceItem: peripheralServiceItem)
+      tableView.dataSource = dataModelSource
+      tableView.delegate = dataModelSource
+      tableView.isScrollEnabled = true
+      tableView.separatorStyle = .none
+      tableView.tableFooterView = UIView(frame: .zero)
+      
+      peripheralNameLabel.text = sharedBluetoothManager.connectedPeripheral?.name
+      peripheralUUIDLabel.text = sharedBluetoothManager.connectedPeripheral?.identifier.uuidString
+      reloadTableView()
+      registerNotification()
+      
+    } catch let error as BluetoothError {
+      BluetoothError.handle(error: error)
+    } catch {
+      BluetoothError.handle()
+    }
   }
   
   func setupStyle() {
@@ -173,9 +182,9 @@ extension BluetoothPeripheralViewController: BluetoothDelegate {
   
   func didDisconnectPeripheral(_ peripheral: CBPeripheral) {
     print("PeripheralController --> didDisconnectPeripheral")
+    MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_DISCONNECTED", comment: ""))
     connectedLabel.text = NSLocalizedString("BLUETOOTH_PERIPHERAL_LABEL_DISCONNECTED_STATUS", comment: "")
     connectedLabel.textColor = .red
-    
   }
   
   func didDiscoverCharacteritics(_ service: CBService) {

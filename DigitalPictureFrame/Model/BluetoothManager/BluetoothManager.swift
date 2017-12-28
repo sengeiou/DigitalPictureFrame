@@ -140,9 +140,9 @@ final class BluetoothManager: NSObject {
   /**
    This method provides for discovering the characteristics.
    */
-  func discoverCharacteristics() {
-    guard let connectedPeripheral = connectedPeripheral, isReady else { return }
-    guard let services = connectedPeripheral.services, services.isEmpty == false else { return }
+  func discoverCharacteristics() throws {
+    guard let connectedPeripheral = connectedPeripheral, isReady else { throw BluetoothError.peripheralNotReady }
+    guard let services = connectedPeripheral.services, services.isEmpty == false else { throw BluetoothError.peripheralNoServicesAvailable }
     
     for service in services {
       connectedPeripheral.discoverCharacteristics(nil, for: service)
@@ -154,8 +154,8 @@ final class BluetoothManager: NSObject {
    Read characteristic value from the peripheral
    - parameter characteristic: The characteristic which user should
    */
-  func readValueForCharacteristic(characteristic: CBCharacteristic) {
-    guard let connectedPeripheral = connectedPeripheral, isReady else { return }
+  func readValueForCharacteristic(characteristic: CBCharacteristic) throws {
+    guard let connectedPeripheral = connectedPeripheral, isReady else { throw BluetoothError.peripheralNotReady }
     connectedPeripheral.readValue(for: characteristic)
   }
   
@@ -165,8 +165,8 @@ final class BluetoothManager: NSObject {
    - parameter enable:         If you want to start listening, the value is true, others is false
    - parameter characteristic: The characteristic which provides notifications
    */
-  func setNotification(enable: Bool, forCharacteristic characteristic: CBCharacteristic) {
-    guard let connectedPeripheral = connectedPeripheral, isReady else { return }
+  func setNotification(enable: Bool, forCharacteristic characteristic: CBCharacteristic) throws {
+    guard let connectedPeripheral = connectedPeripheral, isReady else { throw BluetoothError.peripheralNotReady }
     connectedPeripheral.setNotifyValue(enable, for: characteristic)
   }
   
@@ -179,8 +179,8 @@ final class BluetoothManager: NSObject {
    - parameter progressHandler:The closure of progress
    */
   func writeValue(data: Data, forCharacteristic characteristic: CBCharacteristic, writeType: CBCharacteristicWriteType,
-                  progressHandler: @escaping (_ bytesSent: Int, _ totalBytesExpectedToSend: Int) -> ()) {
-    guard let connectedPeripheral = connectedPeripheral, isReady else { return }
+                  progressHandler: @escaping (_ bytesSent: Int, _ totalBytesExpectedToSend: Int) -> ()) throws {
+    guard let connectedPeripheral = connectedPeripheral, isReady else { throw BluetoothError.peripheralNotReady }
 
     let fragmentedData = Fragmenter.fragmentise(data: data)
     var writtenDataLength: Int = 0

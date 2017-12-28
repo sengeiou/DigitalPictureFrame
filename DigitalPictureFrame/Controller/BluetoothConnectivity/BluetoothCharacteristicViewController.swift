@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreBluetooth
+import MBProgressHUD
 
 class BluetoothCharacteristicViewController: UIViewController {
   typealias CharacteristicStyle = Style.BluetoothCharacteristicVC
@@ -53,7 +54,10 @@ class BluetoothCharacteristicViewController: UIViewController {
 extension BluetoothCharacteristicViewController: ViewSetupable {
   
   func setup() {
-    guard let characteristic = selectedCharacteristic else { return }
+    guard let characteristic = selectedCharacteristic else {
+      BluetoothError.handle(error: .peripheralNoCharacteristicAvailable)
+      return
+    }
     
     self.title = characteristic.name
     sharedBluetoothManager.delegate = self
@@ -120,30 +124,43 @@ private extension BluetoothCharacteristicViewController {
 // MARK: - BluetoothCharacteristicActionCellDelegate protocol
 extension BluetoothCharacteristicViewController: BluetoothCharacteristicActionCellDelegate {
   
-  func bluetoothCharacteristicActionCell(_ bluetoothCharacteristicActionCell: BluetoothCharacteristicActionTableViewCell, didPressSend button: TableSectionButton) {
+  func bluetoothCharacteristicActionCell(_ bluetoothCharacteristicActionCell: BluetoothCharacteristicActionTableViewCell, didPressSend button: TableSectionButton) throws {
     if !sharedBluetoothManager.isReady {
       let title = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_CONNECTION_TITLE", comment: "")
       let message = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_MESSAGE_PERIPHERAL_NOT_READY", comment: "")
       AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
+      
     } else {
-      guard let jsonDataForArduino = DatabaseManager.shared().encodedJsonData else { return }
-      guard let characteristic = bluetoothCharacteristicActionCell.characteristicItem else { return }
-      BluetoothSendingView.show()
-      sharedBluetoothManager.writeValue(data: jsonDataForArduino, forCharacteristic: characteristic, writeType: bluetoothCharacteristicActionCell.writeType, progressHandler: { bytesSent, totalBytesExpectedToSend in
-        DispatchQueue.main.async {
-          let progressRatio: Float = (Float(bytesSent) / Float(totalBytesExpectedToSend))
-          BluetoothSendingView.sharedInstance.progress = progressRatio
-          if bytesSent >= totalBytesExpectedToSend {
-            BluetoothSendingView.hide()
+      guard let jsonDataForArduino = DatabaseManager.shared().encodedJsonData else { throw BluetoothError.encodedDataForArduinoNotAvailable }
+      guard let characteristic = bluetoothCharacteristicActionCell.characteristicItem else { throw BluetoothError.peripheralNoCharacteristicAvailable }
+    
+      do {
+        BluetoothSendingView.show()
+        try sharedBluetoothManager.writeValue(data: jsonDataForArduino, forCharacteristic: characteristic, writeType: bluetoothCharacteristicActionCell.writeType, progressHandler: { bytesSent, totalBytesExpectedToSend in
+          DispatchQueue.main.async {
+            let progressRatio: Float = (Float(bytesSent) / Float(totalBytesExpectedToSend))
+            BluetoothSendingView.sharedInstance.progress = progressRatio
+            if bytesSent >= totalBytesExpectedToSend {
+              BluetoothSendingView.hide()
+            }
           }
-        }
-      })
+        })
+      } catch let error as BluetoothError {
+        BluetoothSendingView.hide()
+        BluetoothError.handle(error: error)
+        
+      } catch {
+        BluetoothSendingView.hide()
+        BluetoothError.handle()
+      }
+      
+      
     }
   }
   
   
-  func bluetoothCharacteristicActionCell(_ bluetoothCharacteristicActionCell: BluetoothCharacteristicActionTableViewCell, didPressListenNotifications button: TableSectionButton) {
-    guard let characteristic = bluetoothCharacteristicActionCell.characteristicItem else { return }
+  func bluetoothCharacteristicActionCell(_ bluetoothCharacteristicActionCell: BluetoothCharacteristicActionTableViewCell, didPressListenNotifications button: TableSectionButton) throws {
+    guard let characteristic = bluetoothCharacteristicActionCell.characteristicItem else { throw BluetoothError.peripheralNoCharacteristicAvailable }
     
     isListeningNotifications = !isListeningNotifications
     var title: String {
@@ -151,13 +168,17 @@ extension BluetoothCharacteristicViewController: BluetoothCharacteristicActionCe
         : NSLocalizedString("BLUETOOTH_PERIPHERAL_CELL_BUTTON_STOP_LISTEN_NOTIFICATIONS_TITLE", comment: "")
     }
 
-    if !isListeningNotifications {
-      button.setTitle(title, for: .normal)
-    } else {
-      button.setTitle(title, for: .normal)
+    do {
+      try sharedBluetoothManager.setNotification(enable: isListeningNotifications, forCharacteristic: characteristic)
+      isListeningNotifications == false ? button.setTitle(title, for: .normal) : button.setTitle(title, for: .normal)
+      
+    } catch let error as BluetoothError {
+      BluetoothError.handle(error: error)
+      
+    } catch {
+      BluetoothError.handle()
     }
-
-    sharedBluetoothManager.setNotification(enable: isListeningNotifications, forCharacteristic: characteristic)
+    
   }
 }
 
@@ -167,6 +188,7 @@ extension BluetoothCharacteristicViewController: BluetoothDelegate {
 
   func didDisconnectPeripheral(_ peripheral: CBPeripheral) {
     print("CharacteristicController --> didDisconnectPeripheral")
+    MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_DISCONNECTED", comment: ""))
     connectedLabel.text = NSLocalizedString("BLUETOOTH_PERIPHERAL_LABEL_DISCONNECTED_STATUS", comment: "")
     connectedLabel.textColor = .red
   }

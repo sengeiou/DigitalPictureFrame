@@ -112,7 +112,7 @@ extension BluetoothPeripheralDataModel {
   
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let service = service(at: indexPath.section), let characteristic = peripheralServiceItem?.characteristics[service.uuid]?[indexPath.row] else { return }
+    guard let service = service(at: indexPath.section), let characteristic = peripheralServiceItem?.characteristics[service.uuid]?[indexPath.row] else { return } 
     let notificationName = NotificationName.presentCharacteristicViewController.name
     let userInfo = [NotificationUserInfoKey.peripheralCharacteristic.rawValue: characteristic]
     
