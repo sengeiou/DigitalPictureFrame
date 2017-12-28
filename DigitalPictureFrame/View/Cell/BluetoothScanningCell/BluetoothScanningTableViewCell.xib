@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVg-y0-kZn" customClass="TableSectionButton" customModule="DigitalPictureFrame" customModuleProvider="target">
-                        <rect key="frame" x="281" y="15" width="90" height="35"/>
+                        <rect key="frame" x="275" y="15" width="90" height="35"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="90" id="nIx-xr-klV"/>
                             <constraint firstAttribute="height" constant="35" id="xBO-Jh-3mv"/>
@@ -69,7 +69,7 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="fVg-y0-kZn" secondAttribute="trailing" constant="4" id="0Aq-7Y-lGR"/>
+                    <constraint firstAttribute="trailing" secondItem="fVg-y0-kZn" secondAttribute="trailing" constant="10" id="0Aq-7Y-lGR"/>
                     <constraint firstItem="fVg-y0-kZn" firstAttribute="centerY" secondItem="WtT-WM-GF8" secondAttribute="centerY" id="77W-Dh-zNn"/>
                     <constraint firstItem="wNx-rd-qD3" firstAttribute="top" secondItem="poG-6K-ECd" secondAttribute="bottom" id="91t-xO-cmI"/>
                     <constraint firstItem="WtT-WM-GF8" firstAttribute="leading" secondItem="poG-6K-ECd" secondAttribute="trailing" constant="6" id="CDl-sp-yeP"/>

@@ -11,8 +11,8 @@ import UIKit
 
 enum BluetoothPeripheralSectionType: Int {
   case advertisementData = 0
-  case deviceInfo = 1
-  case transferData = 2
+  case serviceInfo = 1
+  case characteristicInfo = 2
 }
 
 
@@ -23,16 +23,8 @@ extension BluetoothPeripheralSectionType {
     return 45
   }
   
-  var sectionCellHeight: CGFloat {
-    switch self {
-    case .advertisementData:
-      return 50
-      
-    case .deviceInfo:
-      return 75
-      
-    case .transferData:
-      return 115
-    }
+  static var sectionCellHeight: CGFloat {
+    return 70
   }
+    
 }

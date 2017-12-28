@@ -54,7 +54,7 @@ extension BluetoothPeripheralAdvertisementTableViewCell: ViewSetupable {
 // MARK: Configure cell
 extension BluetoothPeripheralAdvertisementTableViewCell {
   
-  func configureWith(item: PeripheralCharacteristicServiceItem, at indexPath: IndexPath) {
+  func configureWith(item: PeripheralServiceItem, at indexPath: IndexPath) {
     guard let advertisementDataTypes = item.advertisementDataTypes else { return }
     
     let advertisementData = item.advertisementData

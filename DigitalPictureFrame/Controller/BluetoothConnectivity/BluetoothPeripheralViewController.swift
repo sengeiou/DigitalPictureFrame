@@ -21,7 +21,7 @@ class BluetoothPeripheralViewController: UIViewController, UINavigationBarDelega
   @IBOutlet weak var connectedLabel: UILabel!
   @IBOutlet weak var tableView: UITableView!
   
-  var characteriticServiceItem: PeripheralCharacteristicServiceItem?
+  var peripheralServiceItem: PeripheralServiceItem?
   private var dataModelSource: BluetoothPeripheralDataModelDelegate?
   
   
@@ -35,6 +35,10 @@ class BluetoothPeripheralViewController: UIViewController, UINavigationBarDelega
     setupStyle()
     sharedBluetoothManager.delegate = self
   }
+  
+  deinit {
+    unregisterNotification()
+  }
 }
 
 
@@ -45,11 +49,11 @@ extension BluetoothPeripheralViewController: ViewSetupable {
   func setup() {
     sharedBluetoothManager.delegate = self
     sharedBluetoothManager.discoverCharacteristics()
-    dataModelSource = BluetoothPeripheralDataModel(self, characteriticServiceItem: characteriticServiceItem)
+    dataModelSource = BluetoothPeripheralDataModel(peripheralServiceItem: peripheralServiceItem)
     
     tableView.register(cell: BluetoothPeripheralAdvertisementTableViewCell.self)
-    tableView.register(cell: BluetoothPeripheralDeviceInfoTableViewCell.self)
-    tableView.register(cell: BluetoothPeripheralTransferDataTableViewCell.self)
+    tableView.register(cell: BluetoothCharacteristicTableViewCell.self)
+    
     tableView.dataSource = dataModelSource
     tableView.delegate = dataModelSource
     tableView.isScrollEnabled = true
@@ -59,6 +63,7 @@ extension BluetoothPeripheralViewController: ViewSetupable {
     peripheralNameLabel.text = sharedBluetoothManager.connectedPeripheral?.name
     peripheralUUIDLabel.text = sharedBluetoothManager.connectedPeripheral?.identifier.uuidString
     reloadTableView()
+    registerNotification()
   }
   
   func setupStyle() {
@@ -116,46 +121,38 @@ private extension BluetoothPeripheralViewController {
   
 }
 
-
-// MARK: - BluetoothPeripheralCellDelegate protocol
-extension BluetoothPeripheralViewController: BluetoothPeripheralTransferDataCellDelegate {
+// MARK: - Present Characteristic View Controller Notification
+extension BluetoothPeripheralViewController {
+  func registerNotification() {
+    addPresentCharacteristicVCNofificationObserver()
+  }
   
-  func bluetoothPeripheralCell(_ bluetoothPeripheralCell: BluetoothPeripheralTransferDataTableViewCell, didPressSend button: TableSectionButton) {
-    if !sharedBluetoothManager.isReady {
-      let title = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_CONNECTION_TITLE", comment: "")
-      let message = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_MESSAGE_PERIPHERAL_NOT_READY", comment: "")
-      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
-    } else {
-      guard let jsonDataForArduino = DatabaseManager.shared().encodedJsonData else { return }
-      guard let characteristic = bluetoothPeripheralCell.characteristicItem else { return }
-      BluetoothSendingView.show()
-      sharedBluetoothManager.writeValue(data: jsonDataForArduino, forCharacteristic: characteristic, writeType: bluetoothPeripheralCell.writeType, progressHandler: { bytesSent, totalBytesExpectedToSend in
-        DispatchQueue.main.async {
-          let progressRatio: Float = (Float(bytesSent) / Float(totalBytesExpectedToSend))
-          BluetoothSendingView.sharedInstance.progress = progressRatio
-          if bytesSent >= totalBytesExpectedToSend {
-            BluetoothSendingView.hide()
-          }
-        }
-      })
-    }
+  func unregisterNotification() {
+    removePresentCharacteristicVCNofificationObserver()
   }
   
   
-  func bluetoothPeripheralCell(_ bluetoothPeripheralCell: BluetoothPeripheralTransferDataTableViewCell, didPressListenNotifications button: TableSectionButton) {
-    isListeningNotifications = !isListeningNotifications
-    var title: String {
-      return isListeningNotifications == false ? NSLocalizedString("BLUETOOTH_PERIPHERAL_CELL_BUTTON_LISTEN_NOTIFICATIONS_TITLE", comment: "")
-        : NSLocalizedString("BLUETOOTH_PERIPHERAL_CELL_BUTTON_STOP_LISTEN_NOTIFICATIONS_TITLE", comment: "")
-    }
+  func addPresentCharacteristicVCNofificationObserver() {
+    NotificationCenter.default.addObserver(self, selector: #selector(BluetoothPeripheralViewController.presentCharacteristicViewController(_:)),
+                                           name: NotificationName.presentCharacteristicViewController.name, object: nil)
+  }
+  
+  func removePresentCharacteristicVCNofificationObserver() {
+    NotificationCenter.default.removeObserver(self, name: NotificationName.presentCharacteristicViewController.name, object: nil)
+  }
+}
+
+
+// MARK: - Present Characteristic View Controller
+extension BluetoothPeripheralViewController {
+  
+  @objc func presentCharacteristicViewController(_ notification: NSNotification) {
+    guard let characteristic = notification.userInfo?[NotificationUserInfoKey.peripheralCharacteristic.rawValue] as? CBCharacteristic else { return }
+    let bluetoothStoryboard = UIStoryboard(storyboard: .bluetooth)
+    let characteristicVC = bluetoothStoryboard.instantiateViewController(BluetoothCharacteristicViewController.self)
+    characteristicVC.selectedCharacteristic = characteristic
     
-    if !isListeningNotifications {
-      button.setTitle(title, for: .normal)
-    } else {
-      button.setTitle(title, for: .normal)
-    }
-    
-    sharedBluetoothManager.setNotification(enable: isListeningNotifications, forCharacteristic: bluetoothPeripheralCell.characteristicItem!)
+    transitionPresent(characteristicVC)
   }
   
 }
@@ -182,8 +179,8 @@ extension BluetoothPeripheralViewController: BluetoothDelegate {
   }
   
   func didDiscoverCharacteritics(_ service: CBService) {
-    characteriticServiceItem?.service = service
-    dataModelSource?.characteriticServiceItem = characteriticServiceItem
+    peripheralServiceItem?.service = service
+    dataModelSource?.peripheralServiceItem = peripheralServiceItem
     reloadTableView()
   }
   

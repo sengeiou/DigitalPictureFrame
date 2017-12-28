@@ -20,6 +20,7 @@ enum NotificationName: String {
   
   case peripheralDisconnectNotification = "PeripheralDisconnectNotification"
   case peripheralCharacteristicDiscoverNotification = "PeripheralCharacteristicDiscoverNotification"
+  case presentCharacteristicViewController = "PresentCharacteristicViewController"
   
   var name: Notification.Name {
     return Notification.Name(self.rawValue)

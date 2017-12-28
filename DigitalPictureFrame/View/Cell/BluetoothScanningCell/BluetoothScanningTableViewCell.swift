@@ -101,9 +101,6 @@ extension BluetoothScanningTableViewCell: ViewSetupable {
     connectButton.setTitleColor(.red, for: .highlighted)
     connectButton.setTitleColor(.red, for: .selected)
     connectButton.titleLabel?.font = StyleBluetoothScanningCell.connectButtonTitleFont
-    connectButton.layer.borderColor = UIColor.appleBlue.cgColor
-    connectButton.layer.borderWidth = 0.5
-    connectButton.layer.cornerRadius = 8
   }
   
 }

@@ -248,10 +248,10 @@ extension BluetoothConnectivityViewController: BluetoothDelegate {
 private extension BluetoothConnectivityViewController {
   
   func presentPeripheralViewController() {
-    let storyboard = UIStoryboard(storyboard: .main)
-    let peripheralViewController = storyboard.instantiateViewController(BluetoothPeripheralViewController.self)
-    let characteriticServiceItem = PeripheralCharacteristicServiceItem(advertisementData: selectedPeripheral?.advertisementData ?? [:])
-    peripheralViewController.characteriticServiceItem = characteriticServiceItem
+    let bluetoothStoryboard = UIStoryboard(storyboard: .bluetooth)
+    let peripheralViewController = bluetoothStoryboard.instantiateViewController(BluetoothPeripheralViewController.self)
+    let peripheralServiceItem = PeripheralServiceItem(advertisementData: selectedPeripheral?.advertisementData ?? [:])
+    peripheralViewController.peripheralServiceItem = peripheralServiceItem
     
     transitionPresent(peripheralViewController)
   }

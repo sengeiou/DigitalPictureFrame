@@ -13,11 +13,9 @@ import CoreBluetooth
 typealias BluetoothCharacteristicDictionary = [CBUUID: [CBCharacteristic]]
 
 protocol BluetoothPeripheralDataModelDelegate: class, UITableViewDataSource, UITableViewDelegate {
-  var delegatorVC: BluetoothPeripheralTransferDataCellDelegate { get set }
-  var characteriticServiceItem: PeripheralCharacteristicServiceItem? { get set }
+  var peripheralServiceItem: PeripheralServiceItem? { get set }
   
-//  func item(at indexPath: IndexPath) -> [String: Any]?
-  init(_ delegatorVC: BluetoothPeripheralTransferDataCellDelegate, characteriticServiceItem: PeripheralCharacteristicServiceItem?)
+  init(peripheralServiceItem: PeripheralServiceItem?)
 }
 
 

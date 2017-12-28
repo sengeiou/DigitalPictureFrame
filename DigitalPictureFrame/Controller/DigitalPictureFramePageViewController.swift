@@ -22,7 +22,9 @@ class DigitalPictureFramePageViewController: UIPageViewController {
     let usersVC = mainStoryboard.instantiateViewController(UserViewController.self)
     let settingsVC = mainStoryboard.instantiateViewController(SettingsViewController.self)
     let wifiVC = mainStoryboard.instantiateViewController(WiFiViewController.self)
-    let bluetoothVC = mainStoryboard.instantiateViewController(BluetoothConnectivityViewController.self)
+    
+    let bluetoothStoryboard = UIStoryboard(storyboard: .bluetooth)
+    let bluetoothVC = bluetoothStoryboard.instantiateViewController(BluetoothConnectivityViewController.self)
     return [usersVC, settingsVC, wifiVC, bluetoothVC]
   }()
   

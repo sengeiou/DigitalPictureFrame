@@ -9,10 +9,7 @@
 import Foundation
 import CoreBluetooth
 
-final class PeripheralCharacteristicServiceItem: PeripheralAdvertisement {
-  typealias BluetoothCharacteristicDictionary = [CBUUID: [CBCharacteristic]]
-
-  //  var cellType: BluetoothPeripheralCellType?
+final class PeripheralServiceItem: PeripheralAdvertisement {
   private(set) var characteristics: BluetoothCharacteristicDictionary = [:]
   private(set) var advertisementDataTypes: [AdvertisementDataType]?
   var advertisementData: [String: Any]

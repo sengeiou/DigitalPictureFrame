@@ -12,7 +12,6 @@ import CoreBluetooth
 final class BluetoothManager: NSObject {
   private static var sharedInstance: BluetoothManager!
   
-  private let notifyMaximumTransferUnit = 20 // 20 bytes
   private var centralManager: CBCentralManager?
   private var connectingTimeoutMonitor: Timer?
   private var interrogatingTimeoutMonitor: Timer?
@@ -23,8 +22,9 @@ final class BluetoothManager: NSObject {
   
   var logs: [String] = []
   var delegate: BluetoothDelegate?
-  var state: CBManagerState? {
-    return centralManager?.state
+  
+  var isReady: Bool {
+    return (isConnectedToPeripheral && isPoweredOn)
   }
   
   /// Whether peripheral is ready to send and receive data
@@ -32,13 +32,8 @@ final class BluetoothManager: NSObject {
     return connectedPeripheral?.state == .connected ? true : false
   }
   
-  var isReady: Bool {
-    guard let _ = connectedPeripheral, let state = state, state == .poweredOn else { return false }
-    return true
-  }
-  
   var isPoweredOn: Bool {
-    return state == .poweredOn
+    return centralManager?.state == .poweredOn
   }
   
   
@@ -396,7 +391,7 @@ extension BluetoothManager: CBPeripheralDelegate {
 extension BluetoothManager {
   
   var stateDescription: String {
-    switch state {
+    switch centralManager?.state {
     case .unknown?:
       return "State unknown, update imminent."
       

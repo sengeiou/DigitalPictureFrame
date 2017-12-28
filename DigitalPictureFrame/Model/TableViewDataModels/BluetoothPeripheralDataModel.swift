@@ -12,16 +12,12 @@ import CoreBluetooth
 
 final class BluetoothPeripheralDataModel: NSObject, BluetoothPeripheralDataModelDelegate {
   private var advertisementData: [String: Any]?
-  var delegatorVC: BluetoothPeripheralTransferDataCellDelegate
-  var characteriticServiceItem: PeripheralCharacteristicServiceItem?
-  
-  var sectionData: [[Int: PeripheralCharacteristicServiceItem]]?
+  var peripheralServiceItem: PeripheralServiceItem?
   
   
-  init(_ delegatorVC: BluetoothPeripheralTransferDataCellDelegate, characteriticServiceItem: PeripheralCharacteristicServiceItem?) {
-    self.delegatorVC = delegatorVC
-    self.characteriticServiceItem = characteriticServiceItem
-    self.advertisementData = characteriticServiceItem?.advertisementData
+  init(peripheralServiceItem: PeripheralServiceItem?) {
+    self.peripheralServiceItem = peripheralServiceItem
+    self.advertisementData = peripheralServiceItem?.advertisementData
   }
   
   
@@ -44,9 +40,9 @@ extension BluetoothPeripheralDataModel {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if let peripheralSection = BluetoothPeripheralSectionType(rawValue: section), peripheralSection == .advertisementData {
-      return characteriticServiceItem?.advertisementDataTypes?.count ?? 0
+      return peripheralServiceItem?.advertisementDataTypes?.count ?? 0
       
-    } else if let service = service(at: section), let characteristics = characteriticServiceItem?.characteristics[service.uuid] {
+    } else if let service = service(at: section), let characteristics = peripheralServiceItem?.characteristics[service.uuid] {
       return characteristics.count
     }
     
@@ -86,24 +82,17 @@ extension BluetoothPeripheralDataModel {
     let section = indexPath.section
     let row = indexPath.row
     
-    if let characteriticServiceItem = characteriticServiceItem, let peripheralSection = BluetoothPeripheralSectionType(rawValue: section), peripheralSection == .advertisementData {
+    if let peripheralServiceItem = peripheralServiceItem, let peripheralSection = BluetoothPeripheralSectionType(rawValue: section), peripheralSection == .advertisementData {
       let cell = tableView.dequeueReusableCell(withIdentifier: BluetoothPeripheralAdvertisementTableViewCell.reuseIdentifier) as! BluetoothPeripheralAdvertisementTableViewCell
-      cell.configureWith(item: characteriticServiceItem, at: indexPath)
+      cell.configureWith(item: peripheralServiceItem, at: indexPath)
       return cell
       
-//    } else if let service = service(at: section), let characteristic = characteriticServiceItem?.characteristics[service.uuid]?[row],
-//              let peripheralSection = BluetoothPeripheralSectionType(rawValue: section), peripheralSection == .deviceInfo {
-//      let cell = tableView.dequeueReusableCell(withIdentifier: BluetoothPeripheralDeviceInfoTableViewCell.reuseIdentifier) as! BluetoothPeripheralDeviceInfoTableViewCell
-//      cell.configureWith(item: characteristic, at: indexPath)
-//      return cell
-
-    } else if let service = service(at: section), let characteristic = characteriticServiceItem?.characteristics[service.uuid]?[row] {
-      let cell = tableView.dequeueReusableCell(withIdentifier: BluetoothPeripheralTransferDataTableViewCell.reuseIdentifier) as! BluetoothPeripheralTransferDataTableViewCell
+    } else if let service = service(at: section), let characteristic = peripheralServiceItem?.characteristics[service.uuid]?[row] {
+      let cell = tableView.dequeueReusableCell(withIdentifier: BluetoothCharacteristicTableViewCell.reuseIdentifier) as! BluetoothCharacteristicTableViewCell
       cell.configureWith(item: characteristic, at: indexPath)
-      cell.delegate = delegatorVC
       return cell
     }
-    
+
     return UITableViewCell()
   }
 }
@@ -118,18 +107,16 @@ extension BluetoothPeripheralDataModel {
   
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    let peripheralSection = BluetoothPeripheralSectionType(rawValue: indexPath.section)
+    return BluetoothPeripheralSectionType.sectionCellHeight
+  }
+  
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let service = service(at: indexPath.section), let characteristic = peripheralServiceItem?.characteristics[service.uuid]?[indexPath.row] else { return }
+    let notificationName = NotificationName.presentCharacteristicViewController.name
+    let userInfo = [NotificationUserInfoKey.peripheralCharacteristic.rawValue: characteristic]
     
-    switch peripheralSection {
-    case .advertisementData?:
-      return peripheralSection!.sectionCellHeight
-//      
-//    case .deviceInfo?:
-//      return peripheralSection!.sectionCellHeight
-      
-    default:
-      return BluetoothPeripheralSectionType.transferData.sectionCellHeight
-    }
+    NotificationCenter.default.post(name: notificationName, object: nil, userInfo: userInfo)
   }
   
 }
