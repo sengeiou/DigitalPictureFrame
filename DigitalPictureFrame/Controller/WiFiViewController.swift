@@ -41,7 +41,7 @@ extension WiFiViewController {
   func registerCells() {
     tableView.register(cell: WiFiTableViewCell.self)
   }
-
+  
 }
 
 
@@ -52,7 +52,7 @@ extension WiFiViewController {
     createAndAssignWiFiDelegate()
     updateTableView()
   }
- 
+  
 }
 
 
@@ -67,13 +67,13 @@ extension WiFiViewController {
     let infoItem = WiFiItem(wiFi: wifiInfo)
     createAndAssignDelegate(for: [infoItem])
   }
-
+  
 }
 
 
 // MARK: - Verify Connected Network
 private extension WiFiViewController {
-
+  
   func verifyConnectedNetwork() {
     guard let wifiInfo = DatabaseManager.shared().wifiInfo else { return }
     guard let connectedNetworkSSID = NetworkConnectionUtility.fetchSSIDInfo() else {

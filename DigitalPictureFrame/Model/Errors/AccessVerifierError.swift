@@ -8,30 +8,35 @@
 
 import Foundation
 
-enum AccessVerifierError: Error {
+enum AccessVerifierError: ErrorHandleable {
   case accessDenied
   case dataNotAvailable(description: String)
   case invalidUserCredentials
   case unrecognizedWirelessNetwork
+  case unsupportedError
 }
 
 
-// MARK: - Localized description
-extension AccessVerifierError: CustomStringConvertible {
+// MARK: - ErrorHandleable protocol
+extension AccessVerifierError {
   
   var description: String {
     switch self {
     case .accessDenied:
-      return "Access Denied"
+      return NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_INFO_MSG", comment: "")
       
-    case .dataNotAvailable(_):
-      return "Data Not Available"
+    case .dataNotAvailable(let desc):
+      let errorDesc = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_FAILED_MSG", comment: "") + desc
+      return errorDesc
       
     case .invalidUserCredentials:
       return "Invalid User Credential"
       
     case .unrecognizedWirelessNetwork:
       return "Unrecognized Wireless Network"
+      
+    case .unsupportedError:
+      return "Unsupported Error"
     }
   }
   

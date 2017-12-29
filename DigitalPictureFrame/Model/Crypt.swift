@@ -23,14 +23,14 @@ extension Crypt {
     return cipherText
   }
   
-  func decryptContents(of encryptData: Data) throws -> String? {
+  func decryptContents(of encryptData: Data) -> String? {
     var decryptString: String?
     
     do {
       let decryptData = try RNCryptor.decrypt(data: encryptData, withPassword: encryptionKey)
       decryptString = String(data: decryptData, encoding: .utf8)
     } catch {
-      print(error)
+      CryptError.handle(error: .decryptionFaild)
     }
     
     return decryptString

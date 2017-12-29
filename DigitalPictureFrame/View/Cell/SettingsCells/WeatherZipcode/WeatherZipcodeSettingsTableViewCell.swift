@@ -12,7 +12,7 @@ class WeatherZipcodeSettingsTableViewCell: UITableViewCell, DigitalPictureFrameC
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var valueLabel: UILabel!
-  @IBOutlet weak var zipcodeButton: TableSectionButton!
+  @IBOutlet weak var zipcodeButton: TableShadowButton!
   
   weak var delegate: WeatherZipcodeSettingsCellDelegate?
   
@@ -39,6 +39,7 @@ extension WeatherZipcodeSettingsTableViewCell {
   
   func setup() {
     selectionStyle = .none
+    valueLabel.textAlignment = .center
     thumbnailImageView.contentMode = .scaleAspectFit
   }
   
@@ -59,7 +60,7 @@ extension WeatherZipcodeSettingsTableViewCell {
 // MARK: - Actions
 extension WeatherZipcodeSettingsTableViewCell {
   
-  @IBAction func zipcodeButtonPressed(_ sender: TableSectionButton) {
+  @IBAction func zipcodeButtonPressed(_ sender: TableShadowButton) {
     guard let indexPath = sender.indexPath else { return }
     delegate?.weatherZipcodeSettingsCell(self, didPressZipcodeButtonAt: indexPath)
   }

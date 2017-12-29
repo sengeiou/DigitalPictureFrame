@@ -21,7 +21,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="BXG-v6-jWv">
                         <rect key="frame" x="10" y="8" width="300" height="37.5"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Le4-GL-Qcj" userLabel="Send Button" customClass="TableSectionButton" customModule="DigitalPictureFrame" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Le4-GL-Qcj" userLabel="Send Button" customClass="TableShadowButton" customModule="DigitalPictureFrame" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="147" height="37.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Send"/>
@@ -29,7 +29,7 @@
                                     <action selector="sendButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ZJw-M0-ZYJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87D-x4-Vx2" userLabel="Notify Button" customClass="TableSectionButton" customModule="DigitalPictureFrame" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87D-x4-Vx2" userLabel="Notify Button" customClass="TableShadowButton" customModule="DigitalPictureFrame" customModuleProvider="target">
                                 <rect key="frame" x="153" y="0.0" width="147" height="37.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Notify"/>

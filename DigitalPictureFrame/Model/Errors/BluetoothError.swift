@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum BluetoothError: Error {
+enum BluetoothError: ErrorHandleable {
   case peripheralNotReady
   case peripheralNoServicesAvailable
   case peripheralNoCharacteristicAvailable
@@ -17,8 +17,8 @@ enum BluetoothError: Error {
 }
 
 
-// MARK: - Localized description
-extension BluetoothError: CustomStringConvertible {
+// MARK: - ErrorHandleable protocol
+extension BluetoothError {
   
   var description: String {
     switch self {
@@ -37,16 +37,6 @@ extension BluetoothError: CustomStringConvertible {
     case .unsupportedError:
       return "Unsupported Error"
     }
-  }
-  
-}
-
-
-// MARK: - Handle errors
-extension BluetoothError {
-  
-  static func handle(error: BluetoothError = .unsupportedError) {
-    AlertViewPresenter.sharedInstance.presentErrorAlert(withMessage: error.description)
   }
   
 }

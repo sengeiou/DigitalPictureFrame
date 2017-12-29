@@ -8,7 +8,23 @@
 
 import Foundation
 
-enum NetworkError: Error {
+enum NetworkError: ErrorHandleable {
   case unknownFormat
   case dataNotAvailable
+}
+
+
+// MARK: ErrorHandleable protocol
+extension NetworkError {
+  
+  var description: String {
+    switch self {
+    case .unknownFormat:
+      return "Unknown Format"
+      
+    case .dataNotAvailable:
+      return "Data Not Available"
+    }
+  }
+  
 }

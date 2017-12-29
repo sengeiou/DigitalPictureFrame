@@ -119,7 +119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5h-dB-T16" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965" y="98"/>
+            <point key="canvasLocation" x="1214" y="98"/>
         </scene>
         <!--Wi-Fi-->
         <scene sceneID="FOe-om-H06">
@@ -150,7 +150,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZWU-aq-vYv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1392" y="98"/>
+            <point key="canvasLocation" x="1916" y="98"/>
         </scene>
     </scenes>
     <resources>

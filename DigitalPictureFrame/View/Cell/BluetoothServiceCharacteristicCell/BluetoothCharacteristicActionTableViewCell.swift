@@ -12,8 +12,8 @@ import CoreBluetooth
 open class BluetoothCharacteristicActionTableViewCell: UITableViewCell {
   typealias CharacteristicActionStyle = Style.BluetoothCharacteristicActionCell
   
-  @IBOutlet weak var sendButton: TableSectionButton!
-  @IBOutlet weak var notifyButton: TableSectionButton!
+  @IBOutlet weak var sendButton: TableShadowButton!
+  @IBOutlet weak var notifyButton: TableShadowButton!
   
   private(set) var writeType: CBCharacteristicWriteType = .withoutResponse
   private(set) var characteristicItem: CBCharacteristic?
@@ -104,24 +104,24 @@ private extension BluetoothCharacteristicActionTableViewCell {
 // MARK: - ViewSetupable protocol
 extension BluetoothCharacteristicActionTableViewCell {
   
-  @IBAction func sendButtonPressed(_ sender: TableSectionButton) {
+  @IBAction func sendButtonPressed(_ sender: TableShadowButton) {
     do {
       try delegate?.bluetoothCharacteristicActionCell(self, didPressSend: sender)
     } catch let error as BluetoothError {
       BluetoothError.handle(error: error)
     } catch {
-      BluetoothError.handle()
+      BluetoothError.handle(error: .unsupportedError)
     }
     
   }
   
-  @IBAction func notifyButtonPressed(_ sender: TableSectionButton) {
+  @IBAction func notifyButtonPressed(_ sender: TableShadowButton) {
     do {
       try delegate?.bluetoothCharacteristicActionCell(self, didPressListenNotifications: sender)
     } catch let error as BluetoothError {
       BluetoothError.handle(error: error)
     } catch {
-      BluetoothError.handle()
+      BluetoothError.handle(error: .unsupportedError)
     }
   }
   

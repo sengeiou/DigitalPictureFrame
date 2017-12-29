@@ -90,7 +90,7 @@ extension SettingsViewController: TimePickerViewDelegate {
   func timePicker(_ timePickerView: TimePickerView, didPressDone sender: UIDatePicker) {
     guard let modifiedItemIndexPath = modifiedItemIndexPath else { return }
     guard let modifiedTimeFrameItem = dataSourceDelegate?.item(at: modifiedItemIndexPath) else { return }
-    guard let selectedTime = Date.date(sender.date) else { return }
+    guard let selectedTime = Date.dateToString(sender.date) else { return }
     
     let time = modifiedTimeFrameItem.cells[modifiedItemIndexPath.row]
     time.value = selectedTime
@@ -151,9 +151,10 @@ extension SettingsViewController: UserInfoSettingsCellDelegate {
 extension SettingsViewController: WeatherZipcodeSettingsCellDelegate {
   
   func weatherZipcodeSettingsCell(_ cell: WeatherZipcodeSettingsTableViewCell, didPressZipcodeButtonAt indexPath: IndexPath) {
-    modifiedItemIndexPath = indexPath
     let title = NSLocalizedString("SETTINGS_WEATHER_ZIPCODE_ALERT_TITLE", comment: "")
     let message = NSLocalizedString("SETTINGS_WEATHER_ZIPCODE_ALERT_MSG", comment: "")
+    
+    modifiedItemIndexPath = indexPath
     sharedAlert.delegate = self
     sharedAlert.presentSubmitAlert(in: self, title: title, message: message, textFieldConfiguration: { textField in
       textField.placeholder = NSLocalizedString("SETTINGS_WEATHER_ZIPCODE_ALERT_PLACEHOLDER", comment: "")

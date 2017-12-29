@@ -212,22 +212,22 @@ extension BluetoothManager: CBCentralManagerDelegate {
   public func centralManagerDidUpdateState(_ central: CBCentralManager) {
     switch central.state {
     case .poweredOff:
-      print("State : Powered Off")
+      Logger.log(message: "State : Powered Off", event: .debug)
       
     case .poweredOn:
-      print("State : Powered On")
+      Logger.log(message: "State : Powered On", event: .debug)
       
     case .resetting:
-      print("State : Resetting")
+      Logger.log(message: "State : Resetting", event: .debug)
       
     case .unauthorized:
-      print("State : Unauthorized")
+      Logger.log(message: "State : Unauthorized", event: .debug)
       
     case .unknown:
-      print("State : Unknown")
+      Logger.log(message: "State : Unknown", event: .debug)
       
     case .unsupported:
-      print("State : Unsupported")
+      Logger.log(message: "State : Unsupported", event: .debug)
     }
     
     delegate?.didUpdateState?(central.state)
@@ -243,7 +243,8 @@ extension BluetoothManager: CBCentralManagerDelegate {
    *                was not available.
    */
   public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-    print("Bluetooth Manager --> didDiscoverPeripheral, RSSI:\(RSSI)")
+//    let message = "Bluetooth Manager --> didDiscoverPeripheral, RSSI:\(RSSI)"
+//    Logger.log(message: message, event: .debug)
     delegate?.didDiscoverPeripheral?(peripheral, advertisementData: advertisementData, RSSI: RSSI)
   }
   
@@ -254,7 +255,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
    - parameter peripheral: The peripheral that has connected.
    */
   public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-    print("Bluetooth Manager --> didConnectPeripheral")
+    let message = "Bluetooth Manager --> didConnectPeripheral"
+    Logger.log(message: message, event: .debug)
+    
     isConnecting = false
     if connectingTimeoutMonitor != nil {
       connectingTimeoutMonitor!.invalidate()
@@ -278,7 +281,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
    - parameter error:      The error infomation about connecting failed.
    */
   public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-    print("Bluetooth Manager --> didFailToConnectPeripheral")
+    let message = "Bluetooth Manager --> didFailToConnectPeripheral"
+    Logger.log(message: message, event: .debug)
+    
     isConnecting = false
     if connectingTimeoutMonitor != nil {
       connectingTimeoutMonitor!.invalidate()
@@ -296,7 +301,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
    - parameter error:      The error message
    */
   public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-    print("Bluetooth Manager --> didDisconnectPeripheral")
+    let message = "Bluetooth Manager --> didDisconnectPeripheral"
+    Logger.log(message: message, event: .debug)
+    
     connected = false
     self.delegate?.didDisconnectPeripheral?(peripheral)
     NotificationCenter.default.post(name: NotificationName.peripheralDisconnectNotification.name, object: self)
@@ -316,9 +323,14 @@ extension BluetoothManager: CBPeripheralDelegate {
    - parameter error:          The error message
    */
   public func peripheral(_ peripheral: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: Error?) {
-    print("Bluetooth Manager --> didDiscoverDescriptorsForCharacteristic")
+    let message = "Bluetooth Manager --> didDiscoverDescriptorsForCharacteristic"
+    Logger.log(message: message, event: .debug)
+    
     if error != nil {
-      print("Bluetooth Manager --> Fail to discover descriptor for characteristic Error:\(String(describing: error?.localizedDescription))")
+      let message = "Bluetooth Manager --> Fail to discover descriptor for characteristic Error:\(String(describing: error?.localizedDescription))"
+      Logger.log(message: message, event: .debug)
+      Logger.logInfo(message: message)
+      
       delegate?.didFailToDiscoverDescriptors?(error!)
       return
     }
@@ -333,9 +345,14 @@ extension BluetoothManager: CBPeripheralDelegate {
    - parameter error:          The error message
    */
   public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-    print("Bluetooth Manager --> didUpdateValueForCharacteristic")
+    let message = "Bluetooth Manager --> didUpdateValueForCharacteristic"
+    Logger.log(message: message, event: .debug)
+    
     if error != nil {
-      print("Bluetooth Manager --> Failed to read value for the characteristic. Error:\(error!.localizedDescription)")
+      let message = "Bluetooth Manager --> Failed to read value for the characteristic. Error:\(error!.localizedDescription)"
+      Logger.log(message: message, event: .debug)
+      Logger.logInfo(message: message)
+      
       delegate?.didFailToReadValueForCharacteristic?(error!)
       return
     }
@@ -350,11 +367,15 @@ extension BluetoothManager: CBPeripheralDelegate {
    - parameter error:      Errot message when discovered services.
    */
   public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-    print("Bluetooth Manager --> didDiscoverServices")
+    let message = "Bluetooth Manager --> didDiscoverServices"
+    Logger.log(message: message, event: .debug)
+    
     connectedPeripheral = peripheral
     if error != nil {
-      print("Bluetooth Manager --> Discover Services Error, error:\(String(describing: error?.localizedDescription))")
-      return ;
+      let message = "Bluetooth Manager --> Discover Services Error, error:\(String(describing: error?.localizedDescription))"
+      Logger.log(message: message, event: .debug)
+      Logger.logInfo(message: message)
+      return
     }
     
     // If discover services, then invalidate the timeout monitor
@@ -374,9 +395,14 @@ extension BluetoothManager: CBPeripheralDelegate {
    - parameter error:      If an error occurred, the cause of the failure.
    */
   public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-    print("Bluetooth Manager --> didDiscoverCharacteristicsForService")
+    let message = "Bluetooth Manager --> didDiscoverCharacteristicsForService"
+    Logger.log(message: message, event: .debug)
+    
     if error != nil {
-      print("Bluetooth Manager --> Fail to discover characteristics! Error: \(String(describing: error?.localizedDescription))")
+      let message = "Bluetooth Manager --> Fail to discover characteristics! Error: \(String(describing: error?.localizedDescription))"
+      Logger.log(message: message, event: .debug)
+      Logger.logInfo(message: message)
+      
       delegate?.didFailToDiscoverCharacteritics?(error!)
       return
     }

@@ -11,6 +11,14 @@ import UIKit
 
 struct Style {
 
+  // MARK: - StatusBarView
+  struct StatusBarView {
+    static let backgroundColor = UIColor.groupGray
+    static let textColor = UIColor.appleBlue
+    static let titleTextAttributes = [NSAttributedStringKey.foregroundColor: StatusBarView.textColor]
+  }
+  
+  
   // MARK: - AvailabilityMessageView
   struct AvailabilityMessageView {
     static let titleLabelTextAlignment = NSTextAlignment.center
@@ -18,6 +26,23 @@ struct Style {
     static let subTitleLabelFont = UIFont.systemFont(ofSize: 15, weight: .light)
     static let subTitleLabelTextAlignment = NSTextAlignment.center
   }
+  
+  
+  // MARK: - LoggerView
+  struct LoggerView {
+    static let defaultBackgroundColor = UIColor.white
+    static let logTextViewFont = UIFont.systemFont(ofSize: 10, weight: .light)
+    static let logTextViewTextColor = UIColor.white
+    static let logTextViewBackground = UIColor.black
+  }
+  
+  
+  // MARK: - LogFooterView
+  struct LogFooterView {
+    static let defaultBackgroundColor = UIColor.groupGray
+    static let logButtonTitleFont = UIFont.systemFont(ofSize: 18, weight: .regular)
+  }
+  
   
   // MARK: - TimePickerView
   struct TimePickerView {

@@ -87,8 +87,7 @@ private extension BluetoothCharacteristicViewController {
   
   func renderStatusBarBackgroundColor() {
     let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
-    let statusBarColor = UIColor.groupGray
-    statusBarView.backgroundColor = statusBarColor
+    statusBarView.backgroundColor = Style.StatusBarView.backgroundColor
     view.addSubview(statusBarView)
   }
   
@@ -124,11 +123,14 @@ private extension BluetoothCharacteristicViewController {
 // MARK: - BluetoothCharacteristicActionCellDelegate protocol
 extension BluetoothCharacteristicViewController: BluetoothCharacteristicActionCellDelegate {
   
-  func bluetoothCharacteristicActionCell(_ bluetoothCharacteristicActionCell: BluetoothCharacteristicActionTableViewCell, didPressSend button: TableSectionButton) throws {
+  func bluetoothCharacteristicActionCell(_ bluetoothCharacteristicActionCell: BluetoothCharacteristicActionTableViewCell, didPressSend button: TableShadowButton) throws {
     if !sharedBluetoothManager.isReady {
       let title = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_CONNECTION_TITLE", comment: "")
       let message = NSLocalizedString("BLUETOOTH_CONNECTIVITY_ALERT_MESSAGE_PERIPHERAL_NOT_READY", comment: "")
       AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
+      
+      let logMessage = "Bluetooth is not ready when try send data"
+      Logger.logInfo(message: logMessage)
       
     } else {
       guard let jsonDataForArduino = DatabaseManager.shared().encodedJsonData else { throw BluetoothError.encodedDataForArduinoNotAvailable }
@@ -142,16 +144,20 @@ extension BluetoothCharacteristicViewController: BluetoothCharacteristicActionCe
             BluetoothSendingView.sharedInstance.progress = progressRatio
             if bytesSent >= totalBytesExpectedToSend {
               BluetoothSendingView.hide()
+              
+              let logMessage = "Bluetooth send \(bytesSent) bytes"
+              Logger.logInfo(message: logMessage)
             }
           }
         })
+        
       } catch let error as BluetoothError {
         BluetoothSendingView.hide()
         BluetoothError.handle(error: error)
         
       } catch {
         BluetoothSendingView.hide()
-        BluetoothError.handle()
+        BluetoothError.handle(error: .unsupportedError)
       }
       
       
@@ -159,7 +165,7 @@ extension BluetoothCharacteristicViewController: BluetoothCharacteristicActionCe
   }
   
   
-  func bluetoothCharacteristicActionCell(_ bluetoothCharacteristicActionCell: BluetoothCharacteristicActionTableViewCell, didPressListenNotifications button: TableSectionButton) throws {
+  func bluetoothCharacteristicActionCell(_ bluetoothCharacteristicActionCell: BluetoothCharacteristicActionTableViewCell, didPressListenNotifications button: TableShadowButton) throws {
     guard let characteristic = bluetoothCharacteristicActionCell.characteristicItem else { throw BluetoothError.peripheralNoCharacteristicAvailable }
     
     isListeningNotifications = !isListeningNotifications
@@ -172,11 +178,14 @@ extension BluetoothCharacteristicViewController: BluetoothCharacteristicActionCe
       try sharedBluetoothManager.setNotification(enable: isListeningNotifications, forCharacteristic: characteristic)
       isListeningNotifications == false ? button.setTitle(title, for: .normal) : button.setTitle(title, for: .normal)
       
+      let logMessage = "Did set notification - is Listening \(isListeningNotifications ? "TRUE" : "FALSE")"
+      Logger.logInfo(message: logMessage)
+      
     } catch let error as BluetoothError {
       BluetoothError.handle(error: error)
       
     } catch {
-      BluetoothError.handle()
+      BluetoothError.handle(error: .unsupportedError)
     }
     
   }
@@ -187,16 +196,27 @@ extension BluetoothCharacteristicViewController: BluetoothCharacteristicActionCe
 extension BluetoothCharacteristicViewController: BluetoothDelegate {
 
   func didDisconnectPeripheral(_ peripheral: CBPeripheral) {
-    print("CharacteristicController --> didDisconnectPeripheral")
+    let message = "Did disconnect Peripheral \(peripheral.name ?? "Unnamed"))"
+    Logger.logInfo(message: message)
+    
     MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_DISCONNECTED", comment: ""))
     connectedLabel.text = NSLocalizedString("BLUETOOTH_PERIPHERAL_LABEL_DISCONNECTED_STATUS", comment: "")
     connectedLabel.textColor = .red
   }
   
   func didDiscoverDescriptors(_ characteristic: CBCharacteristic) {
-    print("CharacteristicController --> didDiscoverDescriptors")
+    let message = "Did discover Characteristic \(characteristic.name))"
+    Logger.logInfo(message: message)
+    
     selectedCharacteristic = characteristic
   }
+  
+  
+  func didReadValueForCharacteristic(_ characteristic: CBCharacteristic) {
+    let message = "Did read value Characteristic \(characteristic.name))"
+    Logger.logInfo(message: message)
+  }
+  
 }
 
 

@@ -23,8 +23,8 @@ final class FileLoader {
       let digitalPictureFrameData = try JSONDecoder().decode(DigitalPictureFrameData.self, from: data)
       
       decodeCompletion(digitalPictureFrameData)
-    } catch let error {
-      throw error
+    } catch {
+      throw FileLoaderError.dataNotAvailable
     }
   }
   

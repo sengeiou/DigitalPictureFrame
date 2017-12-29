@@ -131,7 +131,7 @@ private extension DigitalPictureFramePageViewController {
       case .failure(let error):
         NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
         self.sendNotificationToReloadUserData()
-        AlertViewPresenter.sharedInstance.presentErrorAlert(in: self, error: error)
+        AlertViewPresenter.sharedInstance.presentErrorAlert(withMessage: error.localizedDescription)
       }
     })
   }
@@ -195,26 +195,20 @@ extension DigitalPictureFramePageViewController: AlertViewPresenterDelegate {
   
   func alertView(_ alertViewPresenter: AlertViewPresenter, didSubmit result: String) {
     guard !result.isEmpty else { return }
-    let title = "Error"
     
     do {
       let verifier = AccessVerifier(data: data)
       try verifier.verify(enteredPhoneNumber: result)
+      
       NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
       initializeDatabase()
       sendNotificationToReloadUserData()
       NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
       
-    } catch AccessVerifierError.dataNotAvailable(let desc) {
-      let errorMessage = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_FAILED_MSG", comment: "") + desc
-      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: errorMessage)
-      
-    } catch AccessVerifierError.accessDenied {
-      let message = NSLocalizedString("DIGITAL_PICTURE_FRAME_PAGEVIEW_ALERT_VERIFY_INFO_MSG", comment: "")
-      AlertViewPresenter.sharedInstance.presentPopupAlert(in: self, title: title, message: message)
-      
-    } catch let error {
-      print(error.localizedDescription)
+    } catch let error as AccessVerifierError {
+      AccessVerifierError.handle(error: error)
+    } catch {
+      AccessVerifierError.handle(error: .unsupportedError)
     }
   }
   

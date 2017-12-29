@@ -71,7 +71,7 @@ extension BluetoothPeripheralViewController: ViewSetupable {
     } catch let error as BluetoothError {
       BluetoothError.handle(error: error)
     } catch {
-      BluetoothError.handle()
+      BluetoothError.handle(error: .unsupportedError)
     }
   }
   
@@ -101,8 +101,7 @@ private extension BluetoothPeripheralViewController {
   
   func renderStatusBarBackgroundColor() {
     let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
-    let statusBarColor = UIColor.groupGray
-    statusBarView.backgroundColor = statusBarColor
+    statusBarView.backgroundColor = Style.StatusBarView.backgroundColor
     view.addSubview(statusBarView)
   }
   
@@ -162,6 +161,9 @@ extension BluetoothPeripheralViewController {
     characteristicVC.selectedCharacteristic = characteristic
     
     transitionPresent(characteristicVC)
+    
+    let message = "Did present Characteristic \(characteristic.name)"
+    Logger.logInfo(message: message)
   }
   
 }
@@ -181,13 +183,18 @@ private extension BluetoothPeripheralViewController {
 extension BluetoothPeripheralViewController: BluetoothDelegate {
   
   func didDisconnectPeripheral(_ peripheral: CBPeripheral) {
-    print("PeripheralController --> didDisconnectPeripheral")
+    let message = "Did disconnect Peripheral \(peripheral.name ?? "Unnamed")"
+    Logger.logInfo(message: message)
+    
     MBProgressHUD.showHUD(in: view, with: NSLocalizedString("BLUETOOTH_CONNECTIVITY_PROGRESS_HUD_MSG_DISCONNECTED", comment: ""))
     connectedLabel.text = NSLocalizedString("BLUETOOTH_PERIPHERAL_LABEL_DISCONNECTED_STATUS", comment: "")
     connectedLabel.textColor = .red
   }
   
   func didDiscoverCharacteritics(_ service: CBService) {
+    let message = "Did discover Characteritics \(String(describing: peripheralServiceItem?.characteristics)))"
+    Logger.logInfo(message: message)
+    
     peripheralServiceItem?.service = service
     dataModelSource?.peripheralServiceItem = peripheralServiceItem
     reloadTableView()

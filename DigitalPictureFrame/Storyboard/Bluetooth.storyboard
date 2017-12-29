@@ -19,26 +19,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kaa-dH-CpR">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="602"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tf-2B-IBH" userLabel="LogFooterView" customClass="LogFooterView" customModule="DigitalPictureFrame" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Fyo-yG-png"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="y5s-6y-0f4" firstAttribute="bottom" secondItem="Kaa-dH-CpR" secondAttribute="bottom" id="Hec-Mj-m7a"/>
+                            <constraint firstItem="4tf-2B-IBH" firstAttribute="bottom" secondItem="y5s-6y-0f4" secondAttribute="bottom" id="3Rl-9c-LZP"/>
+                            <constraint firstItem="4tf-2B-IBH" firstAttribute="top" secondItem="Kaa-dH-CpR" secondAttribute="bottom" id="Bp6-Z1-JK2"/>
                             <constraint firstItem="y5s-6y-0f4" firstAttribute="trailing" secondItem="Kaa-dH-CpR" secondAttribute="trailing" id="XPS-KV-jfq"/>
+                            <constraint firstItem="4tf-2B-IBH" firstAttribute="trailing" secondItem="y5s-6y-0f4" secondAttribute="trailing" id="Xff-t7-BMF"/>
                             <constraint firstItem="Kaa-dH-CpR" firstAttribute="leading" secondItem="y5s-6y-0f4" secondAttribute="leading" id="rF5-hZ-Wjg"/>
+                            <constraint firstItem="4tf-2B-IBH" firstAttribute="leading" secondItem="y5s-6y-0f4" secondAttribute="leading" id="tqh-E3-YLD"/>
                             <constraint firstItem="Kaa-dH-CpR" firstAttribute="top" secondItem="y5s-6y-0f4" secondAttribute="top" id="yTQ-V0-jMV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="y5s-6y-0f4"/>
                     </view>
                     <connections>
+                        <outlet property="logFooterView" destination="4tf-2B-IBH" id="58b-hQ-1Jq"/>
                         <outlet property="tableView" destination="Kaa-dH-CpR" id="ZS4-KT-q0w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oyp-tC-5fM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3247" y="153"/>
+            <point key="canvasLocation" x="3245.5999999999999" y="152.47376311844079"/>
         </scene>
         <!--Peripheral View Controller-->
         <scene sceneID="PVb-gF-EAY">

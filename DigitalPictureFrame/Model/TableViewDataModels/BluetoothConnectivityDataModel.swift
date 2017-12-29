@@ -67,16 +67,12 @@ extension BluetoothConnectivityDataModel {
     cell.delegate = delegateVC
     return cell
   }
-  
+
 }
 
 
 // MARK: - UITableViewDelegate protocol
 extension BluetoothConnectivityDataModel {
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    return print("Did select row at: \(indexPath.row)")
-  }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 65
