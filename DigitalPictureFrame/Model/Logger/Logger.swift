@@ -9,7 +9,11 @@
 import Foundation
 
 struct Logger {
-  static private(set) var data: [String] = []
+  static private var data: [String] = []
+  
+  static var stringRepresentation: String {
+    return data.flatMap({$0}).joined(separator: "\n")
+  }
 }
 
 

@@ -40,9 +40,7 @@ class LoggerView: UIView {
   
   override func didMoveToSuperview() {
     super.didMoveToSuperview()
-    let logData = Logger.data
-    let stringRepresentation = logData.flatMap({$0}).joined(separator: "\n")
-    logTextView.text = stringRepresentation
+    logTextView.text = Logger.stringRepresentation
   }
 }
 
@@ -107,21 +105,24 @@ extension LoggerView {
   
   @IBAction func sendEmailButtonPressed(_ sender: UIBarButtonItem) {
     guard MFMailComposeViewController.canSendMail() else {
-      let errorMessage = "Mail services are not available"
+      let errorMessage = NSLocalizedString("LOGGER_VIEW_MAIL_NOT_AVAILABLE_ALERT_MSG", comment: "")
       AlertViewPresenter.sharedInstance.presentErrorAlert(withMessage: errorMessage)
       return
     }
     
     guard let topViewController = UIApplication.topViewController else {
-      let errorMessage = "Application top ViewController is not available"
+      let errorMessage = NSLocalizedString("LOGGER_VIEW_TOP_VIEW_CONTROLLER_NOT_AVAILABLE_ALERT_MSG", comment: "")
       AlertViewPresenter.sharedInstance.presentErrorAlert(withMessage: errorMessage)
       return
     }
     
     let composeVC = MFMailComposeViewController()
+    let subjectTitle = NSLocalizedString("LOGGER_VIEW_MAIL_SUBJECT_TITLE", comment: "")
+    let recipientsMail = ["pawel.milek0626@gmail.com"]
+    
     composeVC.mailComposeDelegate = self
-    composeVC.setToRecipients(["pawel.milek0626@gmail.com"])
-    composeVC.setSubject("Bluetooth connectivity log")
+    composeVC.setToRecipients(recipientsMail)
+    composeVC.setSubject(subjectTitle)
     composeVC.setMessageBody(logTextView.text, isHTML: false)
     
     topViewController.present(composeVC, animated: true, completion: nil)
@@ -139,16 +140,16 @@ extension LoggerView: MFMailComposeViewControllerDelegate {
     
     switch result {
     case .cancelled:
-      logMessage = "User canceled the composition."
+      logMessage = NSLocalizedString("LOGGER_VIEW_MAIL_CANCELLED_ALERT_MSG", comment: "")
       
     case .failed:
-      logMessage = "User's attempt to save or send was unsuccessful."
+      logMessage = NSLocalizedString("LOGGER_VIEW_MAIL_FAILED_ALERT_MSG", comment: "")
       
     case .saved:
-      logMessage = "User successfully saved the message."
+      logMessage = NSLocalizedString("LOGGER_VIEW_MAIL_SAVED_ALERT_MSG", comment: "")
       
     case .sent:
-      logMessage = "User successfully sent/queued the message."
+      logMessage = NSLocalizedString("LOGGER_VIEW_MAIL_SENT_ALERT_MSG", comment: "")
     }
     
     Logger.logInfo(message: logMessage)

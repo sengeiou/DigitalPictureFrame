@@ -78,4 +78,13 @@
 "BLUETOOTH_CONNECTING_VIEW_LABEL_TITLE_CONNECT" = "Connecting...";
 "BLUETOOTH_CONNECTING_VIEW_LABEL_TITLE_INTERROGATE" = "Interrogating...";
 
+// MARK: - LoggerView
+"LOGGER_VIEW_MAIL_SUBJECT_TITLE" = "Bluetooth connectivity log";
+"LOGGER_VIEW_MAIL_NOT_AVAILABLE_ALERT_MSG" = "Mail services are not available. Check your email client configuration.";
+"LOGGER_VIEW_TOP_VIEW_CONTROLLER_NOT_AVAILABLE_ALERT_MSG" = "Application top View Controller is not available";
+"LOGGER_VIEW_MAIL_CANCELLED_ALERT_MSG" = "User canceled the composition.";
+"LOGGER_VIEW_MAIL_FAILED_ALERT_MSG" = "User's attempt to save or send was unsuccessful.";
+"LOGGER_VIEW_MAIL_SAVED_ALERT_MSG" = "User successfully saved the message.";
+"LOGGER_VIEW_MAIL_SENT_ALERT_MSG" = "User successfully sent/queued the message.";
+
 

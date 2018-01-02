@@ -128,10 +128,9 @@ extension WiFiViewController: AlertViewPresenterDelegate {
     guard let modifiedItemIndexPath = modifiedItemIndexPath else { return }
     guard let modifiedWiFiItem = dataSourceDelegate?.item(at: modifiedItemIndexPath) as? WiFiItem else { return }
     
-    let crypt = Crypt()
     let newPassword = result
-    let encryptedBytes = crypt.encryptContentsToSecureData(for: newPassword)
-    let passwordEncodedBase64 = crypt.convertIntoBase64Encoded(data: encryptedBytes)
+    let encryptedBytes = Cryptor.shared.encrypt(password: newPassword)
+    let passwordEncodedBase64 = Cryptor.shared.convertIntoBase64Encrypted(data: encryptedBytes)
     
     let fetchedWiFiName = modifiedWiFiItem.wiFi.name
     let connectedWiFiName = NetworkConnectionUtility.fetchSSIDInfo() ?? NSLocalizedString("WIFI_WIRELESS_NETWORK_CONNECTED_LABEL_NOT_AVAILABLE", comment: "")

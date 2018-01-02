@@ -138,6 +138,7 @@
 		E2B4C7A71FF6C0FB006F1423 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7A61FF6C0FB006F1423 /* Logger.swift */; };
 		E2B4C7AA1FF6C56D006F1423 /* LogEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7A91FF6C56D006F1423 /* LogEventType.swift */; };
 		E2B4C7AC1FF6E1B1006F1423 /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7AB1FF6E1B1006F1423 /* UIApplication+TopViewController.swift */; };
+		E2B4C7AF1FFC2A45006F1423 /* KeychainQuerieType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7AE1FFC2A45006F1423 /* KeychainQuerieType.swift */; };
 		E2C8BDF21FEC3539001DA8F7 /* CharacteristicPropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8BDF11FEC3539001DA8F7 /* CharacteristicPropertyType.swift */; };
 		E2C8BDF41FEC42C3001DA8F7 /* UIViewController+Transitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8BDF31FEC42C2001DA8F7 /* UIViewController+Transitionable.swift */; };
 		E2C8BDF61FEC42DA001DA8F7 /* ViewControllerTransitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8BDF51FEC42DA001DA8F7 /* ViewControllerTransitionable.swift */; };
@@ -145,7 +146,7 @@
 		E2C8BDFB1FED542C001DA8F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2C8BDFA1FED542C001DA8F7 /* GoogleService-Info.plist */; };
 		E2CED88A1FBC9FEE00FCD90E /* String+IsEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CED8891FBC9FEE00FCD90E /* String+IsEqual.swift */; };
 		E2D8AD881FB65A7C000DA60C /* NetworkConnectionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */; };
-		E2D8AD951FBB77F6000DA60C /* Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD941FBB77F6000DA60C /* Crypt.swift */; };
+		E2D8AD951FBB77F6000DA60C /* Cryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD941FBB77F6000DA60C /* Cryptor.swift */; };
 		E2E0784B1FB0D58200E9EAF7 /* Date+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */; };
 		E2E660161FB374DD00948B3D /* UserPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E660151FB374DD00948B3D /* UserPickerView.swift */; };
 		E2E660181FB3751E00948B3D /* UserPickerView+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E660171FB3751E00948B3D /* UserPickerView+Actions.swift */; };
@@ -307,6 +308,7 @@
 		E2B4C7A61FF6C0FB006F1423 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		E2B4C7A91FF6C56D006F1423 /* LogEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEventType.swift; sourceTree = "<group>"; };
 		E2B4C7AB1FF6E1B1006F1423 /* UIApplication+TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopViewController.swift"; sourceTree = "<group>"; };
+		E2B4C7AE1FFC2A45006F1423 /* KeychainQuerieType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainQuerieType.swift; sourceTree = "<group>"; };
 		E2C8BDF11FEC3539001DA8F7 /* CharacteristicPropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicPropertyType.swift; sourceTree = "<group>"; };
 		E2C8BDF31FEC42C2001DA8F7 /* UIViewController+Transitionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Transitionable.swift"; sourceTree = "<group>"; };
 		E2C8BDF51FEC42DA001DA8F7 /* ViewControllerTransitionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTransitionable.swift; sourceTree = "<group>"; };
@@ -314,7 +316,7 @@
 		E2C8BDFA1FED542C001DA8F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2CED8891FBC9FEE00FCD90E /* String+IsEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IsEqual.swift"; sourceTree = "<group>"; };
 		E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionUtility.swift; sourceTree = "<group>"; };
-		E2D8AD941FBB77F6000DA60C /* Crypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypt.swift; sourceTree = "<group>"; };
+		E2D8AD941FBB77F6000DA60C /* Cryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cryptor.swift; sourceTree = "<group>"; };
 		E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utility.swift"; sourceTree = "<group>"; };
 		E2E660151FB374DD00948B3D /* UserPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickerView.swift; sourceTree = "<group>"; };
 		E2E660171FB3751E00948B3D /* UserPickerView+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserPickerView+Actions.swift"; sourceTree = "<group>"; };
@@ -451,8 +453,8 @@
 				E24F69871FABCDD30099343B /* TableViewItems */,
 				E2204F7D1FACCEC600F7E8DC /* Response */,
 				E2FB8E2E1FB0F06600724889 /* NotificationCenter */,
-				E2D8AD941FBB77F6000DA60C /* Crypt.swift */,
-				E23A1CBB1FEDBB8900DC19CF /* KeychainService.swift */,
+				E2B4C7AD1FFC2A2F006F1423 /* KeychainService */,
+				E2D8AD941FBB77F6000DA60C /* Cryptor.swift */,
 				E20FF6B91FAB770E00F89850 /* TopTabBarItemType.swift */,
 				E22ED44B1FB3678B0080570A /* EmbeddedViewTag.swift */,
 				E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */,
@@ -814,6 +816,15 @@
 			path = Logger;
 			sourceTree = "<group>";
 		};
+		E2B4C7AD1FFC2A2F006F1423 /* KeychainService */ = {
+			isa = PBXGroup;
+			children = (
+				E23A1CBB1FEDBB8900DC19CF /* KeychainService.swift */,
+				E2B4C7AE1FFC2A45006F1423 /* KeychainQuerieType.swift */,
+			);
+			path = KeychainService;
+			sourceTree = "<group>";
+		};
 		E2C8BDF71FEC7044001DA8F7 /* BluetoothSendingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1147,6 +1158,7 @@
 				E244F26A1FE5ABF90040C4B7 /* BluetoothConnectingView.swift in Sources */,
 				E298EE981FC22F48006BC203 /* CustomTabBarDelegate.swift in Sources */,
 				E2FB8E381FB10A8700724889 /* TableSectionButton.swift in Sources */,
+				E2B4C7AF1FFC2A45006F1423 /* KeychainQuerieType.swift in Sources */,
 				E298EE941FC22C7C006BC203 /* CustomTabBar.swift in Sources */,
 				E244F2601FE490C60040C4B7 /* CBCharacteristic+Name.swift in Sources */,
 				E27D95671FAE84EB0099430B /* GeneralSettingsTableViewCell.swift in Sources */,
@@ -1174,7 +1186,7 @@
 				E23A1CBE1FF0317800DC19CF /* Fragmenter.swift in Sources */,
 				E24F69951FABF15A0099343B /* TimeFrame.swift in Sources */,
 				E20FF6AC1FAB739200F89850 /* UIStoryboard+Storyboard.swift in Sources */,
-				E2D8AD951FBB77F6000DA60C /* Crypt.swift in Sources */,
+				E2D8AD951FBB77F6000DA60C /* Cryptor.swift in Sources */,
 				E26CDBB41FEC0C6F008386F8 /* BluetoothPeripheralSectionType.swift in Sources */,
 				E2217F331FB3ADB5002CCD9C /* WiFiCellDelegate.swift in Sources */,
 				E2FB8E3A1FB113BD00724889 /* UIView+AddConstraintsWithFormat.swift in Sources */,
