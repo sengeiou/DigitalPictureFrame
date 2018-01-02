@@ -12,7 +12,7 @@ class TimeFrameSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellCo
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var valueLabel: UILabel!
-  @IBOutlet weak var timePickerButton: TableSectionButton!
+  @IBOutlet weak var timePickerButton: TableShadowButton!
   
   weak var delegate: TimeFrameSettingsCellDelegate?
   
@@ -24,12 +24,13 @@ class TimeFrameSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellCo
       descriptionLabel.text = timeFrameCell.description
       let timestamp = timeFrameCell.value as? String
       let time = Date.shortTime(from: timestamp ?? "")
+      
       valueLabel.text = time
       thumbnailImageView.image = UIImage(named: timeFrameCell.thumbnailImageName)
     }
   }
   
-  @IBAction func timePickerButtonPressed(_ sender: TableSectionButton) {
+  @IBAction func timePickerButtonPressed(_ sender: TableShadowButton) {
     guard let indexPath = sender.indexPath else { return }
     delegate?.timeFrameSettingsCell(self, didPressTimePickerButtonAt: indexPath)
   }
@@ -46,9 +47,9 @@ extension TimeFrameSettingsTableViewCell {
   
   func setup() {
     selectionStyle = .none
+    valueLabel.textAlignment = .center
     timePickerButton.setTitle("", for: .normal)
     thumbnailImageView.contentMode = .scaleAspectFit
-    //thumbnailImageView.roundThumbnail()
   }
   
 }

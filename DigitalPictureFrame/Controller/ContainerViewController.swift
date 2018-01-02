@@ -82,8 +82,7 @@ private extension ContainerViewController {
   
   func renderStatusBarBackgroundColor() {
     let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
-    let statusBarColor = UIColor.groupGray
-    statusBarView.backgroundColor = statusBarColor
+    statusBarView.backgroundColor = Style.StatusBarView.backgroundColor
     view.addSubview(statusBarView)
   }
   

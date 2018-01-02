@@ -10,4 +10,5 @@ import Foundation
 
 enum NotificationUserInfoKey: String {
   case currentPageIndex = "currentPageIndex"
+  case peripheralCharacteristic = "peripheralCharacteristic"
 }

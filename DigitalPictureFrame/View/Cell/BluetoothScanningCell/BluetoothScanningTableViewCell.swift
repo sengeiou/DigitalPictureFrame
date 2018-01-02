@@ -13,7 +13,7 @@ class BluetoothScanningTableViewCell: UITableViewCell {
   @IBOutlet weak var peripheralNameLabel: UILabel!
   @IBOutlet weak var serviceCounterLabel: UILabel!
   @IBOutlet weak var signalStrengthLabel: UILabel!
-  @IBOutlet weak var connectButton: TableSectionButton!
+  @IBOutlet weak var connectButton: TableShadowButton!
   
   weak var delegate: BluetoothScanningCellDelegate?
   
@@ -101,9 +101,6 @@ extension BluetoothScanningTableViewCell: ViewSetupable {
     connectButton.setTitleColor(.red, for: .highlighted)
     connectButton.setTitleColor(.red, for: .selected)
     connectButton.titleLabel?.font = StyleBluetoothScanningCell.connectButtonTitleFont
-    connectButton.layer.borderColor = UIColor.appleBlue.cgColor
-    connectButton.layer.borderWidth = 0.5
-    connectButton.layer.cornerRadius = 8
   }
   
 }
@@ -125,7 +122,7 @@ extension BluetoothScanningTableViewCell {
 // MARK: Actions
 extension BluetoothScanningTableViewCell {
   
-  @IBAction func connectButtonPressed(_ sender: TableSectionButton) {
+  @IBAction func connectButtonPressed(_ sender: TableShadowButton) {
     self.delegate?.bluetoothScanningCell(self, didPressConnect: sender)
   }
   

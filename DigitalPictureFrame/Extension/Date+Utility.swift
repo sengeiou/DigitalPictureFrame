@@ -10,14 +10,16 @@ import Foundation
 
 extension Date {
   
-  fileprivate static var tzdFormat: String {
-    let format = "yyyy-MM-dd'T'HH:mm:ssZ"
-    return format
+  static private var dateFormatter: DateFormatter {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+    formatter.locale = Locale.current
+    formatter.timeZone = TimeZone.current
+    return formatter
   }
+
   
-  static func date(_ date: Date) -> String? {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = Date.tzdFormat
+  static func dateToString(_ date: Date) -> String? {
     return dateFormatter.string(from: date)
   }
   

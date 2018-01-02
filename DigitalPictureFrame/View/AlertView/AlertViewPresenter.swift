@@ -41,13 +41,18 @@ extension AlertViewPresenter {
 
 // MARK: - Present Error Alert
 extension AlertViewPresenter {
-  
-  func presentErrorAlert(in viewController: UIViewController, error: Error) {
-    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-    let okAction = UIAlertAction(title: "Ok", style: .default)
+
+  func presentErrorAlert(withMessage msg: String, animated: Bool = true, completion: (() -> Void)? = nil) {
+    let alertWindow = UIWindow(frame: UIScreen.main.bounds)
+    alertWindow.rootViewController = UIViewController()
+    alertWindow.windowLevel = UIWindowLevelAlert + 1;
+    alertWindow.makeKeyAndVisible()
     
+    let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
+    let okAction = UIAlertAction(title: "Ok", style: .default)
     alert.addAction(okAction)
-    viewController.present(alert, animated: true, completion: nil)
+
+    alertWindow.rootViewController?.present(alert, animated: animated, completion: completion)
   }
   
 }

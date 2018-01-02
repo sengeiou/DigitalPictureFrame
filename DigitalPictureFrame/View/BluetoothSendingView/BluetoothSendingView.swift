@@ -12,7 +12,6 @@ import UICircularProgressRing
 class BluetoothSendingView: UIView {
   static private(set) var sharedInstance = BluetoothSendingView()
   
-  private let contentView = UIView()
   private var progressRing: UICircularProgressRingView = {
     let ring = UICircularProgressRingView(frame: .zero)
     ring.maxValue = 100

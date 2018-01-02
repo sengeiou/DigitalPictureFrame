@@ -47,8 +47,9 @@ class WiFiTableViewCell: UITableViewCell, DigitalPictureFrameCellConfigurable, V
       passwordTextField.text = ""
       thumbnailImageView.image = UIImage(named: wifiCell.thumbnailImageName)
       checkConnectedWirelessNetwork() {
-        let crypt = Crypt()
-        guard let data = crypt.convertIntoData(string: $0), let pwd = try? crypt.decryptContents(of: data) else { return }
+
+        guard let data = Cryptor.shared.convertIntoDataEncrypted(base64: $0) else { return }
+        guard let pwd = Cryptor.shared.decrypt(password: data) else { return }
         passwordTextField.text = pwd
       }
     }

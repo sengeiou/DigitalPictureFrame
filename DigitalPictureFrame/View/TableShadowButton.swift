@@ -1,14 +1,15 @@
 //
-//  ShadowButton.swift
+//  TableShadowButton.swift
 //  DigitalPictureFrame
 //
-//  Created by Pawel Milek.
+//  Created by Pawel Milek on 12/28/17.
 //  Copyright © 2017 Pawel Milek. All rights reserved.
 //
 
 import UIKit
 
-class ShadowButton: UIButton {
+class TableShadowButton: UIButton {
+  var indexPath: IndexPath?
   var shadowLayer: CAShapeLayer!
   
   override func layoutSubviews() {
@@ -27,5 +28,5 @@ class ShadowButton: UIButton {
       layer.insertSublayer(shadowLayer, at: 0)
     }
   }
-  
 }
+

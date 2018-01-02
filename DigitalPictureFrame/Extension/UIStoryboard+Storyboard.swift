@@ -13,6 +13,7 @@ extension UIStoryboard {
   
   enum Storyboard: String {
     case main
+    case bluetooth
     
     var fileName: String {
       return rawValue.capitalized

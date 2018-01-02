@@ -35,7 +35,6 @@
 		E21D6CBF1FDB259F00E966B1 /* BluetoothScanningTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CBD1FDB259F00E966B1 /* BluetoothScanningTableViewCell.swift */; };
 		E21D6CC01FDB259F00E966B1 /* BluetoothScanningTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E21D6CBE1FDB259F00E966B1 /* BluetoothScanningTableViewCell.xib */; };
 		E21D6CC21FDB29D300E966B1 /* BluetoothScanningCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CC11FDB29D300E966B1 /* BluetoothScanningCellDelegate.swift */; };
-		E21D6CC41FDEEB8F00E966B1 /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21D6CC31FDEEB8F00E966B1 /* ShadowButton.swift */; };
 		E2204F7A1FACB85700F7E8DC /* AlertViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2204F791FACB85700F7E8DC /* AlertViewPresenter.swift */; };
 		E2204F7C1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2204F7B1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift */; };
 		E2204F7F1FACCF3400F7E8DC /* GeneralSettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2204F7E1FACCF3400F7E8DC /* GeneralSettingsSection.swift */; };
@@ -56,6 +55,14 @@
 		E22ED44A1FB366FD0080570A /* AvailabilityMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22ED4491FB366FC0080570A /* AvailabilityMessageView.swift */; };
 		E22ED44C1FB3678B0080570A /* EmbeddedViewTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22ED44B1FB3678B0080570A /* EmbeddedViewTag.swift */; };
 		E22ED44E1FB3684F0080570A /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22ED44D1FB3684F0080570A /* Style.swift */; };
+		E23A1CBC1FEDBB8900DC19CF /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A1CBB1FEDBB8900DC19CF /* KeychainService.swift */; };
+		E23A1CBE1FF0317800DC19CF /* Fragmenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A1CBD1FF0317800DC19CF /* Fragmenter.swift */; };
+		E23A1CC01FF0319B00DC19CF /* Defragmenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A1CBF1FF0319B00DC19CF /* Defragmenter.swift */; };
+		E23A1CC41FF41C4800DC19CF /* BluetoothCharacteristicActionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E23A1CC21FF41C4700DC19CF /* BluetoothCharacteristicActionTableViewCell.xib */; };
+		E23A1CC51FF41C4800DC19CF /* BluetoothCharacteristicActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A1CC31FF41C4800DC19CF /* BluetoothCharacteristicActionTableViewCell.swift */; };
+		E23A1CC91FF41C5E00DC19CF /* BluetoothCharacteristicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A1CC71FF41C5E00DC19CF /* BluetoothCharacteristicViewController.swift */; };
+		E23C16BC1FF451B200E67140 /* BluetoothCharacteristicDataModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23C16BB1FF451B200E67140 /* BluetoothCharacteristicDataModelDelegate.swift */; };
+		E23C16BE1FF4525100E67140 /* BluetoothCharacteristicDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23C16BD1FF4525100E67140 /* BluetoothCharacteristicDataModel.swift */; };
 		E244F25C1FE490C60040C4B7 /* AdvertisementDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E244F2551FE490C40040C4B7 /* AdvertisementDataType.swift */; };
 		E244F25D1FE490C60040C4B7 /* CBService+CharacteristicName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E244F2561FE490C50040C4B7 /* CBService+CharacteristicName.swift */; };
 		E244F25E1FE490C60040C4B7 /* BluetoothDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E244F2571FE490C50040C4B7 /* BluetoothDelegate.swift */; };
@@ -85,14 +92,12 @@
 		E24F69891FABCE5D0099343B /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69881FABCE5D0099343B /* PageContentViewController.swift */; };
 		E24F69951FABF15A0099343B /* TimeFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69941FABF15A0099343B /* TimeFrame.swift */; };
 		E24F69971FABF1AD0099343B /* SideInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F69961FABF1AD0099343B /* SideInfo.swift */; };
-		E26CDBA21FE9D652008386F8 /* BluetoothPeripheralTransferDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDBA01FE9D652008386F8 /* BluetoothPeripheralTransferDataTableViewCell.swift */; };
-		E26CDBA31FE9D652008386F8 /* BluetoothPeripheralTransferDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E26CDBA11FE9D652008386F8 /* BluetoothPeripheralTransferDataTableViewCell.xib */; };
-		E26CDBA51FEACADA008386F8 /* BluetoothPeripheralTransferDataCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDBA41FEACADA008386F8 /* BluetoothPeripheralTransferDataCellDelegate.swift */; };
-		E26CDBA71FEAD3C6008386F8 /* PeripheralCharacteristicServiceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDBA61FEAD3C6008386F8 /* PeripheralCharacteristicServiceItem.swift */; };
+		E26CDBA51FEACADA008386F8 /* BluetoothCharacteristicActionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDBA41FEACADA008386F8 /* BluetoothCharacteristicActionCellDelegate.swift */; };
+		E26CDBA71FEAD3C6008386F8 /* PeripheralServiceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDBA61FEAD3C6008386F8 /* PeripheralServiceItem.swift */; };
 		E26CDBAA1FEAE8FC008386F8 /* BluetoothPeripheralAdvertisementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDBA81FEAE8FC008386F8 /* BluetoothPeripheralAdvertisementTableViewCell.swift */; };
 		E26CDBAB1FEAE8FC008386F8 /* BluetoothPeripheralAdvertisementTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E26CDBA91FEAE8FC008386F8 /* BluetoothPeripheralAdvertisementTableViewCell.xib */; };
-		E26CDBAF1FEB05BD008386F8 /* BluetoothPeripheralDeviceInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDBAD1FEB05BD008386F8 /* BluetoothPeripheralDeviceInfoTableViewCell.swift */; };
-		E26CDBB01FEB05BD008386F8 /* BluetoothPeripheralDeviceInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E26CDBAE1FEB05BD008386F8 /* BluetoothPeripheralDeviceInfoTableViewCell.xib */; };
+		E26CDBAF1FEB05BD008386F8 /* BluetoothCharacteristicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDBAD1FEB05BD008386F8 /* BluetoothCharacteristicTableViewCell.swift */; };
+		E26CDBB01FEB05BD008386F8 /* BluetoothCharacteristicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E26CDBAE1FEB05BD008386F8 /* BluetoothCharacteristicTableViewCell.xib */; };
 		E26CDBB41FEC0C6F008386F8 /* BluetoothPeripheralSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDBB31FEC0C6F008386F8 /* BluetoothPeripheralSectionType.swift */; };
 		E26CDBB81FEC1423008386F8 /* PeripheralAdvertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDBB71FEC1423008386F8 /* PeripheralAdvertisement.swift */; };
 		E26CDBBA1FEC24D9008386F8 /* CBCharacteristic+PropertiesDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDBB91FEC24D9008386F8 /* CBCharacteristic+PropertiesDescription.swift */; };
@@ -121,6 +126,19 @@
 		E298EEA01FC24A08006BC203 /* SegueIdentifierType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EE9F1FC24A08006BC203 /* SegueIdentifierType.swift */; };
 		E298EEA21FC24EEA006BC203 /* UIImageView+TintImageColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E298EEA11FC24EEA006BC203 /* UIImageView+TintImageColor.swift */; };
 		E2A3B3171FC33740002A3B88 /* CustomTabBarItemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A3B3161FC33740002A3B88 /* CustomTabBarItemDelegate.swift */; };
+		E2B4C7911FF56066006F1423 /* Bluetooth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B4C7901FF56066006F1423 /* Bluetooth.storyboard */; };
+		E2B4C7931FF56CBE006F1423 /* BluetoothError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7921FF56CBE006F1423 /* BluetoothError.swift */; };
+		E2B4C7961FF5815C006F1423 /* LogFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7951FF5815C006F1423 /* LogFooterView.swift */; };
+		E2B4C7981FF58D13006F1423 /* TableShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7971FF58D13006F1423 /* TableShadowButton.swift */; };
+		E2B4C79A1FF59CC3006F1423 /* LogFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2B4C7991FF59CC3006F1423 /* LogFooterView.xib */; };
+		E2B4C79D1FF5A269006F1423 /* LoggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C79C1FF5A269006F1423 /* LoggerView.swift */; };
+		E2B4C79F1FF5A274006F1423 /* LoggerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2B4C79E1FF5A274006F1423 /* LoggerView.xib */; };
+		E2B4C7A31FF6B9D2006F1423 /* ErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7A21FF6B9D2006F1423 /* ErrorHandleable.swift */; };
+		E2B4C7A51FF6BEC0006F1423 /* CryptError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7A41FF6BEC0006F1423 /* CryptError.swift */; };
+		E2B4C7A71FF6C0FB006F1423 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7A61FF6C0FB006F1423 /* Logger.swift */; };
+		E2B4C7AA1FF6C56D006F1423 /* LogEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7A91FF6C56D006F1423 /* LogEventType.swift */; };
+		E2B4C7AC1FF6E1B1006F1423 /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7AB1FF6E1B1006F1423 /* UIApplication+TopViewController.swift */; };
+		E2B4C7AF1FFC2A45006F1423 /* KeychainQuerieType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7AE1FFC2A45006F1423 /* KeychainQuerieType.swift */; };
 		E2C8BDF21FEC3539001DA8F7 /* CharacteristicPropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8BDF11FEC3539001DA8F7 /* CharacteristicPropertyType.swift */; };
 		E2C8BDF41FEC42C3001DA8F7 /* UIViewController+Transitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8BDF31FEC42C2001DA8F7 /* UIViewController+Transitionable.swift */; };
 		E2C8BDF61FEC42DA001DA8F7 /* ViewControllerTransitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8BDF51FEC42DA001DA8F7 /* ViewControllerTransitionable.swift */; };
@@ -128,8 +146,7 @@
 		E2C8BDFB1FED542C001DA8F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2C8BDFA1FED542C001DA8F7 /* GoogleService-Info.plist */; };
 		E2CED88A1FBC9FEE00FCD90E /* String+IsEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CED8891FBC9FEE00FCD90E /* String+IsEqual.swift */; };
 		E2D8AD881FB65A7C000DA60C /* NetworkConnectionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */; };
-		E2D8AD8A1FBA388B000DA60C /* DigitalPictureFrameDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD891FBA388B000DA60C /* DigitalPictureFrameDataError.swift */; };
-		E2D8AD951FBB77F6000DA60C /* Crypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD941FBB77F6000DA60C /* Crypt.swift */; };
+		E2D8AD951FBB77F6000DA60C /* Cryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D8AD941FBB77F6000DA60C /* Cryptor.swift */; };
 		E2E0784B1FB0D58200E9EAF7 /* Date+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */; };
 		E2E660161FB374DD00948B3D /* UserPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E660151FB374DD00948B3D /* UserPickerView.swift */; };
 		E2E660181FB3751E00948B3D /* UserPickerView+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E660171FB3751E00948B3D /* UserPickerView+Actions.swift */; };
@@ -187,7 +204,6 @@
 		E21D6CBD1FDB259F00E966B1 /* BluetoothScanningTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothScanningTableViewCell.swift; sourceTree = "<group>"; };
 		E21D6CBE1FDB259F00E966B1 /* BluetoothScanningTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BluetoothScanningTableViewCell.xib; sourceTree = "<group>"; };
 		E21D6CC11FDB29D300E966B1 /* BluetoothScanningCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothScanningCellDelegate.swift; sourceTree = "<group>"; };
-		E21D6CC31FDEEB8F00E966B1 /* ShadowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowButton.swift; sourceTree = "<group>"; };
 		E2204F791FACB85700F7E8DC /* AlertViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewPresenter.swift; sourceTree = "<group>"; };
 		E2204F7B1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewPresenterDelegate.swift; sourceTree = "<group>"; };
 		E2204F7E1FACCF3400F7E8DC /* GeneralSettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsSection.swift; sourceTree = "<group>"; };
@@ -208,6 +224,14 @@
 		E22ED4491FB366FC0080570A /* AvailabilityMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailabilityMessageView.swift; sourceTree = "<group>"; };
 		E22ED44B1FB3678B0080570A /* EmbeddedViewTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedViewTag.swift; sourceTree = "<group>"; };
 		E22ED44D1FB3684F0080570A /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		E23A1CBB1FEDBB8900DC19CF /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		E23A1CBD1FF0317800DC19CF /* Fragmenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fragmenter.swift; sourceTree = "<group>"; };
+		E23A1CBF1FF0319B00DC19CF /* Defragmenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defragmenter.swift; sourceTree = "<group>"; };
+		E23A1CC21FF41C4700DC19CF /* BluetoothCharacteristicActionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BluetoothCharacteristicActionTableViewCell.xib; sourceTree = "<group>"; };
+		E23A1CC31FF41C4800DC19CF /* BluetoothCharacteristicActionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothCharacteristicActionTableViewCell.swift; sourceTree = "<group>"; };
+		E23A1CC71FF41C5E00DC19CF /* BluetoothCharacteristicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothCharacteristicViewController.swift; sourceTree = "<group>"; };
+		E23C16BB1FF451B200E67140 /* BluetoothCharacteristicDataModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothCharacteristicDataModelDelegate.swift; sourceTree = "<group>"; };
+		E23C16BD1FF4525100E67140 /* BluetoothCharacteristicDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothCharacteristicDataModel.swift; sourceTree = "<group>"; };
 		E244F2551FE490C40040C4B7 /* AdvertisementDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvertisementDataType.swift; sourceTree = "<group>"; };
 		E244F2561FE490C50040C4B7 /* CBService+CharacteristicName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CBService+CharacteristicName.swift"; sourceTree = "<group>"; };
 		E244F2571FE490C50040C4B7 /* BluetoothDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothDelegate.swift; sourceTree = "<group>"; };
@@ -237,14 +261,12 @@
 		E24F69881FABCE5D0099343B /* PageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		E24F69941FABF15A0099343B /* TimeFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFrame.swift; sourceTree = "<group>"; };
 		E24F69961FABF1AD0099343B /* SideInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideInfo.swift; sourceTree = "<group>"; };
-		E26CDBA01FE9D652008386F8 /* BluetoothPeripheralTransferDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPeripheralTransferDataTableViewCell.swift; sourceTree = "<group>"; };
-		E26CDBA11FE9D652008386F8 /* BluetoothPeripheralTransferDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BluetoothPeripheralTransferDataTableViewCell.xib; sourceTree = "<group>"; };
-		E26CDBA41FEACADA008386F8 /* BluetoothPeripheralTransferDataCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPeripheralTransferDataCellDelegate.swift; sourceTree = "<group>"; };
-		E26CDBA61FEAD3C6008386F8 /* PeripheralCharacteristicServiceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralCharacteristicServiceItem.swift; sourceTree = "<group>"; };
+		E26CDBA41FEACADA008386F8 /* BluetoothCharacteristicActionCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothCharacteristicActionCellDelegate.swift; sourceTree = "<group>"; };
+		E26CDBA61FEAD3C6008386F8 /* PeripheralServiceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralServiceItem.swift; sourceTree = "<group>"; };
 		E26CDBA81FEAE8FC008386F8 /* BluetoothPeripheralAdvertisementTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPeripheralAdvertisementTableViewCell.swift; sourceTree = "<group>"; };
 		E26CDBA91FEAE8FC008386F8 /* BluetoothPeripheralAdvertisementTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BluetoothPeripheralAdvertisementTableViewCell.xib; sourceTree = "<group>"; };
-		E26CDBAD1FEB05BD008386F8 /* BluetoothPeripheralDeviceInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPeripheralDeviceInfoTableViewCell.swift; sourceTree = "<group>"; };
-		E26CDBAE1FEB05BD008386F8 /* BluetoothPeripheralDeviceInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BluetoothPeripheralDeviceInfoTableViewCell.xib; sourceTree = "<group>"; };
+		E26CDBAD1FEB05BD008386F8 /* BluetoothCharacteristicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothCharacteristicTableViewCell.swift; sourceTree = "<group>"; };
+		E26CDBAE1FEB05BD008386F8 /* BluetoothCharacteristicTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BluetoothCharacteristicTableViewCell.xib; sourceTree = "<group>"; };
 		E26CDBB31FEC0C6F008386F8 /* BluetoothPeripheralSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPeripheralSectionType.swift; sourceTree = "<group>"; };
 		E26CDBB71FEC1423008386F8 /* PeripheralAdvertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralAdvertisement.swift; sourceTree = "<group>"; };
 		E26CDBB91FEC24D9008386F8 /* CBCharacteristic+PropertiesDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CBCharacteristic+PropertiesDescription.swift"; sourceTree = "<group>"; };
@@ -274,6 +296,19 @@
 		E298EE9F1FC24A08006BC203 /* SegueIdentifierType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifierType.swift; sourceTree = "<group>"; };
 		E298EEA11FC24EEA006BC203 /* UIImageView+TintImageColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+TintImageColor.swift"; sourceTree = "<group>"; };
 		E2A3B3161FC33740002A3B88 /* CustomTabBarItemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarItemDelegate.swift; sourceTree = "<group>"; };
+		E2B4C7901FF56066006F1423 /* Bluetooth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Bluetooth.storyboard; sourceTree = "<group>"; };
+		E2B4C7921FF56CBE006F1423 /* BluetoothError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothError.swift; sourceTree = "<group>"; };
+		E2B4C7951FF5815C006F1423 /* LogFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFooterView.swift; sourceTree = "<group>"; };
+		E2B4C7971FF58D13006F1423 /* TableShadowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableShadowButton.swift; sourceTree = "<group>"; };
+		E2B4C7991FF59CC3006F1423 /* LogFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogFooterView.xib; sourceTree = "<group>"; };
+		E2B4C79C1FF5A269006F1423 /* LoggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerView.swift; sourceTree = "<group>"; };
+		E2B4C79E1FF5A274006F1423 /* LoggerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoggerView.xib; sourceTree = "<group>"; };
+		E2B4C7A21FF6B9D2006F1423 /* ErrorHandleable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandleable.swift; sourceTree = "<group>"; };
+		E2B4C7A41FF6BEC0006F1423 /* CryptError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptError.swift; sourceTree = "<group>"; };
+		E2B4C7A61FF6C0FB006F1423 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		E2B4C7A91FF6C56D006F1423 /* LogEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEventType.swift; sourceTree = "<group>"; };
+		E2B4C7AB1FF6E1B1006F1423 /* UIApplication+TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopViewController.swift"; sourceTree = "<group>"; };
+		E2B4C7AE1FFC2A45006F1423 /* KeychainQuerieType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainQuerieType.swift; sourceTree = "<group>"; };
 		E2C8BDF11FEC3539001DA8F7 /* CharacteristicPropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicPropertyType.swift; sourceTree = "<group>"; };
 		E2C8BDF31FEC42C2001DA8F7 /* UIViewController+Transitionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Transitionable.swift"; sourceTree = "<group>"; };
 		E2C8BDF51FEC42DA001DA8F7 /* ViewControllerTransitionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTransitionable.swift; sourceTree = "<group>"; };
@@ -281,8 +316,7 @@
 		E2C8BDFA1FED542C001DA8F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2CED8891FBC9FEE00FCD90E /* String+IsEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IsEqual.swift"; sourceTree = "<group>"; };
 		E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionUtility.swift; sourceTree = "<group>"; };
-		E2D8AD891FBA388B000DA60C /* DigitalPictureFrameDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalPictureFrameDataError.swift; sourceTree = "<group>"; };
-		E2D8AD941FBB77F6000DA60C /* Crypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypt.swift; sourceTree = "<group>"; };
+		E2D8AD941FBB77F6000DA60C /* Cryptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cryptor.swift; sourceTree = "<group>"; };
 		E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utility.swift"; sourceTree = "<group>"; };
 		E2E660151FB374DD00948B3D /* UserPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickerView.swift; sourceTree = "<group>"; };
 		E2E660171FB3751E00948B3D /* UserPickerView+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserPickerView+Actions.swift"; sourceTree = "<group>"; };
@@ -390,6 +424,7 @@
 			isa = PBXGroup;
 			children = (
 				E20608C71FAB629B00F06260 /* Main.storyboard */,
+				E2B4C7901FF56066006F1423 /* Bluetooth.storyboard */,
 				E20608CC1FAB629B00F06260 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
@@ -418,11 +453,13 @@
 				E24F69871FABCDD30099343B /* TableViewItems */,
 				E2204F7D1FACCEC600F7E8DC /* Response */,
 				E2FB8E2E1FB0F06600724889 /* NotificationCenter */,
-				E2D8AD941FBB77F6000DA60C /* Crypt.swift */,
+				E2B4C7AD1FFC2A2F006F1423 /* KeychainService */,
+				E2D8AD941FBB77F6000DA60C /* Cryptor.swift */,
 				E20FF6B91FAB770E00F89850 /* TopTabBarItemType.swift */,
 				E22ED44B1FB3678B0080570A /* EmbeddedViewTag.swift */,
 				E2D8AD871FB65A7C000DA60C /* NetworkConnectionUtility.swift */,
 				E298EE9F1FC24A08006BC203 /* SegueIdentifierType.swift */,
+				E2B4C7A81FF6C55E006F1423 /* Logger */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -430,12 +467,14 @@
 		E20608DA1FAB632700F06260 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E2B4C79B1FF5A24C006F1423 /* LoggerView */,
+				E2B4C7941FF58137006F1423 /* LogFooterView */,
 				E244F26C1FE81D900040C4B7 /* PopupCentralManagerStateView */,
 				E2C8BDF71FEC7044001DA8F7 /* BluetoothSendingView */,
 				E244F26B1FE5AC0A0040C4B7 /* BluetoothConnectivityView */,
 				E22ED44D1FB3684F0080570A /* Style.swift */,
-				E21D6CC31FDEEB8F00E966B1 /* ShadowButton.swift */,
 				E2FB8E371FB10A8700724889 /* TableSectionButton.swift */,
+				E2B4C7971FF58D13006F1423 /* TableShadowButton.swift */,
 				E22ED4491FB366FC0080570A /* AvailabilityMessageView.swift */,
 				E298EE921FC22C42006BC203 /* CustomTabBar */,
 				E24F697C1FABBAB40099343B /* Cell */,
@@ -450,6 +489,7 @@
 			isa = PBXGroup;
 			children = (
 				E2E0784A1FB0D58200E9EAF7 /* Date+Utility.swift */,
+				E2B4C7AB1FF6E1B1006F1423 /* UIApplication+TopViewController.swift */,
 				E21D6CBB1FDB223000E966B1 /* MBProgressHUD+showHUDWithMessage.swift */,
 				E2CED8891FBC9FEE00FCD90E /* String+IsEqual.swift */,
 				E2F0596B1FB2469B0054C424 /* UIColor+CustomRGB.swift */,
@@ -485,6 +525,8 @@
 				E26CDBB91FEC24D9008386F8 /* CBCharacteristic+PropertiesDescription.swift */,
 				E244F2561FE490C50040C4B7 /* CBService+CharacteristicName.swift */,
 				E244F25B1FE490C60040C4B7 /* CBUUID+Name.swift */,
+				E23A1CBF1FF0319B00DC19CF /* Defragmenter.swift */,
+				E23A1CBD1FF0317800DC19CF /* Fragmenter.swift */,
 			);
 			path = BluetoothManager;
 			sourceTree = "<group>";
@@ -492,6 +534,7 @@
 		E21D6CB31FDA028000E966B1 /* BluetoothConnectivity */ = {
 			isa = PBXGroup;
 			children = (
+				E23A1CC71FF41C5E00DC19CF /* BluetoothCharacteristicViewController.swift */,
 				E21D6CA41FD9CC3100E966B1 /* BluetoothConnectivityViewController.swift */,
 				E244F2631FE591DF0040C4B7 /* BluetoothPeripheralViewController.swift */,
 			);
@@ -540,6 +583,20 @@
 				E2204F7B1FACC80900F7E8DC /* AlertViewPresenterDelegate.swift */,
 			);
 			path = AlertView;
+			sourceTree = "<group>";
+		};
+		E23A1CC11FF41C1F00DC19CF /* BluetoothServiceCharacteristicCell */ = {
+			isa = PBXGroup;
+			children = (
+				E23A1CC31FF41C4800DC19CF /* BluetoothCharacteristicActionTableViewCell.swift */,
+				E23A1CC21FF41C4700DC19CF /* BluetoothCharacteristicActionTableViewCell.xib */,
+				E26CDBA41FEACADA008386F8 /* BluetoothCharacteristicActionCellDelegate.swift */,
+				E26CDBAD1FEB05BD008386F8 /* BluetoothCharacteristicTableViewCell.swift */,
+				E26CDBAE1FEB05BD008386F8 /* BluetoothCharacteristicTableViewCell.xib */,
+				E26CDBA81FEAE8FC008386F8 /* BluetoothPeripheralAdvertisementTableViewCell.swift */,
+				E26CDBA91FEAE8FC008386F8 /* BluetoothPeripheralAdvertisementTableViewCell.xib */,
+			);
+			path = BluetoothServiceCharacteristicCell;
 			sourceTree = "<group>";
 		};
 		E244F26B1FE5AC0A0040C4B7 /* BluetoothConnectivityView */ = {
@@ -596,6 +653,8 @@
 		E24F696D1FABB3390099343B /* TableViewDataModels */ = {
 			isa = PBXGroup;
 			children = (
+				E23C16BD1FF4525100E67140 /* BluetoothCharacteristicDataModel.swift */,
+				E23C16BB1FF451B200E67140 /* BluetoothCharacteristicDataModelDelegate.swift */,
 				E21D6CAC1FD9E87C00E966B1 /* BluetoothConnectivityDataModel.swift */,
 				E21D6CA81FD9E77000E966B1 /* BluetoothConnectivityDataModelDelegate.swift */,
 				E244F2731FE86F390040C4B7 /* BluetoothPeripheralDataModel.swift */,
@@ -609,7 +668,7 @@
 		E24F697C1FABBAB40099343B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				E26CDB9F1FE9D632008386F8 /* BluetoothPeripheralCell */,
+				E23A1CC11FF41C1F00DC19CF /* BluetoothServiceCharacteristicCell */,
 				E21D6CBA1FDB182C00E966B1 /* BluetoothScanningCell */,
 				E27D955A1FAE83B40099430B /* UserCell */,
 				E27D955F1FAE844D0099430B /* SettingsCells */,
@@ -636,20 +695,6 @@
 			path = TableViewItems;
 			sourceTree = "<group>";
 		};
-		E26CDB9F1FE9D632008386F8 /* BluetoothPeripheralCell */ = {
-			isa = PBXGroup;
-			children = (
-				E26CDBA41FEACADA008386F8 /* BluetoothPeripheralTransferDataCellDelegate.swift */,
-				E26CDBA01FE9D652008386F8 /* BluetoothPeripheralTransferDataTableViewCell.swift */,
-				E26CDBA11FE9D652008386F8 /* BluetoothPeripheralTransferDataTableViewCell.xib */,
-				E26CDBA81FEAE8FC008386F8 /* BluetoothPeripheralAdvertisementTableViewCell.swift */,
-				E26CDBA91FEAE8FC008386F8 /* BluetoothPeripheralAdvertisementTableViewCell.xib */,
-				E26CDBAD1FEB05BD008386F8 /* BluetoothPeripheralDeviceInfoTableViewCell.swift */,
-				E26CDBAE1FEB05BD008386F8 /* BluetoothPeripheralDeviceInfoTableViewCell.xib */,
-			);
-			path = BluetoothPeripheralCell;
-			sourceTree = "<group>";
-		};
 		E26CDBAC1FEAF35A008386F8 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
@@ -657,7 +702,7 @@
 				E26CDBB31FEC0C6F008386F8 /* BluetoothPeripheralSectionType.swift */,
 				E2C8BDF11FEC3539001DA8F7 /* CharacteristicPropertyType.swift */,
 				E26CDBB71FEC1423008386F8 /* PeripheralAdvertisement.swift */,
-				E26CDBA61FEAD3C6008386F8 /* PeripheralCharacteristicServiceItem.swift */,
+				E26CDBA61FEAD3C6008386F8 /* PeripheralServiceItem.swift */,
 				E21D6CAA1FD9E81000E966B1 /* PeripheralItem.swift */,
 			);
 			path = Bluetooth;
@@ -744,6 +789,42 @@
 			path = CustomTabBar;
 			sourceTree = "<group>";
 		};
+		E2B4C7941FF58137006F1423 /* LogFooterView */ = {
+			isa = PBXGroup;
+			children = (
+				E2B4C7951FF5815C006F1423 /* LogFooterView.swift */,
+				E2B4C7991FF59CC3006F1423 /* LogFooterView.xib */,
+			);
+			path = LogFooterView;
+			sourceTree = "<group>";
+		};
+		E2B4C79B1FF5A24C006F1423 /* LoggerView */ = {
+			isa = PBXGroup;
+			children = (
+				E2B4C79C1FF5A269006F1423 /* LoggerView.swift */,
+				E2B4C79E1FF5A274006F1423 /* LoggerView.xib */,
+			);
+			path = LoggerView;
+			sourceTree = "<group>";
+		};
+		E2B4C7A81FF6C55E006F1423 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				E2B4C7A61FF6C0FB006F1423 /* Logger.swift */,
+				E2B4C7A91FF6C56D006F1423 /* LogEventType.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		E2B4C7AD1FFC2A2F006F1423 /* KeychainService */ = {
+			isa = PBXGroup;
+			children = (
+				E23A1CBB1FEDBB8900DC19CF /* KeychainService.swift */,
+				E2B4C7AE1FFC2A45006F1423 /* KeychainQuerieType.swift */,
+			);
+			path = KeychainService;
+			sourceTree = "<group>";
+		};
 		E2C8BDF71FEC7044001DA8F7 /* BluetoothSendingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -755,10 +836,12 @@
 		E2D8AD8B1FBA3B0E000DA60C /* Errors */ = {
 			isa = PBXGroup;
 			children = (
-				E24F69541FAB93380099343B /* FileLoaderError.swift */,
-				E2D8AD891FBA388B000DA60C /* DigitalPictureFrameDataError.swift */,
-				E24F69561FAB93380099343B /* NetworkError.swift */,
 				E21D6CA21FD9A04F00E966B1 /* AccessVerifierError.swift */,
+				E2B4C7921FF56CBE006F1423 /* BluetoothError.swift */,
+				E2B4C7A41FF6BEC0006F1423 /* CryptError.swift */,
+				E2B4C7A21FF6B9D2006F1423 /* ErrorHandleable.swift */,
+				E24F69541FAB93380099343B /* FileLoaderError.swift */,
+				E24F69561FAB93380099343B /* NetworkError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -875,13 +958,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2FB8E321FB0F2F100724889 /* TimePickerView.xib in Resources */,
+				E23A1CC41FF41C4800DC19CF /* BluetoothCharacteristicActionTableViewCell.xib in Resources */,
 				E21D6CC01FDB259F00E966B1 /* BluetoothScanningTableViewCell.xib in Resources */,
-				E26CDBB01FEB05BD008386F8 /* BluetoothPeripheralDeviceInfoTableViewCell.xib in Resources */,
+				E2B4C79F1FF5A274006F1423 /* LoggerView.xib in Resources */,
+				E26CDBB01FEB05BD008386F8 /* BluetoothCharacteristicTableViewCell.xib in Resources */,
 				E288CEC31FDF37F100B0E075 /* Localizable.strings in Resources */,
 				E27D95641FAE84D30099430B /* UserTableViewCell.xib in Resources */,
 				E27D95741FAE85200099430B /* WeatherZipcodeSettingsTableViewCell.xib in Resources */,
 				E26CDBAB1FEAE8FC008386F8 /* BluetoothPeripheralAdvertisementTableViewCell.xib in Resources */,
 				E24F69601FAB93400099343B /* ServerData.json in Resources */,
+				E2B4C7911FF56066006F1423 /* Bluetooth.storyboard in Resources */,
 				E27D95701FAE850D0099430B /* TimeFrameSettingsTableViewCell.xib in Resources */,
 				E20608CE1FAB629B00F06260 /* LaunchScreen.storyboard in Resources */,
 				E2C8BDFB1FED542C001DA8F7 /* GoogleService-Info.plist in Resources */,
@@ -890,7 +976,7 @@
 				E27D95781FAE85360099430B /* WiFiTableViewCell.xib in Resources */,
 				E20608C91FAB629B00F06260 /* Main.storyboard in Resources */,
 				E27D956C1FAE84FB0099430B /* UserInfoSettingsTableViewCell.xib in Resources */,
-				E26CDBA31FE9D652008386F8 /* BluetoothPeripheralTransferDataTableViewCell.xib in Resources */,
+				E2B4C79A1FF59CC3006F1423 /* LogFooterView.xib in Resources */,
 				E2E6601A1FB3754000948B3D /* UserPickerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -973,15 +1059,17 @@
 				E2204F911FACD99B00F7E8DC /* UIImageView+RoundThumbnail.swift in Sources */,
 				E24F69861FABC8090099343B /* SettingsGeneralItem.swift in Sources */,
 				E2E6601C1FB3760300948B3D /* UserPickerViewDelegate.swift in Sources */,
-				E26CDBA51FEACADA008386F8 /* BluetoothPeripheralTransferDataCellDelegate.swift in Sources */,
+				E26CDBA51FEACADA008386F8 /* BluetoothCharacteristicActionCellDelegate.swift in Sources */,
+				E2B4C7961FF5815C006F1423 /* LogFooterView.swift in Sources */,
 				E21D6CBF1FDB259F00E966B1 /* BluetoothScanningTableViewCell.swift in Sources */,
 				E2204F7F1FACCF3400F7E8DC /* GeneralSettingsSection.swift in Sources */,
 				E2CED88A1FBC9FEE00FCD90E /* String+IsEqual.swift in Sources */,
 				E244F25D1FE490C60040C4B7 /* CBService+CharacteristicName.swift in Sources */,
 				E26CDBB81FEC1423008386F8 /* PeripheralAdvertisement.swift in Sources */,
-				E26CDBA71FEAD3C6008386F8 /* PeripheralCharacteristicServiceItem.swift in Sources */,
+				E26CDBA71FEAD3C6008386F8 /* PeripheralServiceItem.swift in Sources */,
 				E24F695C1FAB93380099343B /* NetworkResultType.swift in Sources */,
 				E21D6CAD1FD9E87C00E966B1 /* BluetoothConnectivityDataModel.swift in Sources */,
+				E2B4C7A51FF6BEC0006F1423 /* CryptError.swift in Sources */,
 				E2EB4AE61FCE23010062A8CD /* AccessVerifier.swift in Sources */,
 				E24F695D1FAB93380099343B /* FileLoader.swift in Sources */,
 				E244F2721FE86EA80040C4B7 /* BluetoothPeripheralDataModelDelegate.swift in Sources */,
@@ -990,10 +1078,11 @@
 				E298EE9E1FC245E1006BC203 /* ContainerViewControllerDelegate.swift in Sources */,
 				E2F0596C1FB2469B0054C424 /* UIColor+CustomRGB.swift in Sources */,
 				E20FF6AD1FAB739200F89850 /* UITableView+Registrable.swift in Sources */,
+				E23A1CC91FF41C5E00DC19CF /* BluetoothCharacteristicViewController.swift in Sources */,
 				E2204F971FACDDC300F7E8DC /* DigitalPictureFrameDataModel.swift in Sources */,
 				E27D957A1FAE9CF70099430B /* DatabaseManager.swift in Sources */,
 				E298EE961FC22F3D006BC203 /* CustomTabBarDataSource.swift in Sources */,
-				E26CDBAF1FEB05BD008386F8 /* BluetoothPeripheralDeviceInfoTableViewCell.swift in Sources */,
+				E26CDBAF1FEB05BD008386F8 /* BluetoothCharacteristicTableViewCell.swift in Sources */,
 				E2204F8B1FACD28F00F7E8DC /* SettingsUserInfoItem.swift in Sources */,
 				E244F25C1FE490C60040C4B7 /* AdvertisementDataType.swift in Sources */,
 				E24F69681FAB9B960099343B /* WiFiInfo.swift in Sources */,
@@ -1003,13 +1092,16 @@
 				E24F69971FABF1AD0099343B /* SideInfo.swift in Sources */,
 				E2E660161FB374DD00948B3D /* UserPickerView.swift in Sources */,
 				E20FF6A51FAB738B00F89850 /* ReusableView.swift in Sources */,
+				E2B4C7981FF58D13006F1423 /* TableShadowButton.swift in Sources */,
 				E24F69661FAB9ADA0099343B /* Settings.swift in Sources */,
 				E29369591FC1EED00001D7AB /* DigitalPictureFramePageViewController.swift in Sources */,
+				E2B4C7AA1FF6C56D006F1423 /* LogEventType.swift in Sources */,
 				E2C8BDF41FEC42C3001DA8F7 /* UIViewController+Transitionable.swift in Sources */,
 				E2204F7A1FACB85700F7E8DC /* AlertViewPresenter.swift in Sources */,
+				E23A1CC01FF0319B00DC19CF /* Defragmenter.swift in Sources */,
+				E2B4C7A71FF6C0FB006F1423 /* Logger.swift in Sources */,
 				E20FF6B41FAB73F800F89850 /* UIView+ReusableView.swift in Sources */,
 				E2EB4AE41FCE21940062A8CD /* PhoneNumberVerificationKey.swift in Sources */,
-				E2D8AD8A1FBA388B000DA60C /* DigitalPictureFrameDataError.swift in Sources */,
 				E27D956F1FAE850D0099430B /* TimeFrameSettingsTableViewCell.swift in Sources */,
 				E24F69841FABC6CD0099343B /* UserItem.swift in Sources */,
 				E20FF6A61FAB738B00F89850 /* ViewSetupable.swift in Sources */,
@@ -1021,12 +1113,12 @@
 				E288CECD1FDF43B800B0E075 /* NotificationUserInfoKey.swift in Sources */,
 				E2E769D61FB27DA000F5C37E /* SwitchableCellDelegate.swift in Sources */,
 				E27D956B1FAE84FB0099430B /* UserInfoSettingsTableViewCell.swift in Sources */,
+				E2B4C79D1FF5A269006F1423 /* LoggerView.swift in Sources */,
 				E2C8BDF61FEC42DA001DA8F7 /* ViewControllerTransitionable.swift in Sources */,
 				E2204F931FACDA7A00F7E8DC /* DigitalPictureFrameCellConfigurable.swift in Sources */,
 				E2204F951FACDD6700F7E8DC /* DigitalPictureFrameDataModelDelegate.swift in Sources */,
 				E21D6CBC1FDB223000E966B1 /* MBProgressHUD+showHUDWithMessage.swift in Sources */,
 				E20608C41FAB629B00F06260 /* AppDelegate.swift in Sources */,
-				E21D6CC41FDEEB8F00E966B1 /* ShadowButton.swift in Sources */,
 				E24F69641FAB9A660099343B /* User.swift in Sources */,
 				E2FB8E301FB0F13D00724889 /* TimePickerViewDelegate.swift in Sources */,
 				E24F69591FAB93380099343B /* FileLoaderError.swift in Sources */,
@@ -1050,6 +1142,8 @@
 				E21D6CC21FDB29D300E966B1 /* BluetoothScanningCellDelegate.swift in Sources */,
 				E24F695B1FAB93380099343B /* NetworkError.swift in Sources */,
 				E2E6601E1FB37F8600948B3D /* PickerViewPresentable.swift in Sources */,
+				E2B4C7931FF56CBE006F1423 /* BluetoothError.swift in Sources */,
+				E23C16BC1FF451B200E67140 /* BluetoothCharacteristicDataModelDelegate.swift in Sources */,
 				E2204F8F1FACD6AC00F7E8DC /* WiFiItem.swift in Sources */,
 				E2204F9B1FACDFB700F7E8DC /* UITableView+DigitalPictureFrameCellDequeueble.swift in Sources */,
 				E298EE9C1FC23DDD006BC203 /* ContainerViewController.swift in Sources */,
@@ -1059,11 +1153,12 @@
 				E2FB8E361FB106DB00724889 /* TimeFrameSettingsCellDelegate.swift in Sources */,
 				E21D6CA91FD9E77000E966B1 /* BluetoothConnectivityDataModelDelegate.swift in Sources */,
 				E27D95631FAE84D30099430B /* UserTableViewCell.swift in Sources */,
+				E23A1CBC1FEDBB8900DC19CF /* KeychainService.swift in Sources */,
 				E24F696C1FABA8E80099343B /* DigitalPictureFrameData.swift in Sources */,
 				E244F26A1FE5ABF90040C4B7 /* BluetoothConnectingView.swift in Sources */,
 				E298EE981FC22F48006BC203 /* CustomTabBarDelegate.swift in Sources */,
-				E26CDBA21FE9D652008386F8 /* BluetoothPeripheralTransferDataTableViewCell.swift in Sources */,
 				E2FB8E381FB10A8700724889 /* TableSectionButton.swift in Sources */,
+				E2B4C7AF1FFC2A45006F1423 /* KeychainQuerieType.swift in Sources */,
 				E298EE941FC22C7C006BC203 /* CustomTabBar.swift in Sources */,
 				E244F2601FE490C60040C4B7 /* CBCharacteristic+Name.swift in Sources */,
 				E27D95671FAE84EB0099430B /* GeneralSettingsTableViewCell.swift in Sources */,
@@ -1074,26 +1169,31 @@
 				E20FF6BA1FAB770E00F89850 /* TopTabBarItemType.swift in Sources */,
 				E20FF6B81FAB748A00F89850 /* WiFiViewController.swift in Sources */,
 				E20FF6AE1FAB739200F89850 /* UIViewController+StoryboardIdentifiable.swift in Sources */,
+				E2B4C7A31FF6B9D2006F1423 /* ErrorHandleable.swift in Sources */,
 				E2204F891FACD25E00F7E8DC /* UserInfoSettingsSection.swift in Sources */,
 				E2204F871FACD1E100F7E8DC /* SettingsWeatherZipCodeItem.swift in Sources */,
 				E298EE9A1FC232AE006BC203 /* CustomTabBarItem.swift in Sources */,
 				E22ED44C1FB3678B0080570A /* EmbeddedViewTag.swift in Sources */,
 				E244F25E1FE490C60040C4B7 /* BluetoothDelegate.swift in Sources */,
+				E2B4C7AC1FF6E1B1006F1423 /* UIApplication+TopViewController.swift in Sources */,
 				E2D8AD881FB65A7C000DA60C /* NetworkConnectionUtility.swift in Sources */,
 				E2E769D41FB2744200F5C37E /* Observable.swift in Sources */,
 				E2E769D31FB2744200F5C37E /* Observer.swift in Sources */,
 				E298EEA21FC24EEA006BC203 /* UIImageView+TintImageColor.swift in Sources */,
 				E26CDBBA1FEC24D9008386F8 /* CBCharacteristic+PropertiesDescription.swift in Sources */,
+				E23A1CC51FF41C4800DC19CF /* BluetoothCharacteristicActionTableViewCell.swift in Sources */,
 				E2E0784B1FB0D58200E9EAF7 /* Date+Utility.swift in Sources */,
+				E23A1CBE1FF0317800DC19CF /* Fragmenter.swift in Sources */,
 				E24F69951FABF15A0099343B /* TimeFrame.swift in Sources */,
 				E20FF6AC1FAB739200F89850 /* UIStoryboard+Storyboard.swift in Sources */,
-				E2D8AD951FBB77F6000DA60C /* Crypt.swift in Sources */,
+				E2D8AD951FBB77F6000DA60C /* Cryptor.swift in Sources */,
 				E26CDBB41FEC0C6F008386F8 /* BluetoothPeripheralSectionType.swift in Sources */,
 				E2217F331FB3ADB5002CCD9C /* WiFiCellDelegate.swift in Sources */,
 				E2FB8E3A1FB113BD00724889 /* UIView+AddConstraintsWithFormat.swift in Sources */,
 				E20FF6C21FAB818A00F89850 /* UserViewController.swift in Sources */,
 				E20FF6A71FAB738B00F89850 /* StoryboardIdentifiable.swift in Sources */,
 				E24F69821FABC4610099343B /* DigitalPictureFrameCellSectionType.swift in Sources */,
+				E23C16BE1FF4525100E67140 /* BluetoothCharacteristicDataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

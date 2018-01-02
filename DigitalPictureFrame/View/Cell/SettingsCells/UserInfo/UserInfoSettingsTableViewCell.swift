@@ -12,7 +12,7 @@ class UserInfoSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellCon
   @IBOutlet weak var thumbnailImageView: UIImageView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var valueLabel: UILabel!
-  @IBOutlet weak var userButton: TableSectionButton!
+  @IBOutlet weak var userButton: TableShadowButton!
   
   weak var delegate: UserInfoSettingsCellDelegate?
   var rowInSection: Int?
@@ -26,7 +26,7 @@ class UserInfoSettingsTableViewCell: UITableViewCell, DigitalPictureFrameCellCon
     }
   }
   
-  @IBAction func userPickerButtonPressed(_ sender: TableSectionButton) {
+  @IBAction func userPickerButtonPressed(_ sender: TableShadowButton) {
     guard let indexPath = sender.indexPath else { return }
     delegate?.userInfoSettingsCell(self, didPressUserPickerButtonAt: indexPath)
   }
@@ -43,8 +43,9 @@ extension UserInfoSettingsTableViewCell {
   
   func setup() {
     selectionStyle = .none
+    userButton.setTitle("", for: .normal)
+    valueLabel.textAlignment = .center
     thumbnailImageView.contentMode = .scaleAspectFit
-    //thumbnailImageView.roundThumbnail()
   }
   
 }
