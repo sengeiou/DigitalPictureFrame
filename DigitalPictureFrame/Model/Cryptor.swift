@@ -13,12 +13,13 @@ final class Cryptor {
   static let shared = Cryptor()
   
   private var encryptionKey: String {
-    return KeychainService.load()! as String
+    return KeychainService.shared["key"]!
   }
   
   
   private init() {
-    KeychainService.save(token: "MySecretPassword")
+    KeychainService.shared.loggingEnabled = true
+    KeychainService.shared["key"] = "MySecretPassword"
   }
 }
 

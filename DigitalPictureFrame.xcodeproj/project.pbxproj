@@ -138,7 +138,6 @@
 		E2B4C7A71FF6C0FB006F1423 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7A61FF6C0FB006F1423 /* Logger.swift */; };
 		E2B4C7AA1FF6C56D006F1423 /* LogEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7A91FF6C56D006F1423 /* LogEventType.swift */; };
 		E2B4C7AC1FF6E1B1006F1423 /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7AB1FF6E1B1006F1423 /* UIApplication+TopViewController.swift */; };
-		E2B4C7AF1FFC2A45006F1423 /* KeychainQuerieType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B4C7AE1FFC2A45006F1423 /* KeychainQuerieType.swift */; };
 		E2C8BDF21FEC3539001DA8F7 /* CharacteristicPropertyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8BDF11FEC3539001DA8F7 /* CharacteristicPropertyType.swift */; };
 		E2C8BDF41FEC42C3001DA8F7 /* UIViewController+Transitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8BDF31FEC42C2001DA8F7 /* UIViewController+Transitionable.swift */; };
 		E2C8BDF61FEC42DA001DA8F7 /* ViewControllerTransitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8BDF51FEC42DA001DA8F7 /* ViewControllerTransitionable.swift */; };
@@ -308,7 +307,6 @@
 		E2B4C7A61FF6C0FB006F1423 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		E2B4C7A91FF6C56D006F1423 /* LogEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEventType.swift; sourceTree = "<group>"; };
 		E2B4C7AB1FF6E1B1006F1423 /* UIApplication+TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopViewController.swift"; sourceTree = "<group>"; };
-		E2B4C7AE1FFC2A45006F1423 /* KeychainQuerieType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainQuerieType.swift; sourceTree = "<group>"; };
 		E2C8BDF11FEC3539001DA8F7 /* CharacteristicPropertyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicPropertyType.swift; sourceTree = "<group>"; };
 		E2C8BDF31FEC42C2001DA8F7 /* UIViewController+Transitionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Transitionable.swift"; sourceTree = "<group>"; };
 		E2C8BDF51FEC42DA001DA8F7 /* ViewControllerTransitionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTransitionable.swift; sourceTree = "<group>"; };
@@ -820,7 +818,6 @@
 			isa = PBXGroup;
 			children = (
 				E23A1CBB1FEDBB8900DC19CF /* KeychainService.swift */,
-				E2B4C7AE1FFC2A45006F1423 /* KeychainQuerieType.swift */,
 			);
 			path = KeychainService;
 			sourceTree = "<group>";
@@ -1158,7 +1155,6 @@
 				E244F26A1FE5ABF90040C4B7 /* BluetoothConnectingView.swift in Sources */,
 				E298EE981FC22F48006BC203 /* CustomTabBarDelegate.swift in Sources */,
 				E2FB8E381FB10A8700724889 /* TableSectionButton.swift in Sources */,
-				E2B4C7AF1FFC2A45006F1423 /* KeychainQuerieType.swift in Sources */,
 				E298EE941FC22C7C006BC203 /* CustomTabBar.swift in Sources */,
 				E244F2601FE490C60040C4B7 /* CBCharacteristic+Name.swift in Sources */,
 				E27D95671FAE84EB0099430B /* GeneralSettingsTableViewCell.swift in Sources */,
