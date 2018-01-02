@@ -35,5 +35,3 @@ Bluetooth Terminology
 ![screen](https://user-images.githubusercontent.com/9807660/34504135-210fee84-efe2-11e7-9b01-e4899ebe009c.PNG)
 ![screen](https://user-images.githubusercontent.com/9807660/34362562-63fb47be-ea3a-11e7-9fb5-630036bece9f.jpg)
 ![screen](https://user-images.githubusercontent.com/9807660/34362563-645aa326-ea3a-11e7-8053-0d2b0204818d.jpg)
-![screen](https://user-images.githubusercontent.com/9807660/34362564-649e5cba-ea3a-11e7-9886-31431a6fbb51.jpg)
-![screen](https://user-images.githubusercontent.com/9807660/34362565-64cef582-ea3a-11e7-9e97-c35d5b798de0.jpg)
