@@ -25,7 +25,7 @@ extension Date {
   
 
   static func shortTime(from dateString: String) -> String {
-    let isoFormatter = ISO8601DateFormatter()
+    let isoFormatter = Date.dateFormatter
     let date = isoFormatter.date(from: dateString)!
     
     let formatter = DateFormatter()

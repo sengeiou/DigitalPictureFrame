@@ -41,13 +41,14 @@ private extension CGFloat {
  */
 private extension UILabel {
     func update(withValue value: CGFloat, valueIndicator: String,
-                showsDecimal: Bool, decimalPlaces: Int) {
+                showsDecimal: Bool, decimalPlaces: Int, valueDelegate: UICircularProgressRingView?) {
         if showsDecimal {
             self.text = String(format: "%.\(decimalPlaces)f", value) +
                         "\(valueIndicator)"
         } else {
             self.text = "\(Int(value))\(valueIndicator)"
         }
+        valueDelegate?.willDisplayLabel(label: self)
         self.sizeToFit()
     }
 }
@@ -108,7 +109,25 @@ class UICircularProgressRingLayer: CAShapeLayer {
     
     // The value label which draws the text for the current value
     lazy private var valueLabel: UILabel = UILabel(frame: .zero)
-    
+
+    // MARK: Animatable properties
+
+    // Whether or not animatable properties should be animated when changed
+    internal var shouldAnimateProperties: Bool = false
+
+    // The animation duration for a animatable property animation
+    internal var propertyAnimationDuration: TimeInterval = 0.0
+
+    // The properties which are animatable
+    private static let animatableProperties: [String] = ["innerRingWidth", "innerRingColor",
+                                                         "outerRingWidth", "outerRingColor",
+                                                         "fontColor", "innerRingSpacing"]
+
+    // Returns whether or not a given property key is animatable
+    private static func isAnimatableProperty(_ key: String) -> Bool {
+        return animatableProperties.index(of: key) != nil
+    }
+
     // MARK: Draw
     
     /**
@@ -137,11 +156,11 @@ class UICircularProgressRingLayer: CAShapeLayer {
      Watches for changes in the value property, and setNeedsDisplay accordingly
      */
     override class func needsDisplay(forKey key: String) -> Bool {
-        if key == "value" {
+        if key == "value" || isAnimatableProperty(key) {
             return true
+        } else {
+            return super.needsDisplay(forKey: key)
         }
-        
-        return super.needsDisplay(forKey: key)
     }
     
     /**
@@ -151,12 +170,18 @@ class UICircularProgressRingLayer: CAShapeLayer {
         if event == "value" && self.animated {
             let animation = CABasicAnimation(keyPath: "value")
             animation.fromValue = self.presentation()?.value(forKey: "value")
-            animation.timingFunction = CAMediaTimingFunction(name: animationStyle)
-            animation.duration = animationDuration
+            animation.timingFunction = CAMediaTimingFunction(name: self.animationStyle)
+            animation.duration = self.animationDuration
             return animation
+        } else if UICircularProgressRingLayer.isAnimatableProperty(event) && self.shouldAnimateProperties {
+            let animation = CABasicAnimation(keyPath: event)
+            animation.fromValue = self.presentation()?.value(forKey: event)
+            animation.timingFunction = CAMediaTimingFunction(name: self.animationStyle)
+            animation.duration = self.propertyAnimationDuration
+            return animation
+        } else {
+            return super.action(forKey: event)
         }
-        
-        return super.action(forKey: event)
     }
     
     
@@ -313,7 +338,8 @@ class UICircularProgressRingLayer: CAShapeLayer {
         valueLabel.update(withValue: value,
                           valueIndicator: valueIndicator,
                           showsDecimal: showFloatingPoint,
-                          decimalPlaces: decimalPlaces)
+                          decimalPlaces: decimalPlaces,
+                          valueDelegate: valueDelegate)
         
         // Deterime what should be the center for the label
         valueLabel.center = CGPoint(x: bounds.midX, y: bounds.midY)

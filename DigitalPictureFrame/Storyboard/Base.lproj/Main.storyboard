@@ -49,7 +49,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j0i-Uh-sGW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-409" y="98"/>
+            <point key="canvasLocation" x="-839" y="98"/>
         </scene>
         <!--Digital Picture Frame Page View Controller-->
         <scene sceneID="hvp-mG-f5t">
@@ -57,7 +57,7 @@
                 <pageViewController storyboardIdentifier="DigitalPictureFramePageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="XLS-OF-2sc" customClass="DigitalPictureFramePageViewController" customModule="DigitalPictureFrame" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TA0-22-mOj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="84" y="98"/>
+            <point key="canvasLocation" x="-129" y="98"/>
         </scene>
         <!--Users-->
         <scene sceneID="1rh-sM-M9r">
